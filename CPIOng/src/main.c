@@ -126,21 +126,21 @@ int main(void) {
 	canMessage.ExtId = 0;
 	canMessage.RTR = CAN_RTR_DATA;
 	canMessage.IDE = CAN_ID_STD;
-	canMessage.DLC = 8;
+	canMessage.DLC = 1;
 
 
-	canMessage.Data[1] = 1;
-	canMessage.Data[2] = 2;
-	canMessage.Data[3] = 3;
-	canMessage.Data[4] = 4;
-	canMessage.Data[5] = 5;
-	canMessage.Data[6] = 6;
-	canMessage.Data[7] = 7;
+//	canMessage.Data[1] = 1;
+//	canMessage.Data[2] = 2;
+//	canMessage.Data[3] = 3;
+//	canMessage.Data[4] = 4;
+//	canMessage.Data[5] = 5;
+//	canMessage.Data[6] = 6;
+//	canMessage.Data[7] = 7;
 
 	int i=0;
 	while (1) {
 		++i;
-		canMessage.Data[0] = 0;
+		canMessage.Data[0] = i;
 		while(!(CAN1->TSR & CAN_TSR_TME0 || CAN1->TSR & CAN_TSR_TME1 || CAN1->TSR & CAN_TSR_TME2)){} // todo mb: das ding austimen lassen
 		CAN_Transmit(CAN2, &canMessage);
 
