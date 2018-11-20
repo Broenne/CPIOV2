@@ -1,0 +1,29 @@
+
+/* Includes */
+#include <stddef.h>
+#include "stm32f10x.h"
+
+
+/* Private macro */
+/* Private variables */
+ USART_InitTypeDef USART_InitStructure;
+
+/* Private function prototypes */
+/* Private functions */
+
+/**
+**===========================================================================
+**
+**  Abstract: main program
+**
+**===========================================================================
+*/
+int main(void)
+{
+  int i = 0;
+
+	while (1) {
+
+	}
+
+}

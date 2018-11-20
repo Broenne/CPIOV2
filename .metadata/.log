@@ -1,0 +1,198 @@
+!SESSION 2018-11-20 10:12:03.837 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_181
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY com.atollic.truestudio.productmanager 1 0 2018-11-20 10:12:11.479
+!MESSAGE Loading product manager
+
+!ENTRY com.atollic.truestudio.productmanager 1 0 2018-11-20 10:12:11.485
+!MESSAGE OS info: Windows 7, 6.1, x86
+
+!ENTRY TrueSTUDIO 1 0 2018-11-20 10:12:12.264
+!MESSAGE Target: STM32, Version: 9.1.0, Build date: 20181011-1241, Installation dir: /C:/Program Files (x86)/Atollic/TrueSTUDIO for STM32 9.1.0/ide/
+
+!ENTRY TrueSTUDIO 1 0 2018-11-20 10:12:12.264
+!MESSAGE Workspace: C:\apps\CPIOV2
+
+!ENTRY org.eclipse.jface 2 0 2018-11-20 10:12:13.286
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-11-20 10:12:13.286
+!MESSAGE A conflict occurred for ALT+CTRL+T:
+Binding(ALT+CTRL+T,
+	ParameterizedCommand(Command(org.eclipse.team.svn.ui.command.EditPropertiesCommand,Show Properties,
+		,
+		Category(org.eclipse.team.svn.ui.command.category,SVN,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6459d9,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+CTRL+T,
+	ParameterizedCommand(Command(org.eclipse.tm.terminal.connector.local.command.launch,Open Local Terminal on Selection,
+		,
+		Category(org.eclipse.tm.terminal.view.ui.commands.category,Terminal Commands,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1a71d23,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY com.atollic.truestudio.integration.processorexpert 0 0 2018-11-20 10:12:15.998
+!MESSAGE Atollic TrueSTUDIO Processor Expert integration is up.
+
+!ENTRY edu.hawaii.ics.csdl.jupiter 1 0 2018-11-20 10:12:16.021
+!MESSAGE Code Review is up.
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-11-20 10:12:16.309
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\tbe241.OSMA-AUFZUEGE'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.atollic.truestudio.common.wizards 4 0 2018-11-20 10:14:10.511
+!MESSAGE Failed to find the correct FPU ABI, falling back to Soft. Value: 
+
+!ENTRY com.atollic.truestudio.common.wizards 4 0 2018-11-20 10:14:21.937
+!MESSAGE Failed to find the correct FPU ABI, falling back to Soft. Value: 
+
+!ENTRY com.atollic.truestudio.common.wizards 4 0 2018-11-20 10:14:46.015
+!MESSAGE Failed to find the correct FPU ABI, falling back to Soft. Value: 
+
+!ENTRY com.atollic.truestudio.common.wizards 4 0 2018-11-20 10:14:48.181
+!MESSAGE Failed to find the correct FPU ABI, falling back to Soft. Value: 
+
+!ENTRY com.atollic.truestudio.common.wizards 4 0 2018-11-20 10:15:52.673
+!MESSAGE Failed to find the correct FPU ABI, falling back to Soft. Value: 
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2018-11-20 10:16:59.469
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2018-11-20 10:16:59.473
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2018-11-20 10:16:59.478
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2018-11-20 10:16:59.478
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-11-20 10:16:59.533
+!MESSAGE CPIOng needs property 'com.atollic.truestudio.general.runtimelib.609880463' fixed. Fixing to 'com.atollic.truestudio.ld.general.clib.small'.
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-11-20 10:16:59.534
+!MESSAGE Failed to get device info (Debug) for project CPIOng
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-11-20 10:16:59.535
+!MESSAGE Failed to get device info (Debug) for project CPIOng
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-11-20 10:16:59.535
+!MESSAGE Failed to get device info (Debug) for project CPIOng
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-11-20 10:16:59.536
+!MESSAGE CPIOng needs property 'com.atollic.truestudio.general.runtimelib.247296306' fixed. Fixing to 'com.atollic.truestudio.ld.general.clib.small'.
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-11-20 10:16:59.536
+!MESSAGE Failed to get device info (Release) for project CPIOng
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-11-20 10:16:59.537
+!MESSAGE Failed to get device info (Release) for project CPIOng
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-11-20 10:16:59.537
+!MESSAGE Failed to get device info (Release) for project CPIOng
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2018-11-20 10:16:59.561
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2018-11-20 10:16:59.562
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2018-11-20 10:16:59.565
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2018-11-20 10:16:59.566
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2018-11-20 10:16:59.613
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2018-11-20 10:16:59.614
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2018-11-20 10:17:08.757
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2018-11-20 10:17:08.850
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2018-11-20 10:17:09.019
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2018-11-20 10:17:09.095
+!MESSAGE Failed to find device info
+
+!ENTRY org.eclipse.cdt.core 1 0 2018-11-20 10:17:13.246
+!MESSAGE Indexed 'CPIOng' (29 sources, 71 headers) in 2,23 sec: 7.410 declarations; 16.566 references; 3 unresolved inclusions; 51 syntax errors; 4.200 unresolved names (15 %)
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2018-11-20 10:20:04.438
+!MESSAGE Failed to execute MI command:
+target extended-remote localhost:2331
+
+Error message from debugger back end:
+localhost:2331: Das System hat versucht, einem Verzeichnis, das sich auf einem mit JOIN zugeordneten Laufwerk befindet, ein Laufwerk mit SUBST zuzuordnen.
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2018-11-20 10:58:53.017
+!MESSAGE Failed to execute MI command:
+target extended-remote localhost:2331
+
+Error message from debugger back end:
+localhost:2331: Das System hat versucht, einem Verzeichnis, das sich auf einem mit JOIN zugeordneten Laufwerk befindet, ein Laufwerk mit SUBST zuzuordnen.
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2018-11-20 11:07:16.104
+!MESSAGE Failed to execute MI command:
+target extended-remote localhost:2331
+
+Error message from debugger back end:
+localhost:2331: Das System hat versucht, einem Verzeichnis, das sich auf einem mit JOIN zugeordneten Laufwerk befindet, ein Laufwerk mit SUBST zuzuordnen.
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2018-11-20 11:12:56.732
+!MESSAGE Connection to target failed
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2018-11-20 11:17:22.690
+!MESSAGE Failed to execute MI command:
+target extended-remote localhost:2331
+
+Error message from debugger back end:
+localhost:2331: Das System hat versucht, einem Verzeichnis, das sich auf einem mit JOIN zugeordneten Laufwerk befindet, ein Laufwerk mit SUBST zuzuordnen.
+
+!ENTRY TrueSTUDIO 4 0 2018-11-20 11:17:53.174
+!MESSAGE ST-LINK GDB server failed to start (exit code = 6)
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2018-11-20 11:17:53.248
+!MESSAGE Error in initializing ST-Link device.
+Reason: (6) ST-Link firmware upgrade required.
+Please upgrade the ST-Link firmware using the upgrade tool. Reconnect ST-LINK and click OK
+
+!ENTRY org.eclipse.ui 4 4 2018-11-20 11:18:43.624
+!MESSAGE Referenced part does not exist yet: org.eclipse.ui.views.TaskList.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2018-11-20 11:19:33.498
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.mi.service.MIRunControl$9@21e29e): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Interrupt failed. null' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2018-11-20 11:19:33.498
+!MESSAGE Interrupt failed.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2018-11-20 11:21:11.918
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.mi.service.MIRunControl$9@1ec8870): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Interrupt failed. null' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2018-11-20 11:21:11.918
+!MESSAGE Interrupt failed.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2018-11-20 11:21:14.462
+!MESSAGE Breakpoint already removed
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10005 2018-11-20 11:21:14.462
+!MESSAGE Breakpoint already removed
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2018-11-20 11:21:20.455
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.mi.service.MIRunControl$9@94c260): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Interrupt failed. null' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2018-11-20 11:21:20.455
+!MESSAGE Interrupt failed.
