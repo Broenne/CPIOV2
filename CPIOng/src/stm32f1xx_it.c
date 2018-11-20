@@ -41,6 +41,21 @@
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
+
+
+
+void TIM2_IRQHandler(void){
+  TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
+  if(GPIO_ReadOutputDataBit(GPIOD, GPIO_Pin_2)){
+    GPIO_WriteBit(GPIOD, GPIO_Pin_2, RESET);
+  }else{
+    GPIO_WriteBit(GPIOD, GPIO_Pin_2, SET);
+  }
+}
+
+
+
+
 /******************************************************************************/
 /*            Cortex-M Processor Exceptions Handlers                          */
 /******************************************************************************/
