@@ -130,6 +130,15 @@ void PrepareStatusLed(void){
 }
 
 
+int _write(int file, char *ptr, int len)
+{
+  /* Implement your write code here, this is used by puts and printf for example */
+  int i=0;
+  for(i=0 ; i<len ; i++)
+    ITM_SendChar((*ptr++));
+  return len;
+}
+
 /**
  **===========================================================================
  **
@@ -153,7 +162,13 @@ int main(void) {
 	Init_Timer(); // interrupted TIM2_IRQHandler
 
 
-	while (1) {	}
+	int i=0;
+	while (1) {
+
+		printf("hello world %d \n", i);
+		++i;
+		delay_ms(500);
+	}
 }
 
 
