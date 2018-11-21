@@ -41,16 +41,34 @@
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
+void SwitchMainLed(void){
+       TIM_ClearITPendingBit(TIM2, TIM_IT_Update); // setz timer zurück, achtung dann kann man ihn auch anders nicht mehr benutzen
+	  if(GPIO_ReadOutputDataBit(GPIOD, GPIO_Pin_2)){
+	    GPIO_WriteBit(GPIOD, GPIO_Pin_2, RESET);
+	  }else{
+	    GPIO_WriteBit(GPIOD, GPIO_Pin_2, SET);
+	  }
+}
 
+void SendCan(void){
+		static int i;
+		++i;
+		CanTxMsg canMessage;
+		canMessage.StdId = 0x123;
+		canMessage.ExtId = 0;
+		canMessage.RTR = CAN_RTR_DATA;
+		canMessage.IDE = CAN_ID_STD;
+		canMessage.DLC = 1;
+
+		canMessage.Data[0] = i;
+		while (!(CAN1->TSR & CAN_TSR_TME0 || CAN1->TSR & CAN_TSR_TME1 || CAN1->TSR & CAN_TSR_TME2)) {} // todo mb: das ding austimen lassen
+		CAN_Transmit(CAN2, &canMessage);
+}
 
 
 void TIM2_IRQHandler(void){
-  TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
-  if(GPIO_ReadOutputDataBit(GPIOD, GPIO_Pin_2)){
-    GPIO_WriteBit(GPIOD, GPIO_Pin_2, RESET);
-  }else{
-    GPIO_WriteBit(GPIOD, GPIO_Pin_2, SET);
-  }
+	SwitchMainLed();
+	SendCan();
 }
 
 
