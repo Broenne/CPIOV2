@@ -196,3 +196,48 @@ Please upgrade the ST-Link firmware using the upgrade tool. Reconnect ST-LINK an
 !MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.mi.service.MIRunControl$9@94c260): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Interrupt failed. null' resulted in an error.
 !SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2018-11-20 11:21:20.455
 !MESSAGE Interrupt failed.
+
+!ENTRY org.eclipse.cdt.core 1 0 2018-11-22 09:07:36.605
+!MESSAGE Indexed 'Knoten' (53 sources, 115 headers) in 2,3 sec: 9.835 declarations; 32.875 references; 1 unresolved inclusions; 36 syntax errors; 0 unresolved names (0 %)
+
+!ENTRY TrueSTUDIO 4 0 2018-11-22 10:45:18.372
+!MESSAGE ST-LINK GDB server failed to start (exit code = 2)
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2018-11-22 10:45:18.450
+!MESSAGE Error in initializing ST-Link device.
+Reason: (2) ST-Link DLL error.
+
+!ENTRY TrueSTUDIO 4 0 2018-11-22 11:38:19.283
+!MESSAGE ST-LINK GDB server failed to start (exit code = 4)
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2018-11-22 11:38:19.333
+!MESSAGE Error in initializing ST-Link device.
+Reason: (4) No device found on target.
+
+!ENTRY TrueSTUDIO 4 0 2018-11-22 11:38:28.985
+!MESSAGE ST-LINK GDB server failed to start (exit code = 4)
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2018-11-22 11:38:29.042
+!MESSAGE Error in initializing ST-Link device.
+Reason: (4) No device found on target.
+
+!ENTRY TrueSTUDIO 4 0 2018-11-22 11:38:51.090
+!MESSAGE ST-LINK GDB server failed to start (exit code = 4)
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2018-11-22 11:38:51.140
+!MESSAGE Error in initializing ST-Link device.
+Reason: (4) No device found on target.
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2018-11-22 11:39:28.901
+!MESSAGE Failed to execute MI command:
+target extended-remote localhost:60000
+
+Error message from debugger back end:
+localhost:60000: Das System hat versucht, einem Verzeichnis, das sich auf einem mit JOIN zugeordneten Laufwerk befindet, ein Laufwerk mit SUBST zuzuordnen.
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2018-11-22 11:40:12.460
+!MESSAGE Failed to execute MI command:
+target extended-remote localhost:60000
+
+Error message from debugger back end:
+localhost:60000: Das System hat versucht, einem Verzeichnis, das sich auf einem mit JOIN zugeordneten Laufwerk befindet, ein Laufwerk mit SUBST zuzuordnen.

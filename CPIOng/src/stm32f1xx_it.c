@@ -72,6 +72,19 @@ void TIM2_IRQHandler(void){
 }
 
 
+void CAN2_RX0_IRQHandler(void) {
+
+	printf("receive can 2 interrupt\n");
+	// todo mb: interrupts sperren
+	CanRxMsg RxMessage;
+	CAN_Receive(CAN2, CAN_FIFO0, &RxMessage);
+	if (RxMessage.Data[0] == 1) {
+		GPIO_WriteBit(GPIOA, GPIO_Pin_5, Bit_SET);
+	} else {
+		GPIO_WriteBit(GPIOA, GPIO_Pin_5, Bit_RESET);
+	}
+}
+
 
 
 /******************************************************************************/
