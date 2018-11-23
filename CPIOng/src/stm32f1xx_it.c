@@ -72,9 +72,36 @@ void TIM2_IRQHandler(void){
 }
 
 
+void EXTI0_IRQHandler(void){
+  printf("Rising edge on .... In 0\n");
+
+  EXTI_ClearITPendingBit(EXTI_Line0);
+  if(GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)){
+    GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
+  }else{
+    GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
+  }
+}
+
+
+
+void EXTI1_IRQHandler(void){
+  printf("Rising edge on .... In 1\n");
+
+  EXTI_ClearITPendingBit(EXTI_Line1);
+  if(GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)){
+    GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
+  }else{
+    GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
+  }
+}
+
+
+
 void CAN2_RX0_IRQHandler(void) {
 
 	printf("receive can 2 interrupt\n");
+
 	// todo mb: interrupts sperren
 	CanRxMsg RxMessage;
 	CAN_Receive(CAN2, CAN_FIFO0, &RxMessage);

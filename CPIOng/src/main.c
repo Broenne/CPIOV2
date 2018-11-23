@@ -52,6 +52,11 @@ int _write(int file, char *ptr, int len) {
 	return len;
 }
 
+void PrepareCan(void) {
+	CAN2_init_GPIO(); // das intern machen
+	init_CAN2();
+}
+
 /**
  **===========================================================================
  **
@@ -63,16 +68,75 @@ int main(void) {
 
 	// http://www.diller-technologies.de/stm32_wide.html#takt
 
+	GPIO_InitTypeDef GPIO_InitStructure;
+	EXTI_InitTypeDef EXTI_InitStructure;
+	NVIC_InitTypeDef NVIC_InitStructure;
+
 	SystemInit();
 	PrepareStatusLed();
-
-
-	CAN2_init_GPIO(); // das intern machen
-	init_CAN2();
+	PrepareCan();
 
 	Init_Timer(); // interrupted
 
-	while (1) {	}
+//	RCC_APB2PeriphClockCmd(
+//			RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOC
+//					| RCC_APB2Periph_AFIO | RCC_APB2Periph_ADC1, ENABLE);
+
+	RCC_APB2PeriphClockCmd(
+			RCC_APB2Periph_GPIOA , ENABLE);
+
+
+	// todo mb: was macht dieserpin 9 genau?
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_Init(GPIOC, &GPIO_InitStructure);
+
+
+
+
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+	GPIO_Init(GPIOA, &GPIO_InitStructure);
+	GPIO_EXTILineConfig(GPIO_PortSourceGPIOA, GPIO_PinSource0);
+
+	EXTI_InitStructure.EXTI_Line = EXTI_Line0;
+	EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+	EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
+	EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+	EXTI_Init(&EXTI_InitStructure);
+
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
+	NVIC_InitStructure.NVIC_IRQChannel = EXTI0_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x0F;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x0F;
+	NVIC_Init(&NVIC_InitStructure);
+
+
+
+
+
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+	GPIO_Init(GPIOA, &GPIO_InitStructure);
+	GPIO_EXTILineConfig(GPIO_PortSourceGPIOA, GPIO_PinSource1);
+
+	EXTI_InitStructure.EXTI_Line = EXTI_Line1;
+	EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+	EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
+	EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+	EXTI_Init(&EXTI_InitStructure);
+
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
+	NVIC_InitStructure.NVIC_IRQChannel = EXTI1_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x0F;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x0F;
+	NVIC_Init(&NVIC_InitStructure);
+
+	while (1) {
+	}
 }
 
 #define COUNTS_PER_MICROSECOND 12 //für die 12 MHz STM32F1
