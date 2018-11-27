@@ -50,11 +50,18 @@ void SwitchMainLed(void) {
 	}
 }
 
+// todo mb: Funktion drum herum
+static uint32_t tickMs;
+static uint32_t lastTimeValue[8];
+
 void SanCanAlive() {
-	SendCan(0x123);
+	if (!(tickMs % 500)) {
+		uint8_t p[] = { 0, 1, 2, 3, 4, 5, 6, 7 };
+		SendCan(0x123, p, 8);
+	}
 }
 
-void SendCan(uint32_t id) {
+void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 	static int i;
 	++i;
 	CanTxMsg canMessage;
@@ -62,21 +69,44 @@ void SendCan(uint32_t id) {
 	canMessage.ExtId = 0;
 	canMessage.RTR = CAN_RTR_DATA;
 	canMessage.IDE = CAN_ID_STD;
-	canMessage.DLC = 1;
+	canMessage.DLC = len;
 
-	canMessage.Data[0] = i;
+	memcpy(canMessage.Data, data, len * sizeof(uint8_t));
+
 	while (!(CAN1->TSR & CAN_TSR_TME0 || CAN1->TSR & CAN_TSR_TME1
 			|| CAN1->TSR & CAN_TSR_TME2)) {
 	} // todo mb: das ding austimen lassen
+
 	CAN_Transmit(CAN2, &canMessage);
 }
 
 void TIM2_IRQHandler(void) {
 	SwitchMainLed();
 	SanCanAlive();
+	++tickMs; // wenn der in ms läuft, ist alles ok?!
+}
+
+void SendCanTimeDif(uint32_t res) {
+	uint8_t p[] = { 0, 0, 0, 0 };
+	p[0] = (res >> 24) & 0xFF;
+	p[1] = (res >> 16) & 0xFF;
+	p[2] = (res >> 8) & 0xFF;
+	p[3] = res & 0xFF;
+	SendCan(0x01, p, 4);
+
+}
+
+void SendTimeInfo(uint8_t channel) {
+	uint32_t actualTimeValue = tickMs;
+	uint32_t res = actualTimeValue - lastTimeValue[channel]; // todo mb: überschlag beachten
+	SendCanTimeDif(res);
+	printf("Rising edge on .... In %d %d \n", channel, res);
+	lastTimeValue[channel] = actualTimeValue;
+
 }
 
 void EXTI0_IRQHandler(void) {
+	SendTimeInfo(0);
 	printf("Rising edge on .... In 0\n");
 	EXTI_ClearITPendingBit(EXTI_Line0);
 	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
@@ -87,8 +117,7 @@ void EXTI0_IRQHandler(void) {
 }
 
 void EXTI1_IRQHandler(void) {
-	printf("Rising edge on .... In 1\n");
-	SendCan(0x01);
+	SendTimeInfo(1);
 	EXTI_ClearITPendingBit(EXTI_Line1);
 	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
 		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);

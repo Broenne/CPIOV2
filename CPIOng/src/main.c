@@ -20,7 +20,7 @@ void Init_Timer(void) {
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE); // Timer 2 Interrupt enable
 	TIM_TimeBase_InitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
 	TIM_TimeBase_InitStructure.TIM_CounterMode = TIM_CounterMode_Up;
-	TIM_TimeBase_InitStructure.TIM_Period = 1999;
+	TIM_TimeBase_InitStructure.TIM_Period = 4;//1999;
 	TIM_TimeBase_InitStructure.TIM_Prescaler = 17999;
 	TIM_TimeBaseInit(TIM2, &TIM_TimeBase_InitStructure);
 
