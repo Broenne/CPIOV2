@@ -84,6 +84,7 @@ void TIM2_IRQHandler(void) {
 	SwitchMainLed();
 	SanCanAlive();
 	++tickMs; // wenn der in ms läuft, ist alles ok?!
+	//tickMs += TIM_GetCounter(TIM2);
 }
 
 void SendCanTimeDif(uint32_t res) {
@@ -93,16 +94,20 @@ void SendCanTimeDif(uint32_t res) {
 	p[2] = (res >> 8) & 0xFF;
 	p[3] = res & 0xFF;
 	SendCan(0x01, p, 4);
-
 }
 
 void SendTimeInfo(uint8_t channel) {
 	uint32_t actualTimeValue = tickMs;
-	uint32_t res = actualTimeValue - lastTimeValue[channel]; // todo mb: überschlag beachten
+	uint32_t res;
+	if (actualTimeValue > lastTimeValue[channel]) {
+		res = actualTimeValue - lastTimeValue[channel]; // todo mb: überschlag beachten
+	} else {
+		res = lastTimeValue[channel] - actualTimeValue;
+	}
+
 	SendCanTimeDif(res);
 	printf("Rising edge on .... In %d %d \n", channel, res);
 	lastTimeValue[channel] = actualTimeValue;
-
 }
 
 void EXTI0_IRQHandler(void) {
@@ -118,6 +123,66 @@ void EXTI0_IRQHandler(void) {
 
 void EXTI1_IRQHandler(void) {
 	SendTimeInfo(1);
+	EXTI_ClearITPendingBit(EXTI_Line1);
+	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
+		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
+	} else {
+		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
+	}
+}
+
+void EXTI2_IRQHandler(void) {
+	SendTimeInfo(2);
+	EXTI_ClearITPendingBit(EXTI_Line1);
+	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
+		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
+	} else {
+		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
+	}
+}
+
+void EXTI3_IRQHandler(void) {
+	SendTimeInfo(3);
+	EXTI_ClearITPendingBit(EXTI_Line1);
+	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
+		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
+	} else {
+		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
+	}
+}
+
+void EXTI4_IRQHandler(void) {
+	SendTimeInfo(4);
+	EXTI_ClearITPendingBit(EXTI_Line1);
+	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
+		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
+	} else {
+		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
+	}
+}
+
+void EXTI5_IRQHandler(void) {
+	SendTimeInfo(5);
+	EXTI_ClearITPendingBit(EXTI_Line1);
+	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
+		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
+	} else {
+		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
+	}
+}
+
+void EXTI6_IRQHandler(void) {
+	SendTimeInfo(6);
+	EXTI_ClearITPendingBit(EXTI_Line1);
+	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
+		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
+	} else {
+		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
+	}
+}
+
+void EXTI7_IRQHandler(void) {
+	SendTimeInfo(7);
 	EXTI_ClearITPendingBit(EXTI_Line1);
 	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
 		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);

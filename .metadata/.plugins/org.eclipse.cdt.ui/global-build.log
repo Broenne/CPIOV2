@@ -1,493 +1,4 @@
-06:39:29 **** Incremental Build of configuration Debug for project CPIOng ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\src\stm32f1xx_it.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\stm32f1xx_it.o 
-..\src\stm32f1xx_it.c: In function 'SanCanAlive':
-..\src\stm32f1xx_it.c:55:2: warning: implicit declaration of function 'SendCan' [-Wimplicit-function-declaration]
-  SendCan(0x123, p, 8);
-  ^~~~~~~
-..\src\stm32f1xx_it.c: At top level:
-..\src\stm32f1xx_it.c:58:6: warning: conflicting types for 'SendCan'
- void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
-      ^~~~~~~
-..\src\stm32f1xx_it.c:55:2: note: previous implicit declaration of 'SendCan' was here
-  SendCan(0x123, p, 8);
-  ^~~~~~~
-..\src\stm32f1xx_it.c: In function 'SendCan':
-..\src\stm32f1xx_it.c:68:2: warning: implicit declaration of function 'memcpy' [-Wimplicit-function-declaration]
-  memcpy(canMessage.Data, data, len * sizeof(uint8_t));
-  ^~~~~~
-..\src\stm32f1xx_it.c:68:2: warning: incompatible implicit declaration of built-in function 'memcpy'
-..\src\stm32f1xx_it.c:68:2: note: include '<string.h>' or provide a declaration of 'memcpy'
-..\src\stm32f1xx_it.c: In function 'TIM2_IRQHandler':
-..\src\stm32f1xx_it.c:82:4: error: 'tickMs' undeclared (first use in this function)
-  ++tickMs; // wenn der in ms läuft, ist alles ok?!
-    ^~~~~~
-..\src\stm32f1xx_it.c:82:4: note: each undeclared identifier is reported only once for each function it appears in
-..\src\stm32f1xx_it.c: In function 'EXTI0_IRQHandler':
-..\src\stm32f1xx_it.c:92:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
-  printf("Rising edge on .... In 0\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:92:2: warning: incompatible implicit declaration of built-in function 'printf'
-..\src\stm32f1xx_it.c:92:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-..\src\stm32f1xx_it.c: In function 'EXTI1_IRQHandler':
-..\src\stm32f1xx_it.c:102:2: warning: incompatible implicit declaration of built-in function 'printf'
-  printf("Rising edge on .... In 1\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:102:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-..\src\stm32f1xx_it.c: In function 'CAN2_RX0_IRQHandler':
-..\src\stm32f1xx_it.c:130:2: warning: incompatible implicit declaration of built-in function 'printf'
-  printf("receive can 2 interrupt\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:130:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-06:40:53 **** Incremental Build of configuration Debug for project CPIOng ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\src\stm32f1xx_it.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\stm32f1xx_it.o 
-..\src\stm32f1xx_it.c: In function 'SanCanAlive':
-..\src\stm32f1xx_it.c:55:2: warning: implicit declaration of function 'SendCan' [-Wimplicit-function-declaration]
-  SendCan(0x123, p, 8);
-  ^~~~~~~
-..\src\stm32f1xx_it.c: At top level:
-..\src\stm32f1xx_it.c:58:6: warning: conflicting types for 'SendCan'
- void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
-      ^~~~~~~
-..\src\stm32f1xx_it.c:55:2: note: previous implicit declaration of 'SendCan' was here
-  SendCan(0x123, p, 8);
-  ^~~~~~~
-..\src\stm32f1xx_it.c: In function 'SendCan':
-..\src\stm32f1xx_it.c:68:2: warning: implicit declaration of function 'memcpy' [-Wimplicit-function-declaration]
-  memcpy(canMessage.Data, data, len * sizeof(uint8_t));
-  ^~~~~~
-..\src\stm32f1xx_it.c:68:2: warning: incompatible implicit declaration of built-in function 'memcpy'
-..\src\stm32f1xx_it.c:68:2: note: include '<string.h>' or provide a declaration of 'memcpy'
-..\src\stm32f1xx_it.c: In function 'EXTI0_IRQHandler':
-..\src\stm32f1xx_it.c:94:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
-  printf("Rising edge on .... In 0\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:94:2: warning: incompatible implicit declaration of built-in function 'printf'
-..\src\stm32f1xx_it.c:94:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-..\src\stm32f1xx_it.c: In function 'EXTI1_IRQHandler':
-..\src\stm32f1xx_it.c:104:2: warning: incompatible implicit declaration of built-in function 'printf'
-  printf("Rising edge on .... In 1\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:104:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-..\src\stm32f1xx_it.c: In function 'CAN2_RX0_IRQHandler':
-..\src\stm32f1xx_it.c:132:2: warning: incompatible implicit declaration of built-in function 'printf'
-  printf("receive can 2 interrupt\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:132:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-arm-atollic-eabi-gcc -o CPIOng.elf Libraries\STM32F10x_StdPeriph_Driver\src\misc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.o src\Can.o src\main.o src\startup_stm32f10x_cl.o src\stm32f1xx_it.o src\system_stm32f10x.o src\tiny_printf.o -mthumb -mcpu=cortex-m3 -T../stm32_flash.ld -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
-C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
-Generate build reports...
-Print size information
-   text	   data	    bss	    dec	    hex	filename
-   6508	      8	    552	   7068	   1b9c	CPIOng.elf
-Print size information done
-Generate listing file
-Output sent to: CPIOng.list
-Generate listing file done
-Generate build reports done
-07:15:19 **** Incremental Build of configuration Debug for project CPIOng ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\main.o 
-..\src\main.c: In function 'InitInputs':
-..\src\main.c:84:2: warning: implicit declaration of function 'InitExtiLine' [-Wimplicit-function-declaration]
-  InitExtiLine(EXTI_Line0);
-  ^~~~~~~~~~~~
-..\src\main.c: At top level:
-..\src\main.c:109:6: warning: conflicting types for 'InitExtiLine'
- void InitExtiLine(uint32_t value) {
-      ^~~~~~~~~~~~
-..\src\main.c:84:2: note: previous implicit declaration of 'InitExtiLine' was here
-  InitExtiLine(EXTI_Line0);
-  ^~~~~~~~~~~~
-arm-atollic-eabi-gcc -o CPIOng.elf Libraries\STM32F10x_StdPeriph_Driver\src\misc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.o src\Can.o src\main.o src\startup_stm32f10x_cl.o src\stm32f1xx_it.o src\system_stm32f10x.o src\tiny_printf.o -mthumb -mcpu=cortex-m3 -T../stm32_flash.ld -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
-C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
-Generate build reports...
-Print size information
-   text	   data	    bss	    dec	    hex	filename
-   6508	      8	    552	   7068	   1b9c	CPIOng.elf
-Print size information done
-Generate listing file
-Output sent to: CPIOng.list
-Generate listing file done
-Generate build reports done
-07:16:46 **** Incremental Build of configuration Debug for project CPIOng ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\src\stm32f1xx_it.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\stm32f1xx_it.o 
-..\src\stm32f1xx_it.c: In function 'SanCanAlive':
-..\src\stm32f1xx_it.c:60:4: warning: implicit declaration of function 'SendCan' [-Wimplicit-function-declaration]
-    SendCan(0x123, p, 8);
-    ^~~~~~~
-..\src\stm32f1xx_it.c: At top level:
-..\src\stm32f1xx_it.c:64:6: warning: conflicting types for 'SendCan'
- void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
-      ^~~~~~~
-..\src\stm32f1xx_it.c:60:4: note: previous implicit declaration of 'SendCan' was here
-    SendCan(0x123, p, 8);
-    ^~~~~~~
-..\src\stm32f1xx_it.c: In function 'SendCan':
-..\src\stm32f1xx_it.c:74:2: warning: implicit declaration of function 'memcpy' [-Wimplicit-function-declaration]
-  memcpy(canMessage.Data, data, len * sizeof(uint8_t));
-  ^~~~~~
-..\src\stm32f1xx_it.c:74:2: warning: incompatible implicit declaration of built-in function 'memcpy'
-..\src\stm32f1xx_it.c:74:2: note: include '<string.h>' or provide a declaration of 'memcpy'
-..\src\stm32f1xx_it.c: In function 'EXTI0_IRQHandler':
-..\src\stm32f1xx_it.c:99:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
-  printf("Rising edge on .... In 0\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:99:2: warning: incompatible implicit declaration of built-in function 'printf'
-..\src\stm32f1xx_it.c:99:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-..\src\stm32f1xx_it.c: In function 'EXTI1_IRQHandler':
-..\src\stm32f1xx_it.c:109:2: warning: incompatible implicit declaration of built-in function 'printf'
-  printf("Rising edge on .... In 1\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:109:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-..\src\stm32f1xx_it.c: In function 'CAN2_RX0_IRQHandler':
-..\src\stm32f1xx_it.c:137:2: warning: incompatible implicit declaration of built-in function 'printf'
-  printf("receive can 2 interrupt\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:137:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-arm-atollic-eabi-gcc -o CPIOng.elf Libraries\STM32F10x_StdPeriph_Driver\src\misc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.o src\Can.o src\main.o src\startup_stm32f10x_cl.o src\stm32f1xx_it.o src\system_stm32f10x.o src\tiny_printf.o -mthumb -mcpu=cortex-m3 -T../stm32_flash.ld -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
-C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
-Generate build reports...
-Print size information
-   text	   data	    bss	    dec	    hex	filename
-   6544	      8	    552	   7104	   1bc0	CPIOng.elf
-Print size information done
-Generate listing file
-Output sent to: CPIOng.list
-Generate listing file done
-Generate build reports done
-07:17:27 **** Incremental Build of configuration Debug for project CPIOng ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\src\stm32f1xx_it.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\stm32f1xx_it.o 
-..\src\stm32f1xx_it.c: In function 'SanCanAlive':
-..\src\stm32f1xx_it.c:60:3: warning: implicit declaration of function 'SendCan' [-Wimplicit-function-declaration]
-   SendCan(0x123, p, 8);
-   ^~~~~~~
-..\src\stm32f1xx_it.c: At top level:
-..\src\stm32f1xx_it.c:64:6: warning: conflicting types for 'SendCan'
- void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
-      ^~~~~~~
-..\src\stm32f1xx_it.c:60:3: note: previous implicit declaration of 'SendCan' was here
-   SendCan(0x123, p, 8);
-   ^~~~~~~
-..\src\stm32f1xx_it.c: In function 'SendCan':
-..\src\stm32f1xx_it.c:74:2: warning: implicit declaration of function 'memcpy' [-Wimplicit-function-declaration]
-  memcpy(canMessage.Data, data, len * sizeof(uint8_t));
-  ^~~~~~
-..\src\stm32f1xx_it.c:74:2: warning: incompatible implicit declaration of built-in function 'memcpy'
-..\src\stm32f1xx_it.c:74:2: note: include '<string.h>' or provide a declaration of 'memcpy'
-..\src\stm32f1xx_it.c: In function 'EXTI0_IRQHandler':
-..\src\stm32f1xx_it.c:92:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
-  printf("Rising edge on .... In 0\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:92:2: warning: incompatible implicit declaration of built-in function 'printf'
-..\src\stm32f1xx_it.c:92:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-..\src\stm32f1xx_it.c: In function 'EXTI1_IRQHandler':
-..\src\stm32f1xx_it.c:102:2: warning: incompatible implicit declaration of built-in function 'printf'
-  printf("Rising edge on .... In 1\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:102:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-..\src\stm32f1xx_it.c: In function 'CAN2_RX0_IRQHandler':
-..\src\stm32f1xx_it.c:128:2: warning: incompatible implicit declaration of built-in function 'printf'
-  printf("receive can 2 interrupt\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:128:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-arm-atollic-eabi-gcc -o CPIOng.elf Libraries\STM32F10x_StdPeriph_Driver\src\misc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.o src\Can.o src\main.o src\startup_stm32f10x_cl.o src\stm32f1xx_it.o src\system_stm32f10x.o src\tiny_printf.o -mthumb -mcpu=cortex-m3 -T../stm32_flash.ld -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
-C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
-Generate build reports...
-Print size information
-   text	   data	    bss	    dec	    hex	filename
-   6520	      8	    552	   7080	   1ba8	CPIOng.elf
-Print size information done
-Generate listing file
-Output sent to: CPIOng.list
-Generate listing file done
-Generate build reports done
-07:18:16 **** Incremental Build of configuration Debug for project CPIOng ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\src\stm32f1xx_it.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\stm32f1xx_it.o 
-..\src\stm32f1xx_it.c: In function 'SanCanAlive':
-..\src\stm32f1xx_it.c:60:3: warning: implicit declaration of function 'SendCan' [-Wimplicit-function-declaration]
-   SendCan(0x123, p, 8);
-   ^~~~~~~
-..\src\stm32f1xx_it.c: At top level:
-..\src\stm32f1xx_it.c:64:6: warning: conflicting types for 'SendCan'
- void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
-      ^~~~~~~
-..\src\stm32f1xx_it.c:60:3: note: previous implicit declaration of 'SendCan' was here
-   SendCan(0x123, p, 8);
-   ^~~~~~~
-..\src\stm32f1xx_it.c: In function 'SendCan':
-..\src\stm32f1xx_it.c:74:2: warning: implicit declaration of function 'memcpy' [-Wimplicit-function-declaration]
-  memcpy(canMessage.Data, data, len * sizeof(uint8_t));
-  ^~~~~~
-..\src\stm32f1xx_it.c:74:2: warning: incompatible implicit declaration of built-in function 'memcpy'
-..\src\stm32f1xx_it.c:74:2: note: include '<string.h>' or provide a declaration of 'memcpy'
-..\src\stm32f1xx_it.c: In function 'EXTI0_IRQHandler':
-..\src\stm32f1xx_it.c:92:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
-  printf("Rising edge on .... In 0\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:92:2: warning: incompatible implicit declaration of built-in function 'printf'
-..\src\stm32f1xx_it.c:92:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-..\src\stm32f1xx_it.c: In function 'EXTI1_IRQHandler':
-..\src\stm32f1xx_it.c:102:2: warning: incompatible implicit declaration of built-in function 'printf'
-  printf("Rising edge on .... In 1\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:102:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-..\src\stm32f1xx_it.c: In function 'CAN2_RX0_IRQHandler':
-..\src\stm32f1xx_it.c:128:2: warning: incompatible implicit declaration of built-in function 'printf'
-  printf("receive can 2 interrupt\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:128:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-arm-atollic-eabi-gcc -o CPIOng.elf Libraries\STM32F10x_StdPeriph_Driver\src\misc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.o src\Can.o src\main.o src\startup_stm32f10x_cl.o src\stm32f1xx_it.o src\system_stm32f10x.o src\tiny_printf.o -mthumb -mcpu=cortex-m3 -T../stm32_flash.ld -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
-C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
-Generate build reports...
-Print size information
-   text	   data	    bss	    dec	    hex	filename
-   6544	      8	    552	   7104	   1bc0	CPIOng.elf
-Print size information done
-Generate listing file
-Output sent to: CPIOng.list
-Generate listing file done
-Generate build reports done
-07:19:02 **** Incremental Build of configuration Debug for project CPIOng ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\src\stm32f1xx_it.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\stm32f1xx_it.o 
-..\src\stm32f1xx_it.c: In function 'SanCanAlive':
-..\src\stm32f1xx_it.c:59:3: warning: implicit declaration of function 'SendCan' [-Wimplicit-function-declaration]
-   SendCan(0x123, p, 8);
-   ^~~~~~~
-..\src\stm32f1xx_it.c: At top level:
-..\src\stm32f1xx_it.c:63:6: warning: conflicting types for 'SendCan'
- void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
-      ^~~~~~~
-..\src\stm32f1xx_it.c:59:3: note: previous implicit declaration of 'SendCan' was here
-   SendCan(0x123, p, 8);
-   ^~~~~~~
-..\src\stm32f1xx_it.c: In function 'SendCan':
-..\src\stm32f1xx_it.c:73:2: warning: implicit declaration of function 'memcpy' [-Wimplicit-function-declaration]
-  memcpy(canMessage.Data, data, len * sizeof(uint8_t));
-  ^~~~~~
-..\src\stm32f1xx_it.c:73:2: warning: incompatible implicit declaration of built-in function 'memcpy'
-..\src\stm32f1xx_it.c:73:2: note: include '<string.h>' or provide a declaration of 'memcpy'
-..\src\stm32f1xx_it.c: In function 'EXTI0_IRQHandler':
-..\src\stm32f1xx_it.c:91:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
-  printf("Rising edge on .... In 0\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:91:2: warning: incompatible implicit declaration of built-in function 'printf'
-..\src\stm32f1xx_it.c:91:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-..\src\stm32f1xx_it.c: In function 'EXTI1_IRQHandler':
-..\src\stm32f1xx_it.c:101:2: warning: incompatible implicit declaration of built-in function 'printf'
-  printf("Rising edge on .... In 1\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:101:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-..\src\stm32f1xx_it.c: In function 'CAN2_RX0_IRQHandler':
-..\src\stm32f1xx_it.c:127:2: warning: incompatible implicit declaration of built-in function 'printf'
-  printf("receive can 2 interrupt\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:127:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-arm-atollic-eabi-gcc -o CPIOng.elf Libraries\STM32F10x_StdPeriph_Driver\src\misc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.o src\Can.o src\main.o src\startup_stm32f10x_cl.o src\stm32f1xx_it.o src\system_stm32f10x.o src\tiny_printf.o -mthumb -mcpu=cortex-m3 -T../stm32_flash.ld -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
-C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
-Generate build reports...
-Print size information
-   text	   data	    bss	    dec	    hex	filename
-   6544	      8	    552	   7104	   1bc0	CPIOng.elf
-Print size information done
-Generate listing file
-Output sent to: CPIOng.list
-Generate listing file done
-Generate build reports done
-07:40:12 **** Incremental Build of configuration Debug for project CPIOng ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\src\stm32f1xx_it.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\stm32f1xx_it.o 
-..\src\stm32f1xx_it.c: In function 'SanCanAlive':
-..\src\stm32f1xx_it.c:60:3: warning: implicit declaration of function 'SendCan' [-Wimplicit-function-declaration]
-   SendCan(0x123, p, 8);
-   ^~~~~~~
-..\src\stm32f1xx_it.c: At top level:
-..\src\stm32f1xx_it.c:64:6: warning: conflicting types for 'SendCan'
- void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
-      ^~~~~~~
-..\src\stm32f1xx_it.c:60:3: note: previous implicit declaration of 'SendCan' was here
-   SendCan(0x123, p, 8);
-   ^~~~~~~
-..\src\stm32f1xx_it.c: In function 'SendCan':
-..\src\stm32f1xx_it.c:74:2: warning: implicit declaration of function 'memcpy' [-Wimplicit-function-declaration]
-  memcpy(canMessage.Data, data, len * sizeof(uint8_t));
-  ^~~~~~
-..\src\stm32f1xx_it.c:74:2: warning: incompatible implicit declaration of built-in function 'memcpy'
-..\src\stm32f1xx_it.c:74:2: note: include '<string.h>' or provide a declaration of 'memcpy'
-..\src\stm32f1xx_it.c: In function 'SendCanTimeDif':
-..\src\stm32f1xx_it.c:91:10: error: 'res' undeclared (first use in this function)
-  p[0] = (res >> 24) & 0xFF;
-          ^~~
-..\src\stm32f1xx_it.c:91:10: note: each undeclared identifier is reported only once for each function it appears in
-..\src\stm32f1xx_it.c: In function 'EXTI0_IRQHandler':
-..\src\stm32f1xx_it.c:100:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
-  printf("Rising edge on .... In 0\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:100:2: warning: incompatible implicit declaration of built-in function 'printf'
-..\src\stm32f1xx_it.c:100:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-..\src\stm32f1xx_it.c: In function 'EXTI1_IRQHandler':
-..\src\stm32f1xx_it.c:111:2: warning: incompatible implicit declaration of built-in function 'printf'
-  printf("Rising edge on .... In 1\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:111:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-..\src\stm32f1xx_it.c:118:16: error: assignment to expression with array type
-  lastTimeValue = actualTimeValue;
-                ^
-..\src\stm32f1xx_it.c:115:11: warning: unused variable 'res' [-Wunused-variable]
-  uint32_t res = actualTimeValue - lastTimeValue[0]; // todo mb: überschlag beachten
-           ^~~
-..\src\stm32f1xx_it.c: In function 'CAN2_RX0_IRQHandler':
-..\src\stm32f1xx_it.c:129:2: warning: incompatible implicit declaration of built-in function 'printf'
-  printf("receive can 2 interrupt\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:129:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-07:40:33 **** Incremental Build of configuration Debug for project CPIOng ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\src\stm32f1xx_it.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\stm32f1xx_it.o 
-..\src\stm32f1xx_it.c: In function 'SanCanAlive':
-..\src\stm32f1xx_it.c:60:3: warning: implicit declaration of function 'SendCan' [-Wimplicit-function-declaration]
-   SendCan(0x123, p, 8);
-   ^~~~~~~
-..\src\stm32f1xx_it.c: At top level:
-..\src\stm32f1xx_it.c:64:6: warning: conflicting types for 'SendCan'
- void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
-      ^~~~~~~
-..\src\stm32f1xx_it.c:60:3: note: previous implicit declaration of 'SendCan' was here
-   SendCan(0x123, p, 8);
-   ^~~~~~~
-..\src\stm32f1xx_it.c: In function 'SendCan':
-..\src\stm32f1xx_it.c:74:2: warning: implicit declaration of function 'memcpy' [-Wimplicit-function-declaration]
-  memcpy(canMessage.Data, data, len * sizeof(uint8_t));
-  ^~~~~~
-..\src\stm32f1xx_it.c:74:2: warning: incompatible implicit declaration of built-in function 'memcpy'
-..\src\stm32f1xx_it.c:74:2: note: include '<string.h>' or provide a declaration of 'memcpy'
-..\src\stm32f1xx_it.c: In function 'SendCanTimeDif':
-..\src\stm32f1xx_it.c:91:10: error: 'res' undeclared (first use in this function)
-  p[0] = (res >> 24) & 0xFF;
-          ^~~
-..\src\stm32f1xx_it.c:91:10: note: each undeclared identifier is reported only once for each function it appears in
-..\src\stm32f1xx_it.c: In function 'EXTI0_IRQHandler':
-..\src\stm32f1xx_it.c:100:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
-  printf("Rising edge on .... In 0\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:100:2: warning: incompatible implicit declaration of built-in function 'printf'
-..\src\stm32f1xx_it.c:100:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-..\src\stm32f1xx_it.c: In function 'EXTI1_IRQHandler':
-..\src\stm32f1xx_it.c:111:2: warning: incompatible implicit declaration of built-in function 'printf'
-  printf("Rising edge on .... In 1\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:111:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-..\src\stm32f1xx_it.c:115:11: warning: unused variable 'res' [-Wunused-variable]
-  uint32_t res = actualTimeValue - lastTimeValue[0]; // todo mb: überschlag beachten
-           ^~~
-..\src\stm32f1xx_it.c: In function 'CAN2_RX0_IRQHandler':
-..\src\stm32f1xx_it.c:129:2: warning: incompatible implicit declaration of built-in function 'printf'
-  printf("receive can 2 interrupt\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:129:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-07:41:04 **** Incremental Build of configuration Debug for project CPIOng ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\src\stm32f1xx_it.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\stm32f1xx_it.o 
-..\src\stm32f1xx_it.c: In function 'SanCanAlive':
-..\src\stm32f1xx_it.c:60:3: warning: implicit declaration of function 'SendCan' [-Wimplicit-function-declaration]
-   SendCan(0x123, p, 8);
-   ^~~~~~~
-..\src\stm32f1xx_it.c: At top level:
-..\src\stm32f1xx_it.c:64:6: warning: conflicting types for 'SendCan'
- void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
-      ^~~~~~~
-..\src\stm32f1xx_it.c:60:3: note: previous implicit declaration of 'SendCan' was here
-   SendCan(0x123, p, 8);
-   ^~~~~~~
-..\src\stm32f1xx_it.c: In function 'SendCan':
-..\src\stm32f1xx_it.c:74:2: warning: implicit declaration of function 'memcpy' [-Wimplicit-function-declaration]
-  memcpy(canMessage.Data, data, len * sizeof(uint8_t));
-  ^~~~~~
-..\src\stm32f1xx_it.c:74:2: warning: incompatible implicit declaration of built-in function 'memcpy'
-..\src\stm32f1xx_it.c:74:2: note: include '<string.h>' or provide a declaration of 'memcpy'
-..\src\stm32f1xx_it.c: In function 'EXTI0_IRQHandler':
-..\src\stm32f1xx_it.c:100:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
-  printf("Rising edge on .... In 0\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:100:2: warning: incompatible implicit declaration of built-in function 'printf'
-..\src\stm32f1xx_it.c:100:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-..\src\stm32f1xx_it.c: In function 'EXTI1_IRQHandler':
-..\src\stm32f1xx_it.c:111:2: warning: incompatible implicit declaration of built-in function 'printf'
-  printf("Rising edge on .... In 1\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:111:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-..\src\stm32f1xx_it.c: In function 'CAN2_RX0_IRQHandler':
-..\src\stm32f1xx_it.c:129:2: warning: incompatible implicit declaration of built-in function 'printf'
-  printf("receive can 2 interrupt\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:129:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-arm-atollic-eabi-gcc -o CPIOng.elf Libraries\STM32F10x_StdPeriph_Driver\src\misc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.o src\Can.o src\main.o src\startup_stm32f10x_cl.o src\stm32f1xx_it.o src\system_stm32f10x.o src\tiny_printf.o -mthumb -mcpu=cortex-m3 -T../stm32_flash.ld -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
-C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
-Generate build reports...
-Print size information
-   text	   data	    bss	    dec	    hex	filename
-   6568	      8	    580	   7156	   1bf4	CPIOng.elf
-Print size information done
-Generate listing file
-Output sent to: CPIOng.list
-Generate listing file done
-Generate build reports done
-07:42:58 **** Incremental Build of configuration Debug for project CPIOng ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\src\stm32f1xx_it.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\stm32f1xx_it.o 
-..\src\stm32f1xx_it.c: In function 'SanCanAlive':
-..\src\stm32f1xx_it.c:60:3: warning: implicit declaration of function 'SendCan' [-Wimplicit-function-declaration]
-   SendCan(0x123, p, 8);
-   ^~~~~~~
-..\src\stm32f1xx_it.c: At top level:
-..\src\stm32f1xx_it.c:64:6: warning: conflicting types for 'SendCan'
- void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
-      ^~~~~~~
-..\src\stm32f1xx_it.c:60:3: note: previous implicit declaration of 'SendCan' was here
-   SendCan(0x123, p, 8);
-   ^~~~~~~
-..\src\stm32f1xx_it.c: In function 'SendCan':
-..\src\stm32f1xx_it.c:74:2: warning: implicit declaration of function 'memcpy' [-Wimplicit-function-declaration]
-  memcpy(canMessage.Data, data, len * sizeof(uint8_t));
-  ^~~~~~
-..\src\stm32f1xx_it.c:74:2: warning: incompatible implicit declaration of built-in function 'memcpy'
-..\src\stm32f1xx_it.c:74:2: note: include '<string.h>' or provide a declaration of 'memcpy'
-..\src\stm32f1xx_it.c: In function 'EXTI0_IRQHandler':
-..\src\stm32f1xx_it.c:100:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
-  printf("Rising edge on .... In 0\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:100:2: warning: incompatible implicit declaration of built-in function 'printf'
-..\src\stm32f1xx_it.c:100:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-..\src\stm32f1xx_it.c: In function 'EXTI1_IRQHandler':
-..\src\stm32f1xx_it.c:114:2: warning: incompatible implicit declaration of built-in function 'printf'
-  printf("Rising edge on .... In 1 %d \n", res);
-  ^~~~~~
-..\src\stm32f1xx_it.c:114:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-..\src\stm32f1xx_it.c:114:36: warning: format '%d' expects argument of type 'int', but argument 2 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
-  printf("Rising edge on .... In 1 %d \n", res);
-                                    ^
-..\src\stm32f1xx_it.c: In function 'CAN2_RX0_IRQHandler':
-..\src\stm32f1xx_it.c:126:2: warning: incompatible implicit declaration of built-in function 'printf'
-  printf("receive can 2 interrupt\n");
-  ^~~~~~
-..\src\stm32f1xx_it.c:126:2: note: include '<stdio.h>' or provide a declaration of 'printf'
-arm-atollic-eabi-gcc -o CPIOng.elf Libraries\STM32F10x_StdPeriph_Driver\src\misc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.o src\Can.o src\main.o src\startup_stm32f10x_cl.o src\stm32f1xx_it.o src\system_stm32f10x.o src\tiny_printf.o -mthumb -mcpu=cortex-m3 -T../stm32_flash.ld -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
-C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
-Generate build reports...
-Print size information
-   text	   data	    bss	    dec	    hex	filename
-   7472	      8	    580	   8060	   1f7c	CPIOng.elf
-Print size information done
-Generate listing file
-Output sent to: CPIOng.list
-Generate listing file done
-Generate build reports done
-07:48:50 **** Incremental Build of configuration Debug for project CPIOng ****
+08:02:59 **** Incremental Build of configuration Debug for project CPIOng ****
 Info: Internal Builder is used for build
 arm-atollic-eabi-gcc -c ..\src\stm32f1xx_it.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\stm32f1xx_it.o 
 ..\src\stm32f1xx_it.c: In function 'SanCanAlive':
@@ -526,6 +37,431 @@ arm-atollic-eabi-gcc -c ..\src\stm32f1xx_it.c -mthumb -mcpu=cortex-m3 -std=gnu11
   printf("receive can 2 interrupt\n");
   ^~~~~~
 ..\src\stm32f1xx_it.c:130:2: note: include '<stdio.h>' or provide a declaration of 'printf'
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\main.o 
+..\src\main.c: In function 'InitInputs':
+..\src\main.c:84:2: warning: implicit declaration of function 'InitExtiLine' [-Wimplicit-function-declaration]
+  InitExtiLine(EXTI_Line0);
+  ^~~~~~~~~~~~
+..\src\main.c: At top level:
+..\src\main.c:109:6: warning: conflicting types for 'InitExtiLine'
+ void InitExtiLine(uint32_t value) {
+      ^~~~~~~~~~~~
+..\src\main.c:84:2: note: previous implicit declaration of 'InitExtiLine' was here
+  InitExtiLine(EXTI_Line0);
+  ^~~~~~~~~~~~
+arm-atollic-eabi-gcc -o CPIOng.elf Libraries\STM32F10x_StdPeriph_Driver\src\misc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.o src\Can.o src\main.o src\startup_stm32f10x_cl.o src\stm32f1xx_it.o src\system_stm32f10x.o src\tiny_printf.o -mthumb -mcpu=cortex-m3 -T../stm32_flash.ld -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+   7472	      8	    580	   8060	   1f7c	CPIOng.elf
+Print size information done
+Generate listing file
+Output sent to: CPIOng.list
+Generate listing file done
+Generate build reports done
+Info: Nothing to build for CPIOng
+08:03:30 **** Incremental Build of configuration Debug for project CPIOng ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\stm32f1xx_it.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\stm32f1xx_it.o 
+..\src\stm32f1xx_it.c: In function 'SanCanAlive':
+..\src\stm32f1xx_it.c:60:3: warning: implicit declaration of function 'SendCan' [-Wimplicit-function-declaration]
+   SendCan(0x123, p, 8);
+   ^~~~~~~
+..\src\stm32f1xx_it.c: At top level:
+..\src\stm32f1xx_it.c:64:6: warning: conflicting types for 'SendCan'
+ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
+      ^~~~~~~
+..\src\stm32f1xx_it.c:60:3: note: previous implicit declaration of 'SendCan' was here
+   SendCan(0x123, p, 8);
+   ^~~~~~~
+..\src\stm32f1xx_it.c: In function 'SendCan':
+..\src\stm32f1xx_it.c:74:2: warning: implicit declaration of function 'memcpy' [-Wimplicit-function-declaration]
+  memcpy(canMessage.Data, data, len * sizeof(uint8_t));
+  ^~~~~~
+..\src\stm32f1xx_it.c:74:2: warning: incompatible implicit declaration of built-in function 'memcpy'
+..\src\stm32f1xx_it.c:74:2: note: include '<string.h>' or provide a declaration of 'memcpy'
+..\src\stm32f1xx_it.c: In function 'SendTimeInfo':
+..\src\stm32f1xx_it.c:103:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+  printf("Rising edge on .... In %d %d \n", channel, res);
+  ^~~~~~
+..\src\stm32f1xx_it.c:103:2: warning: incompatible implicit declaration of built-in function 'printf'
+..\src\stm32f1xx_it.c:103:2: note: include '<stdio.h>' or provide a declaration of 'printf'
+..\src\stm32f1xx_it.c:103:37: warning: format '%d' expects argument of type 'int', but argument 3 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+  printf("Rising edge on .... In %d %d \n", channel, res);
+                                     ^
+..\src\stm32f1xx_it.c: In function 'EXTI0_IRQHandler':
+..\src\stm32f1xx_it.c:110:2: warning: incompatible implicit declaration of built-in function 'printf'
+  printf("Rising edge on .... In 0\n");
+  ^~~~~~
+..\src\stm32f1xx_it.c:110:2: note: include '<stdio.h>' or provide a declaration of 'printf'
+..\src\stm32f1xx_it.c: In function 'CAN2_RX0_IRQHandler':
+..\src\stm32f1xx_it.c:130:2: warning: incompatible implicit declaration of built-in function 'printf'
+  printf("receive can 2 interrupt\n");
+  ^~~~~~
+..\src\stm32f1xx_it.c:130:2: note: include '<stdio.h>' or provide a declaration of 'printf'
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\main.o 
+..\src\main.c: In function 'InitInputs':
+..\src\main.c:84:2: warning: implicit declaration of function 'InitExtiLine' [-Wimplicit-function-declaration]
+  InitExtiLine(EXTI_Line0);
+  ^~~~~~~~~~~~
+..\src\main.c: At top level:
+..\src\main.c:109:6: warning: conflicting types for 'InitExtiLine'
+ void InitExtiLine(uint32_t value) {
+      ^~~~~~~~~~~~
+..\src\main.c:84:2: note: previous implicit declaration of 'InitExtiLine' was here
+  InitExtiLine(EXTI_Line0);
+  ^~~~~~~~~~~~
+arm-atollic-eabi-gcc -o CPIOng.elf Libraries\STM32F10x_StdPeriph_Driver\src\misc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.o src\Can.o src\main.o src\startup_stm32f10x_cl.o src\stm32f1xx_it.o src\system_stm32f10x.o src\tiny_printf.o -mthumb -mcpu=cortex-m3 -T../stm32_flash.ld -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+   7508	      8	    580	   8096	   1fa0	CPIOng.elf
+Print size information done
+Generate listing file
+Output sent to: CPIOng.list
+Generate listing file done
+Generate build reports done
+08:04:17 **** Incremental Build of configuration Debug for project CPIOng ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\main.o 
+..\src\main.c: In function 'InitInputs':
+..\src\main.c:84:2: warning: implicit declaration of function 'InitExtiLine' [-Wimplicit-function-declaration]
+  InitExtiLine(EXTI_Line0);
+  ^~~~~~~~~~~~
+..\src\main.c: At top level:
+..\src\main.c:109:6: warning: conflicting types for 'InitExtiLine'
+ void InitExtiLine(uint32_t value) {
+      ^~~~~~~~~~~~
+..\src\main.c:84:2: note: previous implicit declaration of 'InitExtiLine' was here
+  InitExtiLine(EXTI_Line0);
+  ^~~~~~~~~~~~
+arm-atollic-eabi-gcc -o CPIOng.elf Libraries\STM32F10x_StdPeriph_Driver\src\misc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.o src\Can.o src\main.o src\startup_stm32f10x_cl.o src\stm32f1xx_it.o src\system_stm32f10x.o src\tiny_printf.o -mthumb -mcpu=cortex-m3 -T../stm32_flash.ld -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+   7508	      8	    580	   8096	   1fa0	CPIOng.elf
+Print size information done
+Generate listing file
+Output sent to: CPIOng.list
+Generate listing file done
+Generate build reports done
+08:05:24 **** Incremental Build of configuration Debug for project CPIOng ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\main.o 
+..\src\main.c: In function 'InitInputs':
+..\src\main.c:84:2: warning: implicit declaration of function 'InitExtiLine' [-Wimplicit-function-declaration]
+  InitExtiLine(EXTI_Line0);
+  ^~~~~~~~~~~~
+..\src\main.c: At top level:
+..\src\main.c:109:6: warning: conflicting types for 'InitExtiLine'
+ void InitExtiLine(uint32_t value) {
+      ^~~~~~~~~~~~
+..\src\main.c:84:2: note: previous implicit declaration of 'InitExtiLine' was here
+  InitExtiLine(EXTI_Line0);
+  ^~~~~~~~~~~~
+arm-atollic-eabi-gcc -o CPIOng.elf Libraries\STM32F10x_StdPeriph_Driver\src\misc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.o src\Can.o src\main.o src\startup_stm32f10x_cl.o src\stm32f1xx_it.o src\system_stm32f10x.o src\tiny_printf.o -mthumb -mcpu=cortex-m3 -T../stm32_flash.ld -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+   7508	      8	    580	   8096	   1fa0	CPIOng.elf
+Print size information done
+Generate listing file
+Output sent to: CPIOng.list
+Generate listing file done
+Generate build reports done
+08:05:54 **** Incremental Build of configuration Debug for project CPIOng ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\main.o 
+..\src\main.c: In function 'InitInputs':
+..\src\main.c:84:2: warning: implicit declaration of function 'InitExtiLine' [-Wimplicit-function-declaration]
+  InitExtiLine(EXTI_Line0);
+  ^~~~~~~~~~~~
+..\src\main.c: At top level:
+..\src\main.c:109:6: warning: conflicting types for 'InitExtiLine'
+ void InitExtiLine(uint32_t value) {
+      ^~~~~~~~~~~~
+..\src\main.c:84:2: note: previous implicit declaration of 'InitExtiLine' was here
+  InitExtiLine(EXTI_Line0);
+  ^~~~~~~~~~~~
+arm-atollic-eabi-gcc -o CPIOng.elf Libraries\STM32F10x_StdPeriph_Driver\src\misc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.o src\Can.o src\main.o src\startup_stm32f10x_cl.o src\stm32f1xx_it.o src\system_stm32f10x.o src\tiny_printf.o -mthumb -mcpu=cortex-m3 -T../stm32_flash.ld -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+   7508	      8	    580	   8096	   1fa0	CPIOng.elf
+Print size information done
+Generate listing file
+Output sent to: CPIOng.list
+Generate listing file done
+Generate build reports done
+08:06:50 **** Incremental Build of configuration Debug for project CPIOng ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\main.o 
+..\src\main.c: In function 'InitInputs':
+..\src\main.c:84:2: warning: implicit declaration of function 'InitExtiLine' [-Wimplicit-function-declaration]
+  InitExtiLine(EXTI_Line0);
+  ^~~~~~~~~~~~
+..\src\main.c: At top level:
+..\src\main.c:109:6: warning: conflicting types for 'InitExtiLine'
+ void InitExtiLine(uint32_t value) {
+      ^~~~~~~~~~~~
+..\src\main.c:84:2: note: previous implicit declaration of 'InitExtiLine' was here
+  InitExtiLine(EXTI_Line0);
+  ^~~~~~~~~~~~
+arm-atollic-eabi-gcc -o CPIOng.elf Libraries\STM32F10x_StdPeriph_Driver\src\misc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.o src\Can.o src\main.o src\startup_stm32f10x_cl.o src\stm32f1xx_it.o src\system_stm32f10x.o src\tiny_printf.o -mthumb -mcpu=cortex-m3 -T../stm32_flash.ld -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+   7508	      8	    580	   8096	   1fa0	CPIOng.elf
+Print size information done
+Generate listing file
+Output sent to: CPIOng.list
+Generate listing file done
+Generate build reports done
+08:07:19 **** Incremental Build of configuration Debug for project CPIOng ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\main.o 
+..\src\main.c: In function 'InitInputs':
+..\src\main.c:84:2: warning: implicit declaration of function 'InitExtiLine' [-Wimplicit-function-declaration]
+  InitExtiLine(EXTI_Line0);
+  ^~~~~~~~~~~~
+..\src\main.c: At top level:
+..\src\main.c:109:6: warning: conflicting types for 'InitExtiLine'
+ void InitExtiLine(uint32_t value) {
+      ^~~~~~~~~~~~
+..\src\main.c:84:2: note: previous implicit declaration of 'InitExtiLine' was here
+  InitExtiLine(EXTI_Line0);
+  ^~~~~~~~~~~~
+arm-atollic-eabi-gcc -o CPIOng.elf Libraries\STM32F10x_StdPeriph_Driver\src\misc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.o src\Can.o src\main.o src\startup_stm32f10x_cl.o src\stm32f1xx_it.o src\system_stm32f10x.o src\tiny_printf.o -mthumb -mcpu=cortex-m3 -T../stm32_flash.ld -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+   7508	      8	    580	   8096	   1fa0	CPIOng.elf
+Print size information done
+Generate listing file
+Output sent to: CPIOng.list
+Generate listing file done
+Generate build reports done
+08:07:38 **** Incremental Build of configuration Debug for project CPIOng ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\main.o 
+..\src\main.c: In function 'InitInputs':
+..\src\main.c:84:2: warning: implicit declaration of function 'InitExtiLine' [-Wimplicit-function-declaration]
+  InitExtiLine(EXTI_Line0);
+  ^~~~~~~~~~~~
+..\src\main.c: At top level:
+..\src\main.c:109:6: warning: conflicting types for 'InitExtiLine'
+ void InitExtiLine(uint32_t value) {
+      ^~~~~~~~~~~~
+..\src\main.c:84:2: note: previous implicit declaration of 'InitExtiLine' was here
+  InitExtiLine(EXTI_Line0);
+  ^~~~~~~~~~~~
+arm-atollic-eabi-gcc -o CPIOng.elf Libraries\STM32F10x_StdPeriph_Driver\src\misc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.o src\Can.o src\main.o src\startup_stm32f10x_cl.o src\stm32f1xx_it.o src\system_stm32f10x.o src\tiny_printf.o -mthumb -mcpu=cortex-m3 -T../stm32_flash.ld -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+   7508	      8	    580	   8096	   1fa0	CPIOng.elf
+Print size information done
+Generate listing file
+Output sent to: CPIOng.list
+Generate listing file done
+Generate build reports done
+09:03:42 **** Incremental Build of configuration Debug for project CPIOng ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\stm32f1xx_it.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\stm32f1xx_it.o 
+..\src\stm32f1xx_it.c: In function 'SanCanAlive':
+..\src\stm32f1xx_it.c:60:3: warning: implicit declaration of function 'SendCan' [-Wimplicit-function-declaration]
+   SendCan(0x123, p, 8);
+   ^~~~~~~
+..\src\stm32f1xx_it.c: At top level:
+..\src\stm32f1xx_it.c:64:6: warning: conflicting types for 'SendCan'
+ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
+      ^~~~~~~
+..\src\stm32f1xx_it.c:60:3: note: previous implicit declaration of 'SendCan' was here
+   SendCan(0x123, p, 8);
+   ^~~~~~~
+..\src\stm32f1xx_it.c: In function 'SendCan':
+..\src\stm32f1xx_it.c:74:2: warning: implicit declaration of function 'memcpy' [-Wimplicit-function-declaration]
+  memcpy(canMessage.Data, data, len * sizeof(uint8_t));
+  ^~~~~~
+..\src\stm32f1xx_it.c:74:2: warning: incompatible implicit declaration of built-in function 'memcpy'
+..\src\stm32f1xx_it.c:74:2: note: include '<string.h>' or provide a declaration of 'memcpy'
+..\src\stm32f1xx_it.c: In function 'SendTimeInfo':
+..\src\stm32f1xx_it.c:104:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+  printf("Rising edge on .... In %d %d \n", channel, res);
+  ^~~~~~
+..\src\stm32f1xx_it.c:104:2: warning: incompatible implicit declaration of built-in function 'printf'
+..\src\stm32f1xx_it.c:104:2: note: include '<stdio.h>' or provide a declaration of 'printf'
+..\src\stm32f1xx_it.c:104:37: warning: format '%d' expects argument of type 'int', but argument 3 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+  printf("Rising edge on .... In %d %d \n", channel, res);
+                                     ^
+..\src\stm32f1xx_it.c: In function 'EXTI0_IRQHandler':
+..\src\stm32f1xx_it.c:111:2: warning: incompatible implicit declaration of built-in function 'printf'
+  printf("Rising edge on .... In 0\n");
+  ^~~~~~
+..\src\stm32f1xx_it.c:111:2: note: include '<stdio.h>' or provide a declaration of 'printf'
+..\src\stm32f1xx_it.c: In function 'CAN2_RX0_IRQHandler':
+..\src\stm32f1xx_it.c:131:2: warning: incompatible implicit declaration of built-in function 'printf'
+  printf("receive can 2 interrupt\n");
+  ^~~~~~
+..\src\stm32f1xx_it.c:131:2: note: include '<stdio.h>' or provide a declaration of 'printf'
+arm-atollic-eabi-gcc -o CPIOng.elf Libraries\STM32F10x_StdPeriph_Driver\src\misc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.o src\Can.o src\main.o src\startup_stm32f10x_cl.o src\stm32f1xx_it.o src\system_stm32f10x.o src\tiny_printf.o -mthumb -mcpu=cortex-m3 -T../stm32_flash.ld -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+   7536	      8	    580	   8124	   1fbc	CPIOng.elf
+Print size information done
+Generate listing file
+Output sent to: CPIOng.list
+Generate listing file done
+Generate build reports done
+09:04:31 **** Incremental Build of configuration Debug for project CPIOng ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\stm32f1xx_it.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\stm32f1xx_it.o 
+..\src\stm32f1xx_it.c: In function 'SanCanAlive':
+..\src\stm32f1xx_it.c:60:3: warning: implicit declaration of function 'SendCan' [-Wimplicit-function-declaration]
+   SendCan(0x123, p, 8);
+   ^~~~~~~
+..\src\stm32f1xx_it.c: At top level:
+..\src\stm32f1xx_it.c:64:6: warning: conflicting types for 'SendCan'
+ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
+      ^~~~~~~
+..\src\stm32f1xx_it.c:60:3: note: previous implicit declaration of 'SendCan' was here
+   SendCan(0x123, p, 8);
+   ^~~~~~~
+..\src\stm32f1xx_it.c: In function 'SendCan':
+..\src\stm32f1xx_it.c:74:2: warning: implicit declaration of function 'memcpy' [-Wimplicit-function-declaration]
+  memcpy(canMessage.Data, data, len * sizeof(uint8_t));
+  ^~~~~~
+..\src\stm32f1xx_it.c:74:2: warning: incompatible implicit declaration of built-in function 'memcpy'
+..\src\stm32f1xx_it.c:74:2: note: include '<string.h>' or provide a declaration of 'memcpy'
+..\src\stm32f1xx_it.c: In function 'SendTimeInfo':
+..\src\stm32f1xx_it.c:104:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+  printf("Rising edge on .... In %d %d \n", channel, res);
+  ^~~~~~
+..\src\stm32f1xx_it.c:104:2: warning: incompatible implicit declaration of built-in function 'printf'
+..\src\stm32f1xx_it.c:104:2: note: include '<stdio.h>' or provide a declaration of 'printf'
+..\src\stm32f1xx_it.c:104:37: warning: format '%d' expects argument of type 'int', but argument 3 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+  printf("Rising edge on .... In %d %d \n", channel, res);
+                                     ^
+..\src\stm32f1xx_it.c: In function 'EXTI0_IRQHandler':
+..\src\stm32f1xx_it.c:111:2: warning: incompatible implicit declaration of built-in function 'printf'
+  printf("Rising edge on .... In 0\n");
+  ^~~~~~
+..\src\stm32f1xx_it.c:111:2: note: include '<stdio.h>' or provide a declaration of 'printf'
+..\src\stm32f1xx_it.c: In function 'CAN2_RX0_IRQHandler':
+..\src\stm32f1xx_it.c:131:2: warning: incompatible implicit declaration of built-in function 'printf'
+  printf("receive can 2 interrupt\n");
+  ^~~~~~
+..\src\stm32f1xx_it.c:131:2: note: include '<stdio.h>' or provide a declaration of 'printf'
+arm-atollic-eabi-gcc -o CPIOng.elf Libraries\STM32F10x_StdPeriph_Driver\src\misc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.o src\Can.o src\main.o src\startup_stm32f10x_cl.o src\stm32f1xx_it.o src\system_stm32f10x.o src\tiny_printf.o -mthumb -mcpu=cortex-m3 -T../stm32_flash.ld -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+   7544	      8	    580	   8132	   1fc4	CPIOng.elf
+Print size information done
+Generate listing file
+Output sent to: CPIOng.list
+Generate listing file done
+Generate build reports done
+09:05:40 **** Incremental Build of configuration Debug for project CPIOng ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\stm32f1xx_it.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\stm32f1xx_it.o 
+..\src\stm32f1xx_it.c: In function 'SanCanAlive':
+..\src\stm32f1xx_it.c:60:3: warning: implicit declaration of function 'SendCan' [-Wimplicit-function-declaration]
+   SendCan(0x123, p, 8);
+   ^~~~~~~
+..\src\stm32f1xx_it.c: At top level:
+..\src\stm32f1xx_it.c:64:6: warning: conflicting types for 'SendCan'
+ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
+      ^~~~~~~
+..\src\stm32f1xx_it.c:60:3: note: previous implicit declaration of 'SendCan' was here
+   SendCan(0x123, p, 8);
+   ^~~~~~~
+..\src\stm32f1xx_it.c: In function 'SendCan':
+..\src\stm32f1xx_it.c:74:2: warning: implicit declaration of function 'memcpy' [-Wimplicit-function-declaration]
+  memcpy(canMessage.Data, data, len * sizeof(uint8_t));
+  ^~~~~~
+..\src\stm32f1xx_it.c:74:2: warning: incompatible implicit declaration of built-in function 'memcpy'
+..\src\stm32f1xx_it.c:74:2: note: include '<string.h>' or provide a declaration of 'memcpy'
+..\src\stm32f1xx_it.c: In function 'SendTimeInfo':
+..\src\stm32f1xx_it.c:104:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+  printf("Rising edge on .... In %d %d \n", channel, res);
+  ^~~~~~
+..\src\stm32f1xx_it.c:104:2: warning: incompatible implicit declaration of built-in function 'printf'
+..\src\stm32f1xx_it.c:104:2: note: include '<stdio.h>' or provide a declaration of 'printf'
+..\src\stm32f1xx_it.c:104:37: warning: format '%d' expects argument of type 'int', but argument 3 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+  printf("Rising edge on .... In %d %d \n", channel, res);
+                                     ^
+..\src\stm32f1xx_it.c: In function 'EXTI0_IRQHandler':
+..\src\stm32f1xx_it.c:111:2: warning: incompatible implicit declaration of built-in function 'printf'
+  printf("Rising edge on .... In 0\n");
+  ^~~~~~
+..\src\stm32f1xx_it.c:111:2: note: include '<stdio.h>' or provide a declaration of 'printf'
+..\src\stm32f1xx_it.c: In function 'CAN2_RX0_IRQHandler':
+..\src\stm32f1xx_it.c:131:2: warning: incompatible implicit declaration of built-in function 'printf'
+  printf("receive can 2 interrupt\n");
+  ^~~~~~
+..\src\stm32f1xx_it.c:131:2: note: include '<stdio.h>' or provide a declaration of 'printf'
+arm-atollic-eabi-gcc -o CPIOng.elf Libraries\STM32F10x_StdPeriph_Driver\src\misc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.o src\Can.o src\main.o src\startup_stm32f10x_cl.o src\stm32f1xx_it.o src\system_stm32f10x.o src\tiny_printf.o -mthumb -mcpu=cortex-m3 -T../stm32_flash.ld -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+   7508	      8	    580	   8096	   1fa0	CPIOng.elf
+Print size information done
+Generate listing file
+Output sent to: CPIOng.list
+Generate listing file done
+Generate build reports done
+09:07:48 **** Incremental Build of configuration Debug for project CPIOng ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\stm32f1xx_it.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\stm32f1xx_it.o 
+..\src\stm32f1xx_it.c: In function 'SanCanAlive':
+..\src\stm32f1xx_it.c:60:3: warning: implicit declaration of function 'SendCan' [-Wimplicit-function-declaration]
+   SendCan(0x123, p, 8);
+   ^~~~~~~
+..\src\stm32f1xx_it.c: At top level:
+..\src\stm32f1xx_it.c:64:6: warning: conflicting types for 'SendCan'
+ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
+      ^~~~~~~
+..\src\stm32f1xx_it.c:60:3: note: previous implicit declaration of 'SendCan' was here
+   SendCan(0x123, p, 8);
+   ^~~~~~~
+..\src\stm32f1xx_it.c: In function 'SendCan':
+..\src\stm32f1xx_it.c:74:2: warning: implicit declaration of function 'memcpy' [-Wimplicit-function-declaration]
+  memcpy(canMessage.Data, data, len * sizeof(uint8_t));
+  ^~~~~~
+..\src\stm32f1xx_it.c:74:2: warning: incompatible implicit declaration of built-in function 'memcpy'
+..\src\stm32f1xx_it.c:74:2: note: include '<string.h>' or provide a declaration of 'memcpy'
+..\src\stm32f1xx_it.c: In function 'SendTimeInfo':
+..\src\stm32f1xx_it.c:104:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+  printf("Rising edge on .... In %d %d \n", channel, res);
+  ^~~~~~
+..\src\stm32f1xx_it.c:104:2: warning: incompatible implicit declaration of built-in function 'printf'
+..\src\stm32f1xx_it.c:104:2: note: include '<stdio.h>' or provide a declaration of 'printf'
+..\src\stm32f1xx_it.c:104:37: warning: format '%d' expects argument of type 'int', but argument 3 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+  printf("Rising edge on .... In %d %d \n", channel, res);
+                                     ^
+..\src\stm32f1xx_it.c: In function 'EXTI0_IRQHandler':
+..\src\stm32f1xx_it.c:111:2: warning: incompatible implicit declaration of built-in function 'printf'
+  printf("Rising edge on .... In 0\n");
+  ^~~~~~
+..\src\stm32f1xx_it.c:111:2: note: include '<stdio.h>' or provide a declaration of 'printf'
+..\src\stm32f1xx_it.c: In function 'CAN2_RX0_IRQHandler':
+..\src\stm32f1xx_it.c:131:2: warning: incompatible implicit declaration of built-in function 'printf'
+  printf("receive can 2 interrupt\n");
+  ^~~~~~
+..\src\stm32f1xx_it.c:131:2: note: include '<stdio.h>' or provide a declaration of 'printf'
 arm-atollic-eabi-gcc -o CPIOng.elf Libraries\STM32F10x_StdPeriph_Driver\src\misc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.o src\Can.o src\main.o src\startup_stm32f10x_cl.o src\stm32f1xx_it.o src\system_stm32f10x.o src\tiny_printf.o -mthumb -mcpu=cortex-m3 -T../stm32_flash.ld -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
 C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
 Generate build reports...
