@@ -21,7 +21,7 @@ void Init_Timer(void) {
 	TIM_TimeBase_InitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
 	TIM_TimeBase_InitStructure.TIM_CounterMode = TIM_CounterMode_Up;
 	TIM_TimeBase_InitStructure.TIM_Period = 1946;//1999;
-	TIM_TimeBase_InitStructure.TIM_Prescaler = 36; // prescal auf 72 MHz bezogen -> 72Mhz/72 = 1 Mhz  -> 1Mhz = 1 us
+	TIM_TimeBase_InitStructure.TIM_Prescaler = 36; // prescal auf 72 MHz bezogen -> 72Mhz/36 = 2 Mhz  -> 2Mhz = 0,5 us
 	TIM_TimeBaseInit(TIM2, &TIM_TimeBase_InitStructure);
 
 	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
@@ -124,15 +124,22 @@ void InitExtiLine(uint32_t value) {
  */
 int main(void) {
 
-	// http://www.diller-technologies.de/stm32_wide.html#takt
-
 	SystemInit();
+
+	// http://www.diller-technologies.de/stm32_wide.html#takt
+	uint32_t init = SysTick_Config(SystemCoreClock/*72000000*/ /1000);
+	if(init!=0){
+		printf("Error in init system tick"); // noch erro per can?! allgemeine status bits?
+	}
+
 	PrepareStatusLed();
 	PrepareCan();
 
 	Init_Timer(); // interrupted
 
 	InitInputs();
+
+
 
 	while (1) {
 	}

@@ -51,14 +51,14 @@ void SwitchMainLed(void) {
 }
 
 // todo mb: Funktion drum herum
-static uint32_t tickMs;
-static uint32_t lastTimeValue[8];
+volatile static uint32_t tickMs;
+volatile static uint32_t lastTimeValue[8];
 
 void SanCanAlive() {
-	if (!(tickMs % 500)) {
+	//if (!(tickMs % 500)) {
 		uint8_t p[] = { 0, 1, 2, 3, 4, 5, 6, 7 };
 		SendCan(0x123, p, 8);
-	}
+	//}
 }
 
 void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
@@ -83,8 +83,10 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 void TIM2_IRQHandler(void) {
 	SwitchMainLed();
 	SanCanAlive();
-	++tickMs; // wenn der in ms läuft, ist alles ok?!
-	//tickMs += TIM_GetCounter(TIM2);
+	//++tickMs; // wenn der in ms läuft, ist alles ok?!
+//	if(TIM_GetCounter(TIM2)==1946){
+//		++tickMs;//1946
+//	}
 }
 
 void SendCanTimeDif(uint32_t res) {
@@ -131,65 +133,65 @@ void EXTI1_IRQHandler(void) {
 	}
 }
 
-void EXTI2_IRQHandler(void) {
-	SendTimeInfo(2);
-	EXTI_ClearITPendingBit(EXTI_Line1);
-	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
-		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
-	} else {
-		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
-	}
-}
-
-void EXTI3_IRQHandler(void) {
-	SendTimeInfo(3);
-	EXTI_ClearITPendingBit(EXTI_Line1);
-	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
-		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
-	} else {
-		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
-	}
-}
-
-void EXTI4_IRQHandler(void) {
-	SendTimeInfo(4);
-	EXTI_ClearITPendingBit(EXTI_Line1);
-	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
-		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
-	} else {
-		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
-	}
-}
-
-void EXTI5_IRQHandler(void) {
-	SendTimeInfo(5);
-	EXTI_ClearITPendingBit(EXTI_Line1);
-	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
-		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
-	} else {
-		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
-	}
-}
-
-void EXTI6_IRQHandler(void) {
-	SendTimeInfo(6);
-	EXTI_ClearITPendingBit(EXTI_Line1);
-	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
-		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
-	} else {
-		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
-	}
-}
-
-void EXTI7_IRQHandler(void) {
-	SendTimeInfo(7);
-	EXTI_ClearITPendingBit(EXTI_Line1);
-	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
-		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
-	} else {
-		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
-	}
-}
+//void EXTI2_IRQHandler(void) {
+//	SendTimeInfo(2);
+//	EXTI_ClearITPendingBit(EXTI_Line1);
+//	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
+//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
+//	} else {
+//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
+//	}
+//}
+//
+//void EXTI3_IRQHandler(void) {
+//	SendTimeInfo(3);
+//	EXTI_ClearITPendingBit(EXTI_Line1);
+//	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
+//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
+//	} else {
+//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
+//	}
+//}
+//
+//void EXTI4_IRQHandler(void) {
+//	SendTimeInfo(4);
+//	EXTI_ClearITPendingBit(EXTI_Line1);
+//	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
+//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
+//	} else {
+//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
+//	}
+//}
+//
+//void EXTI5_IRQHandler(void) {
+//	SendTimeInfo(5);
+//	EXTI_ClearITPendingBit(EXTI_Line1);
+//	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
+//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
+//	} else {
+//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
+//	}
+//}
+//
+//void EXTI6_IRQHandler(void) {
+//	SendTimeInfo(6);
+//	EXTI_ClearITPendingBit(EXTI_Line1);
+//	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
+//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
+//	} else {
+//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
+//	}
+//}
+//
+//void EXTI7_IRQHandler(void) {
+//	SendTimeInfo(7);
+//	EXTI_ClearITPendingBit(EXTI_Line1);
+//	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
+//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
+//	} else {
+//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
+//	}
+//}
 
 void CAN2_RX0_IRQHandler(void) {
 	printf("receive can 2 interrupt\n");
@@ -289,6 +291,7 @@ void PendSV_Handler(void) {
  * @retval None
  */
 void SysTick_Handler(void) {
+	++tickMs;
 }
 
 /******************************************************************************/
