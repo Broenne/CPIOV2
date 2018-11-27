@@ -241,3 +241,13 @@ target extended-remote localhost:60000
 
 Error message from debugger back end:
 localhost:60000: Das System hat versucht, einem Verzeichnis, das sich auf einem mit JOIN zugeordneten Laufwerk befindet, ein Laufwerk mit SUBST zuzuordnen.
+
+!ENTRY TrueSTUDIO 4 0 2018-11-27 06:00:48.209
+!MESSAGE ST-LINK GDB server failed to start (exit code = 4)
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2018-11-27 06:00:48.278
+!MESSAGE Error in initializing ST-Link device.
+Reason: (4) No device found on target.
+
+!ENTRY com.atollic.truestudio.productmanager 1 0 2018-11-27 06:07:43.328
+!MESSAGE Unloading product manager
