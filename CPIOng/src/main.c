@@ -93,28 +93,24 @@ void InitInputs(void) {
 	GPIO_InitStructure.GPIO_Pin = (GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2	| GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7);
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;//GPIO_Mode_IN_FLOATING;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
-//	GPIO_EXTILineConfig(GPIO_PortSourceGPIOA,
-//			(GPIO_PinSource0 | GPIO_PinSource1 | GPIO_PinSource2
-//					| GPIO_PinSource3 | GPIO_PinSource4 | GPIO_PinSource5
-//					| GPIO_PinSource6 | GPIO_PinSource7));
 
 
 
 
-//	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
-//	GPIO_InitStructure.GPIO_Pin = (GPIO_Pin_0 | GPIO_Pin_1);
-//	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-//	GPIO_Init(GPIOB, &GPIO_InitStructure);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+	GPIO_InitStructure.GPIO_Pin = (GPIO_Pin_0 | GPIO_Pin_1);
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+	GPIO_Init(GPIOB, &GPIO_InitStructure);
 //	GPIO_EXTILineConfig(GPIO_PortSourceGPIOB, (GPIO_PinSource0 ));
 //	//GPIO_EXTILineConfig(GPIO_PortSourceGPIOB, (GPIO_PinSource1 ));
 
 
 
-//	RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOC, ENABLE);
-//	GPIO_InitStructure.GPIO_Pin = (GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2
-////	| GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5);
-////	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-//	GPIO_Init(GPIOC, &GPIO_InitStructure);
+	RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOC, ENABLE);
+	GPIO_InitStructure.GPIO_Pin = (GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2
+	| GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5);
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+	GPIO_Init(GPIOC, &GPIO_InitStructure);
 //	GPIO_EXTILineConfig(GPIO_PortSourceGPIOC, (GPIO_PinSource0 ));
 
 

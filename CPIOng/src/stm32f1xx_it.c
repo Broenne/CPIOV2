@@ -117,7 +117,6 @@ void SendTimeInfo(uint8_t channel) {
 	lastTimeValue[channel] = actualTimeValue;
 }
 
-
 //
 //void EXTI0_IRQHandler(void) {
 //
@@ -328,12 +327,9 @@ void DebugMon_Handler(void) {
 void PendSV_Handler(void) {
 }
 
-
-
 static uint16_t oldGpioA;
 static uint16_t oldGpioB;
 static uint16_t oldGpioC;
-
 
 /**
  * @brief  This function handles SysTick Handler.
@@ -344,25 +340,33 @@ void SysTick_Handler(void) {
 	++tickMs;
 
 	uint16_t gpioA = (GPIO_ReadInputData(GPIOA) & 0xFF); // Inetressant sind nur die untesten 8 bits, siehe Schaltplan
-	uint16_t gpioB = GPIO_ReadInputData(GPIOB) & 0x03;
+	uint16_t gpioB = GPIO_ReadInputData(GPIOB) & 0x03; // Pb0 = 10, pb1 = 11
 	uint16_t gpioC = GPIO_ReadInputData(GPIOC) & 0x3F;
 
-	if(gpioA != oldGpioA){
-		uint16_t dif = gpioA ^ oldGpioA;
-
-		// PinA0 -> I0
-				// PinA1 -> I1
-				// PinA2 -> I2
-				// PinA3 -> I3
-				// PinA4 -> I4
-				// PinA5 -> I5
-				// PinA6 -> I6
-				// PinA7 -> I7
-		for(int i=0;i<8;++i){
+	if (gpioA != oldGpioA) {
+		uint16_t dif = gpioA ^ oldGpioA; // PinA0 -> I0 	// PinA1 -> I1	// PinA2 -> I2	// PinA3 -> I3	// PinA4 -> I4	// PinA5 -> I5	// PinA6 -> I6	// PinA7 -> I7
+		for (int i = 0; i < 8; ++i) {
 			// Änderung bit und steigende Flanke
-			if(( dif >> i) & 0x01  && (gpioA >> i & 0x01)  ){
-				SendTimeInfo(i);//Achtung, nur bei a
-				// printf("Rising on %d ", i);
+			if ((dif >> i) & 0x01 && (gpioA >> i & 0x01)) {
+				SendTimeInfo(i); // Achtung, nur bei a
+			}
+		}
+	}
+
+	if (gpioB != oldGpioB) {
+		uint16_t dif = gpioB ^ oldGpioB;
+		for (int i = 0; i < 2; ++i) {
+			if ((dif >> i) & 0x01 && (gpioB >> i & 0x01)) {
+				SendTimeInfo(8 + i);
+			}
+		}
+	}
+
+	if (gpioC != oldGpioC) {
+		uint16_t dif = gpioC ^ oldGpioC;
+		for (int i = 0; i < 6; ++i) {
+			if ((dif >> i) & 0x01 && (gpioC >> i & 0x01)) {
+				SendTimeInfo(10 + i);
 			}
 		}
 	}
