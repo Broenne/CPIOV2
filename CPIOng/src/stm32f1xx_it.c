@@ -100,7 +100,8 @@ void SendCanTimeDif(uint8_t channel, uint32_t res) {
 	p[3] = (res >> 8) & 0xFF;
 	p[4] = res & 0xFF;
 
-	SendCan(0x01, p, 5);
+	uint32_t canId = canId;
+	SendCan(canId, p, 5);
 }
 
 void SendTimeInfo(uint8_t channel) {
@@ -117,129 +118,22 @@ void SendTimeInfo(uint8_t channel) {
 	lastTimeValue[channel] = actualTimeValue;
 }
 
-//
-//void EXTI0_IRQHandler(void) {
-//
-//	/* Make sure that interrupt flag is set */
-//	    if (EXTI_GetITStatus(EXTI_Line0) != RESET) {
-//
-//
-//	    	// hier kommt intzerrupt von 0 (PA0) oder 8 (PB0)
-//
-//	    		/* Disable interrupts */
-//	    		__disable_irq();
-//
-//	    		// alten un neuen wert merken, um genau zu detektieren
-//	    		if(GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_0))
-//	    		{
-//	    			printf("Rising edge on A \n");
-//	    		}
-//	    		if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_0))
-//	    		{
-//	    			printf("Rising edge on B \n");
-//	    		}
-//
-//	    		SendTimeInfo(0);
-//
-//	    		EXTI_ClearITPendingBit(EXTI_Line0);
-//	    		__enable_irq();
-//	    	//	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
-//	    	//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
-//	    	//	} else {
-//	    	//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
-//	    	//	}
-//
-//	    }
-//
-//
-//
-//}
-//
-//void EXTI1_IRQHandler(void) {
-//	/* Disable interrupts */
-//	__disable_irq();
-//
-//	SendTimeInfo(1);
-//	EXTI_ClearITPendingBit(EXTI_Line1);
-//	__enable_irq();
-////	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
-////		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
-////	} else {
-////		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
-////	}
-//}
-//
-//void EXTI2_IRQHandler(void) {
-//	/* Disable interrupts */
-//	__disable_irq();
-//	SendTimeInfo(2);
-//	EXTI_ClearITPendingBit(EXTI_Line2);
-//	__enable_irq();
-////	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
-////		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
-////	} else {
-////		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
-////	}
-//}
-//
-//void EXTI3_IRQHandler(void) {
-//	/* Disable interrupts */
-//	__disable_irq();
-//	SendTimeInfo(3);
-//	EXTI_ClearITPendingBit(EXTI_Line3);
-//	__enable_irq();
-////	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
-////		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
-////	} else {
-////		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
-////	}
-//}
-//
-//void EXTI4_IRQHandler(void) {
-//	__disable_irq();
-//	SendTimeInfo(4);
-//	EXTI_ClearITPendingBit(EXTI_Line4);
-//	__enable_irq();
-////	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
-////		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
-////	} else {
-////		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
-////	}
-//}
-//
-//void EXTI9_5_IRQHandler(void) {
-//	__disable_irq();
-//	printf("Rising edge on .... In 5-9\n");
-//
-//	//SendTimeInfo(5);
-//	EXTI_ClearITPendingBit(EXTI_Line5);
-//	__enable_irq();
-////	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
-////		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
-////	} else {
-////		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
-////	}
-//}
-//
-//void EXTI15_10_IRQHandler(void) {
-//	__disable_irq();
-//	printf("Rising edge on .... In 15-10\n");
-//
-//	//SendTimeInfo(5);
-//	EXTI_ClearITPendingBit(EXTI_Line5);
-//	__enable_irq();
-////	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
-////		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
-////	} else {
-////		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
-////	}
-//}
+static uint8_t canId; // todo mb: ab in festen speicher
 
 void CAN2_RX0_IRQHandler(void) {
 	printf("receive can 2 interrupt\n");
 	// todo mb: interrupts sperren
 	CanRxMsg RxMessage;
 	CAN_Receive(CAN2, CAN_FIFO0, &RxMessage);
+
+	if(RxMessage.StdId == 0x00){
+		if(RxMessage.Data[0] == 0x01){
+			canId = RxMessage.Data[1];
+			printf("Incoming id 0x00 %d", canId);
+		}
+	}
+
+
 	if (RxMessage.Data[0] == 1) {
 		GPIO_WriteBit(GPIOA, GPIO_Pin_5, Bit_SET);
 	} else {
