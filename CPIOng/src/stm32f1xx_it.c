@@ -331,17 +331,8 @@ static uint16_t oldGpioA;
 static uint16_t oldGpioB;
 static uint16_t oldGpioC;
 
-/**
- * @brief  This function handles SysTick Handler.
- * @param  None
- * @retval None
- */
-void SysTick_Handler(void) {
-	++tickMs;
-
+void CheckInputsRegisterA(void) {
 	uint16_t gpioA = (GPIO_ReadInputData(GPIOA) & 0xFF); // Inetressant sind nur die untesten 8 bits, siehe Schaltplan
-	uint16_t gpioB = GPIO_ReadInputData(GPIOB) & 0x03; // Pb0 = 10, pb1 = 11
-	uint16_t gpioC = GPIO_ReadInputData(GPIOC) & 0x3F;
 
 	if (gpioA != oldGpioA) {
 		uint16_t dif = gpioA ^ oldGpioA; // PinA0 -> I0 	// PinA1 -> I1	// PinA2 -> I2	// PinA3 -> I3	// PinA4 -> I4	// PinA5 -> I5	// PinA6 -> I6	// PinA7 -> I7
@@ -353,6 +344,13 @@ void SysTick_Handler(void) {
 		}
 	}
 
+	// Wert merken
+	oldGpioA = gpioA;
+}
+
+void CheckInputsRegisterB(void) {
+	uint16_t gpioB = GPIO_ReadInputData(GPIOB) & 0x03; // Pb0 = 10, pb1 = 11
+
 	if (gpioB != oldGpioB) {
 		uint16_t dif = gpioB ^ oldGpioB;
 		for (int i = 0; i < 2; ++i) {
@@ -361,6 +359,12 @@ void SysTick_Handler(void) {
 			}
 		}
 	}
+
+	oldGpioB = gpioB;
+}
+
+void CheckInputsRegisterC(void) {
+	uint16_t gpioC = GPIO_ReadInputData(GPIOC) & 0x3F;
 
 	if (gpioC != oldGpioC) {
 		uint16_t dif = gpioC ^ oldGpioC;
@@ -371,10 +375,20 @@ void SysTick_Handler(void) {
 		}
 	}
 
-	// Wert merken
-	oldGpioA = gpioA;
-	oldGpioB = gpioB;
 	oldGpioC = gpioC;
+}
+
+/**
+ * @brief  This function handles SysTick Handler.
+ * @param  None
+ * @retval None
+ */
+void SysTick_Handler(void) {
+	++tickMs;
+
+	CheckInputsRegisterA();
+	CheckInputsRegisterB();
+	CheckInputsRegisterC();
 }
 
 /******************************************************************************/
