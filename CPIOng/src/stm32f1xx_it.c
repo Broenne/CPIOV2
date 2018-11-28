@@ -55,10 +55,10 @@ volatile static uint32_t tickMs;
 volatile static uint32_t lastTimeValue[8];
 
 void SanCanAlive() {
-	//if (!(tickMs % 500)) {
+	if (!(tickMs % 500)) {
 		uint8_t p[] = { 0, 1, 2, 3, 4, 5, 6, 7 };
 		SendCan(0x123, p, 8);
-	//}
+	}
 }
 
 void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
@@ -89,108 +89,151 @@ void TIM2_IRQHandler(void) {
 //	}
 }
 
-void SendCanTimeDif(uint32_t res) {
-	uint8_t p[] = { 0, 0, 0, 0 };
-	p[0] = (res >> 24) & 0xFF;
-	p[1] = (res >> 16) & 0xFF;
-	p[2] = (res >> 8) & 0xFF;
-	p[3] = res & 0xFF;
-	SendCan(0x01, p, 4);
+void SendCanTimeDif(uint8_t channel, uint32_t res) {
+
+	uint8_t p[] = { 0, 0, 0, 0, 0 };
+	// channel
+	p[0] = channel;
+	// timestamp
+	p[1] = (res >> 24) & 0xFF;
+	p[2] = (res >> 16) & 0xFF;
+	p[3] = (res >> 8) & 0xFF;
+	p[4] = res & 0xFF;
+
+	SendCan(0x01, p, 5);
 }
 
 void SendTimeInfo(uint8_t channel) {
 	uint32_t actualTimeValue = tickMs;
 	uint32_t res;
 	if (actualTimeValue > lastTimeValue[channel]) {
-		res = actualTimeValue - lastTimeValue[channel]; // todo mb: überschlag beachten
+		res = actualTimeValue - lastTimeValue[channel];
 	} else {
 		res = lastTimeValue[channel] - actualTimeValue;
 	}
 
-	SendCanTimeDif(res);
+	SendCanTimeDif(channel, res);
 	printf("Rising edge on .... In %d %d \n", channel, res);
 	lastTimeValue[channel] = actualTimeValue;
 }
 
-void EXTI0_IRQHandler(void) {
-	SendTimeInfo(0);
-	printf("Rising edge on .... In 0\n");
-	EXTI_ClearITPendingBit(EXTI_Line0);
-	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
-		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
-	} else {
-		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
-	}
-}
 
-void EXTI1_IRQHandler(void) {
-	SendTimeInfo(1);
-	EXTI_ClearITPendingBit(EXTI_Line1);
-	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
-		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
-	} else {
-		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
-	}
-}
-
-//void EXTI2_IRQHandler(void) {
-//	SendTimeInfo(2);
+//
+//void EXTI0_IRQHandler(void) {
+//
+//	/* Make sure that interrupt flag is set */
+//	    if (EXTI_GetITStatus(EXTI_Line0) != RESET) {
+//
+//
+//	    	// hier kommt intzerrupt von 0 (PA0) oder 8 (PB0)
+//
+//	    		/* Disable interrupts */
+//	    		__disable_irq();
+//
+//	    		// alten un neuen wert merken, um genau zu detektieren
+//	    		if(GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_0))
+//	    		{
+//	    			printf("Rising edge on A \n");
+//	    		}
+//	    		if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_0))
+//	    		{
+//	    			printf("Rising edge on B \n");
+//	    		}
+//
+//	    		SendTimeInfo(0);
+//
+//	    		EXTI_ClearITPendingBit(EXTI_Line0);
+//	    		__enable_irq();
+//	    	//	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
+//	    	//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
+//	    	//	} else {
+//	    	//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
+//	    	//	}
+//
+//	    }
+//
+//
+//
+//}
+//
+//void EXTI1_IRQHandler(void) {
+//	/* Disable interrupts */
+//	__disable_irq();
+//
+//	SendTimeInfo(1);
 //	EXTI_ClearITPendingBit(EXTI_Line1);
-//	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
-//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
-//	} else {
-//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
-//	}
+//	__enable_irq();
+////	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
+////		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
+////	} else {
+////		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
+////	}
+//}
+//
+//void EXTI2_IRQHandler(void) {
+//	/* Disable interrupts */
+//	__disable_irq();
+//	SendTimeInfo(2);
+//	EXTI_ClearITPendingBit(EXTI_Line2);
+//	__enable_irq();
+////	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
+////		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
+////	} else {
+////		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
+////	}
 //}
 //
 //void EXTI3_IRQHandler(void) {
+//	/* Disable interrupts */
+//	__disable_irq();
 //	SendTimeInfo(3);
-//	EXTI_ClearITPendingBit(EXTI_Line1);
-//	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
-//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
-//	} else {
-//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
-//	}
+//	EXTI_ClearITPendingBit(EXTI_Line3);
+//	__enable_irq();
+////	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
+////		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
+////	} else {
+////		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
+////	}
 //}
 //
 //void EXTI4_IRQHandler(void) {
+//	__disable_irq();
 //	SendTimeInfo(4);
-//	EXTI_ClearITPendingBit(EXTI_Line1);
-//	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
-//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
-//	} else {
-//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
-//	}
+//	EXTI_ClearITPendingBit(EXTI_Line4);
+//	__enable_irq();
+////	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
+////		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
+////	} else {
+////		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
+////	}
 //}
 //
-//void EXTI5_IRQHandler(void) {
-//	SendTimeInfo(5);
-//	EXTI_ClearITPendingBit(EXTI_Line1);
-//	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
-//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
-//	} else {
-//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
-//	}
+//void EXTI9_5_IRQHandler(void) {
+//	__disable_irq();
+//	printf("Rising edge on .... In 5-9\n");
+//
+//	//SendTimeInfo(5);
+//	EXTI_ClearITPendingBit(EXTI_Line5);
+//	__enable_irq();
+////	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
+////		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
+////	} else {
+////		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
+////	}
 //}
 //
-//void EXTI6_IRQHandler(void) {
-//	SendTimeInfo(6);
-//	EXTI_ClearITPendingBit(EXTI_Line1);
-//	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
-//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
-//	} else {
-//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
-//	}
-//}
+//void EXTI15_10_IRQHandler(void) {
+//	__disable_irq();
+//	printf("Rising edge on .... In 15-10\n");
 //
-//void EXTI7_IRQHandler(void) {
-//	SendTimeInfo(7);
-//	EXTI_ClearITPendingBit(EXTI_Line1);
-//	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
-//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
-//	} else {
-//		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
-//	}
+//	//SendTimeInfo(5);
+//	EXTI_ClearITPendingBit(EXTI_Line5);
+//	__enable_irq();
+////	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_9)) {
+////		GPIO_WriteBit(GPIOC, GPIO_Pin_9, RESET);
+////	} else {
+////		GPIO_WriteBit(GPIOC, GPIO_Pin_9, SET);
+////	}
 //}
 
 void CAN2_RX0_IRQHandler(void) {
@@ -292,6 +335,35 @@ void PendSV_Handler(void) {
  */
 void SysTick_Handler(void) {
 	++tickMs;
+
+	static uint16_t oldGpioA;
+	static uint16_t oldGpioB;
+	static uint16_t oldGpioC;
+
+	uint16_t gpioA = GPIO_ReadInputData(GPIOA);
+	uint16_t gpioB = GPIO_ReadInputData(GPIOB);
+	uint16_t gpioC = GPIO_ReadInputData(GPIOC);
+
+	if(gpioA != oldGpioA){
+
+		// wenn sie unterschciedlich sind, hat sich was geändert.
+
+		// Exklusiv Oder zeigt die Änderung auf steigende Flanke
+
+		// welcher unterscheidet sich?
+		switch (key) {
+				case value:
+
+					break;
+				default:
+					break;
+			}
+	}
+
+	// Wert merken
+	oldGpioA = gpioA;
+	oldGpioB = gpioB;
+	oldGpioC = gpioC;
 }
 
 /******************************************************************************/
