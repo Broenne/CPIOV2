@@ -328,6 +328,13 @@ void DebugMon_Handler(void) {
 void PendSV_Handler(void) {
 }
 
+
+
+static uint16_t oldGpioA;
+static uint16_t oldGpioB;
+static uint16_t oldGpioC;
+
+
 /**
  * @brief  This function handles SysTick Handler.
  * @param  None
@@ -336,28 +343,28 @@ void PendSV_Handler(void) {
 void SysTick_Handler(void) {
 	++tickMs;
 
-	static uint16_t oldGpioA;
-	static uint16_t oldGpioB;
-	static uint16_t oldGpioC;
-
-	uint16_t gpioA = GPIO_ReadInputData(GPIOA);
-	uint16_t gpioB = GPIO_ReadInputData(GPIOB);
-	uint16_t gpioC = GPIO_ReadInputData(GPIOC);
+	uint16_t gpioA = (GPIO_ReadInputData(GPIOA) & 0xFF); // Inetressant sind nur die untesten 8 bits, siehe Schaltplan
+	uint16_t gpioB = GPIO_ReadInputData(GPIOB) & 0x03;
+	uint16_t gpioC = GPIO_ReadInputData(GPIOC) & 0x3F;
 
 	if(gpioA != oldGpioA){
+		uint16_t dif = gpioA ^ oldGpioA;
 
-		// wenn sie unterschciedlich sind, hat sich was geändert.
-
-		// Exklusiv Oder zeigt die Änderung auf steigende Flanke
-
-		// welcher unterscheidet sich?
-		switch (key) {
-				case value:
-
-					break;
-				default:
-					break;
+		// PinA0 -> I0
+				// PinA1 -> I1
+				// PinA2 -> I2
+				// PinA3 -> I3
+				// PinA4 -> I4
+				// PinA5 -> I5
+				// PinA6 -> I6
+				// PinA7 -> I7
+		for(int i=0;i<8;++i){
+			// Änderung bit und steigende Flanke
+			if(( dif >> i) & 0x01  && (gpioA >> i & 0x01)  ){
+				SendTimeInfo(i);//Achtung, nur bei a
+				// printf("Rising on %d ", i);
 			}
+		}
 	}
 
 	// Wert merken

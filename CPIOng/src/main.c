@@ -79,49 +79,49 @@ void PrepareCan(void) {
 //}
 //
 //
-//void InitInputs(void) {
-//
-//	GPIO_InitTypeDef GPIO_InitStructure;
-//
-//
-//	// http://stefanfrings.de/stm32/index.html
-//
-//	// Setzen der Pins auf deefinierte Konfiguration
-//
-//	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
-//
-//	GPIO_InitStructure.GPIO_Pin = (GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2	| GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7);
-//	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-//	GPIO_Init(GPIOA, &GPIO_InitStructure);
+void InitInputs(void) {
+
+	GPIO_InitTypeDef GPIO_InitStructure;
+
+
+	// http://stefanfrings.de/stm32/index.html
+
+	// Setzen der Pins auf deefinierte Konfiguration
+
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+
+	GPIO_InitStructure.GPIO_Pin = (GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2	| GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7);
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;//GPIO_Mode_IN_FLOATING;
+	GPIO_Init(GPIOA, &GPIO_InitStructure);
 //	GPIO_EXTILineConfig(GPIO_PortSourceGPIOA,
 //			(GPIO_PinSource0 | GPIO_PinSource1 | GPIO_PinSource2
 //					| GPIO_PinSource3 | GPIO_PinSource4 | GPIO_PinSource5
 //					| GPIO_PinSource6 | GPIO_PinSource7));
-//
-//
-//
-//
+
+
+
+
 //	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
-//	//GPIO_InitStructure.GPIO_Pin = (GPIO_Pin_0 | GPIO_Pin_1);
-//	//GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+//	GPIO_InitStructure.GPIO_Pin = (GPIO_Pin_0 | GPIO_Pin_1);
+//	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
 //	GPIO_Init(GPIOB, &GPIO_InitStructure);
 //	GPIO_EXTILineConfig(GPIO_PortSourceGPIOB, (GPIO_PinSource0 ));
 //	//GPIO_EXTILineConfig(GPIO_PortSourceGPIOB, (GPIO_PinSource1 ));
-//
-//
-//
+
+
+
 //	RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOC, ENABLE);
-////	GPIO_InitStructure.GPIO_Pin = (GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2
-////			| GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5);
+//	GPIO_InitStructure.GPIO_Pin = (GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2
+////	| GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5);
 ////	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
 //	GPIO_Init(GPIOC, &GPIO_InitStructure);
 //	GPIO_EXTILineConfig(GPIO_PortSourceGPIOC, (GPIO_PinSource0 ));
-//
-//
-////	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOA, EXTI_PinSource0);
-////	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOB, EXTI_PinSource0);
-////	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOC, EXTI_PinSource0);
-//
+
+
+//	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOA, EXTI_PinSource0);
+//	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOB, EXTI_PinSource0);
+//	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOC, EXTI_PinSource0);
+
 //
 //	InitExtiLine(EXTI_Line0);
 //	InitNvicExti(EXTI0_IRQn);
@@ -137,16 +137,16 @@ void PrepareCan(void) {
 //
 //	InitExtiLine(EXTI_Line4);
 //	InitNvicExti(EXTI4_IRQn);
+
+	//InitExtiLine(EXTI_Line5);
+	//InitNvicExti(EXTI9_5_IRQn);
 //
-//	//InitExtiLine(EXTI_Line5);
-//	//InitNvicExti(EXTI9_5_IRQn);
-////
-////	InitExtiLine(EXTI_Line6);
-////	InitNvicExti(EXTI6_IRQn);
-////
-////	InitExtiLine(EXTI_Line7);
-////	InitNvicExti(EXTI7_IRQn);
-//}
+//	InitExtiLine(EXTI_Line6);
+//	InitNvicExti(EXTI6_IRQn);
+//
+//	InitExtiLine(EXTI_Line7);
+//	InitNvicExti(EXTI7_IRQn);
+}
 
 void InitSysTicker(void) {
 	// create 1ms tick
@@ -175,7 +175,7 @@ int main(void) {
 
 	Init_Timer(); // interrupted
 
-	//InitInputs();
+	InitInputs();
 
 	while (1) {
 	}
