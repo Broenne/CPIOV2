@@ -28,8 +28,8 @@
  */
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f1xx_it.h"
-#include "eeprom.h"
+//#include "stm32f1xx_it.h"
+#include "main.h"
 
 /** @addtogroup IO_Toggle
  * @{
@@ -42,19 +42,11 @@
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
-void SwitchMainLed(void) {
-	TIM_ClearITPendingBit(TIM2, TIM_IT_Update); // setz timer zurück, achtung dann kann man ihn auch anders nicht mehr benutzen
-	if (GPIO_ReadOutputDataBit(GPIOD, GPIO_Pin_2)) {
-		GPIO_WriteBit(GPIOD, GPIO_Pin_2, RESET);
-	} else {
-		GPIO_WriteBit(GPIOD, GPIO_Pin_2, SET);
-	}
-}
 
-
-// todo mb: Funktion drum herum
-volatile static uint32_t tickMs;
-volatile static uint32_t lastTimeValue[8];
+//
+//// todo mb: Funktion drum herum
+//volatile static uint32_t tickMs;
+//volatile static uint32_t lastTimeValue[8];
 
 
 
@@ -64,37 +56,6 @@ volatile static uint32_t lastTimeValue[8];
 //	SwitchMainLed();
 //	SanCanAlive();
 //}
-
-
-
-
-
-void SendCanTimeDif(uint8_t channel, uint32_t res) {
-	uint8_t p[] = { 0, 0, 0, 0 };
-
-	// timestamp
-	p[0] = (res >> 24) & 0xFF;
-	p[1] = (res >> 16) & 0xFF;
-	p[2] = (res >> 8) & 0xFF;
-	p[3] = res & 0xFF;
-
-	uint32_t canId = 0x180 + GetGlobalCanNodeId() + channel;
-	SendCan(canId, p, 4);
-}
-
-void SendTimeInfo(uint8_t channel) {
-	uint32_t actualTimeValue = tickMs;
-	uint32_t res;
-	if (actualTimeValue > lastTimeValue[channel]) {
-		res = actualTimeValue - lastTimeValue[channel];
-	} else {
-		res = lastTimeValue[channel] - actualTimeValue;
-	}
-
-	SendCanTimeDif(channel, res);
-	printf("Rising edge on .... In %d %d \n", channel, res);
-	lastTimeValue[channel] = actualTimeValue;
-}
 
 void CAN2_RX0_IRQHandler(void) {
 
@@ -194,71 +155,21 @@ void DebugMon_Handler(void) {
 void PendSV_Handler(void) {
 }
 
-static uint16_t oldGpioA;
-static uint16_t oldGpioB;
-static uint16_t oldGpioC;
 
-void CheckInputsRegisterA(void) {
-	uint16_t gpioA = (GPIO_ReadInputData(GPIOA) & 0xFF); // Inetressant sind nur die untesten 8 bits, siehe Schaltplan
-
-	if (gpioA != oldGpioA) {
-		uint16_t dif = gpioA ^ oldGpioA; // PinA0 -> I0 	// PinA1 -> I1	// PinA2 -> I2	// PinA3 -> I3	// PinA4 -> I4	// PinA5 -> I5	// PinA6 -> I6	// PinA7 -> I7
-		for (int i = 0; i < 8; ++i) {
-			// Änderung bit und steigende Flanke
-			if ((dif >> i) & 0x01 && (gpioA >> i & 0x01)) {
-				SendTimeInfo(i); // Achtung, nur bei a
-			}
-		}
-	}
-
-	// Wert merken
-	oldGpioA = gpioA;
-}
-
-void CheckInputsRegisterB(void) {
-	uint16_t gpioB = GPIO_ReadInputData(GPIOB) & 0x03; // Pb0 = 10, pb1 = 11
-
-	if (gpioB != oldGpioB) {
-		uint16_t dif = gpioB ^ oldGpioB;
-		for (int i = 0; i < 2; ++i) {
-			if ((dif >> i) & 0x01 && (gpioB >> i & 0x01)) {
-				SendTimeInfo(8 + i);
-			}
-		}
-	}
-
-	oldGpioB = gpioB;
-}
-
-void CheckInputsRegisterC(void) {
-	uint16_t gpioC = GPIO_ReadInputData(GPIOC) & 0x3F;
-
-	if (gpioC != oldGpioC) {
-		uint16_t dif = gpioC ^ oldGpioC;
-		for (int i = 0; i < 6; ++i) {
-			if ((dif >> i) & 0x01 && (gpioC >> i & 0x01)) {
-				SendTimeInfo(10 + i);
-			}
-		}
-	}
-
-	oldGpioC = gpioC;
-}
-
-/**
- * @brief  This function handles SysTick Handler.
- * @param  None
- * @retval None
- */
-void SysTick_Handler(void) {
-	__disable_irq();
-	++tickMs;
-
-	CheckInputsRegisterA();
-	CheckInputsRegisterB();
-	CheckInputsRegisterC();
-	__enable_irq();
-}
+///**
+// * @brief  This function handles SysTick Handler.
+// * @param  None
+// * @retval None
+// */
+//void SysTick_Handler(void) {
+//	__disable_irq();
+//	++tickMs;
+//
+//	CheckInputsRegisterA();
+//	CheckInputsRegisterB();
+//	CheckInputsRegisterC();
+//	__enable_irq();
+//}
 
 /******************************************************************************/
 /*                 STM32F1xx Peripherals Interrupt Handlers                   */
