@@ -56,7 +56,7 @@ void SwitchMainLed(void) {
 volatile static uint32_t tickMs;
 volatile static uint32_t lastTimeValue[8];
 
-static uint8_t globalCanId; // todo mb: ab in festen speicher
+
 
 
 // funktioon befindet sich in alive.c
@@ -67,66 +67,6 @@ static uint8_t globalCanId; // todo mb: ab in festen speicher
 
 
 
-void InitGloablCanIDFromEeprom() {
-	SafeGlobalCanId();
-}
-
-uint8_t GetGlobalCanNodeId() {
-	return globalCanId;
-}
-
-// todo mb: eeproms in neue datei
-uint16_t VirtAddVarTab[NumbOfVar] = { 0x0000, 0x0001, 0x0002, 0x003, 0x004, 0x005, 0x006 };
-
-void InitVirtualEeprom(void) {
-	__disable_irq();
-	FLASH_Unlock();
-	// EEPROM Init
-	EE_Init();
-	FLASH_Lock();
-	delay_ms(2);
-	__enable_irq();
-}
-
-
-void SafeGlobalCanId(uint8_t id) {
-	__disable_irq();
-	FLASH_Unlock();
-	if(!EE_WriteVariable(VirtAddVarTab[0], id)){
-		printf("Could not write eeprom \n");
-	}
-	else{
-		printf("Safe global can id to %d \n", id);
-	}
-	// EEPROM Init
-	//EE_Init();
-	FLASH_Lock();
-	__enable_irq();
-	//Reset();
-}
-
-uint8_t SetGlobalCanNodeId(uint8_t canId) {
-	// todo mb: einschränken
-	SafeGlobalCanId(canId);
-	globalCanId = canId;
-}
-
-uint8_t GetGloablCanIdFromEeeprom() {
-	uint16_t id = 0;
-
-	__disable_irq();
-	FLASH_Unlock();
-	if (EE_ReadVariable(VirtAddVarTab[0], &id)) {
-		printf("Variable can id in eeprom not found \n");
-	} else {
-		printf("Read can id %d from eeprom \n", id);
-		SetGlobalCanNodeId(id);
-	}
-
-	FLASH_Lock();
-	__enable_irq();
-	return ((uint8_t) id);
-}
 
 
 void SendCanTimeDif(uint8_t channel, uint32_t res) {

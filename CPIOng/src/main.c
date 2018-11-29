@@ -71,10 +71,7 @@ int main(void) {
 	GetGloablCanIdFromEeeprom();
 
 	InitSysTicker();
-
 	PrepareCan();
-
-	//Init_Timer(); // interrupted
 	InitAlive();
 	InitInputs();
 
