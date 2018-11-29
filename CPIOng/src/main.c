@@ -20,10 +20,7 @@ int _write(int file, char *ptr, int len) {
 	return len;
 }
 
-void PrepareCan(void) {
-	CAN2_init_GPIO(); // das intern machen
-	init_CAN2();
-}
+
 
 
 /*Initialisierung der Eingänge auf dem borad*/
@@ -74,7 +71,6 @@ int main(void) {
 	GetGloablCanIdFromEeeprom();
 
 	InitSysTicker();
-
 
 	PrepareCan();
 

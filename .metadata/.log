@@ -1669,3 +1669,9 @@ localhost:60000: Das System hat versucht, einem Verzeichnis, das sich auf einem 
 !MESSAGE Connection is shut down
 !SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10001 2018-11-29 14:45:08.836
 !MESSAGE Connection is shut down
+
+!ENTRY org.eclipse.cdt.ui 2 0 2018-11-29 15:04:41.809
+!MESSAGE The 'org.eclipse.cdt.mylyn.ui.InclusionProposalComputer' proposal computer from the 'org.eclipse.cdt.mylyn.ui' plug-in did not complete normally. The extension violated the API contract of the 'computeContextInformation()' operation.
+
+!ENTRY org.eclipse.cdt.ui 2 0 2018-11-29 15:04:45.356
+!MESSAGE The 'org.eclipse.cdt.ui.InclusionProposalComputer' proposal computer from the 'org.eclipse.cdt.ui' plug-in did not complete normally. The extension violated the API contract of the 'computeContextInformation()' operation.
