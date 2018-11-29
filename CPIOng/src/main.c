@@ -2,6 +2,7 @@
 #include <stddef.h>
 #include "stm32f10x.h"
 #include "can.h"
+#include "eeprom.h"
 //#include "stm32f1xx_syscfg.h"
 
 /* Private macro */
@@ -14,8 +15,9 @@ USART_InitTypeDef USART_InitStructure;
 void delay_us(unsigned int d);
 void delay_ms(unsigned int d);
 
-void Init_Timer(void) {
+uint16_t VirtAddVarTab[NumbOfVar] = { 0x0000, 0x0001, 0x0002, 0x003, 0x004, 0x005, 0x006 };
 
+void Init_Timer(void) {
 	TIM_TimeBaseInitTypeDef TIM_TimeBase_InitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE); // Timer 2 Interrupt enable
@@ -58,12 +60,13 @@ void PrepareCan(void) {
 	init_CAN2();
 }
 
+
+/*Initialisierung der Eingänge auf dem borad*/
 void InitInputs(void) {
 
 	GPIO_InitTypeDef GPIO_InitStructure;
 
 	// http://stefanfrings.de/stm32/index.html
-
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 
 	GPIO_InitStructure.GPIO_Pin = (GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2	| GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7);
@@ -101,13 +104,15 @@ int main(void) {
 	// http://www.diller-technologies.de/stm32_wide.html#takt
 	SystemInit();
 
+	// EEPROM Init
+	EE_Init();
+
 	InitSysTicker();
 
 	PrepareStatusLed();
 	PrepareCan();
 
 	Init_Timer(); // interrupted
-
 	InitInputs();
 
 	while (1) {

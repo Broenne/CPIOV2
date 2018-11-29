@@ -89,6 +89,16 @@ void TIM2_IRQHandler(void) {
 //	}
 }
 
+
+static uint8_t globalCanId; // todo mb: ab in festen speicher
+uint8_t GetGlobalCanNodeId(){
+	return globalCanId;
+}
+
+uint8_t SetGlobalCanNodeId(uint8_t canId){
+	globalCanId = canId;
+}
+
 void SendCanTimeDif(uint8_t channel, uint32_t res) {
 
 	uint8_t p[] = { 0, 0, 0, 0, 0 };
@@ -100,7 +110,7 @@ void SendCanTimeDif(uint8_t channel, uint32_t res) {
 	p[3] = (res >> 8) & 0xFF;
 	p[4] = res & 0xFF;
 
-	uint32_t canId = canId;
+	uint32_t canId = 0x180 + GetGlobalCanNodeId();
 	SendCan(canId, p, 5);
 }
 
@@ -118,27 +128,29 @@ void SendTimeInfo(uint8_t channel) {
 	lastTimeValue[channel] = actualTimeValue;
 }
 
-static uint8_t canId; // todo mb: ab in festen speicher
+
 
 void CAN2_RX0_IRQHandler(void) {
-	printf("receive can 2 interrupt\n");
-	// todo mb: interrupts sperren
+
+	__disable_irq();
 	CanRxMsg RxMessage;
 	CAN_Receive(CAN2, CAN_FIFO0, &RxMessage);
+	__enable_irq();
 
+	printf("receive can 2 interrupt %d \n", RxMessage.StdId);
 	if(RxMessage.StdId == 0x00){
 		if(RxMessage.Data[0] == 0x01){
-			canId = RxMessage.Data[1];
-			printf("Incoming id 0x00 %d", canId);
+			SetGlobalCanNodeId(RxMessage.Data[1]);
+			printf("Incoming id 0x00 %d", GetGlobalCanNodeId());
 		}
 	}
 
 
-	if (RxMessage.Data[0] == 1) {
-		GPIO_WriteBit(GPIOA, GPIO_Pin_5, Bit_SET);
-	} else {
-		GPIO_WriteBit(GPIOA, GPIO_Pin_5, Bit_RESET);
-	}
+//	if (RxMessage.Data[0] == 1) {
+//		GPIO_WriteBit(GPIOA, GPIO_Pin_5, Bit_SET);
+//	} else {
+//		GPIO_WriteBit(GPIOA, GPIO_Pin_5, Bit_RESET);
+//	}
 }
 
 /******************************************************************************/
@@ -278,11 +290,13 @@ void CheckInputsRegisterC(void) {
  * @retval None
  */
 void SysTick_Handler(void) {
+	__disable_irq();
 	++tickMs;
 
 	CheckInputsRegisterA();
 	CheckInputsRegisterB();
 	CheckInputsRegisterC();
+	__enable_irq();
 }
 
 /******************************************************************************/
