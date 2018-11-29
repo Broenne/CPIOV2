@@ -51,60 +51,21 @@ void SwitchMainLed(void) {
 	}
 }
 
-#define COUNTS_PER_MICROSECOND 12 //für die 12 MHz STM32F1
-void delay_us(unsigned int d) {
-	unsigned int count = d * COUNTS_PER_MICROSECOND - 2;
-	__asm volatile(" mov r0, %[count]  \n\t"
-			"1: subs r0, #1            \n\t"
-			"   bhi 1b                 \n\t"
-			:
-			: [count] "r" (count)
-			: "r0");
-
-}
-
-//--------------------------------------------
-// for 168 MHz @ Optimization-Level -OS
-//--------------------------------------------
-void delay_ms(unsigned int d) {
-	while (d--)
-		delay_us(999);
-}
 
 // todo mb: Funktion drum herum
 volatile static uint32_t tickMs;
 volatile static uint32_t lastTimeValue[8];
 
-void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
-	CanTxMsg canMessage;
-	canMessage.StdId = id;
-	canMessage.ExtId = 0;
-	canMessage.RTR = CAN_RTR_DATA;
-	canMessage.IDE = CAN_ID_STD;
-	canMessage.DLC = len;
-
-	memcpy(canMessage.Data, data, len * sizeof(uint8_t));
-
-	while (!(CAN1->TSR & CAN_TSR_TME0 || CAN1->TSR & CAN_TSR_TME1
-			|| CAN1->TSR & CAN_TSR_TME2)) {
-	} // todo mb: das ding austimen lassen
-
-	CAN_Transmit(CAN2, &canMessage);
-}
-
-void SanCanAlive() {
-	if (!(tickMs % 500)) {
-		uint8_t p[] = { 0, 1, 2, 3, 4, 5, 6, 7 };
-		SendCan(0x123, p, 8);
-	}
-}
-
-void TIM2_IRQHandler(void) {
-	SwitchMainLed();
-	SanCanAlive();
-}
-
 static uint8_t globalCanId; // todo mb: ab in festen speicher
+
+
+// funktioon befindet sich in alive.c
+//void TIM2_IRQHandler(void) {
+//	SwitchMainLed();
+//	SanCanAlive();
+//}
+
+
 
 void InitGloablCanIDFromEeprom() {
 	SafeGlobalCanId();
@@ -125,17 +86,6 @@ void InitVirtualEeprom(void) {
 	FLASH_Lock();
 	delay_ms(2);
 	__enable_irq();
-}
-
-
-
-static void Reset(void) {
-	printf("Reboot...\n");
-	//CoTickDelay(50); //50 x 1ms = 50ms
-	NVIC_SystemReset();
-	while (1){
-		;   //wait for reset
-		}
 }
 
 
@@ -222,12 +172,6 @@ void CAN2_RX0_IRQHandler(void) {
 	}
 
 	__enable_irq();
-
-//	if (RxMessage.Data[0] == 1) {
-//		GPIO_WriteBit(GPIOA, GPIO_Pin_5, Bit_SET);
-//	} else {
-//		GPIO_WriteBit(GPIOA, GPIO_Pin_5, Bit_RESET);
-//	}
 }
 
 /******************************************************************************/

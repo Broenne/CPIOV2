@@ -1662,3 +1662,10 @@ localhost:60000: Das System hat versucht, einem Verzeichnis, das sich auf einem 
 
 !ENTRY org.eclipse.cdt.dsf.gdb 4 0 2018-11-29 13:19:23.015
 !MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2018-11-29 14:45:08.836
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.mi.service.MIRunControl$9@1157636): Status ERROR: org.eclipse.cdt.dsf code=10001 Sequence "" failed while rolling back. null children=[Status ERROR: org.eclipse.cdt.dsf.gdb code=10001 Connection is shut down null Status ERROR: org.eclipse.cdt.dsf.gdb code=10001 Connection is shut down null]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10001 2018-11-29 14:45:08.836
+!MESSAGE Connection is shut down
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10001 2018-11-29 14:45:08.836
+!MESSAGE Connection is shut down
