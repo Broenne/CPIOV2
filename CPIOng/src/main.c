@@ -118,27 +118,9 @@ int main(void) {
 	Init_Timer(); // interrupted
 	InitInputs();
 
-	while (1) {
+ 	while (1) {
 	}
 }
 
-#define COUNTS_PER_MICROSECOND 12 //für die 12 MHz STM32F1
-inline void delay_us(unsigned int d) {
-	unsigned int count = d * COUNTS_PER_MICROSECOND - 2;
-	__asm volatile(" mov r0, %[count]  \n\t"
-			"1: subs r0, #1            \n\t"
-			"   bhi 1b                 \n\t"
-			:
-			: [count] "r" (count)
-			: "r0");
 
-}
-
-//--------------------------------------------
-// for 168 MHz @ Optimization-Level -OS
-//--------------------------------------------
-void delay_ms(unsigned int d) {
-	while (d--)
-		delay_us(999);
-}
 

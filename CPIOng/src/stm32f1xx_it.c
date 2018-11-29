@@ -51,6 +51,26 @@ void SwitchMainLed(void) {
 	}
 }
 
+#define COUNTS_PER_MICROSECOND 12 //für die 12 MHz STM32F1
+void delay_us(unsigned int d) {
+	unsigned int count = d * COUNTS_PER_MICROSECOND - 2;
+	__asm volatile(" mov r0, %[count]  \n\t"
+			"1: subs r0, #1            \n\t"
+			"   bhi 1b                 \n\t"
+			:
+			: [count] "r" (count)
+			: "r0");
+
+}
+
+//--------------------------------------------
+// for 168 MHz @ Optimization-Level -OS
+//--------------------------------------------
+void delay_ms(unsigned int d) {
+	while (d--)
+		delay_us(999);
+}
+
 // todo mb: Funktion drum herum
 volatile static uint32_t tickMs;
 volatile static uint32_t lastTimeValue[8];
@@ -86,57 +106,78 @@ void TIM2_IRQHandler(void) {
 
 static uint8_t globalCanId; // todo mb: ab in festen speicher
 
-void InitGloablCanIDFromEeprom(){
+void InitGloablCanIDFromEeprom() {
 	SafeGlobalCanId();
 }
 
-uint8_t GetGlobalCanNodeId(){
+uint8_t GetGlobalCanNodeId() {
 	return globalCanId;
 }
 
 // todo mb: eeproms in neue datei
-uint16_t VirtAddVarTab[NumbOfVar] = { 0x0000 };
+uint16_t VirtAddVarTab[NumbOfVar] = { 0x0000, 0x0001, 0x0002, 0x003, 0x004, 0x005, 0x006 };
 
-
-void InitVirtualEeprom(void){
-	__disable_irq();
-		FLASH_Unlock();
-		// EEPROM Init
-		EE_Init();
-		FLASH_Lock();
-		__enable_irq();
-}
-
-uint8_t GetGloablCanIdFromEeeprom(){
-	uint16_t id = 0;
+void InitVirtualEeprom(void) {
 	__disable_irq();
 	FLASH_Unlock();
-	if(EE_ReadVariable(VirtAddVarTab[0], id)){
-		printf("Variable can id in eeprom not found");
+	// EEPROM Init
+	EE_Init();
+	FLASH_Lock();
+	delay_ms(2);
+	__enable_irq();
+}
+
+
+
+static void Reset(void) {
+	printf("Reboot...\n");
+	//CoTickDelay(50); //50 x 1ms = 50ms
+	NVIC_SystemReset();
+	while (1){
+		;   //wait for reset
+		}
+}
+
+
+void SafeGlobalCanId(uint8_t id) {
+	__disable_irq();
+	FLASH_Unlock();
+	if(!EE_WriteVariable(VirtAddVarTab[0], id)){
+		printf("Could not write eeprom \n");
 	}
 	else{
-		printf("Read can id %d from eeprom", id);
+		printf("Safe global can id to %d \n", id);
+	}
+	// EEPROM Init
+	//EE_Init();
+	FLASH_Lock();
+	__enable_irq();
+	//Reset();
+}
+
+uint8_t SetGlobalCanNodeId(uint8_t canId) {
+	// todo mb: einschränken
+	SafeGlobalCanId(canId);
+	globalCanId = canId;
+}
+
+uint8_t GetGloablCanIdFromEeeprom() {
+	uint16_t id = 0;
+
+	__disable_irq();
+	FLASH_Unlock();
+	if (EE_ReadVariable(VirtAddVarTab[0], &id)) {
+		printf("Variable can id in eeprom not found \n");
+	} else {
+		printf("Read can id %d from eeprom \n", id);
+		SetGlobalCanNodeId(id);
 	}
 
 	FLASH_Lock();
 	__enable_irq();
-	return ((uint8_t)id);
+	return ((uint8_t) id);
 }
 
-void SafeGlobalCanId(uint8_t id){
-		__disable_irq();
-		FLASH_Unlock();
-		EE_WriteVariable(VirtAddVarTab[0], id);
-		// EEPROM Init
-		EE_Init();
-		FLASH_Lock();
-		__enable_irq();
-}
-
-uint8_t SetGlobalCanNodeId(uint8_t canId){
-	SafeGlobalCanId(canId);
-	globalCanId = canId;
-}
 
 void SendCanTimeDif(uint8_t channel, uint32_t res) {
 	uint8_t p[] = { 0, 0, 0, 0 };
@@ -165,25 +206,22 @@ void SendTimeInfo(uint8_t channel) {
 	lastTimeValue[channel] = actualTimeValue;
 }
 
-
-
-
-
 void CAN2_RX0_IRQHandler(void) {
 
 	__disable_irq();
 	CanRxMsg RxMessage;
 	CAN_Receive(CAN2, CAN_FIFO0, &RxMessage);
-	__enable_irq();
+
 
 	printf("receive can 2 interrupt %d \n", RxMessage.StdId);
-	if(RxMessage.StdId == 0x00){
-		if(RxMessage.Data[0] == 0x01){
+	if (RxMessage.StdId == 0x00) {
+		if (RxMessage.Data[0] == 0x01) {
 			SetGlobalCanNodeId(RxMessage.Data[1]);
 			printf("Incoming id 0x00 %d", GetGlobalCanNodeId());
 		}
 	}
 
+	__enable_irq();
 
 //	if (RxMessage.Data[0] == 1) {
 //		GPIO_WriteBit(GPIOA, GPIO_Pin_5, Bit_SET);
