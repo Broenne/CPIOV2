@@ -15,7 +15,6 @@ USART_InitTypeDef USART_InitStructure;
 void delay_us(unsigned int d);
 void delay_ms(unsigned int d);
 
-uint16_t VirtAddVarTab[NumbOfVar] = { 0x0000, 0x0001, 0x0002, 0x003, 0x004, 0x005, 0x006 };
 
 void Init_Timer(void) {
 	TIM_TimeBaseInitTypeDef TIM_TimeBase_InitStructure;
@@ -92,6 +91,10 @@ void InitSysTicker(void) {
 	}
 }
 
+
+
+
+
 /**
  **===========================================================================
  **
@@ -104,8 +107,8 @@ int main(void) {
 	// http://www.diller-technologies.de/stm32_wide.html#takt
 	SystemInit();
 
-	// EEPROM Init
-	EE_Init();
+	InitVirtualEeprom();
+	GetGloablCanIdFromEeeprom();
 
 	InitSysTicker();
 

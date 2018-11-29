@@ -29,6 +29,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f1xx_it.h"
+#include "eeprom.h"
 
 /** @addtogroup IO_Toggle
  * @{
@@ -54,16 +55,7 @@ void SwitchMainLed(void) {
 volatile static uint32_t tickMs;
 volatile static uint32_t lastTimeValue[8];
 
-void SanCanAlive() {
-	if (!(tickMs % 500)) {
-		uint8_t p[] = { 0, 1, 2, 3, 4, 5, 6, 7 };
-		SendCan(0x123, p, 8);
-	}
-}
-
 void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
-	static int i;
-	++i;
 	CanTxMsg canMessage;
 	canMessage.StdId = id;
 	canMessage.ExtId = 0;
@@ -80,38 +72,83 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 	CAN_Transmit(CAN2, &canMessage);
 }
 
+void SanCanAlive() {
+	if (!(tickMs % 500)) {
+		uint8_t p[] = { 0, 1, 2, 3, 4, 5, 6, 7 };
+		SendCan(0x123, p, 8);
+	}
+}
+
 void TIM2_IRQHandler(void) {
 	SwitchMainLed();
 	SanCanAlive();
-	//++tickMs; // wenn der in ms läuft, ist alles ok?!
-//	if(TIM_GetCounter(TIM2)==1946){
-//		++tickMs;//1946
-//	}
 }
 
-
 static uint8_t globalCanId; // todo mb: ab in festen speicher
+
+void InitGloablCanIDFromEeprom(){
+	SafeGlobalCanId();
+}
+
 uint8_t GetGlobalCanNodeId(){
 	return globalCanId;
 }
 
+// todo mb: eeproms in neue datei
+uint16_t VirtAddVarTab[NumbOfVar] = { 0x0000 };
+
+
+void InitVirtualEeprom(void){
+	__disable_irq();
+		FLASH_Unlock();
+		// EEPROM Init
+		EE_Init();
+		FLASH_Lock();
+		__enable_irq();
+}
+
+uint8_t GetGloablCanIdFromEeeprom(){
+	uint16_t id = 0;
+	__disable_irq();
+	FLASH_Unlock();
+	if(EE_ReadVariable(VirtAddVarTab[0], id)){
+		printf("Variable can id in eeprom not found");
+	}
+	else{
+		printf("Read can id %d from eeprom", id);
+	}
+
+	FLASH_Lock();
+	__enable_irq();
+	return ((uint8_t)id);
+}
+
+void SafeGlobalCanId(uint8_t id){
+		__disable_irq();
+		FLASH_Unlock();
+		EE_WriteVariable(VirtAddVarTab[0], id);
+		// EEPROM Init
+		EE_Init();
+		FLASH_Lock();
+		__enable_irq();
+}
+
 uint8_t SetGlobalCanNodeId(uint8_t canId){
+	SafeGlobalCanId(canId);
 	globalCanId = canId;
 }
 
 void SendCanTimeDif(uint8_t channel, uint32_t res) {
+	uint8_t p[] = { 0, 0, 0, 0 };
 
-	uint8_t p[] = { 0, 0, 0, 0, 0 };
-	// channel
-	p[0] = channel;
 	// timestamp
-	p[1] = (res >> 24) & 0xFF;
-	p[2] = (res >> 16) & 0xFF;
-	p[3] = (res >> 8) & 0xFF;
-	p[4] = res & 0xFF;
+	p[0] = (res >> 24) & 0xFF;
+	p[1] = (res >> 16) & 0xFF;
+	p[2] = (res >> 8) & 0xFF;
+	p[3] = res & 0xFF;
 
-	uint32_t canId = 0x180 + GetGlobalCanNodeId();
-	SendCan(canId, p, 5);
+	uint32_t canId = 0x180 + GetGlobalCanNodeId() + channel;
+	SendCan(canId, p, 4);
 }
 
 void SendTimeInfo(uint8_t channel) {
@@ -127,6 +164,8 @@ void SendTimeInfo(uint8_t channel) {
 	printf("Rising edge on .... In %d %d \n", channel, res);
 	lastTimeValue[channel] = actualTimeValue;
 }
+
+
 
 
 
