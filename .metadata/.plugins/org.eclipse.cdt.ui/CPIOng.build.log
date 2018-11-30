@@ -1,20 +1,52 @@
-06:31:55 **** Incremental Build of configuration Debug for project CPIOng ****
+06:48:38 **** Incremental Build of configuration Debug for project CPIOng ****
 Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\pulse.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\pulse.o 
+..\src\pulse.c: In function 'SendCanTimeDif':
+..\src\pulse.c:52:27: warning: implicit declaration of function 'GetGlobalCanNodeId' [-Wimplicit-function-declaration]
+  uint32_t canId = 0x180 + GetGlobalCanNodeId() + channel;
+                           ^~~~~~~~~~~~~~~~~~
+..\src\pulse.c: In function 'SendTimeInfo':
+..\src\pulse.c:66:37: warning: format '%d' expects argument of type 'int', but argument 3 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+  printf("Rising edge on .... In %d %d \n", channel, res);
+                                     ^
+arm-atollic-eabi-gcc -c ..\src\usart.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\usart.o 
+arm-atollic-eabi-gcc -c ..\src\can.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\can.o 
+..\src\can.c: In function 'init_CAN2':
+..\src\can.c:39:10: warning: unused variable 'n' [-Wunused-variable]
+  uint8_t n;
+          ^
+arm-atollic-eabi-gcc -c ..\src\stm32f1xx_it.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\stm32f1xx_it.o 
+..\src\stm32f1xx_it.c: In function 'CAN2_RX0_IRQHandler':
+..\src\stm32f1xx_it.c:67:35: warning: format '%d' expects argument of type 'int', but argument 2 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+  printf("receive can 2 interrupt %d \n", RxMessage.StdId);
+                                   ^
+..\src\stm32f1xx_it.c:71:34: warning: implicit declaration of function 'GetGlobalCanNodeId' [-Wimplicit-function-declaration]
+    printf("Incoming id 0x00 %d", GetGlobalCanNodeId());
+                                  ^~~~~~~~~~~~~~~~~~
+arm-atollic-eabi-gcc -c ..\src\helper.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\helper.o 
+..\src\helper.c: In function '_write':
+..\src\helper.c:36:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+arm-atollic-eabi-gcc -c ..\src\myCanFunctions.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\myCanFunctions.o 
 arm-atollic-eabi-gcc -c ..\src\storages.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\storages.o 
 arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\main.o 
 ..\src\main.c: In function 'main':
 ..\src\main.c:34:2: warning: implicit declaration of function 'GetGloablCanIdFromEeeprom' [-Wimplicit-function-declaration]
   GetGloablCanIdFromEeeprom(); // todo mb: das zusammen fassen
   ^~~~~~~~~~~~~~~~~~~~~~~~~
-arm-atollic-eabi-gcc -c ..\src\helper.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\helper.o 
-..\src\helper.c: In function '_write':
-..\src\helper.c:34:3: warning: implicit declaration of function 'UART_PutChar' [-Wimplicit-function-declaration]
-   UART_PutChar(*ptr++);
-   ^~~~~~~~~~~~
-arm-atollic-eabi-gcc -o CPIOng.elf Libraries\STM32F10x_StdPeriph_Driver\src\misc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.o src\alive.o src\can.o src\eeprom.o src\helper.o src\main.o src\myCanFunctions.o src\pulse.o src\startup_stm32f10x_cl.o src\stm32f1xx_it.o src\storages.o src\system_stm32f10x.o src\tiny_printf.o -mthumb -mcpu=cortex-m3 -T../stm32_flash.ld -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
-src\helper.o: In function `_write':
-C:\apps\CPIOV2\CPIOng\Debug/..\src/helper.c:34: undefined reference to `UART_PutChar'
-collect2.exe: error: ld returned 1 exit status
+arm-atollic-eabi-gcc -c ..\src\alive.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\alive.o 
+arm-atollic-eabi-gcc -o CPIOng.elf Libraries\STM32F10x_StdPeriph_Driver\src\misc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.o src\alive.o src\can.o src\eeprom.o src\helper.o src\main.o src\myCanFunctions.o src\pulse.o src\startup_stm32f10x_cl.o src\stm32f1xx_it.o src\storages.o src\system_stm32f10x.o src\tiny_printf.o src\usart.o -mthumb -mcpu=cortex-m3 -T../stm32_flash.ld -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+   9904	     28	    588	  10520	   2918	CPIOng.elf
+Print size information done
+Generate listing file
+Output sent to: CPIOng.list
+Generate listing file done
+Generate build reports done
 
-06:31:56 Build Finished (took 899ms)
+06:48:41 Build Finished (took 2s.177ms)
 
