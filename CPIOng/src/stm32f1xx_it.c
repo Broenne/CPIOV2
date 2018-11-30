@@ -63,8 +63,7 @@ void CAN2_RX0_IRQHandler(void) {
 	CanRxMsg RxMessage;
 	CAN_Receive(CAN2, CAN_FIFO0, &RxMessage);
 
-
-	printf("receive can 2 interrupt %d \n", RxMessage.StdId);
+	printf("receive can 2 interrupt %i \n", RxMessage.StdId);
 	if (RxMessage.StdId == 0x00) {
 		if (RxMessage.Data[0] == 0x01) {
 			SetGlobalCanNodeId(RxMessage.Data[1]);

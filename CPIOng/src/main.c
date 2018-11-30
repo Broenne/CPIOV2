@@ -32,6 +32,9 @@ int main(void) {
 
 	UART_Init();
 
+	Init_TimerForSendCan();
+
+
 	InitVirtualEeprom();
 	GetGloablCanIdFromEeeprom(); // todo mb: das zusammen fassen
 
