@@ -30,6 +30,8 @@ int main(void) {
 	// http://www.diller-technologies.de/stm32_wide.html#takt
 	SystemInit();
 
+	UART_Init();
+
 	InitVirtualEeprom();
 	GetGloablCanIdFromEeeprom(); // todo mb: das zusammen fassen
 
