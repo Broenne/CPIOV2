@@ -9,14 +9,6 @@ USART_InitTypeDef USART_InitStructure;
 /* Private function prototypes */
 /* Private functions */
 
-
-
-
-
-
-
-
-
 void InitSysTicker(void) {
 	// create 1ms tick
 	uint32_t init = SysTick_Config(SystemCoreClock/*72000000*// 1000);
@@ -39,7 +31,7 @@ int main(void) {
 	SystemInit();
 
 	InitVirtualEeprom();
-	GetGloablCanIdFromEeeprom();
+	GetGloablCanIdFromEeeprom(); // todo mb: das zusammen fassen
 
 	InitSysTicker();
 	PrepareCan();
