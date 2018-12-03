@@ -21,11 +21,14 @@ void InitSysTicker(void) {
 	}
 }
 
-static xQueueHandle xQueue = NULL;
+
 /* The semaphore (in this case binary) that is used by the FreeRTOS tick hook
  * function and the event semaphore task.
  */
 static xSemaphoreHandle xEventSemaphore = NULL;
+
+
+
 
 /**
  **===========================================================================
@@ -42,26 +45,24 @@ int main(void) {
 
 	SystemInit();
 
+	UART_Init();
+
 	InitVirtualEeprom();
 	GetGloablCanIdFromEeeprom(); // todo mb: das zusammen fassen
 
-//	/* Create the queue used by the queue send and queue receive tasks.
-//		http://www.freertos.org/a00116.html */
-//	xQueue = xQueueCreate( 	mainQUEUE_LENGTH,		/* The number of items the queue can hold. */
-//								sizeof( uint32_t ) );	/* The size of each item the queue holds. */
-//
-	UART_Init();
+
 
 	//InitSysTicker(); // todo mb: geht nicht mehr
 	PrepareCan();
-	InitAlive();
+	//InitAlive();
 
 	InitPulse();
 	Init_TimerForSendCan();
 
+	InitQueue();
 	vTaskStartScheduler(); /* run RTOS */
 
-	printf("This should never reached!")
+	printf("This should never reached!");
 }
 
 void vApplicationIdleHook(void) {

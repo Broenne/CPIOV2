@@ -14,17 +14,9 @@ typedef struct {
 	uint32_t res;
 } MessageForSend;
 
-typedef struct {
-	MessageForSend messageForSend;
-	int isNotSend;
-} SendQueueStructType;
-
 static uint16_t oldGpioA;
 static uint16_t oldGpioB;
 static uint16_t oldGpioC;
-
-static SendQueueStructType SendQueueCounter[MessageSize];
-static uint32_t positionInQueueForFill;
 
 /*Initialisierung der Eingänge auf dem borad*/
 void InitInputs(void) {
@@ -68,6 +60,60 @@ void SendCanTimeDif(uint8_t channel, uint32_t res) {
 	SendCan(canId, p, 4);
 }
 
+static xQueueHandle xQueue = NULL;
+
+/* Task to be created. */
+void vTaskCode(void * pvParameters) {
+	/* The parameter value is expected to be 1 as 1 is passed in the
+	 pvParameters value in the call to xTaskCreate() below.*/
+	configASSERT(((uint32_t ) pvParameters) == 1);
+
+//	for (;;) {
+//		/* Task code goes here. */
+//	}
+
+
+	for (;;) {
+		MessageForSend currentMessage;
+		if (xQueueReceive(xQueue, &currentMessage, 0) == pdTRUE) {
+//			printf("Received %lu %lu \r\n", currentMessage.channel,
+//					currentMessage.res);
+			printf("sss \r\n");
+		}
+
+		printf("while task \r\n");
+		vTaskDelay(100);
+		//delay_ms(250);
+	}
+}
+
+#define configMINIMAL_STACK_SIZE		( ( unsigned short ) 70 )
+
+void InitQueue(void) {
+	// todo mb: funktion umbenen oder so und rückgabe abfragen
+	xQueue = xQueueCreate(100, /* The number of items the queue can hold. */
+	sizeof( MessageForSend )); /* The size of each item the queue holds. */
+
+	portBASE_TYPE xReturned;
+	xTaskHandle xHandle = NULL;
+
+
+	/* Create the task, storing the handle. */
+	xReturned = xTaskCreate(vTaskCode, /* Function that implements the task. */
+			"CanSenderTask", /* Text name for the task. */
+			configMINIMAL_STACK_SIZE, /* Stack size in words, not bytes. */
+			( void * ) 1, /* Parameter passed into the task. */
+			tskIDLE_PRIORITY,/* Priority at which the task is created. */
+			&xHandle); /* Used to pass out the created task's handle. */
+
+
+//		    if( xReturned == pdPASS )
+//		    {
+//		        /* The task was created.  Use the task's handle to delete the task. */
+//		        vTaskDelete( xHandle );
+//		    }
+}
+
 /*
  * 30.11.18
  * MB
@@ -80,8 +126,8 @@ void Init_TimerForSendCan(void) {
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE); // Timer 2 Interrupt enable
 	TIM_TimeBase_InitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
 	TIM_TimeBase_InitStructure.TIM_CounterMode = TIM_CounterMode_Up;
-	TIM_TimeBase_InitStructure.TIM_Period = 1999; //1999;
-	TIM_TimeBase_InitStructure.TIM_Prescaler = 36; // prescal auf 72 MHz bezogen -> 72Mhz/36 = 2 Mhz  -> 2Mhz = 0,5 us
+	TIM_TimeBase_InitStructure.TIM_Period = 19990; //1999;
+	TIM_TimeBase_InitStructure.TIM_Prescaler = 360; // prescal auf 72 MHz bezogen -> 72Mhz/36 = 2 Mhz  -> 2Mhz = 0,5 us
 	TIM_TimeBaseInit(TIM3, &TIM_TimeBase_InitStructure);
 
 	TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
@@ -110,8 +156,14 @@ void SendTimeInfo(uint8_t channel) {
 		res = lastTimeValue[channel] - actualTimeValue;
 	}
 
-	printf("SendTimeInfo %d", channel);
+	printf("SendTimeInfo %d \r\n", channel);
 
+	MessageForSend messageForSend;
+	messageForSend.channel = channel;
+	messageForSend.res = res;
+	if (xQueueSend(xQueue, &messageForSend, 0) != pdTRUE) {
+		printf("Error in queue send.\r\n");
+	}
 
 	lastTimeValue[channel] = actualTimeValue;
 }
@@ -121,16 +173,14 @@ void CheckInputsRegisterA(void) {
 
 	if (gpioA != oldGpioA) {
 		uint16_t dif = gpioA ^ oldGpioA; // PinA0 -> I0 	// PinA1 -> I1	// PinA2 -> I2	// PinA3 -> I3	// PinA4 -> I4	// PinA5 -> I5	// PinA6 -> I6	// PinA7 -> I7
-		for (int i = 0; i < 8; ++i) {
-			// Änderung bit und steigende Flanke
+		for (int i = 0; i < 8; ++i) {	// Änderung bit und steigende Flanke
 			if ((dif >> i) & 0x01 && (gpioA >> i & 0x01)) {
 				SendTimeInfo(i); // Achtung, nur bei a
 			}
 		}
 	}
 
-	// Wert merken
-	oldGpioA = gpioA;
+	oldGpioA = gpioA; // Wert merken
 }
 
 void CheckInputsRegisterB(void) {
@@ -163,52 +213,18 @@ void CheckInputsRegisterC(void) {
 	oldGpioC = gpioC;
 }
 
-
 void TIM3_IRQHandler(void) {
-//	__disable_irq();
-//
-//	// der letzte eintrag ist bei positionInQueueForFill
-//
-//	// position steht grade bei 15 _> dann rückwärts laufen bis zum ersten nicht send
-//	// todo mb: überschlag beachten
-//	for (int i = positionInQueueForFill; i >= 0; --i) {
-//		if (SendQueueCounter[i].isNotSend) {
-//			// gefunden den man wegschicken muss?
-//			int channel = SendQueueCounter[i].messageForSend.channel;
-//			int res = SendQueueCounter[i].messageForSend.res;
-//			SendCanTimeDif(channel, res);
-//			printf("Rising edge on .... In %d %d \n", channel, res);
-//			SendQueueCounter[i].isNotSend = 0;
-//		}
-//	}
-//
-//	TIM_ClearITPendingBit(TIM3, TIM_IT_Update); // setz timer zurück, achtung dann kann man ihn auch anders nicht mehr benutzen
-//	__enable_irq();
 
+	taskENTER_CRITICAL();
+	__disable_irq();
+	//printf("Interrupt timer 3 \r\n");
+	++tickMs;
 
-		__disable_irq();
-		++tickMs;
-
-		CheckInputsRegisterA();
-		CheckInputsRegisterB();
-		CheckInputsRegisterC();
-		__enable_irq();
-
-
-}
-
-///**
-// * @brief  This function handles SysTick Handler.
-// * @param  None
-// * @retval None
-// */
-//void SysTick_Handler(void) {
-//	__disable_irq();
-//	++tickMs;
-//
 //	CheckInputsRegisterA();
 //	CheckInputsRegisterB();
 //	CheckInputsRegisterC();
-//	__enable_irq();
-//}
+	TIM_ClearITPendingBit(TIM3, TIM_IT_Update); // setz timer zurück, achtung dann kann man ihn auch anders nicht mehr benutzen
+	__enable_irq();
+	taskEXIT_CRITICAL();
 
+}

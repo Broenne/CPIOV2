@@ -15,6 +15,7 @@
 #include "queue.h"
 #include "timers.h"
 #include "semphr.h"
+#include "FreeRTOSConfig.h"
 //#include "board.h"
 
 #include <stddef.h>

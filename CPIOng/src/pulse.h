@@ -15,6 +15,6 @@ volatile static uint32_t tickMs;
 volatile static uint32_t lastTimeValue[8];
 
 void InitPulse(void);
-
+void InitQueue(void);
 
 #endif /* PULSE_H_ */
