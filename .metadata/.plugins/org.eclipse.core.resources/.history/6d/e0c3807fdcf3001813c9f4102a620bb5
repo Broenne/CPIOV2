@@ -1,0 +1,15 @@
+/*
+ * alive.c
+ *
+ *  Created on: 29.11.2018
+ *      Author: tbe241
+ */
+
+#include "can.h"
+
+void SanCanAlive(void) {
+	//if (!(tickMs % 500)) {
+		uint8_t p[] = { 0, 1, 2, 3, 4, 5, 6, 7 };
+		SendCan(AliveCanId, p, 8);
+	//}
+}

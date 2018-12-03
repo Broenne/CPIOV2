@@ -1,0 +1,17 @@
+/*
+ * storages.c
+ *
+ *  Created on: 29.11.2018
+ *      Author: tbe241
+ */
+
+
+void InitVirtualEeprom(void) {
+	__disable_irq();
+	FLASH_Unlock();
+	// EEPROM Init
+	EE_Init();
+	FLASH_Lock();
+	delay_ms(2);
+	__enable_irq();
+}

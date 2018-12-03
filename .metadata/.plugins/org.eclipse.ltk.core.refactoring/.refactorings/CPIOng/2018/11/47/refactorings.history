@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;CPIOng/src/can&apos; to &apos;can.h&apos;" description="Rename resource &apos;can&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/can" name="can.h" stamp="1542896030887" updateReferences="true"/>
+</session>

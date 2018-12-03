@@ -1799,3 +1799,17 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2018-11-30 13:08:00.042
+!MESSAGE Failed to execute MI command:
+target extended-remote localhost:60000
+
+Error message from debugger back end:
+localhost:60000: Das System hat versucht, einem Verzeichnis, das sich auf einem mit JOIN zugeordneten Laufwerk befindet, ein Laufwerk mit SUBST zuzuordnen.
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2018-11-30 13:08:42.170
+!MESSAGE Failed to execute MI command:
+target extended-remote localhost:60000
+
+Error message from debugger back end:
+localhost:60000: Das System hat versucht, einem Verzeichnis, das sich auf einem mit JOIN zugeordneten Laufwerk befindet, ein Laufwerk mit SUBST zuzuordnen.

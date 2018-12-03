@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PCANExplorerProject Version="5.0" Name="Neues Projekt">
+    <Connections AutoReset="0" IgnoreRTRLength="0" ProcessRTR="1">
+        <Connection Bus="1" Enabled="1" Protocol="0" BitRate="796" Connection="PCANLight_USB_16@pcan_usb" Name="Verbindung1"/>
+    </Connections>
+    <MessageFilters/>
+    <Files>
+        <File RelativePath="Test.xmt"/>
+    </Files>
+</PCANExplorerProject>

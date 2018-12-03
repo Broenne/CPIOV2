@@ -1,0 +1,14 @@
+;$FORMATVERSION=5.1
+; C:\apps\CPIOV2\canView\Test.xmt
+; CAN messages saved by PCAN-Explorer 5.4.0
+;
+; Columns descriptions:
+; ~~~~~~~~~~~~~~~~~~~~~
+;+Bus
+;|  +Message ID
+;|  |         +Reserved
+;|  |         |  +Cycle time in ms (0=manual)
+;|  |         |  |     +Length of message
+;|  |         |  |     |    +Frame type: D)ata or R)emote request
+;|  |         |  |     |    | +Message data
+;|  |         |  |     |    | |
