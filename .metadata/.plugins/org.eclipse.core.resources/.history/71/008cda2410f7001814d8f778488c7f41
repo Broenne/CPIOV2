@@ -54,7 +54,7 @@ int main(void) {
 	InitAlive();
 
 	InitPulse();
-	Init_TimerForPulsTime();
+	Init_TimerForSendCan();
 
 	InitQueue();
 	vTaskStartScheduler(); /* run RTOS */

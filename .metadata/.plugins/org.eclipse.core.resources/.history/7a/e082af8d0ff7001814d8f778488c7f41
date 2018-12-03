@@ -68,12 +68,21 @@ void vTaskCode(void * pvParameters) {
 	 pvParameters value in the call to xTaskCreate() below.*/
 	configASSERT(((uint32_t ) pvParameters) == 1);
 
+//	for (;;) {
+//		/* Task code goes here. */
+//	}
+
+
 	while(1) {
 		MessageForSend currentMessage;
 		if (xQueueReceive(xQueue, &currentMessage, 0) == pdTRUE) {
-			printf("Received %lu %lu \r\n", currentMessage.channel, currentMessage.res);
-			SendCanTimeDif(currentMessage.channel, currentMessage.res);
+			printf("Received %lu %lu \r\n", currentMessage.channel,
+					currentMessage.res);
 		}
+
+//		printf("while task \r\n");
+//		vTaskDelay(10);
+		//delay_ms(250);
 	}
 }
 
@@ -107,16 +116,16 @@ void InitQueue(void) {
 /*
  * 30.11.18
  * MB
- *
- *
+ * Initialisiert den timer zum versenden der timer can nachrichten aus der message queue.
+ * Genutzt wird timer 3.
  * */
-void Init_TimerForPulsTime(void) {
+void Init_TimerForSendCan(void) {
 	TIM_TimeBaseInitTypeDef TIM_TimeBase_InitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE); // Timer 3 Interrupt enable
 	TIM_TimeBase_InitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
 	TIM_TimeBase_InitStructure.TIM_CounterMode = TIM_CounterMode_Up;
-	TIM_TimeBase_InitStructure.TIM_Period = 1999; //1999;
+	TIM_TimeBase_InitStructure.TIM_Period = 19990; //1999;
 	TIM_TimeBase_InitStructure.TIM_Prescaler = 360; // prescal auf 72 MHz bezogen -> 72Mhz/36 = 2 Mhz  -> 2Mhz = 0,5 us
 	TIM_TimeBaseInit(TIM3, &TIM_TimeBase_InitStructure);
 
@@ -205,8 +214,7 @@ void CheckInputsRegisterC(void) {
 
 void TIM3_IRQHandler(void) {
 
-	//taskDISABLE_INTERRUPTS();
-	portDISABLE_INTERRUPTS();
+	taskDISABLE_INTERRUPTS();
 //	__disable_irq();
 	//printf("Interrupt timer 3 \r\n");
 	++tickMs;
@@ -217,7 +225,6 @@ void TIM3_IRQHandler(void) {
 	TIM_ClearITPendingBit(TIM3, TIM_IT_Update); // setz timer zurück, achtung dann kann man ihn auch anders nicht mehr benutzen
 //	__enable_irq();
 //	//taskEXIT_CRITICAL();
-	//taskENABLE_INTERRUPTS();
-	portENABLE_INTERRUPTS();
+	taskENABLE_INTERRUPTS();
 
 }

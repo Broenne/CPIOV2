@@ -68,12 +68,20 @@ void vTaskCode(void * pvParameters) {
 	 pvParameters value in the call to xTaskCreate() below.*/
 	configASSERT(((uint32_t ) pvParameters) == 1);
 
+//	for (;;) {
+//		/* Task code goes here. */
+//	}
+
+
 	while(1) {
 		MessageForSend currentMessage;
 		if (xQueueReceive(xQueue, &currentMessage, 0) == pdTRUE) {
 			printf("Received %lu %lu \r\n", currentMessage.channel, currentMessage.res);
-			SendCanTimeDif(currentMessage.channel, currentMessage.res);
 		}
+
+//		printf("while task \r\n");
+//		vTaskDelay(10);
+		//delay_ms(250);
 	}
 }
 
@@ -116,7 +124,7 @@ void Init_TimerForPulsTime(void) {
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE); // Timer 3 Interrupt enable
 	TIM_TimeBase_InitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
 	TIM_TimeBase_InitStructure.TIM_CounterMode = TIM_CounterMode_Up;
-	TIM_TimeBase_InitStructure.TIM_Period = 1999; //1999;
+	TIM_TimeBase_InitStructure.TIM_Period = 19990; //1999;
 	TIM_TimeBase_InitStructure.TIM_Prescaler = 360; // prescal auf 72 MHz bezogen -> 72Mhz/36 = 2 Mhz  -> 2Mhz = 0,5 us
 	TIM_TimeBaseInit(TIM3, &TIM_TimeBase_InitStructure);
 

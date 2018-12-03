@@ -42,7 +42,7 @@ int main(void) {
 
 	SystemInit();
 
-	UART_Init();
+	//UART_Init();
 
 	InitVirtualEeprom();
 	GetGloablCanIdFromEeeprom(); // todo mb: das zusammen fassen
@@ -54,7 +54,7 @@ int main(void) {
 	InitAlive();
 
 	InitPulse();
-	Init_TimerForPulsTime();
+	Init_TimerForSendCan();
 
 	InitQueue();
 	vTaskStartScheduler(); /* run RTOS */
