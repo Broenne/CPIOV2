@@ -39,7 +39,8 @@ void ActivateUartDebug(uint activate){
 }
 
 int GetDebugStatusInfo(){
-	return printOnUart;
+	//return printOnUart;
+	return 1;
 }
 
 

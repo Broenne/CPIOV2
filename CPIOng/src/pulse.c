@@ -2,7 +2,7 @@
  * pulse.c
  *
  *  Created on: 29.11.2018
- *      Author: tbe241
+ *      Author: MB
  */
 
 #include "pulse.h"
@@ -80,7 +80,7 @@ void Init_TimerForSendCan(void) {
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE); // Timer 2 Interrupt enable
 	TIM_TimeBase_InitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
 	TIM_TimeBase_InitStructure.TIM_CounterMode = TIM_CounterMode_Up;
-	TIM_TimeBase_InitStructure.TIM_Period = 4000; //1999;
+	TIM_TimeBase_InitStructure.TIM_Period = 1999; //1999;
 	TIM_TimeBase_InitStructure.TIM_Prescaler = 36; // prescal auf 72 MHz bezogen -> 72Mhz/36 = 2 Mhz  -> 2Mhz = 0,5 us
 	TIM_TimeBaseInit(TIM3, &TIM_TimeBase_InitStructure);
 
@@ -98,29 +98,8 @@ void Init_TimerForSendCan(void) {
 /*
  * 30.11.18
  * MB
- * Interrupt handler zum leeren der CAN-message queu für die counter werte
+ *
  * */
-void TIM3_IRQHandler(void) {
-	__disable_irq();
-
-	// der letzte eintrag ist bei positionInQueueForFill
-
-	// position steht grade bei 15 _> dann rückwärts laufen bis zum ersten nicht send
-	// todo mb: überschlag beachten
-	for (int i = positionInQueueForFill; i >= 0; --i) {
-		if (SendQueueCounter[i].isNotSend) {
-			// gefunden den man wegschicken muss?
-			int channel = SendQueueCounter[i].messageForSend.channel;
-			int res = SendQueueCounter[i].messageForSend.res;
-			SendCanTimeDif(channel, res);
-			printf("Rising edge on .... In %d %d \n", channel, res);
-			SendQueueCounter[i].isNotSend = 0;
-		}
-	}
-
-	TIM_ClearITPendingBit(TIM3, TIM_IT_Update); // setz timer zurück, achtung dann kann man ihn auch anders nicht mehr benutzen
-	__enable_irq();
-}
 
 void SendTimeInfo(uint8_t channel) {
 	uint32_t actualTimeValue = tickMs;
@@ -131,25 +110,8 @@ void SendTimeInfo(uint8_t channel) {
 		res = lastTimeValue[channel] - actualTimeValue;
 	}
 
-	MessageForSend messageForSendX; // { channel,  res };
-	messageForSendX.channel = channel;
-	messageForSendX.res = res;
-	SendQueueStructType sendQueueStruct;
-	sendQueueStruct.messageForSend = messageForSendX;
-	sendQueueStruct.isNotSend = 1;
+	printf("SendTimeInfo %d", channel);
 
-	// wenn der letzte noch nicht weggesendet ist entsteht ein überlauf
-	if (SendQueueCounter[positionInQueueForFill].isNotSend) {
-		SetCounterError();
-		// todo mb: dann abbruch oder irgendwas. Infos gehen verloren
-	}
-
-	SendQueueCounter[positionInQueueForFill] = sendQueueStruct;
-
-	++positionInQueueForFill; // es wird immer von unten wieder aufgefüllt
-	if (positionInQueueForFill > (MessageSize)) {
-		positionInQueueForFill = 0;
-	}
 
 	lastTimeValue[channel] = actualTimeValue;
 }
@@ -199,6 +161,40 @@ void CheckInputsRegisterC(void) {
 	}
 
 	oldGpioC = gpioC;
+}
+
+
+void TIM3_IRQHandler(void) {
+//	__disable_irq();
+//
+//	// der letzte eintrag ist bei positionInQueueForFill
+//
+//	// position steht grade bei 15 _> dann rückwärts laufen bis zum ersten nicht send
+//	// todo mb: überschlag beachten
+//	for (int i = positionInQueueForFill; i >= 0; --i) {
+//		if (SendQueueCounter[i].isNotSend) {
+//			// gefunden den man wegschicken muss?
+//			int channel = SendQueueCounter[i].messageForSend.channel;
+//			int res = SendQueueCounter[i].messageForSend.res;
+//			SendCanTimeDif(channel, res);
+//			printf("Rising edge on .... In %d %d \n", channel, res);
+//			SendQueueCounter[i].isNotSend = 0;
+//		}
+//	}
+//
+//	TIM_ClearITPendingBit(TIM3, TIM_IT_Update); // setz timer zurück, achtung dann kann man ihn auch anders nicht mehr benutzen
+//	__enable_irq();
+
+
+		__disable_irq();
+		++tickMs;
+
+		CheckInputsRegisterA();
+		CheckInputsRegisterB();
+		CheckInputsRegisterC();
+		__enable_irq();
+
+
 }
 
 ///**

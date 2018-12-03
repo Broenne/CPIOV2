@@ -9,6 +9,14 @@
 #define MAIN_H_
 
 
+/* Kernel includes. */
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+#include "timers.h"
+#include "semphr.h"
+//#include "board.h"
+
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
