@@ -118,7 +118,7 @@ void vApplicationTickHook(void) {
 
 	 "Give" the semaphore on every 500th tick interrupt. */
 	ulCount++;
-	if (ulCount >= 500UL) {
+	if (ulCount >= 1500UL) {
 		/* This function is called from an interrupt context (the RTOS tick
 		 interrupt),	so only ISR safe API functions can be used (those that end
 		 in "FromISR()".

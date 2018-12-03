@@ -66,7 +66,7 @@ static xQueueHandle xQueue = NULL;
 void vTaskCode(void * pvParameters) {
 	/* The parameter value is expected to be 1 as 1 is passed in the
 	 pvParameters value in the call to xTaskCreate() below.*/
-	//configASSERT(((uint32_t ) pvParameters) == 1);
+	configASSERT(((uint32_t ) pvParameters) == 1);
 
 //	for (;;) {
 //		/* Task code goes here. */
@@ -74,12 +74,12 @@ void vTaskCode(void * pvParameters) {
 
 
 	for (;;) {
-		MessageForSend currentMessage;
-		if (xQueueReceive(xQueue, &currentMessage, 0) == pdTRUE) {
-//			printf("Received %lu %lu \r\n", currentMessage.channel,
-//					currentMessage.res);
-			printf("sss \r\n");
-		}
+//		MessageForSend currentMessage;
+//		if (xQueueReceive(xQueue, &currentMessage, 0) == pdTRUE) {
+////			printf("Received %lu %lu \r\n", currentMessage.channel,
+////					currentMessage.res);
+//			printf("sss \r\n");
+//		}
 
 		printf("while task \r\n");
 		vTaskDelay(100);
@@ -123,7 +123,7 @@ void InitQueue(void) {
 void Init_TimerForSendCan(void) {
 	TIM_TimeBaseInitTypeDef TIM_TimeBase_InitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE); // Timer 3 Interrupt enable
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE); // Timer 2 Interrupt enable
 	TIM_TimeBase_InitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
 	TIM_TimeBase_InitStructure.TIM_CounterMode = TIM_CounterMode_Up;
 	TIM_TimeBase_InitStructure.TIM_Period = 19990; //1999;
@@ -134,7 +134,7 @@ void Init_TimerForSendCan(void) {
 
 	NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQn;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x0E;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x0F;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x0F;
 	NVIC_Init(&NVIC_InitStructure);
 
@@ -215,17 +215,16 @@ void CheckInputsRegisterC(void) {
 
 void TIM3_IRQHandler(void) {
 
-	taskDISABLE_INTERRUPTS();
-//	__disable_irq();
+	taskENTER_CRITICAL();
+	__disable_irq();
 	//printf("Interrupt timer 3 \r\n");
 	++tickMs;
 
-	CheckInputsRegisterA();
-	CheckInputsRegisterB();
-	CheckInputsRegisterC();
+//	CheckInputsRegisterA();
+//	CheckInputsRegisterB();
+//	CheckInputsRegisterC();
 	TIM_ClearITPendingBit(TIM3, TIM_IT_Update); // setz timer zurück, achtung dann kann man ihn auch anders nicht mehr benutzen
-//	__enable_irq();
-//	//taskEXIT_CRITICAL();
-	taskENABLE_INTERRUPTS();
+	__enable_irq();
+	taskEXIT_CRITICAL();
 
 }

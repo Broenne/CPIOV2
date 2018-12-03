@@ -1,4 +1,4 @@
-14:36:13 **** Incremental Build of configuration Debug for project CPIOng ****
+16:13:51 **** Incremental Build of configuration Debug for project CPIOng ****
 Info: Internal Builder is used for build
 arm-atollic-eabi-gcc -c ..\src\pulse.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\pulse.o 
 In file included from ..\src\main.h:14:0,
@@ -22,12 +22,12 @@ C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar 
 Generate build reports...
 Print size information
    text	   data	    bss	    dec	    hex	filename
-  18796	     52	   8572	  27420	   6b1c	CPIOng.elf
+  18184	     32	   8600	  26816	   68c0	CPIOng.elf
 Print size information done
 Generate listing file
 Output sent to: CPIOng.list
 Generate listing file done
 Generate build reports done
 
-14:36:14 Build Finished (took 586ms)
+16:13:51 Build Finished (took 551ms)
 

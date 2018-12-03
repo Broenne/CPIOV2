@@ -91,8 +91,8 @@ void vTaskCode(void * pvParameters) {
 
 void InitQueue(void) {
 	// todo mb: funktion umbenen oder so und rückgabe abfragen
-	xQueue = xQueueCreate(100, /* The number of items the queue can hold. */
-	sizeof( MessageForSend )); /* The size of each item the queue holds. */
+//	xQueue = xQueueCreate(100, /* The number of items the queue can hold. */
+//	sizeof( MessageForSend )); /* The size of each item the queue holds. */
 
 	portBASE_TYPE xReturned;
 	xTaskHandle xHandle = NULL;

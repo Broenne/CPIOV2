@@ -10,16 +10,16 @@
 /* Private variables */
 USART_InitTypeDef USART_InitStructure;
 
-///* Private function prototypes */
-///* Private functions */
-//
-//void InitSysTicker(void) {
-//	// create 1ms tick
-//	uint32_t init = SysTick_Config(SystemCoreClock/*72000000*// 1000);
-//	if (init != 0) {
-//		printf("Error in init system tick"); // noch erro per can?! allgemeine status bits?
-//	}
-//}
+/* Private function prototypes */
+/* Private functions */
+
+void InitSysTicker(void) {
+	// create 1ms tick
+	uint32_t init = SysTick_Config(SystemCoreClock/*72000000*// 1000);
+	if (init != 0) {
+		printf("Error in init system tick"); // noch erro per can?! allgemeine status bits?
+	}
+}
 
 
 /* The semaphore (in this case binary) that is used by the FreeRTOS tick hook
@@ -42,7 +42,7 @@ int main(void) {
 
 	SystemInit();
 
-	//UART_Init();
+	UART_Init();
 
 	InitVirtualEeprom();
 	GetGloablCanIdFromEeeprom(); // todo mb: das zusammen fassen
@@ -51,7 +51,7 @@ int main(void) {
 
 	//InitSysTicker(); // todo mb: geht nicht mehr
 	PrepareCan();
-	InitAlive();
+	//InitAlive();
 
 	InitPulse();
 	Init_TimerForSendCan();

@@ -60,7 +60,7 @@ void SendCanTimeDif(uint8_t channel, uint32_t res) {
 	SendCan(canId, p, 4);
 }
 
-static xQueueHandle xQueue = NULL;
+//static xQueueHandle xQueue = NULL;
 
 /* Task to be created. */
 void vTaskCode(void * pvParameters) {
@@ -74,12 +74,12 @@ void vTaskCode(void * pvParameters) {
 
 
 	for (;;) {
-		MessageForSend currentMessage;
-		if (xQueueReceive(xQueue, &currentMessage, 0) == pdTRUE) {
-//			printf("Received %lu %lu \r\n", currentMessage.channel,
-//					currentMessage.res);
-			printf("sss \r\n");
-		}
+//		MessageForSend currentMessage;
+//		if (xQueueReceive(xQueue, &currentMessage, 0) == pdTRUE) {
+////			printf("Received %lu %lu \r\n", currentMessage.channel,
+////					currentMessage.res);
+//			printf("sss \r\n");
+//		}
 
 		printf("while task \r\n");
 		vTaskDelay(100);
@@ -91,8 +91,8 @@ void vTaskCode(void * pvParameters) {
 
 void InitQueue(void) {
 	// todo mb: funktion umbenen oder so und rückgabe abfragen
-	xQueue = xQueueCreate(100, /* The number of items the queue can hold. */
-	sizeof( MessageForSend )); /* The size of each item the queue holds. */
+//	xQueue = xQueueCreate(100, /* The number of items the queue can hold. */
+//	sizeof( MessageForSend )); /* The size of each item the queue holds. */
 
 	portBASE_TYPE xReturned;
 	xTaskHandle xHandle = NULL;
@@ -161,9 +161,9 @@ void SendTimeInfo(uint8_t channel) {
 	MessageForSend messageForSend;
 	messageForSend.channel = channel;
 	messageForSend.res = res;
-	if (xQueueSend(xQueue, &messageForSend, 0) != pdTRUE) {
-		printf("Error in queue send.\r\n");
-	}
+//	if (xQueueSend(xQueue, &messageForSend, 0) != pdTRUE) {
+//		printf("Error in queue send.\r\n");
+//	}
 
 	lastTimeValue[channel] = actualTimeValue;
 }
@@ -215,17 +215,18 @@ void CheckInputsRegisterC(void) {
 
 void TIM3_IRQHandler(void) {
 
-	taskDISABLE_INTERRUPTS();
+//	taskDISABLE_INTERRUPTS();
+//	//taskENTER_CRITICAL();
 //	__disable_irq();
 	//printf("Interrupt timer 3 \r\n");
 	++tickMs;
 
-	CheckInputsRegisterA();
-	CheckInputsRegisterB();
-	CheckInputsRegisterC();
+//	CheckInputsRegisterA();
+//	CheckInputsRegisterB();
+//	CheckInputsRegisterC();
 	TIM_ClearITPendingBit(TIM3, TIM_IT_Update); // setz timer zurück, achtung dann kann man ihn auch anders nicht mehr benutzen
 //	__enable_irq();
 //	//taskEXIT_CRITICAL();
-	taskENABLE_INTERRUPTS();
+//	taskENABLE_INTERRUPTS();
 
 }

@@ -2402,3 +2402,16 @@ Warning:\nCannot insert hardware breakpoint 3.\nCould not insert hardware breakp
 java.lang.Exception: Warning:\nCannot insert hardware breakpoint 3.\nCould not insert hardware breakpoints:\nYou may have requested too many hardware breakpoints/watchpoints.\n
 	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
 	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.core.jobs 4 2 2018-12-03 15:22:44.024
+!MESSAGE An internal error occurred during: "Debugger Update Job".
+!STACK 0
+java.lang.ClassCastException: org.eclipse.cdt.dsf.gdb.launching.GdbLaunch cannot be cast to org.eclipse.cdt.dsf.ui.viewmodel.datamodel.IDMVMContext
+	at com.atollic.truestudio.debug.ui.ContextManager.getMemoryContext(ContextManager.java:250)
+	at com.atollic.truestudio.debug.ui.ContextManager.readMemory(ContextManager.java:1513)
+	at com.atollic.truestudio.debug.ui.AbstractTrueStudioDebugView.readMemory(AbstractTrueStudioDebugView.java:501)
+	at com.atollic.truestudio.faultanalyzer.FaultAnalyzerView.getRegisterValue(FaultAnalyzerView.java:249)
+	at com.atollic.truestudio.faultanalyzer.FaultAnalyzerView.updateDataCortexM(FaultAnalyzerView.java:647)
+	at com.atollic.truestudio.faultanalyzer.FaultAnalyzerView.updateData(FaultAnalyzerView.java:633)
+	at com.atollic.truestudio.debug.ui.AbstractTrueStudioDebugView$UpdateJob.run(AbstractTrueStudioDebugView.java:71)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
