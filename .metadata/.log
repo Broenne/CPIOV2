@@ -1813,3 +1813,483 @@ target extended-remote localhost:60000
 
 Error message from debugger back end:
 localhost:60000: Das System hat versucht, einem Verzeichnis, das sich auf einem mit JOIN zugeordneten Laufwerk befindet, ein Laufwerk mit SUBST zuzuordnen.
+
+!ENTRY com.atollic.truestudio.productmanager 1 0 2018-12-03 06:21:51.288
+!MESSAGE Unloading product manager
+!SESSION 2018-12-03 06:21:53.180 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_181
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY com.atollic.truestudio.productmanager 1 0 2018-12-03 06:21:56.245
+!MESSAGE Loading product manager
+
+!ENTRY com.atollic.truestudio.productmanager 1 0 2018-12-03 06:21:56.253
+!MESSAGE OS info: Windows 7, 6.1, x86
+
+!ENTRY TrueSTUDIO 1 0 2018-12-03 06:21:57.266
+!MESSAGE Target: STM32, Version: 9.1.0, Build date: 20181011-1241, Installation dir: /C:/Program Files (x86)/Atollic/TrueSTUDIO for STM32 9.1.0/ide/
+
+!ENTRY TrueSTUDIO 1 0 2018-12-03 06:21:57.267
+!MESSAGE Workspace: C:\apps\CPIOV2
+
+!ENTRY org.eclipse.jface 2 0 2018-12-03 06:21:58.690
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-12-03 06:21:58.690
+!MESSAGE A conflict occurred for ALT+CTRL+T:
+Binding(ALT+CTRL+T,
+	ParameterizedCommand(Command(org.eclipse.team.svn.ui.command.EditPropertiesCommand,Show Properties,
+		,
+		Category(org.eclipse.team.svn.ui.command.category,SVN,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@591e98,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+CTRL+T,
+	ParameterizedCommand(Command(org.eclipse.tm.terminal.connector.local.command.launch,Open Local Terminal on Selection,
+		,
+		Category(org.eclipse.tm.terminal.view.ui.commands.category,Terminal Commands,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@16cc344,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY com.atollic.truestudio.integration.processorexpert 0 0 2018-12-03 06:22:03.052
+!MESSAGE Atollic TrueSTUDIO Processor Expert integration is up.
+
+!ENTRY edu.hawaii.ics.csdl.jupiter 1 0 2018-12-03 06:22:03.107
+!MESSAGE Code Review is up.
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-12-03 06:22:03.268
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\tbe241.OSMA-AUFZUEGE'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY Atollic TrueSTORE 1 0 2018-12-03 06:24:16.086
+!MESSAGE Importing project STM32F3_Discovery_FreeRTOS_Simple_Demo
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-12-03 06:24:19.817
+!MESSAGE STM32F3_Discovery_FreeRTOS_Simple_Demo needs property 'com.atollic.truestudio.general.runtimelib.30324560' fixed. Fixing to 'com.atollic.truestudio.ld.general.clib.small'.
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-12-03 06:24:19.818
+!MESSAGE STM32F3_Discovery_FreeRTOS_Simple_Demo needs property 'com.atollic.truestudio.toolchain_options.mcu.1771934049' fixed. Fixing to 'STM32F303VC'.
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-12-03 06:24:19.819
+!MESSAGE STM32F3_Discovery_FreeRTOS_Simple_Demo needs property 'com.atollic.truestudio.toolchain_options.vendor.2123280167' fixed. Fixing to 'STMicroelectronics'.
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-12-03 06:24:19.820
+!MESSAGE STM32F3_Discovery_FreeRTOS_Simple_Demo needs property 'FPU' fixed. Fixing from 'com.atollic.truestudio.common_options.target.fpucore.DUMMY' to 'com.atollic.truestudio.common_options.target.fpucore.fpv4-sp-d16'.
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-12-03 06:24:19.821
+!MESSAGE STM32F3_Discovery_FreeRTOS_Simple_Demo needs property 'FPU' fixed. Fixing from 'com.atollic.truestudio.common_options.target.fpucore.DUMMY' to 'com.atollic.truestudio.common_options.target.fpucore.fpv4-sp-d16'.
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-12-03 06:24:19.822
+!MESSAGE STM32F3_Discovery_FreeRTOS_Simple_Demo needs property 'FPU' fixed. Fixing from 'com.atollic.truestudio.common_options.target.fpucore.DUMMY' to 'com.atollic.truestudio.common_options.target.fpucore.fpv4-sp-d16'.
+
+!ENTRY org.eclipse.cdt.core 4 0 2018-12-03 06:24:19.921
+!MESSAGE Error: Cannot run program "gcc": Launching failed
+!STACK 0
+java.io.IOException: Cannot run program "gcc": Launching failed
+	at org.eclipse.cdt.utils.spawner.Spawner.exec(Spawner.java:349)
+	at org.eclipse.cdt.utils.spawner.Spawner.<init>(Spawner.java:91)
+	at org.eclipse.cdt.utils.spawner.ProcessFactory.exec(ProcessFactory.java:91)
+	at org.eclipse.cdt.core.CommandLauncher.execute(CommandLauncher.java:195)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.build(BuildRunnerHelper.java:263)
+	at org.eclipse.cdt.make.internal.core.scannerconfig2.DefaultRunSIProvider.invokeProvider(DefaultRunSIProvider.java:144)
+	at org.eclipse.cdt.build.internal.core.scannerconfig.jobs.CfgSCJobsUtil$1.run(CfgSCJobsUtil.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:826)
+	at org.eclipse.cdt.build.internal.core.scannerconfig.jobs.CfgSCJobsUtil.getProviderScannerInfo(CfgSCJobsUtil.java:105)
+	at org.eclipse.cdt.build.core.scannerconfig.ScannerConfigBuilder.build(ScannerConfigBuilder.java:206)
+	at org.eclipse.cdt.build.internal.core.scannerconfig.CfgDiscoveredPathManager.loadPathInfo(CfgDiscoveredPathManager.java:298)
+	at org.eclipse.cdt.build.internal.core.scannerconfig.CfgDiscoveredPathManager.getDiscoveredInfo(CfgDiscoveredPathManager.java:177)
+	at org.eclipse.cdt.managedbuilder.internal.dataprovider.ProfileInfoProvider.getEntryValues(ProfileInfoProvider.java:65)
+	at org.eclipse.cdt.managedbuilder.internal.dataprovider.BuildEntryStorage.getDiscoveredEntries(BuildEntryStorage.java:200)
+	at org.eclipse.cdt.managedbuilder.internal.dataprovider.BuildEntryStorage.putEntriesToLevel(BuildEntryStorage.java:190)
+	at org.eclipse.cdt.core.settings.model.util.AbstractEntryStorage.initCache(AbstractEntryStorage.java:71)
+	at org.eclipse.cdt.core.settings.model.util.AbstractEntryStorage.getEntries(AbstractEntryStorage.java:34)
+	at org.eclipse.cdt.managedbuilder.internal.dataprovider.BuildLanguageData.getEntries(BuildLanguageData.java:161)
+	at org.eclipse.cdt.core.settings.model.extension.impl.CDefaultLanguageData.getEntriesToCopy(CDefaultLanguageData.java:101)
+	at org.eclipse.cdt.core.settings.model.extension.impl.CDefaultLanguageData.createStore(CDefaultLanguageData.java:92)
+	at org.eclipse.cdt.core.settings.model.extension.impl.CDefaultLanguageData.copySettingsFrom(CDefaultLanguageData.java:85)
+	at org.eclipse.cdt.internal.core.settings.model.CLanguageSettingCache.copySettingsFrom(CLanguageSettingCache.java:47)
+	at org.eclipse.cdt.internal.core.settings.model.CLanguageSettingCache.<init>(CLanguageSettingCache.java:36)
+	at org.eclipse.cdt.internal.core.settings.model.CFolderDescriptionCache.copyLanguageData(CFolderDescriptionCache.java:79)
+	at org.eclipse.cdt.core.settings.model.extension.impl.CDefaultFolderData.copyDataFrom(CDefaultFolderData.java:56)
+	at org.eclipse.cdt.internal.core.settings.model.CFolderDescriptionCache.<init>(CFolderDescriptionCache.java:38)
+	at org.eclipse.cdt.internal.core.settings.model.CConfigurationDescriptionCache.copyFolderData(CConfigurationDescriptionCache.java:235)
+	at org.eclipse.cdt.core.settings.model.extension.impl.CDefaultConfigurationData.copySettingsFrom(CDefaultConfigurationData.java:113)
+	at org.eclipse.cdt.internal.core.settings.model.CConfigurationDescriptionCache.loadData(CConfigurationDescriptionCache.java:150)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescription.loadDatas(CProjectDescription.java:196)
+	at org.eclipse.cdt.internal.core.settings.model.xml.XmlProjectDescriptionStorage.loadProjectDescription(XmlProjectDescriptionStorage.java:500)
+	at org.eclipse.cdt.internal.core.settings.model.xml.XmlProjectDescriptionStorage.getProjectDescription(XmlProjectDescriptionStorage.java:237)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.getProjectDescriptionInternal(CProjectDescriptionManager.java:437)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.getProjectDescription(CProjectDescriptionManager.java:419)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.getProjectDescription(CProjectDescriptionManager.java:413)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.getProjectDescription(CProjectDescriptionManager.java:406)
+	at org.eclipse.cdt.internal.core.model.CProject.computeSourceRoots(CProject.java:608)
+	at org.eclipse.cdt.internal.core.model.CProject.computeChildren(CProject.java:629)
+	at org.eclipse.cdt.internal.core.model.CProject.buildStructure(CProject.java:593)
+	at org.eclipse.cdt.internal.core.model.Openable.generateInfos(Openable.java:261)
+	at org.eclipse.cdt.internal.core.model.CElement.openWhenClosed(CElement.java:427)
+	at org.eclipse.cdt.internal.core.model.CElement.getElementInfo(CElement.java:305)
+	at org.eclipse.cdt.internal.core.model.CElement.getElementInfo(CElement.java:295)
+	at org.eclipse.cdt.internal.core.model.Parent.getChildren(Parent.java:55)
+	at org.eclipse.cdt.internal.core.model.CElement.accept(CElement.java:524)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMRebuildTask.createDelegate(PDOMRebuildTask.java:118)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMRebuildTask.run(PDOMRebuildTask.java:78)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:155)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.cdt.core 1 0 2018-12-03 06:24:22.926
+!MESSAGE Indexed 'STM32F3_Discovery_FreeRTOS_Simple_Demo' (34 sources, 97 headers) in 2,95 sec: 10.799 declarations; 33.332 references; 3 unresolved inclusions; 49 syntax errors; 198 unresolved names (0,45 %)
+
+!ENTRY org.eclipse.cdt.core 4 0 2018-12-03 06:25:42.548
+!MESSAGE Error: Cannot run program "gcc": Launching failed
+!STACK 0
+java.io.IOException: Cannot run program "gcc": Launching failed
+	at org.eclipse.cdt.utils.spawner.Spawner.exec(Spawner.java:349)
+	at org.eclipse.cdt.utils.spawner.Spawner.<init>(Spawner.java:91)
+	at org.eclipse.cdt.utils.spawner.ProcessFactory.exec(ProcessFactory.java:91)
+	at org.eclipse.cdt.core.CommandLauncher.execute(CommandLauncher.java:195)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.build(BuildRunnerHelper.java:263)
+	at org.eclipse.cdt.make.internal.core.scannerconfig2.DefaultRunSIProvider.invokeProvider(DefaultRunSIProvider.java:144)
+	at org.eclipse.cdt.build.internal.core.scannerconfig.jobs.CfgSCJobsUtil$1.run(CfgSCJobsUtil.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:826)
+	at org.eclipse.cdt.build.internal.core.scannerconfig.jobs.CfgSCJobsUtil.getProviderScannerInfo(CfgSCJobsUtil.java:105)
+	at org.eclipse.cdt.build.core.scannerconfig.ScannerConfigBuilder.build(ScannerConfigBuilder.java:206)
+	at org.eclipse.cdt.build.core.scannerconfig.ScannerConfigBuilder.build(ScannerConfigBuilder.java:154)
+	at org.eclipse.cdt.build.core.scannerconfig.ScannerConfigBuilder.build(ScannerConfigBuilder.java:120)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:736)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:207)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:247)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:302)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:305)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:361)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:384)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:487)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:406)
+	at org.eclipse.ui.actions.BuildAction$1.runInWorkspace(BuildAction.java:285)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:39)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.cdt.core 4 0 2018-12-03 06:25:42.603
+!MESSAGE Error: Cannot run program "gcc": Launching failed
+!STACK 0
+java.io.IOException: Cannot run program "gcc": Launching failed
+	at org.eclipse.cdt.utils.spawner.Spawner.exec(Spawner.java:349)
+	at org.eclipse.cdt.utils.spawner.Spawner.<init>(Spawner.java:91)
+	at org.eclipse.cdt.utils.spawner.ProcessFactory.exec(ProcessFactory.java:91)
+	at org.eclipse.cdt.core.CommandLauncher.execute(CommandLauncher.java:195)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.build(BuildRunnerHelper.java:263)
+	at org.eclipse.cdt.make.internal.core.scannerconfig2.DefaultRunSIProvider.invokeProvider(DefaultRunSIProvider.java:144)
+	at org.eclipse.cdt.build.internal.core.scannerconfig.jobs.CfgSCJobsUtil$1.run(CfgSCJobsUtil.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:826)
+	at org.eclipse.cdt.build.internal.core.scannerconfig.jobs.CfgSCJobsUtil.getProviderScannerInfo(CfgSCJobsUtil.java:105)
+	at org.eclipse.cdt.build.core.scannerconfig.ScannerConfigBuilder.build(ScannerConfigBuilder.java:206)
+	at org.eclipse.cdt.build.internal.core.scannerconfig.CfgDiscoveredPathManager.loadPathInfo(CfgDiscoveredPathManager.java:298)
+	at org.eclipse.cdt.build.internal.core.scannerconfig.CfgDiscoveredPathManager.getDiscoveredInfo(CfgDiscoveredPathManager.java:177)
+	at org.eclipse.cdt.managedbuilder.internal.dataprovider.ProfileInfoProvider.getEntryValues(ProfileInfoProvider.java:65)
+	at org.eclipse.cdt.managedbuilder.internal.dataprovider.BuildEntryStorage.getDiscoveredEntries(BuildEntryStorage.java:200)
+	at org.eclipse.cdt.managedbuilder.internal.dataprovider.BuildEntryStorage.putEntriesToLevel(BuildEntryStorage.java:190)
+	at org.eclipse.cdt.core.settings.model.util.AbstractEntryStorage.initCache(AbstractEntryStorage.java:71)
+	at org.eclipse.cdt.core.settings.model.util.AbstractEntryStorage.getEntries(AbstractEntryStorage.java:34)
+	at org.eclipse.cdt.managedbuilder.internal.dataprovider.BuildLanguageData.getEntries(BuildLanguageData.java:161)
+	at org.eclipse.cdt.core.settings.model.extension.impl.CDefaultLanguageData.getEntriesToCopy(CDefaultLanguageData.java:101)
+	at org.eclipse.cdt.core.settings.model.extension.impl.CDefaultLanguageData.createStore(CDefaultLanguageData.java:92)
+	at org.eclipse.cdt.core.settings.model.extension.impl.CDefaultLanguageData.copySettingsFrom(CDefaultLanguageData.java:85)
+	at org.eclipse.cdt.internal.core.settings.model.CLanguageSettingCache.copySettingsFrom(CLanguageSettingCache.java:47)
+	at org.eclipse.cdt.internal.core.settings.model.CLanguageSettingCache.<init>(CLanguageSettingCache.java:36)
+	at org.eclipse.cdt.internal.core.settings.model.CFolderDescriptionCache.copyLanguageData(CFolderDescriptionCache.java:79)
+	at org.eclipse.cdt.core.settings.model.extension.impl.CDefaultFolderData.copyDataFrom(CDefaultFolderData.java:56)
+	at org.eclipse.cdt.internal.core.settings.model.CFolderDescriptionCache.<init>(CFolderDescriptionCache.java:38)
+	at org.eclipse.cdt.internal.core.settings.model.CConfigurationDescriptionCache.copyFolderData(CConfigurationDescriptionCache.java:235)
+	at org.eclipse.cdt.core.settings.model.extension.impl.CDefaultConfigurationData.copySettingsFrom(CDefaultConfigurationData.java:113)
+	at org.eclipse.cdt.internal.core.settings.model.CConfigurationDescriptionCache.applyData(CConfigurationDescriptionCache.java:193)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescription.applyDatas(CProjectDescription.java:216)
+	at org.eclipse.cdt.internal.core.settings.model.SetCProjectDescriptionOperation.executeOperation(SetCProjectDescriptionOperation.java:98)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.execute(CModelOperation.java:341)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.run(CModelOperation.java:607)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2267)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.runOperation(CModelOperation.java:638)
+	at org.eclipse.cdt.internal.core.settings.model.AbstractCProjectDescriptionStorage.setProjectDescription(AbstractCProjectDescriptionStorage.java:203)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionStorageManager.setProjectDescription(CProjectDescriptionStorageManager.java:149)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.setProjectDescription(CProjectDescriptionManager.java:885)
+	at org.eclipse.cdt.managedbuilder.internal.core.BuildSettingsUtil.checkApplyDescription(BuildSettingsUtil.java:211)
+	at org.eclipse.cdt.managedbuilder.core.ManagedBuildManager.updateCoreSettings(ManagedBuildManager.java:1575)
+	at org.eclipse.cdt.build.internal.core.scannerconfig.CfgDiscoveredPathManager$1.run(CfgDiscoveredPathManager.java:154)
+	at org.eclipse.cdt.internal.core.model.BatchOperation.executeOperation(BatchOperation.java:36)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.execute(CModelOperation.java:341)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.run(CModelOperation.java:607)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2267)
+	at org.eclipse.cdt.core.model.CoreModel.run(CoreModel.java:1220)
+	at org.eclipse.cdt.core.model.CoreModel.run(CoreModel.java:1181)
+	at org.eclipse.cdt.build.internal.core.scannerconfig.CfgDiscoveredPathManager.updateCoreSettings(CfgDiscoveredPathManager.java:157)
+	at org.eclipse.cdt.build.core.scannerconfig.ScannerConfigBuilder.build(ScannerConfigBuilder.java:125)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:736)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:207)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:247)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:302)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:305)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:361)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:384)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:487)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:406)
+	at org.eclipse.ui.actions.BuildAction$1.runInWorkspace(BuildAction.java:285)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:39)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY Atollic TrueSTORE 1 0 2018-12-03 06:38:58.852
+!MESSAGE Importing project STM32F0_Discovery_FreeRTOS_Simple_Demo
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-12-03 06:39:02.338
+!MESSAGE STM32F0_Discovery_FreeRTOS_Simple_Demo needs property 'com.atollic.truestudio.general.runtimelib.997684289' fixed. Fixing to 'com.atollic.truestudio.ld.general.clib.small'.
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-12-03 06:39:02.339
+!MESSAGE STM32F0_Discovery_FreeRTOS_Simple_Demo needs property 'com.atollic.truestudio.toolchain_options.mcu.1420333874' fixed. Fixing to 'STM32F051R8'.
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-12-03 06:39:02.341
+!MESSAGE STM32F0_Discovery_FreeRTOS_Simple_Demo needs property 'com.atollic.truestudio.toolchain_options.vendor.1393575897' fixed. Fixing to 'STMicroelectronics'.
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-12-03 06:39:02.342
+!MESSAGE STM32F0_Discovery_FreeRTOS_Simple_Demo needs property 'FPU' fixed. Fixing from 'com.atollic.truestudio.common_options.target.fpucore.DUMMY' to 'com.atollic.truestudio.common_options.target.fpucore.None'.
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-12-03 06:39:02.343
+!MESSAGE STM32F0_Discovery_FreeRTOS_Simple_Demo needs property 'FPU' fixed. Fixing from 'com.atollic.truestudio.common_options.target.fpucore.DUMMY' to 'com.atollic.truestudio.common_options.target.fpucore.None'.
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-12-03 06:39:02.344
+!MESSAGE STM32F0_Discovery_FreeRTOS_Simple_Demo needs property 'FPU' fixed. Fixing from 'com.atollic.truestudio.common_options.target.fpucore.DUMMY' to 'com.atollic.truestudio.common_options.target.fpucore.None'.
+
+!ENTRY org.eclipse.cdt.core 1 0 2018-12-03 06:39:04.695
+!MESSAGE Indexed 'STM32F0_Discovery_FreeRTOS_Simple_Demo' (32 sources, 93 headers) in 2,02 sec: 8.920 declarations; 24.451 references; 1 unresolved inclusions; 45 syntax errors; 147 unresolved names (0,44 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2018-12-03 06:43:26.018
+!MESSAGE Indexed 'CPIOng' (42 sources, 102 headers) in 2,23 sec: 9.069 declarations; 27.044 references; 1 unresolved inclusions; 46 syntax errors; 121 unresolved names (0,33 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2018-12-03 06:44:25.424
+!MESSAGE Indexed 'CPIOng' (42 sources, 102 headers) in 1,48 sec: 9.069 declarations; 27.044 references; 1 unresolved inclusions; 46 syntax errors; 121 unresolved names (0,33 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2018-12-03 06:50:31.700
+!MESSAGE Indexed 'CPIOng' (42 sources, 102 headers) in 1,46 sec: 9.069 declarations; 27.044 references; 1 unresolved inclusions; 46 syntax errors; 121 unresolved names (0,33 %)
+
+!ENTRY Atollic TrueSTORE 1 0 2018-12-03 06:59:29.896
+!MESSAGE Importing project STM32F0_Discovery_FreeRTOS_Simple_Demo
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-12-03 06:59:30.352
+!MESSAGE STM32F0_Discovery_FreeRTOS_Simple_Demo needs property 'com.atollic.truestudio.general.runtimelib.1070596672' fixed. Fixing to 'com.atollic.truestudio.ld.general.clib.small'.
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-12-03 06:59:30.353
+!MESSAGE STM32F0_Discovery_FreeRTOS_Simple_Demo needs property 'com.atollic.truestudio.toolchain_options.mcu.860615768' fixed. Fixing to 'STM32F051R8'.
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-12-03 06:59:30.354
+!MESSAGE STM32F0_Discovery_FreeRTOS_Simple_Demo needs property 'com.atollic.truestudio.toolchain_options.vendor.698030595' fixed. Fixing to 'STMicroelectronics'.
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-12-03 06:59:30.356
+!MESSAGE STM32F0_Discovery_FreeRTOS_Simple_Demo needs property 'FPU' fixed. Fixing from 'com.atollic.truestudio.common_options.target.fpucore.DUMMY' to 'com.atollic.truestudio.common_options.target.fpucore.None'.
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-12-03 06:59:30.357
+!MESSAGE STM32F0_Discovery_FreeRTOS_Simple_Demo needs property 'FPU' fixed. Fixing from 'com.atollic.truestudio.common_options.target.fpucore.DUMMY' to 'com.atollic.truestudio.common_options.target.fpucore.None'.
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-12-03 06:59:30.358
+!MESSAGE STM32F0_Discovery_FreeRTOS_Simple_Demo needs property 'FPU' fixed. Fixing from 'com.atollic.truestudio.common_options.target.fpucore.DUMMY' to 'com.atollic.truestudio.common_options.target.fpucore.None'.
+
+!ENTRY org.eclipse.cdt.core 1 0 2018-12-03 06:59:32.594
+!MESSAGE Indexed 'STM32F0_Discovery_FreeRTOS_Simple_Demo' (32 sources, 93 headers) in 2,12 sec: 8.920 declarations; 24.451 references; 1 unresolved inclusions; 45 syntax errors; 147 unresolved names (0,44 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2018-12-03 07:04:11.108
+!MESSAGE Indexed 'CPIOng' (36 sources, 98 headers) in 1,89 sec: 8.425 declarations; 23.350 references; 1 unresolved inclusions; 35 syntax errors; 1 unresolved names (0,0031 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2018-12-03 07:05:53.715
+!MESSAGE Indexed 'CPIOng' (36 sources, 98 headers) in 1,52 sec: 8.425 declarations; 23.350 references; 1 unresolved inclusions; 35 syntax errors; 1 unresolved names (0,0031 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2018-12-03 07:06:44.252
+!MESSAGE Indexed 'CPIOng' (36 sources, 98 headers) in 1,52 sec: 8.425 declarations; 23.350 references; 1 unresolved inclusions; 35 syntax errors; 1 unresolved names (0,0031 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2018-12-03 07:07:57.757
+!MESSAGE Indexed 'CPIOng' (36 sources, 98 headers) in 1,78 sec: 8.425 declarations; 23.350 references; 1 unresolved inclusions; 35 syntax errors; 1 unresolved names (0,0031 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2018-12-03 07:21:15.590
+!MESSAGE Indexed 'CPIOng' (36 sources, 98 headers) in 2,03 sec: 8.426 declarations; 23.354 references; 1 unresolved inclusions; 35 syntax errors; 0 unresolved names (0 %)
+
+!ENTRY org.eclipse.ltk.ui.refactoring 4 10000 2018-12-03 07:28:24.315
+!MESSAGE Internal Error
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Problems encountered while deleting resources.
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:795)
+	at org.eclipse.ltk.core.refactoring.resource.DeleteResourceChange.perform(DeleteResourceChange.java:163)
+	at org.eclipse.ltk.core.refactoring.CompositeChange.perform(CompositeChange.java:280)
+	at org.eclipse.ltk.core.refactoring.CompositeChange.perform(CompositeChange.java:280)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation$1.run(PerformChangeOperation.java:257)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2267)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation.executeChange(PerformChangeOperation.java:305)
+	at org.eclipse.ltk.internal.ui.refactoring.UIPerformChangeOperation.executeChange(UIPerformChangeOperation.java:96)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation.run(PerformChangeOperation.java:216)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2267)
+	at org.eclipse.ltk.internal.ui.refactoring.WorkbenchRunnableAdapter.run(WorkbenchRunnableAdapter.java:86)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)
+Contains: Could not delete '/CPIOng/FreeRTOS_Source'.
+org.eclipse.core.internal.resources.ResourceException: Problems encountered while deleting resources.
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.delete(FileSystemResourceManager.java:370)
+	at org.eclipse.core.internal.resources.ResourceTree.internalDeleteFolder(ResourceTree.java:358)
+	at org.eclipse.core.internal.resources.ResourceTree.standardDeleteFolder(ResourceTree.java:810)
+	at org.eclipse.core.internal.resources.Resource.unprotectedDelete(Resource.java:1832)
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:782)
+	at org.eclipse.ltk.core.refactoring.resource.DeleteResourceChange.perform(DeleteResourceChange.java:163)
+	at org.eclipse.ltk.core.refactoring.CompositeChange.perform(CompositeChange.java:280)
+	at org.eclipse.ltk.core.refactoring.CompositeChange.perform(CompositeChange.java:280)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation$1.run(PerformChangeOperation.java:257)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2267)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation.executeChange(PerformChangeOperation.java:305)
+	at org.eclipse.ltk.internal.ui.refactoring.UIPerformChangeOperation.executeChange(UIPerformChangeOperation.java:96)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation.run(PerformChangeOperation.java:216)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2267)
+	at org.eclipse.ltk.internal.ui.refactoring.WorkbenchRunnableAdapter.run(WorkbenchRunnableAdapter.java:86)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)
+Contains: Problems encountered while deleting files.
+Contains: Could not delete: C:\apps\CPIOV2\CPIOng\FreeRTOS_Source.
+java.nio.file.DirectoryNotEmptyException: C:\apps\CPIOV2\CPIOng\FreeRTOS_Source
+	at sun.nio.fs.WindowsFileSystemProvider.implDelete(WindowsFileSystemProvider.java:266)
+	at sun.nio.fs.AbstractFileSystemProvider.deleteIfExists(AbstractFileSystemProvider.java:108)
+	at java.nio.file.Files.deleteIfExists(Files.java:1165)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.internalDelete(LocalFile.java:243)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.delete(LocalFile.java:136)
+	at org.eclipse.core.internal.localstore.DeleteVisitor.delete(DeleteVisitor.java:63)
+	at org.eclipse.core.internal.localstore.DeleteVisitor.visit(DeleteVisitor.java:151)
+	at org.eclipse.core.internal.localstore.UnifiedTree.accept(UnifiedTree.java:111)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.delete(FileSystemResourceManager.java:367)
+	at org.eclipse.core.internal.resources.ResourceTree.internalDeleteFolder(ResourceTree.java:358)
+	at org.eclipse.core.internal.resources.ResourceTree.standardDeleteFolder(ResourceTree.java:810)
+	at org.eclipse.core.internal.resources.Resource.unprotectedDelete(Resource.java:1832)
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:782)
+	at org.eclipse.ltk.core.refactoring.resource.DeleteResourceChange.perform(DeleteResourceChange.java:163)
+	at org.eclipse.ltk.core.refactoring.CompositeChange.perform(CompositeChange.java:280)
+	at org.eclipse.ltk.core.refactoring.CompositeChange.perform(CompositeChange.java:280)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation$1.run(PerformChangeOperation.java:257)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2267)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation.executeChange(PerformChangeOperation.java:305)
+	at org.eclipse.ltk.internal.ui.refactoring.UIPerformChangeOperation.executeChange(UIPerformChangeOperation.java:96)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation.run(PerformChangeOperation.java:216)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2267)
+	at org.eclipse.ltk.internal.ui.refactoring.WorkbenchRunnableAdapter.run(WorkbenchRunnableAdapter.java:86)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)
+!SUBENTRY 1 org.eclipse.core.resources 4 273 2018-12-03 07:28:24.317
+!MESSAGE Problems encountered while deleting resources.
+!SUBENTRY 2 org.eclipse.core.resources 4 273 2018-12-03 07:28:24.317
+!MESSAGE Could not delete '/CPIOng/FreeRTOS_Source'.
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Problems encountered while deleting resources.
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.delete(FileSystemResourceManager.java:370)
+	at org.eclipse.core.internal.resources.ResourceTree.internalDeleteFolder(ResourceTree.java:358)
+	at org.eclipse.core.internal.resources.ResourceTree.standardDeleteFolder(ResourceTree.java:810)
+	at org.eclipse.core.internal.resources.Resource.unprotectedDelete(Resource.java:1832)
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:782)
+	at org.eclipse.ltk.core.refactoring.resource.DeleteResourceChange.perform(DeleteResourceChange.java:163)
+	at org.eclipse.ltk.core.refactoring.CompositeChange.perform(CompositeChange.java:280)
+	at org.eclipse.ltk.core.refactoring.CompositeChange.perform(CompositeChange.java:280)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation$1.run(PerformChangeOperation.java:257)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2267)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation.executeChange(PerformChangeOperation.java:305)
+	at org.eclipse.ltk.internal.ui.refactoring.UIPerformChangeOperation.executeChange(UIPerformChangeOperation.java:96)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation.run(PerformChangeOperation.java:216)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2267)
+	at org.eclipse.ltk.internal.ui.refactoring.WorkbenchRunnableAdapter.run(WorkbenchRunnableAdapter.java:86)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)
+Contains: Problems encountered while deleting files.
+Contains: Could not delete: C:\apps\CPIOV2\CPIOng\FreeRTOS_Source.
+java.nio.file.DirectoryNotEmptyException: C:\apps\CPIOV2\CPIOng\FreeRTOS_Source
+	at sun.nio.fs.WindowsFileSystemProvider.implDelete(WindowsFileSystemProvider.java:266)
+	at sun.nio.fs.AbstractFileSystemProvider.deleteIfExists(AbstractFileSystemProvider.java:108)
+	at java.nio.file.Files.deleteIfExists(Files.java:1165)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.internalDelete(LocalFile.java:243)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.delete(LocalFile.java:136)
+	at org.eclipse.core.internal.localstore.DeleteVisitor.delete(DeleteVisitor.java:63)
+	at org.eclipse.core.internal.localstore.DeleteVisitor.visit(DeleteVisitor.java:151)
+	at org.eclipse.core.internal.localstore.UnifiedTree.accept(UnifiedTree.java:111)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.delete(FileSystemResourceManager.java:367)
+	at org.eclipse.core.internal.resources.ResourceTree.internalDeleteFolder(ResourceTree.java:358)
+	at org.eclipse.core.internal.resources.ResourceTree.standardDeleteFolder(ResourceTree.java:810)
+	at org.eclipse.core.internal.resources.Resource.unprotectedDelete(Resource.java:1832)
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:782)
+	at org.eclipse.ltk.core.refactoring.resource.DeleteResourceChange.perform(DeleteResourceChange.java:163)
+	at org.eclipse.ltk.core.refactoring.CompositeChange.perform(CompositeChange.java:280)
+	at org.eclipse.ltk.core.refactoring.CompositeChange.perform(CompositeChange.java:280)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation$1.run(PerformChangeOperation.java:257)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2267)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation.executeChange(PerformChangeOperation.java:305)
+	at org.eclipse.ltk.internal.ui.refactoring.UIPerformChangeOperation.executeChange(UIPerformChangeOperation.java:96)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation.run(PerformChangeOperation.java:216)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2267)
+	at org.eclipse.ltk.internal.ui.refactoring.WorkbenchRunnableAdapter.run(WorkbenchRunnableAdapter.java:86)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)
+!SUBENTRY 3 org.eclipse.core.resources 4 273 2018-12-03 07:28:24.317
+!MESSAGE Problems encountered while deleting resources.
+!SUBENTRY 4 org.eclipse.core.filesystem 4 273 2018-12-03 07:28:24.317
+!MESSAGE Problems encountered while deleting files.
+!SUBENTRY 5 org.eclipse.core.filesystem 4 273 2018-12-03 07:28:24.317
+!MESSAGE Could not delete: C:\apps\CPIOV2\CPIOng\FreeRTOS_Source.
+!STACK 0
+java.nio.file.DirectoryNotEmptyException: C:\apps\CPIOV2\CPIOng\FreeRTOS_Source
+	at sun.nio.fs.WindowsFileSystemProvider.implDelete(WindowsFileSystemProvider.java:266)
+	at sun.nio.fs.AbstractFileSystemProvider.deleteIfExists(AbstractFileSystemProvider.java:108)
+	at java.nio.file.Files.deleteIfExists(Files.java:1165)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.internalDelete(LocalFile.java:243)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.delete(LocalFile.java:136)
+	at org.eclipse.core.internal.localstore.DeleteVisitor.delete(DeleteVisitor.java:63)
+	at org.eclipse.core.internal.localstore.DeleteVisitor.visit(DeleteVisitor.java:151)
+	at org.eclipse.core.internal.localstore.UnifiedTree.accept(UnifiedTree.java:111)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.delete(FileSystemResourceManager.java:367)
+	at org.eclipse.core.internal.resources.ResourceTree.internalDeleteFolder(ResourceTree.java:358)
+	at org.eclipse.core.internal.resources.ResourceTree.standardDeleteFolder(ResourceTree.java:810)
+	at org.eclipse.core.internal.resources.Resource.unprotectedDelete(Resource.java:1832)
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:782)
+	at org.eclipse.ltk.core.refactoring.resource.DeleteResourceChange.perform(DeleteResourceChange.java:163)
+	at org.eclipse.ltk.core.refactoring.CompositeChange.perform(CompositeChange.java:280)
+	at org.eclipse.ltk.core.refactoring.CompositeChange.perform(CompositeChange.java:280)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation$1.run(PerformChangeOperation.java:257)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2267)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation.executeChange(PerformChangeOperation.java:305)
+	at org.eclipse.ltk.internal.ui.refactoring.UIPerformChangeOperation.executeChange(UIPerformChangeOperation.java:96)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation.run(PerformChangeOperation.java:216)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2267)
+	at org.eclipse.ltk.internal.ui.refactoring.WorkbenchRunnableAdapter.run(WorkbenchRunnableAdapter.java:86)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)
+
+!ENTRY TrueSTUDIO 4 0 2018-12-03 07:29:12.129
+!MESSAGE ST-LINK GDB server failed to start (exit code = 4)
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2018-12-03 07:29:12.192
+!MESSAGE Error in initializing ST-Link device.
+Reason: (4) No device found on target.
+
+!ENTRY org.eclipse.cdt.core 1 0 2018-12-03 07:34:11.990
+!MESSAGE Indexed 'CPIOng' (36 sources, 98 headers) in 1,87 sec: 8.425 declarations; 23.351 references; 1 unresolved inclusions; 35 syntax errors; 1 unresolved names (0,0031 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2018-12-03 07:34:33.999
+!MESSAGE Indexed 'CPIOng' (36 sources, 98 headers) in 1,95 sec: 8.425 declarations; 23.351 references; 1 unresolved inclusions; 35 syntax errors; 1 unresolved names (0,0031 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2018-12-03 07:39:04.507
+!MESSAGE Indexed 'IAR_STM32F103ZE_FreeRTOS_Simple_Demo' (34 sources, 92 headers) in 1,61 sec: 8.779 declarations; 25.223 references; 1 unresolved inclusions; 45 syntax errors; 121 unresolved names (0,35 %)

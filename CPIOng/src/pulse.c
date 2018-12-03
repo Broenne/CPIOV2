@@ -201,18 +201,18 @@ void CheckInputsRegisterC(void) {
 	oldGpioC = gpioC;
 }
 
-/**
- * @brief  This function handles SysTick Handler.
- * @param  None
- * @retval None
- */
-void SysTick_Handler(void) {
-	__disable_irq();
-	++tickMs;
-
-	CheckInputsRegisterA();
-	CheckInputsRegisterB();
-	CheckInputsRegisterC();
-	__enable_irq();
-}
+///**
+// * @brief  This function handles SysTick Handler.
+// * @param  None
+// * @retval None
+// */
+//void SysTick_Handler(void) {
+//	__disable_irq();
+//	++tickMs;
+//
+//	CheckInputsRegisterA();
+//	CheckInputsRegisterB();
+//	CheckInputsRegisterC();
+//	__enable_irq();
+//}
 

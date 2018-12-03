@@ -130,13 +130,13 @@ void UsageFault_Handler(void) {
 	}
 }
 
-/**
- * @brief  This function handles SVCall exception.
- * @param  None
- * @retval None
- */
-void SVC_Handler(void) {
-}
+///**
+// * @brief  This function handles SVCall exception.
+// * @param  None
+// * @retval None
+// */
+//void SVC_Handler(void) {
+//}
 
 /**
  * @brief  This function handles Debug Monitor exception.
@@ -146,13 +146,13 @@ void SVC_Handler(void) {
 void DebugMon_Handler(void) {
 }
 
-/**
- * @brief  This function handles PendSVC exception.
- * @param  None
- * @retval None
- */
-void PendSV_Handler(void) {
-}
+///**
+// * @brief  This function handles PendSVC exception.
+// * @param  None
+// * @retval None
+// */
+//void PendSV_Handler(void) {
+//}
 
 
 ///**

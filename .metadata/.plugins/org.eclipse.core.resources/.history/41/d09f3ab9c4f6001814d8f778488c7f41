@@ -1,0 +1,75 @@
+/* Includes */
+#include "main.h"
+
+#include <stdint.h>
+
+/* Kernel includes. */
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+#include "timers.h"
+#include "semphr.h"
+
+
+//#include "stm32f1xx_syscfg.h"
+
+/* Private macro */
+/* Private variables */
+USART_InitTypeDef USART_InitStructure;
+
+/* Private function prototypes */
+/* Private functions */
+
+void InitSysTicker(void) {
+	// create 1ms tick
+	uint32_t init = SysTick_Config(SystemCoreClock/*72000000*// 1000);
+	if (init != 0) {
+		printf("Error in init system tick"); // noch erro per can?! allgemeine status bits?
+	}
+}
+
+/* The queue used by the queue send and queue receive tasks. */
+static xQueueHandle xQueue = NULL;
+
+/**
+ **===========================================================================
+ **
+ **  Abstract: main program
+ **
+ **===========================================================================
+ */
+#define mainQUEUE_LENGTH					( 1 )
+int main(void) {
+
+	// http://www.diller-technologies.de/stm32_wide.html#takt
+
+	// https://iotexpert.com/2017/05/25/psoc-freertos-queue-example/
+
+	SystemInit();
+
+
+	/* Create the queue used by the queue send and queue receive tasks.
+		http://www.freertos.org/a00116.html */
+		xQueue = xQueueCreate( 	mainQUEUE_LENGTH,		/* The number of items the queue can hold. */
+								sizeof( uint32_t ) );	/* The size of each item the queue holds. */
+
+
+	UART_Init();
+
+	Init_TimerForSendCan();
+
+
+	InitVirtualEeprom();
+	GetGloablCanIdFromEeeprom(); // todo mb: das zusammen fassen
+
+	InitSysTicker();
+	PrepareCan();
+	InitAlive();
+	InitPulse();
+
+ 	while (1) {
+	}
+}
+
+
+
