@@ -52,9 +52,7 @@ uint8_t ReadInputsFromRegisterC(void){
 void GetInputs(uint8_t* data){
 	uint8_t val[2];
 	val [0] = ReadInputsFromRegisterA();
-	val [1]= 0;
-	val [1] = ReadInputsFromRegisterB();
-	val [1] = (ReadInputsFromRegisterC() << 2 ) | val [1];
+	val [1] = ReadInputsFromRegisterB(); // todo mb: verknüpfen
 	memcpy(data, val,2);
 }
 

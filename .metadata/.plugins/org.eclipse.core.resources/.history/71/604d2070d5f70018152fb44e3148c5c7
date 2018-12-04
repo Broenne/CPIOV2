@@ -164,12 +164,17 @@ void SendTimeInfo(uint8_t channel) {
 	lastTimeValue[channel] = actualTimeValue;
 }
 
+
+
+
+
+
 void CheckInputsRegisterA(void) {
-	static uint8_t oldGpioA = 0;
-	uint8_t gpioA = ReadInputsFromRegisterA();
+	static uint16_t oldGpioA = 0;
+	uint16_t gpioA = ReadInputsFromRegisterA(void);
 
 	if (gpioA != oldGpioA) {
-		uint8_t dif = gpioA ^ oldGpioA; // PinA0 -> I0 	// PinA1 -> I1	// PinA2 -> I2	// PinA3 -> I3	// PinA4 -> I4	// PinA5 -> I5	// PinA6 -> I6	// PinA7 -> I7
+		uint16_t dif = gpioA ^ oldGpioA; // PinA0 -> I0 	// PinA1 -> I1	// PinA2 -> I2	// PinA3 -> I3	// PinA4 -> I4	// PinA5 -> I5	// PinA6 -> I6	// PinA7 -> I7
 		for (int i = 0; i < 8; ++i) {	// Änderung bit und steigende Flanke
 			if ((dif >> i) & 0x01 && (gpioA >> i & 0x01)) {
 				SendTimeInfo(i); // Achtung, nur bei a
@@ -181,11 +186,11 @@ void CheckInputsRegisterA(void) {
 }
 
 void CheckInputsRegisterB(void) {
-	static uint8_t oldGpioB = 0;
-	uint8_t gpioB = ReadInputsFromRegisterB();
+	static uint16_t oldGpioB = 0;
+	uint16_t gpioB = ReadInputsFromRegisterB(void);
 
 	if (gpioB != oldGpioB) {
-		uint8_t dif = gpioB ^ oldGpioB;
+		uint16_t dif = gpioB ^ oldGpioB;
 		for (int i = 0; i < 2; ++i) {
 			if ((dif >> i) & 0x01 && (gpioB >> i & 0x01)) {
 				SendTimeInfo(8 + i);
@@ -197,11 +202,11 @@ void CheckInputsRegisterB(void) {
 }
 
 void CheckInputsRegisterC(void) {
-	static uint8_t oldGpioC = 0;
-	uint8_t gpioC = ReadInputsFromRegisterC();
+	static uint16_t oldGpioC = 0;
+	uint16_t gpioC = ReadInputsFromRegisterC(void);
 
 	if (gpioC != oldGpioC) {
-		uint8_t dif = gpioC ^ oldGpioC;
+		uint16_t dif = gpioC ^ oldGpioC;
 		for (int i = 0; i < 6; ++i) {
 			if ((dif >> i) & 0x01 && (gpioC >> i & 0x01)) {
 				SendTimeInfo(10 + i);

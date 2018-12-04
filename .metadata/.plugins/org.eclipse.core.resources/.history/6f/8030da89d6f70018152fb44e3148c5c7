@@ -21,9 +21,9 @@ uint8_t GetGlobalCanNodeId();
   * */
 void SendCanTimeDif(uint8_t channel, uint32_t res);
 
-uint8_t ReadInputsFromRegisterA(void);
-uint8_t ReadInputsFromRegisterB(void);
-uint8_t ReadInputsFromRegisterC(void);
+uint16_t ReadInputsFromRegisterA(void);
+uint16_t ReadInputsFromRegisterB(void);
+uint16_t ReadInputsFromRegisterC(void);
 void GetInputs(uint8_t* data);
 
 

@@ -181,11 +181,10 @@ void CAN2_RX0_IRQHandler(void) {
 	// eigene can id
 	if(GetGloablCanIdFromEeeprom()==RxMessage.StdId){
 			if(0x02 == RxMessage.RTR){
-				// todo mb: über que wegschreiben NIEMALS IN ITERRUPT!!!!!
+				// todo mb: über que wegschreiben
 				uint8_t data[2];
 				GetInputs(data);
-				SendCan(GetGloablCanIdFromEeeprom(), data, 2);
-				//printf("ddd %i", data[1]);
+				printf("ddd %i", data[1]);
 			}
 	}
 

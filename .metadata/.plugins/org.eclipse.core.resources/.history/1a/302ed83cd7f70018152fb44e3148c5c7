@@ -184,7 +184,7 @@ void CAN2_RX0_IRQHandler(void) {
 				// todo mb: über que wegschreiben NIEMALS IN ITERRUPT!!!!!
 				uint8_t data[2];
 				GetInputs(data);
-				SendCan(GetGloablCanIdFromEeeprom(), data, 2);
+				SendCan(uint32_t id, uint8_t data[], uint8_t len)
 				//printf("ddd %i", data[1]);
 			}
 	}

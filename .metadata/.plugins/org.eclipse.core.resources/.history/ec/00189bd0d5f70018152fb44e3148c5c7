@@ -43,18 +43,12 @@ uint8_t ReadInputsFromRegisterA(void){
 
 uint8_t ReadInputsFromRegisterB(void){
 	return (uint8_t)GPIO_ReadInputData(GPIOB) & 0x03; // Pb0 = 10, pb1 = 11
-}
 
+}
 uint8_t ReadInputsFromRegisterC(void){
 	return (uint8_t)GPIO_ReadInputData(GPIOC) & 0x3F;
 }
 
-void GetInputs(uint8_t* data){
-	uint8_t val[2];
-	val [0] = ReadInputsFromRegisterA();
-	val [1]= 0;
-	val [1] = ReadInputsFromRegisterB();
-	val [1] = (ReadInputsFromRegisterC() << 2 ) | val [1];
-	memcpy(data, val,2);
-}
+
+void GetInputs()
 

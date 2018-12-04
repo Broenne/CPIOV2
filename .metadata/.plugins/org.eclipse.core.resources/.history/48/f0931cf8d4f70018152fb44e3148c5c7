@@ -161,11 +161,17 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 void CAN2_RX0_IRQHandler(void) {
 
 	portDISABLE_INTERRUPTS();
+
 	CanRxMsg RxMessage;
 	CAN_Receive(CAN2, CAN_FIFO0, &RxMessage);
+
 	printf("receive can 2 interrupt %d \n", RxMessage.StdId);
-	// default id 0
-	if (0x00 == RxMessage.StdId) {
+
+
+
+
+	switch (RxMessage.StdId) {
+		case 0x00:
 			switch (RxMessage.Data[0]) {
 				case 0x01:
 					SetGlobalCanNodeId(RxMessage.Data[1]);
@@ -176,17 +182,11 @@ void CAN2_RX0_IRQHandler(void) {
 				default:
 					break;
 			}
-	}
-
-	// eigene can id
-	if(GetGloablCanIdFromEeeprom()==RxMessage.StdId){
-			if(0x02 == RxMessage.RTR){
-				// todo mb: über que wegschreiben NIEMALS IN ITERRUPT!!!!!
-				uint8_t data[2];
-				GetInputs(data);
-				SendCan(GetGloablCanIdFromEeeprom(), data, 2);
-				//printf("ddd %i", data[1]);
-			}
+			case GetGloablCanIdFromEeeprom():
+					printf("%d", RxMessage.RTR);
+			break;
+		default:
+			break;
 	}
 
 
