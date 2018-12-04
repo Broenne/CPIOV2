@@ -1,34 +1,8 @@
-06:44:55 **** Incremental Build of configuration Debug for project CPIOng ****
+06:56:18 **** Incremental Build of configuration Debug for project CPIOng ****
 Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\src\error.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\error.o 
-arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\main.o 
-..\src\main.c: In function 'main':
-..\src\main.c:25:2: warning: implicit declaration of function 'GetGloablCanIdFromEeeprom' [-Wimplicit-function-declaration]
-  GetGloablCanIdFromEeeprom(); // todo mb: das zusammen fassen
-  ^~~~~~~~~~~~~~~~~~~~~~~~~
-arm-atollic-eabi-gcc -c ..\src\storages.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\storages.o 
-arm-atollic-eabi-gcc -c ..\src\usart.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\usart.o 
-arm-atollic-eabi-gcc -c ..\src\rtosActions.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\rtosActions.o 
-arm-atollic-eabi-gcc -c ..\src\helper.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\helper.o 
-..\src\helper.c: In function '_write':
-..\src\helper.c:56:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-arm-atollic-eabi-gcc -c ..\src\alive.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\alive.o 
-arm-atollic-eabi-gcc -c ..\src\can.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\can.o 
-..\src\can.c: In function 'init_CAN2':
-..\src\can.c:39:10: warning: unused variable 'n' [-Wunused-variable]
-  uint8_t n;
-          ^
-arm-atollic-eabi-gcc -c ..\src\myCanFunctions.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\myCanFunctions.o 
-arm-atollic-eabi-gcc -c ..\src\stm32f1xx_it.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\stm32f1xx_it.o 
-..\src\stm32f1xx_it.c: In function 'CAN2_RX0_IRQHandler':
-..\src\stm32f1xx_it.c:66:35: warning: format '%i' expects argument of type 'int', but argument 2 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
-  printf("receive can 2 interrupt %i \n", RxMessage.StdId);
-                                   ^
 arm-atollic-eabi-gcc -c ..\src\pulse.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\pulse.o 
 ..\src\pulse.c: In function 'SendPulsePerCanTask':
-..\src\pulse.c:98:25: warning: format '%d' expects argument of type 'int', but argument 3 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+..\src\pulse.c:103:25: warning: format '%d' expects argument of type 'int', but argument 3 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
     printf("Received %d %d \r\n", currentMessage.channel, currentMessage.res);
                          ^
 In file included from ..\src\main.h:14:0,
@@ -38,7 +12,7 @@ In file included from ..\src\main.h:14:0,
 ../FreeRTOS_Source/include/task.h:284:134: warning: pointer targets in passing argument 2 of 'xTaskGenericCreate' differ in signedness [-Wpointer-sign]
  #define xTaskCreate( pvTaskCode, pcName, usStackDepth, pvParameters, uxPriority, pxCreatedTask ) xTaskGenericCreate( ( pvTaskCode ), ( pcName ), ( usStackDepth ), ( pvParameters ), ( uxPriority ), ( pxCreatedTask ), ( NULL ), ( NULL ) )
                                                                                                                                       ^
-..\src\pulse.c:129:14: note: in expansion of macro 'xTaskCreate'
+..\src\pulse.c:134:14: note: in expansion of macro 'xTaskCreate'
   xReturned = xTaskCreate(SendPulsePerCanTask, "CanSenderTask", configMINIMAL_STACK_SIZE, (void * ) 1, tskIDLE_PRIORITY, &xHandle);
               ^~~~~~~~~~~
 ../FreeRTOS_Source/include/task.h:1316:22: note: expected 'const signed char * const' but argument is of type 'char *'
@@ -49,12 +23,12 @@ C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar 
 Generate build reports...
 Print size information
    text	   data	    bss	    dec	    hex	filename
-  19640	     52	   8600	  28292	   6e84	CPIOng.elf
+  19636	     52	   8600	  28288	   6e80	CPIOng.elf
 Print size information done
 Generate listing file
 Output sent to: CPIOng.list
 Generate listing file done
 Generate build reports done
 
-06:44:57 Build Finished (took 2s.467ms)
+06:56:19 Build Finished (took 1s.11ms)
 
