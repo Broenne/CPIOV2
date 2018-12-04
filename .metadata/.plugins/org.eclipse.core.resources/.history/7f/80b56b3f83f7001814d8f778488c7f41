@@ -4,6 +4,12 @@
 
 #include "main.h"
 
+//#include "stm32f1xx_syscfg.h"
+
+/* Private macro */
+/* Private variables */
+USART_InitTypeDef USART_InitStructure;
+
 /**
  **===========================================================================
  **

@@ -20,5 +20,5 @@ void SetCounterError(void){
 }
 
 void SetApplicationEndError(void){
-	printf("This should never reached!");
+
 }

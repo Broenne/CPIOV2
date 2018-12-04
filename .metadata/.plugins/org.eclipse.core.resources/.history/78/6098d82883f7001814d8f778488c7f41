@@ -11,6 +11,5 @@
 #include "main.h"
 
 void SetCounterError(void);
-void SetApplicationEndError(void);
 
 #endif /* ERROR_H_ */

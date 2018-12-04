@@ -18,7 +18,3 @@ void SetCounterError(void){
 	printf("ERROR die Infos können nicht mehr weggeschickt werden");
 	// Reset();
 }
-
-void SetApplicationEndError(void){
-	printf("This should never reached!");
-}
