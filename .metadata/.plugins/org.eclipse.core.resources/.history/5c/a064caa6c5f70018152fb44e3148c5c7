@@ -57,22 +57,22 @@
 //	SanCanAlive();
 //}
 
-//void CAN2_RX0_IRQHandler(void) {
-//
-//	__disable_irq();
-//	CanRxMsg RxMessage;
-//	CAN_Receive(CAN2, CAN_FIFO0, &RxMessage);
-//
-//	printf("receive can 2 interrupt %i \n", RxMessage.StdId);
-//	if (RxMessage.StdId == 0x00) {
-//		if (RxMessage.Data[0] == 0x01) {
-//			SetGlobalCanNodeId(RxMessage.Data[1]);
-//			printf("Incoming id 0x00 %d", GetGlobalCanNodeId());
-//		}
-//	}
-//
-//	__enable_irq();
-//}
+void CAN2_RX0_IRQHandler(void) {
+
+	__disable_irq();
+	CanRxMsg RxMessage;
+	CAN_Receive(CAN2, CAN_FIFO0, &RxMessage);
+
+	printf("receive can 2 interrupt %i \n", RxMessage.StdId);
+	if (RxMessage.StdId == 0x00) {
+		if (RxMessage.Data[0] == 0x01) {
+			SetGlobalCanNodeId(RxMessage.Data[1]);
+			printf("Incoming id 0x00 %d", GetGlobalCanNodeId());
+		}
+	}
+
+	__enable_irq();
+}
 
 /******************************************************************************/
 /*            Cortex-M Processor Exceptions Handlers                          */

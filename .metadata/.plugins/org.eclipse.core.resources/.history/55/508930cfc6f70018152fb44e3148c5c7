@@ -26,7 +26,7 @@ void delay_ms(unsigned int d) {
 		delay_us(999);
 }
 
-volatile static int printMode;
+static int printOnUart;
 /*
  * 30.11.2017
  * MB

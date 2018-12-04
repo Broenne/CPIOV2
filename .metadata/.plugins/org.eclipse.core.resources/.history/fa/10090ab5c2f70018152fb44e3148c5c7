@@ -93,37 +93,8 @@ void FilterOnlyIdNull(void){
 		CAN_FilterInit(&CAN_FilterInitStructure);
 }
 
-void FilterOnlyMyId(void){
-	CAN_FilterInitTypeDef CAN_FilterInitStructure;
-		// except every
-		CAN_FilterInitStructure.CAN_FilterNumber = 14; // 0..13 for CAN1, 14..27 for CAN2
-		CAN_FilterInitStructure.CAN_FilterMode = CAN_FilterMode_IdMask;
-		CAN_FilterInitStructure.CAN_FilterScale = CAN_FilterScale_16bit;
-	//	CAN_FilterInitStructure.CAN_FilterIdHigh = 0x0000;
-	//	CAN_FilterInitStructure.CAN_FilterIdLow = 0x0000;
-	//	CAN_FilterInitStructure.CAN_FilterMaskIdHigh = 0xFFFF;//0x0000;
-	//	CAN_FilterInitStructure.CAN_FilterMaskIdLow = 0x0000;
-
-		// 0x110 - 0x11F
-	//	CAN_FilterInitStructure.CAN_FilterIdHigh =  0x0000;
-	//	CAN_FilterInitStructure.CAN_FilterIdLow = 0x0110 << 5; //     ID   001 0001 0000
-	//	CAN_FilterInitStructure.CAN_FilterMaskIdHigh = 0xFFFF;
-	//	CAN_FilterInitStructure.CAN_FilterMaskIdLow = 0x07F0 << 5; // Mask 111 1111 0000
-		CAN_FilterInitStructure.CAN_FilterIdHigh =  0x0000;
-		CAN_FilterInitStructure.CAN_FilterIdLow = GetGloablCanIdFromEeeprom() << 5;
-		CAN_FilterInitStructure.CAN_FilterMaskIdHigh = 0xFFFF;
-		CAN_FilterInitStructure.CAN_FilterMaskIdLow = 0x07FF << 5;
-
-		CAN_FilterInitStructure.CAN_FilterFIFOAssignment = 0;
-		CAN_FilterInitStructure.CAN_FilterActivation = ENABLE;
-		CAN_FilterInit(&CAN_FilterInitStructure);
-}
-
-
-
 void InitCanFilter(void) {
 	FilterOnlyIdNull();
-	FilterOnlyMyId();
 }
 
 /*
@@ -146,7 +117,7 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 	while (!(CAN2->TSR & CAN_TSR_TME0 || CAN2->TSR & CAN_TSR_TME1
 			|| CAN2->TSR & CAN_TSR_TME2)) {
 		++i;
-		if(i > 50){
+		if(i > 100){
 			SetCanSendError(); // time out after....
 		}
 
@@ -154,38 +125,4 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 	}
 
 	CAN_Transmit(CAN2, &canMessage);
-}
-
-
-
-void CAN2_RX0_IRQHandler(void) {
-
-	portDISABLE_INTERRUPTS();
-	CanRxMsg RxMessage;
-	CAN_Receive(CAN2, CAN_FIFO0, &RxMessage);
-
-	printf("receive can 2 interrupt %d \n", RxMessage.StdId);
-
-	switch (RxMessage.StdId) {
-		case 0x00:
-			switch (RxMessage.Data[0]) {
-				case 0x01:
-					SetGlobalCanNodeId(RxMessage.Data[1]);
-					printf("Incoming id 0x00 %d", GetGlobalCanNodeId());
-					break;
-				case 0x02:
-					ActivateDebug(RxMessage.Data[1]);
-				default:
-					break;
-			}
-
-
-			break;
-		default:
-			break;
-	}
-
-
-
-	portENABLE_INTERRUPTS();
 }

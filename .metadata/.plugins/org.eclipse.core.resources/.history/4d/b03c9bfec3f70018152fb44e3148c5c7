@@ -2,7 +2,7 @@
  * error.c
  *
  *  Created on: 30.11.2018
- *  Author: MB
+ *      Author: MB
  */
 
 
@@ -22,11 +22,7 @@ void GetApplicationStatus(uint8_t* data){
 // max 7, dann nächstes byte
 #define COUNTER_ERROR_POSITION (1)
 #define APPLICATION_END_ERROR (2)
-#define Could_NOT_SAFE_GLOBAL_CAN_ID_ERROR (3)
-#define Could_Not_Read_Global_Can_Id_Error (2)
-#define Possible_Pulse_Send_Queue_Full_Error (4)
-#define Pulse_Sender_Create_Task_Error (5)
-#define Can_Send_Error (6)
+
 
 void SetErrorFlag(int pos){
 	errorFlgas[pos / 8] = errorFlgas[pos / 8] ^ ( 1 << pos);
@@ -40,18 +36,19 @@ void SetErrorFlag(int pos){
 void SetCounterError(void){
 	// todo mb: Fehler merken
 	printf("ERROR die Infos können nicht mehr weggeschickt werden \r\n");
-	SetErrorFlag(COUNTER_ERROR_POSITION);
+
+	SetErrorFlagCOUNTER_ERROR_POSITION);
+
 	// Reset();
 }
 
 void SetApplicationEndError(void){
 	printf("This should never reached! \r\n");
-	SetErrorFlag(APPLICATION_END_ERROR);
+	errorFlgas[0] = errorFlgas[0] ^ ( 1 << APPLICATION_END_ERROR);
 }
 
 void SetCouldNotSafeGlobalCanIdError(){
 	printf("Could not write eeprom \r\n");
-	SetErrorFlag(Could_NOT_SAFE_GLOBAL_CAN_ID_ERROR);
 }
 
 void SetCouldNotReadGlobalCanIdError(void){

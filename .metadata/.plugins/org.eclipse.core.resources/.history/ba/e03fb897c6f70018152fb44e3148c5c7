@@ -174,7 +174,7 @@ void CAN2_RX0_IRQHandler(void) {
 					printf("Incoming id 0x00 %d", GetGlobalCanNodeId());
 					break;
 				case 0x02:
-					ActivateDebug(RxMessage.Data[1]);
+					ActivateDebug()
 				default:
 					break;
 			}

@@ -26,7 +26,7 @@ void delay_ms(unsigned int d) {
 		delay_us(999);
 }
 
-volatile static int printMode;
+static int printOnUart;
 /*
  * 30.11.2017
  * MB
@@ -35,12 +35,14 @@ volatile static int printMode;
  *
  */
 void ActivateDebug(uint activate){
-	printMode = activate;
+	printOnUart = activate;
 }
 
 int GetDebugStatusInfo(){
-	return printMode;
+	//return printOnUart;
+	return 1;
 }
+
 
 int _write(int file, char *ptr, int len) {
 	if(GetDebugStatusInfo()){

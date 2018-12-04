@@ -222,7 +222,7 @@ void CheckInputsRegisterC(void) {
 void TIM3_IRQHandler(void) {
 
 	portDISABLE_INTERRUPTS();
-
+	printf("Interrupt timer 3 \r\n");
 	++tickMs;
 
 	CheckInputsRegisterA();

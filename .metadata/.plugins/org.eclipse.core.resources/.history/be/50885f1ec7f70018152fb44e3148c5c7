@@ -95,7 +95,7 @@ void SendPulsePerCanTask(void * pvParameters) {
 	while (1) {
 		MessageForSend currentMessage;
 		if (xQueueReceive(PulsQueue, &currentMessage, 0) == pdTRUE) {
-			printf("Received %d %d \r\n", currentMessage.channel, currentMessage.res);
+			//printf("Received %d %d \r\n", currentMessage.channel, currentMessage.res);
 			SendCanTimeDif(currentMessage.channel, currentMessage.res);
 		}
 	}
@@ -222,7 +222,7 @@ void CheckInputsRegisterC(void) {
 void TIM3_IRQHandler(void) {
 
 	portDISABLE_INTERRUPTS();
-
+	//printf("Interrupt timer 3 \r\n");
 	++tickMs;
 
 	CheckInputsRegisterA();

@@ -95,7 +95,7 @@ void SendPulsePerCanTask(void * pvParameters) {
 	while (1) {
 		MessageForSend currentMessage;
 		if (xQueueReceive(PulsQueue, &currentMessage, 0) == pdTRUE) {
-			printf("Received %d %d \r\n", currentMessage.channel, currentMessage.res);
+			//printf("Received %d %d \r\n", currentMessage.channel, currentMessage.res);
 			SendCanTimeDif(currentMessage.channel, currentMessage.res);
 		}
 	}
@@ -107,7 +107,7 @@ void SendPulsePerCanTask(void * pvParameters) {
 /*
  * Created on: 30.11.18
  * Author: MB
- * Funktion zum initailiserne der Queue zum senden der Impulsinformation.
+ *Funktion zum initailiserne der Queue zum senden der Impulsinformation.
   * */
 void InitQueueForPulse(void){
 	PulsQueue = xQueueCreate(QUEUE_SIZE_FOR_PULSE_INFO, sizeof(MessageForSend));
@@ -116,8 +116,8 @@ void InitQueueForPulse(void){
 /*
  * Created on: 30.11.18
  * Author: MB
- * Diese Funktion initialisiert die Queue
- * Diese und startet den task um diese abzuarbeiten.
+ *Diese Funktion initialisiert die Queue
+ *Diese und startet den task um diese abzuarbeiten.
   * */
 void InitPulseSender(void) {
 	InitQueueForPulse();
@@ -222,7 +222,7 @@ void CheckInputsRegisterC(void) {
 void TIM3_IRQHandler(void) {
 
 	portDISABLE_INTERRUPTS();
-
+	//printf("Interrupt timer 3 \r\n");
 	++tickMs;
 
 	CheckInputsRegisterA();

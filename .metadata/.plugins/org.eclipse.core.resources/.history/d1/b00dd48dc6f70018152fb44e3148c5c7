@@ -164,7 +164,7 @@ void CAN2_RX0_IRQHandler(void) {
 	CanRxMsg RxMessage;
 	CAN_Receive(CAN2, CAN_FIFO0, &RxMessage);
 
-	printf("receive can 2 interrupt %d \n", RxMessage.StdId);
+	printf("receive can 2 interrupt %i \n", RxMessage.StdId);
 
 	switch (RxMessage.StdId) {
 		case 0x00:
@@ -174,7 +174,7 @@ void CAN2_RX0_IRQHandler(void) {
 					printf("Incoming id 0x00 %d", GetGlobalCanNodeId());
 					break;
 				case 0x02:
-					ActivateDebug(RxMessage.Data[1]);
+					ActivateDebug()
 				default:
 					break;
 			}

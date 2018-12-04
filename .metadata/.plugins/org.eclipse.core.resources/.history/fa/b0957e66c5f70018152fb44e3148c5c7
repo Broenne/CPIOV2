@@ -155,37 +155,3 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 
 	CAN_Transmit(CAN2, &canMessage);
 }
-
-
-
-void CAN2_RX0_IRQHandler(void) {
-
-	portDISABLE_INTERRUPTS();
-	CanRxMsg RxMessage;
-	CAN_Receive(CAN2, CAN_FIFO0, &RxMessage);
-
-	printf("receive can 2 interrupt %d \n", RxMessage.StdId);
-
-	switch (RxMessage.StdId) {
-		case 0x00:
-			switch (RxMessage.Data[0]) {
-				case 0x01:
-					SetGlobalCanNodeId(RxMessage.Data[1]);
-					printf("Incoming id 0x00 %d", GetGlobalCanNodeId());
-					break;
-				case 0x02:
-					ActivateDebug(RxMessage.Data[1]);
-				default:
-					break;
-			}
-
-
-			break;
-		default:
-			break;
-	}
-
-
-
-	portENABLE_INTERRUPTS();
-}
