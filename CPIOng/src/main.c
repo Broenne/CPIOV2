@@ -23,12 +23,12 @@ int main(void) {
 
 	InitVirtualEeprom();
 	GetGloablCanIdFromEeeprom(); // todo mb: das zusammen fassen
-	InitQueue();
+	InitPulseSender();
 
 	PrepareCan();
 
 	InitPulse();
-	Init_TimerForPulsTime();
+
 
 
 	InitAlive();

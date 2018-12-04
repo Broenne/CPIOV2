@@ -2,7 +2,7 @@
  * storages.c
  *
  *  Created on: 29.11.2018
- *      Author: tbe241
+ *      Author: MB
  */
 
 #include "storages.h"
@@ -20,34 +20,32 @@ void InitVirtualEeprom(void) {
 }
 
 void SafeGlobalCanId(uint8_t id) {
-	__disable_irq();
+	portDISABLE_INTERRUPTS();
 	FLASH_Unlock();
 	if (!EE_WriteVariable(VirtAddVarTab[0], id)) {
-		printf("Could not write eeprom \n");
+		SetCouldNotSafeGlobalCanIdError();
 	} else {
 		printf("Safe global can id to %d \n", id);
 	}
-	// EEPROM Init
-	//EE_Init();
+
 	FLASH_Lock();
-	__enable_irq();
-	//Reset();
+	portENABLE_INTERRUPTS();
 }
 
 uint8_t GetGloablCanIdFromEeeprom() {
 	uint16_t id = 0;
 
-	__disable_irq();
+	portDISABLE_INTERRUPTS();
 	FLASH_Unlock();
 	if (EE_ReadVariable(VirtAddVarTab[0], &id)) {
-		printf("Variable can id in eeprom not found \n");
+		SetCouldNotReadGlobalCanIdError();
 	} else {
 		printf("Read can id %d from eeprom \n", id);
 		SetGlobalCanNodeId(id);
 	}
 
 	FLASH_Lock();
-	__enable_irq();
+	portENABLE_INTERRUPTS();
 	return ((uint8_t) id);
 }
 

@@ -18,7 +18,11 @@ static uint16_t oldGpioA;
 static uint16_t oldGpioB;
 static uint16_t oldGpioC;
 
-/*Initialisierung der Eingänge auf dem borad*/
+/*
+ * Created on: 30.11.18
+ * Author: MB
+Initialisierung der Eingänge auf dem borad.
+Siehe Schaltplan*/
 void InitInputs(void) {
 
 	GPIO_InitTypeDef GPIO_InitStructure;
@@ -43,72 +47,12 @@ void InitInputs(void) {
 	GPIO_Init(GPIOC, &GPIO_InitStructure);
 }
 
-void InitPulse(void) {
-	InitInputs();
-}
-
-void SendCanTimeDif(uint8_t channel, uint32_t res) {
-	uint8_t p[] = { 0, 0, 0, 0 };
-
-	// timestamp
-	p[0] = (res >> 24) & 0xFF;
-	p[1] = (res >> 16) & 0xFF;
-	p[2] = (res >> 8) & 0xFF;
-	p[3] = res & 0xFF;
-
-	uint32_t canId = 0x180 + GetGlobalCanNodeId() + channel;
-	SendCan(canId, p, 4);
-}
-
-static xQueueHandle xQueue = NULL;
-
-/* Task to be created. */
-void vTaskCode(void * pvParameters) {
-	/* The parameter value is expected to be 1 as 1 is passed in the
-	 pvParameters value in the call to xTaskCreate() below.*/
-	configASSERT(((uint32_t ) pvParameters) == 1);
-
-	while(1) {
-		MessageForSend currentMessage;
-		if (xQueueReceive(xQueue, &currentMessage, 0) == pdTRUE) {
-			printf("Received %lu %lu \r\n", currentMessage.channel, currentMessage.res);
-			SendCanTimeDif(currentMessage.channel, currentMessage.res);
-		}
-	}
-}
-
-#define configMINIMAL_STACK_SIZE		( ( unsigned short ) 70 )
-
-void InitQueue(void) {
-	// todo mb: funktion umbenen oder so und rückgabe abfragen
-	xQueue = xQueueCreate(100, /* The number of items the queue can hold. */
-	sizeof( MessageForSend )); /* The size of each item the queue holds. */
-
-	portBASE_TYPE xReturned;
-	xTaskHandle xHandle = NULL;
-
-
-	/* Create the task, storing the handle. */
-	xReturned = xTaskCreate(vTaskCode, /* Function that implements the task. */
-			"CanSenderTask", /* Text name for the task. */
-			configMINIMAL_STACK_SIZE, /* Stack size in words, not bytes. */
-			( void * ) 1, /* Parameter passed into the task. */
-			tskIDLE_PRIORITY,/* Priority at which the task is created. */
-			&xHandle); /* Used to pass out the created task's handle. */
-
-
-//		    if( xReturned == pdPASS )
-//		    {
-//		        /* The task was created.  Use the task's handle to delete the task. */
-//		        vTaskDelete( xHandle );
-//		    }
-}
-
 /*
- * 30.11.18
- * MB
- *
- *
+ * Created on: 30.11.18
+ * Author: MB
+ * Initialisierung des Timers für die internen Zeitmessung.
+ * Bei jedem Aufruf wird der Zeitstempel inkrementiert
+ * und die Eingänge werden ausgelesen.
  * */
 void Init_TimerForPulsTime(void) {
 	TIM_TimeBaseInitTypeDef TIM_TimeBase_InitStructure;
@@ -131,12 +75,75 @@ void Init_TimerForPulsTime(void) {
 	TIM_Cmd(TIM3, ENABLE);
 }
 
+void InitPulse(void) {
+	InitInputs();
+	Init_TimerForPulsTime();
+}
+
+static xQueueHandle PulsQueue = NULL;
+
+/*
+ * Created on: 30.11.18
+ * Author: MB
+* Diese Funktion arbeitet die queue ab.
+* Es besteht keine Priorität und es ist darauf zu achten, das de Prozessor ausreichend Zeit hat, die Information los zu werden.
+  * */
+void SendPulsePerCanTask(void * pvParameters) {
+	/* The parameter value is expected to be 1 as 1 is passed in the  pvParameters value in the call to xTaskCreate() below.*/
+	configASSERT(((uint32_t ) pvParameters) == 1);
+
+	while (1) {
+		MessageForSend currentMessage;
+		if (xQueueReceive(PulsQueue, &currentMessage, 0) == pdTRUE) {
+			printf("Received %d %d \r\n", currentMessage.channel, currentMessage.res);
+			SendCanTimeDif(currentMessage.channel, currentMessage.res);
+		}
+	}
+}
+
+#define configMINIMAL_STACK_SIZE		( ( unsigned short ) 70 )
+#define QUEUE_SIZE_FOR_PULSE_INFO		( ( unsigned short ) 100 )
+
 /*
  * 30.11.18
- * MB
- *
- * */
+ * Author: MB
+ *Funktion zum initailiserne der Queue zum senden der Impulsinformation.
+  * */
+void InitQueueForPulse(void){
+	PulsQueue = xQueueCreate(QUEUE_SIZE_FOR_PULSE_INFO, sizeof(MessageForSend));
+}
 
+/*
+ * Created on: 30.11.18
+ * Author: MB
+ *Diese Funktion initialisiert die Queue
+ *Diese und startet den task um diese abzuarbeiten.
+  * */
+void InitPulseSender(void) {
+	InitQueueForPulse();
+
+	portBASE_TYPE xReturned;
+	xTaskHandle xHandle = NULL;
+
+	/* Create the task, storing the handle. */
+	xReturned = xTaskCreate(SendPulsePerCanTask, "CanSenderTask", configMINIMAL_STACK_SIZE, (void * ) 1, tskIDLE_PRIORITY, &xHandle);
+
+	if (xReturned != pdPASS) {
+		SetPulseSenderCreateTaskError();
+	}
+
+	// todo mb: wann und wie den task deleten?
+	/* The task was created.  Use the task's handle to delete the task. */
+			//vTaskDelete( xHandle );
+}
+
+/*
+ * Created on: 30.11.18
+ * Author: MB
+ * Diese Funktion kalkuliert den time stamp und schiebt in eine FIFO queue.
+ * Das wegsenden z.B. per CAN-BUS gehört nicht zur Aufgabe.
+ * Diese Funktion läuft im interrupt handling.
+ * */
 void SendTimeInfo(uint8_t channel) {
 	uint32_t actualTimeValue = tickMs;
 	uint32_t res;
@@ -146,13 +153,12 @@ void SendTimeInfo(uint8_t channel) {
 		res = lastTimeValue[channel] - actualTimeValue;
 	}
 
-	printf("SendTimeInfo %d \r\n", channel);
-
+	// printf("SendTimeInfo %d \r\n", channel);
 	MessageForSend messageForSend;
 	messageForSend.channel = channel;
 	messageForSend.res = res;
-	if (xQueueSend(xQueue, &messageForSend, 0) != pdTRUE) {
-		printf("Error in queue send.\r\n");
+	if (xQueueSend(PulsQueue, &messageForSend, 0) != pdTRUE) {
+		SetPossiblePulseSendQueueFullError();
 	}
 
 	lastTimeValue[channel] = actualTimeValue;
@@ -203,21 +209,23 @@ void CheckInputsRegisterC(void) {
 	oldGpioC = gpioC;
 }
 
+/*
+ * Created on: 30.11.18
+ * Author: MB
+ * Interrupt handler von timer 3
+ * Es wird der counter inkrementiert, welcher den timestamp wiederspiegelt.
+ * Danach lesen der Eingänge und ggf Information an queue übergeben zum wegsenden.
+ * */
 void TIM3_IRQHandler(void) {
 
-	//taskDISABLE_INTERRUPTS();
 	portDISABLE_INTERRUPTS();
-//	__disable_irq();
-	//printf("Interrupt timer 3 \r\n");
+	// printf("Interrupt timer 3 \r\n");
 	++tickMs;
 
 	CheckInputsRegisterA();
 	CheckInputsRegisterB();
 	CheckInputsRegisterC();
 	TIM_ClearITPendingBit(TIM3, TIM_IT_Update); // setz timer zurück, achtung dann kann man ihn auch anders nicht mehr benutzen
-//	__enable_irq();
-//	//taskEXIT_CRITICAL();
-	//taskENABLE_INTERRUPTS();
-	portENABLE_INTERRUPTS();
 
+	portENABLE_INTERRUPTS();
 }

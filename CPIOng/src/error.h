@@ -2,7 +2,7 @@
  * error.h
  *
  *  Created on: 30.11.2018
- *      Author: tbe241
+ *      Author: MB
  */
 
 #ifndef ERROR_H_
@@ -12,5 +12,10 @@
 
 void SetCounterError(void);
 void SetApplicationEndError(void);
+void SetCouldNotSafeGlobalCanIdError(void);
+void SetCouldNotReadGlobalCanIdError(void);
+void SetPossiblePulseSendQueueFullError(void);
+void SetPulseSenderCreateTaskError(void);
+
 
 #endif /* ERROR_H_ */
