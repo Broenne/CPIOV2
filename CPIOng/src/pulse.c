@@ -58,7 +58,6 @@ void Init_TimerForPulsTime(void) {
 
 	// calculate:
 	// updateFrequenz = Clock/((PSC-1)*(Period-1)
-	//  72 Mhz /
 
 	TIM_TimeBaseInitTypeDef TIM_TimeBase_InitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
@@ -110,7 +109,7 @@ void SendPulsePerCanTask(void * pvParameters) {
 #define QUEUE_SIZE_FOR_PULSE_INFO		( ( unsigned short ) 100 )
 
 /*
- * 30.11.18
+ * Created on: 30.11.18
  * Author: MB
  *Funktion zum initailiserne der Queue zum senden der Impulsinformation.
   * */

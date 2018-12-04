@@ -95,12 +95,16 @@ void FilterOnlyIdNull(void){
 		CAN_FilterInit(&CAN_FilterInitStructure);
 }
 
-
 void InitCanFilter(void) {
 	FilterOnlyIdNull();
 }
 
-
+/*
+ * Created on: 30.11.18
+ * Author: MB
+ * Grundfunktion zum senden einer standard can-message im normalen
+ * ID-Bereich
+ * */
 void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 	CanTxMsg canMessage;
 	canMessage.StdId = id;
@@ -111,9 +115,15 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 
 	memcpy(canMessage.Data, data, len * sizeof(uint8_t));
 
+	int i=0;
 	while (!(CAN1->TSR & CAN_TSR_TME0 || CAN1->TSR & CAN_TSR_TME1
 			|| CAN1->TSR & CAN_TSR_TME2)) {
-	} // todo mb: das ding austimen lassen
+		// todo mb: time out
+		++i;
+		if(i > 100){
+			printf("Error in can send");
+		}
+	}
 
 	CAN_Transmit(CAN2, &canMessage);
 }
