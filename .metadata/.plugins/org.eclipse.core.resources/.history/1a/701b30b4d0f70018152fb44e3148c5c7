@@ -220,14 +220,15 @@ void CheckInputsRegisterC(void) {
  * Danach lesen der Eingänge und ggf Information an queue übergeben zum wegsenden.
  * */
 void TIM3_IRQHandler(void) {
-	TIM_ClearITPendingBit(TIM3, TIM_IT_Update); // setz timer zurück, achtung dann kann man ihn auch anders nicht mehr benutzen
+
 	portDISABLE_INTERRUPTS();
 
 	++tickMs;
+
 	CheckInputsRegisterA();
 	CheckInputsRegisterB();
 	CheckInputsRegisterC();
-
+	TIM_ClearITPendingBit(TIM3, TIM_IT_Update); // setz timer zurück, achtung dann kann man ihn auch anders nicht mehr benutzen
 
 	portENABLE_INTERRUPTS();
 }

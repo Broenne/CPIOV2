@@ -1,4 +1,4 @@
-14:27:24 **** Incremental Build of configuration Debug for project CPIOng ****
+15:28:41 **** Incremental Build of configuration Debug for project CPIOng ****
 Info: Internal Builder is used for build
 arm-atollic-eabi-gcc -c ..\src\pulse.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\pulse.o 
 ..\src\pulse.c: In function 'SendPulsePerCanTask':
@@ -29,3 +29,4 @@ Generate listing file
 Output sent to: CPIOng.list
 Generate listing file done
 Generate build reports done
+Info: Nothing to build for CPIOng
