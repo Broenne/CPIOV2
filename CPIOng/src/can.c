@@ -2,7 +2,7 @@
  * Can.c
  *
  *  Created on: 22.11.2018
- *      Author: tbe241
+ *      Author: MB
  */
 
 #include "can.h"
@@ -36,8 +36,6 @@ void CAN2_init_GPIO(void) {
 void init_CAN2(void) {
 	CAN_InitTypeDef CAN_InitStructure;
 	//CAN_FilterInitTypeDef  CAN_FilterInitStructure;
-	uint8_t n;
-
 	// CAN deinit
 	CAN_DeInit(CAN2);
 	// init CAN
@@ -116,13 +114,14 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 	memcpy(canMessage.Data, data, len * sizeof(uint8_t));
 
 	int i=0;
-	while (!(CAN1->TSR & CAN_TSR_TME0 || CAN1->TSR & CAN_TSR_TME1
-			|| CAN1->TSR & CAN_TSR_TME2)) {
-		// todo mb: time out
+	while (!(CAN2->TSR & CAN_TSR_TME0 || CAN2->TSR & CAN_TSR_TME1
+			|| CAN2->TSR & CAN_TSR_TME2)) {
 		++i;
 		if(i > 100){
-			printf("Error in can send");
+			SetCanSendError(); // time out after....
 		}
+
+		delay_us(500);
 	}
 
 	CAN_Transmit(CAN2, &canMessage);

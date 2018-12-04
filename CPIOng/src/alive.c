@@ -2,7 +2,7 @@
  * alive.c
  *
  *  Created on: 29.11.2018
- *      Author: tbe241
+ *      Author: MB
  */
 
 #include "alive.h"
@@ -18,6 +18,10 @@ void SwitchMainLed(void) {
 
 void SanCanAlive(void) {
 	uint8_t p[] = { 0x01, 0, 0, 0, 0, 0, 0, 0 };
+
+	// add error frames
+	GetApplicationStatus(&p[3]);
+
 	SendCan(AliveCanId, p, 8);
 }
 

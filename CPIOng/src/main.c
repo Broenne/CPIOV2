@@ -29,12 +29,9 @@ int main(void) {
 
 	InitPulse();
 
-
-
 	InitAlive();
 	vTaskStartScheduler(); /* run RTOS */
 
 	SetApplicationEndError();
-
 }
 

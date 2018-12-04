@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="EE_ReadVariable" key="selection"/>
+		<item value="xIdleTaskHandle" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="xIdleTaskHandle"/>
+			<item value="xTaskCreate"/>
+			<item value="USE_IDLE_HOOK"/>
+			<item value="configUSE_TIMERS "/>
+			<item value="SysTick_Handler"/>
+			<item value="vApplicationMallocFailedHook"/>
 			<item value="EE_ReadVariable"/>
 			<item value="VirtAdd"/>
-			<item value="GPIO_PinSource1"/>
-			<item value="EnableIRQ"/>
-			<item value="SysTick"/>
-			<item value="CAN"/>
-			<item value="RCC_APB2PeriphClockCmd"/>
-			<item value=" CAN_FilterInitTypeDef CAN_FilterInitStructure;"/>
 		</list>
 		<list key="replacehistory">
 		</list>
@@ -24,7 +24,7 @@
 		<item value="284" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="390" key="DIALOG_HEIGHT"/>
-		<item value="932" key="DIALOG_X_ORIGIN"/>
-		<item value="506" key="DIALOG_Y_ORIGIN"/>
+		<item value="937" key="DIALOG_X_ORIGIN"/>
+		<item value="532" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

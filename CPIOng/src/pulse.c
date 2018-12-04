@@ -14,10 +14,6 @@ typedef struct {
 	uint32_t res;
 } MessageForSend;
 
-static uint16_t oldGpioA;
-static uint16_t oldGpioB;
-static uint16_t oldGpioC;
-
 /*
  * Created on: 30.11.18
  * Author: MB
@@ -99,7 +95,7 @@ void SendPulsePerCanTask(void * pvParameters) {
 	while (1) {
 		MessageForSend currentMessage;
 		if (xQueueReceive(PulsQueue, &currentMessage, 0) == pdTRUE) {
-			printf("Received %d %d \r\n", currentMessage.channel, currentMessage.res);
+			//printf("Received %d %d \r\n", currentMessage.channel, currentMessage.res);
 			SendCanTimeDif(currentMessage.channel, currentMessage.res);
 		}
 	}
@@ -157,11 +153,11 @@ void SendTimeInfo(uint8_t channel) {
 		res = lastTimeValue[channel] - actualTimeValue;
 	}
 
-	// printf("SendTimeInfo %d \r\n", channel);
+	//printf("SendTimeInfo %d \r\n", channel);
 	MessageForSend messageForSend;
 	messageForSend.channel = channel;
 	messageForSend.res = res;
-	if (xQueueSend(PulsQueue, &messageForSend, 0) != pdTRUE) {
+	if (xQueueSendFromISR(PulsQueue, &messageForSend, 0) != pdTRUE) {
 		SetPossiblePulseSendQueueFullError();
 	}
 
@@ -169,6 +165,7 @@ void SendTimeInfo(uint8_t channel) {
 }
 
 void CheckInputsRegisterA(void) {
+	static uint16_t oldGpioA = 0;
 	uint16_t gpioA = (GPIO_ReadInputData(GPIOA) & 0xFF); // Inetressant sind nur die untesten 8 bits, siehe Schaltplan
 
 	if (gpioA != oldGpioA) {
@@ -184,6 +181,7 @@ void CheckInputsRegisterA(void) {
 }
 
 void CheckInputsRegisterB(void) {
+	static uint16_t oldGpioB = 0;
 	uint16_t gpioB = GPIO_ReadInputData(GPIOB) & 0x03; // Pb0 = 10, pb1 = 11
 
 	if (gpioB != oldGpioB) {
@@ -199,6 +197,7 @@ void CheckInputsRegisterB(void) {
 }
 
 void CheckInputsRegisterC(void) {
+	static uint16_t oldGpioC = 0;
 	uint16_t gpioC = GPIO_ReadInputData(GPIOC) & 0x3F;
 
 	if (gpioC != oldGpioC) {
@@ -223,7 +222,7 @@ void CheckInputsRegisterC(void) {
 void TIM3_IRQHandler(void) {
 
 	portDISABLE_INTERRUPTS();
-	// printf("Interrupt timer 3 \r\n");
+	//printf("Interrupt timer 3 \r\n");
 	++tickMs;
 
 	CheckInputsRegisterA();
