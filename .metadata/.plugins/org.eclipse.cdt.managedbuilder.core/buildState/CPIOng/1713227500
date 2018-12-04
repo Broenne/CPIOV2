@@ -1,0 +1,15 @@
+#
+#Tue Dec 04 16:01:15 CET 2018
+src/can.c=1
+Debug/src/main.o=1
+Debug/src/pulse.o=1
+src/pulse.c=1
+src/myCanFunctions.c=1
+Debug/src/myCanFunctions.o=1
+Debug/src/usart.o=1
+Debug/CPIOng=1
+Debug/CPIOng.elf=1
+Debug/src/error.o=1
+Debug/src/alive.o=1
+Debug/src/stm32f1xx_it.o=1
+Debug/src/can.o=1

@@ -161,10 +161,14 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 void CAN2_RX0_IRQHandler(void) {
 
 	portDISABLE_INTERRUPTS();
+
 	CanRxMsg RxMessage;
 	CAN_Receive(CAN2, CAN_FIFO0, &RxMessage);
 
 	printf("receive can 2 interrupt %d \n", RxMessage.StdId);
+
+
+
 
 	switch (RxMessage.StdId) {
 		case 0x00:
@@ -178,8 +182,10 @@ void CAN2_RX0_IRQHandler(void) {
 				default:
 					break;
 			}
+			case GetGloablCanIdFromEeeprom():
+					if(0x02 == RxMessage.RTR){
 
-
+					}
 			break;
 		default:
 			break;

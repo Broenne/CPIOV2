@@ -36,3 +36,15 @@ void SendCanTimeDif(uint8_t channel, uint32_t res) {
 	uint32_t canId = 0x180 + GetGlobalCanNodeId() + channel;
 	SendCan(canId, p, 4);
 }
+
+uint16_t ReadInputsFromRegisterA(void){
+	return (GPIO_ReadInputData(GPIOA) & 0xFF); // Inetressant sind nur die untesten 8 bits, siehe Schaltplan
+}
+
+uint16_t ReadInputsFromRegisterB(void){
+	return GPIO_ReadInputData(GPIOB) & 0x03; // Pb0 = 10, pb1 = 11
+
+}
+uint16_t ReadInputsFromRegisterC(void){
+	return GPIO_ReadInputData(GPIOC) & 0x3F;
+}

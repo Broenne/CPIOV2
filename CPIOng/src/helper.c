@@ -26,7 +26,7 @@ void delay_ms(unsigned int d) {
 		delay_us(999);
 }
 
-volatile static int printMode;
+volatile static int printMode = 1; // todo mb: während der entwicklung an
 /*
  * 30.11.2017
  * MB

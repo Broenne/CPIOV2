@@ -21,4 +21,9 @@ uint8_t GetGlobalCanNodeId();
   * */
 void SendCanTimeDif(uint8_t channel, uint32_t res);
 
+uint16_t ReadInputsFromRegisterA(void);
+uint16_t ReadInputsFromRegisterB(void);
+uint16_t ReadInputsFromRegisterC(void);
+
+
 #endif /* MYCANFUNCTIONS_H_ */
