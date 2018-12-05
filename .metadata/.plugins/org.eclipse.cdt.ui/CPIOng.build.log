@@ -1,6 +1,5 @@
-16:16:58 **** Incremental Build of configuration Debug for project CPIOng ****
+05:55:06 **** Incremental Build of configuration Debug for project CPIOng ****
 Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\src\myCanFunctions.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\myCanFunctions.o 
 arm-atollic-eabi-gcc -c ..\src\can.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\can.o 
 ..\src\can.c: In function 'FilterOnlyMyId':
 ..\src\can.c:113:45: warning: implicit declaration of function 'GetGloablCanIdFromEeeprom' [-Wimplicit-function-declaration]
@@ -10,17 +9,53 @@ arm-atollic-eabi-gcc -c ..\src\can.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F
 ..\src\can.c:166:35: warning: format '%d' expects argument of type 'int', but argument 2 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
   printf("receive can 2 interrupt %d \n", RxMessage.StdId);
                                    ^
-arm-atollic-eabi-gcc -o CPIOng.elf FreeRTOS_Source\list.o FreeRTOS_Source\portable\GCC\ARM_CM3\port.o FreeRTOS_Source\portable\MemMang\heap_1.o FreeRTOS_Source\queue.o FreeRTOS_Source\tasks.o FreeRTOS_Source\timers.o Libraries\STM32F10x_StdPeriph_Driver\src\misc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.o src\alive.o src\can.o src\eeprom.o src\error.o src\helper.o src\main.o src\myCanFunctions.o src\pulse.o src\rtosActions.o src\startup_stm32f10x_cl.o src\stm32f1xx_it.o src\storages.o src\system_stm32f10x.o src\tiny_printf.o src\usart.o -mthumb -mcpu=cortex-m3 -T../stm32_flash.ld -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
+arm-atollic-eabi-gcc -c ..\src\stm32f1xx_it.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\stm32f1xx_it.o 
+arm-atollic-eabi-gcc -c ..\src\rtosActions.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\rtosActions.o 
+arm-atollic-eabi-gcc -c ..\src\myCanFunctions.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\myCanFunctions.o 
+arm-atollic-eabi-gcc -c ..\src\storages.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\storages.o 
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\main.o 
+..\src\main.c: In function 'main':
+..\src\main.c:23:2: warning: implicit declaration of function 'GetGloablCanIdFromEeeprom' [-Wimplicit-function-declaration]
+  GetGloablCanIdFromEeeprom(); // todo mb: das zusammen fassen
+  ^~~~~~~~~~~~~~~~~~~~~~~~~
+arm-atollic-eabi-gcc -c ..\src\error.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\error.o 
+arm-atollic-eabi-gcc -c ..\src\helper.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\helper.o 
+..\src\helper.c: In function '_write':
+..\src\helper.c:54:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+arm-atollic-eabi-gcc -c ..\src\usart.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\usart.o 
+arm-atollic-eabi-gcc -c ..\src\IO.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\IO.o 
+arm-atollic-eabi-gcc -c ..\src\alive.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\alive.o 
+arm-atollic-eabi-gcc -c ..\src\pulse.c -mthumb -mcpu=cortex-m3 -std=gnu11 -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -I../src -I../Libraries/STM32F10x_StdPeriph_Driver/inc -I../Libraries/CMSIS/Device/ST/STM32F10x/Include -I../Libraries/CMSIS/Include -I../FreeRTOS_Source/include -I../FreeRTOS_Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\pulse.o 
+..\src\pulse.c: In function 'SendPulsePerCanTask':
+..\src\pulse.c:102:25: warning: format '%d' expects argument of type 'int', but argument 3 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+    printf("Received %d %d \r\n", currentMessage.channel, currentMessage.res);
+                         ^
+In file included from ..\src\main.h:14:0,
+                 from ..\src\pulse.h:11,
+                 from ..\src\pulse.c:8:
+..\src\pulse.c: In function 'InitPulseSender':
+../FreeRTOS_Source/include/task.h:284:134: warning: pointer targets in passing argument 2 of 'xTaskGenericCreate' differ in signedness [-Wpointer-sign]
+ #define xTaskCreate( pvTaskCode, pcName, usStackDepth, pvParameters, uxPriority, pxCreatedTask ) xTaskGenericCreate( ( pvTaskCode ), ( pcName ), ( usStackDepth ), ( pvParameters ), ( uxPriority ), ( pxCreatedTask ), ( NULL ), ( NULL ) )
+                                                                                                                                      ^
+..\src\pulse.c:133:14: note: in expansion of macro 'xTaskCreate'
+  xReturned = xTaskCreate(SendPulsePerCanTask, "CanSenderTask", configMINIMAL_STACK_SIZE, (void * ) 1, tskIDLE_PRIORITY, &xHandle);
+              ^~~~~~~~~~~
+../FreeRTOS_Source/include/task.h:1316:22: note: expected 'const signed char * const' but argument is of type 'char *'
+ signed portBASE_TYPE xTaskGenericCreate( pdTASK_CODE pxTaskCode, const signed char * const pcName, unsigned short usStackDepth, void *pvParameters, unsigned portBASE_TYPE uxPriority, xTaskHandle *pxCreatedTask, portSTACK_TYPE *puxStackBuffer, const xMemoryRegion * const xRegions ) PRIVILEGED_FUNCTION;
+                      ^~~~~~~~~~~~~~~~~~
+arm-atollic-eabi-gcc -o CPIOng.elf FreeRTOS_Source\list.o FreeRTOS_Source\portable\GCC\ARM_CM3\port.o FreeRTOS_Source\portable\MemMang\heap_1.o FreeRTOS_Source\queue.o FreeRTOS_Source\tasks.o FreeRTOS_Source\timers.o Libraries\STM32F10x_StdPeriph_Driver\src\misc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.o Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.o src\IO.o src\alive.o src\can.o src\eeprom.o src\error.o src\helper.o src\main.o src\myCanFunctions.o src\pulse.o src\rtosActions.o src\startup_stm32f10x_cl.o src\stm32f1xx_it.o src\storages.o src\system_stm32f10x.o src\tiny_printf.o src\usart.o -mthumb -mcpu=cortex-m3 -T../stm32_flash.ld -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
 C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
 Generate build reports...
 Print size information
    text	   data	    bss	    dec	    hex	filename
-  20120	     56	   8604	  28780	   706c	CPIOng.elf
+  20132	     56	   8604	  28792	   7078	CPIOng.elf
 Print size information done
 Generate listing file
 Output sent to: CPIOng.list
 Generate listing file done
 Generate build reports done
 
-16:16:59 Build Finished (took 807ms)
+05:55:09 Build Finished (took 2s.980ms)
 
