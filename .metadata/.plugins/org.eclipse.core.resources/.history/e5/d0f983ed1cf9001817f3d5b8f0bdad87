@@ -1,0 +1,52 @@
+/*
+ * main.h
+ *
+ *  Created on: 29.11.2018
+ *      Author: MB
+ */
+
+#ifndef MAIN_H_
+#define MAIN_H_
+
+#include <stddef.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+
+#include "stm32f1xx_hal.h"
+
+#include "FreeRTOS.h"
+#include "task.h"
+#include "timers.h"
+#include "queue.h"
+#include "semphr.h"
+#include "event_groups.h"
+#include "cmsis_os.h"
+//#include "board.h"
+
+
+//#include "stm32f10x.h"
+//#include "can.h"
+//#include "eeprom.h"
+#include "alive.h"
+//#include "helper.h"
+//#include "myCanFunctions.h"
+//#include "storages.h"
+//#include "pulse.h"
+//#include "usart.h"
+//#include "error.h"
+//#include "rtosActions.h"
+//#include "IO.h"
+//
+///* Kernel includes. */
+//#include "FreeRTOS.h"
+//#include "task.h"
+//#include "queue.h"
+//#include "timers.h"
+//#include "semphr.h"
+//#include "FreeRTOSConfig.h"
+
+
+//#include "FreeRTOSConfig.h"
+
+#endif /* MAIN_H_ */

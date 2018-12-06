@@ -7,11 +7,66 @@
 
 #include "myCanFunctions.h"
 
+
+extern fn_ptr;
+
 static uint8_t globalCanId;
 
+
+
+
+static void CAN2_init_GPIOInternal(void) {
+
+//	  hcan2.Instance = CAN2;
+//	  hcan2.Init.Prescaler = 16;
+//	  hcan2.Init.Mode = CAN_MODE_NORMAL;
+//	  hcan2.Init.SJW = CAN_SJW_1TQ;
+//	  hcan2.Init.BS1 = CAN_BS1_11TQ;
+//	  hcan2.Init.BS2 = CAN_BS2_4TQ;
+//	  hcan2.Init.TTCM = DISABLE;
+//	  hcan2.Init.ABOM = DISABLE;
+//	  hcan2.Init.AWUM = DISABLE;
+//	  hcan2.Init.NART = DISABLE;
+//	  hcan2.Init.RFLM = DISABLE;
+//	  hcan2.Init.TXFP = DISABLE;
+//	  if (HAL_CAN_Init(&hcan2) != HAL_OK)
+//	  {
+//	    _Error_Handler(__FILE__, __LINE__);
+//	  }
+
+//	// CAN RX
+//	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;           // PB5=CANRX
+//	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;        // Pin Mode
+//	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;    // Pin Taktung
+//	GPIO_Init(GPIOB, &GPIO_InitStructure);
+//
+//	// CAN TX
+//	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;             // PB6=CANTX
+//	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;       // Pin Mode
+//	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;     // Pin Taktung
+//	GPIO_Init(GPIOB, &GPIO_InitStructure);
+//
+//	// CAN2 Periph clock enable
+//	RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN1, ENABLE); // CAN1 Takt freigeben sonst geht can 2 nicht
+//	RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN2, ENABLE);  // CAN2 Takt freigeben
+//	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE); // AFIO Takt freigeben (für Remapping)
+//
+//	// Remapping CANRX und CANTX
+//	GPIO_PinRemapConfig(GPIO_Remap_CAN2, ENABLE);
+
+}
+
+
+
+
+
+
 void PrepareCan(void) {
-	CAN2_init_GPIO();
-	init_CAN2();
+	//CAN2_init_GPIO();
+
+	CAN2_init_GPIOInternal();
+
+	//init_CAN2();
 }
 
 uint8_t GetGlobalCanNodeId() {
@@ -33,7 +88,7 @@ void SendCanTimeDif(uint8_t channel, uint32_t res) {
 	p[2] = (res >> 8) & 0xFF;
 	p[3] = res & 0xFF;
 
-	uint32_t canId = 0x180 + GetGlobalCanNodeId() + channel;
+	uint32_t canId =42;//= 0x180 + GetGlobalCanNodeId() + channel;
 	SendCan(canId, p, 4);
 }
 

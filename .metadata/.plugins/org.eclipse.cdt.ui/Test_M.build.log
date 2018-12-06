@@ -1,0 +1,436 @@
+08:12:55 **** Rebuild of configuration Debug for project Test_M ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.o ..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.c 
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_can.o ..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_can.c 
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.o ..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.c 
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Src\freertos.o ..\Src\freertos.c 
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.o ..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.c 
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.o ..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.c 
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Middlewares\Third_Party\FreeRTOS\Source\croutine.o ..\Middlewares\Third_Party\FreeRTOS\Source\croutine.c 
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc.o ..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc.c 
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Src\alive.o ..\Src\alive.c 
+In file included from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h:1159:0,
+                 from ../Inc/stm32f1xx_hal_conf.h:220,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:218,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:46,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:45,
+                 from ..\Src\alive.h:11,
+                 from ..\Src\alive.c:8:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h:1875:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_RCCEx_PeriphCLKConfig(RCC_PeriphCLKInitTypeDef  *PeriphClkInit);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h:1887:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_RCCEx_EnablePLLI2S(RCC_PLLI2SInitTypeDef  *PLLI2SInit);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h:1888:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_RCCEx_DisablePLLI2S(void);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h:1897:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_RCCEx_EnablePLL2(RCC_PLL2InitTypeDef  *PLL2Init);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h:1898:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_RCCEx_DisablePLL2(void);
+ ^~~~~~~~~~~~~~~~~
+In file included from ../Inc/stm32f1xx_hal_conf.h:220:0,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:218,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:46,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:45,
+                 from ..\Src\alive.h:11,
+                 from ..\Src\alive.c:8:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h:1171:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_RCC_DeInit(void);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h:1172:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h:1173:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_RCC_ClockConfig(RCC_ClkInitTypeDef  *RCC_ClkInitStruct, uint32_t FLatency);
+ ^~~~~~~~~~~~~~~~~
+In file included from ../Inc/stm32f1xx_hal_conf.h:228:0,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:218,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:46,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:45,
+                 from ..\Src\alive.h:11,
+                 from ..\Src\alive.c:8:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h:253:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_GPIO_LockPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+ ^~~~~~~~~~~~~~~~~
+In file included from ../Inc/stm32f1xx_hal_conf.h:232:0,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:218,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:46,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:45,
+                 from ..\Src\alive.h:11,
+                 from ..\Src\alive.c:8:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h:133:3: error: unknown type name 'HAL_LockTypeDef'
+   HAL_LockTypeDef       Lock;                            /*!< DMA locking object                     */
+   ^~~~~~~~~~~~~~~
+In file included from ../Inc/stm32f1xx_hal_conf.h:232:0,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:218,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:46,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:45,
+                 from ..\Src\alive.h:11,
+                 from ..\Src\alive.c:8:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h:383:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_DMA_Init(DMA_HandleTypeDef *hdma);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h:384:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_DMA_DeInit (DMA_HandleTypeDef *hdma);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h:393:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_DMA_Start (DMA_HandleTypeDef *hdma, uint32_t SrcAddress, uint32_t DstAddress, uint32_t DataLength);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h:394:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_DMA_Start_IT(DMA_HandleTypeDef *hdma, uint32_t SrcAddress, uint32_t DstAddress, uint32_t DataLength);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h:395:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_DMA_Abort(DMA_HandleTypeDef *hdma);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h:396:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_DMA_Abort_IT(DMA_HandleTypeDef *hdma);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h:397:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_DMA_PollForTransfer(DMA_HandleTypeDef *hdma, uint32_t CompleteLevel, uint32_t Timeout);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h:399:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_DMA_RegisterCallback(DMA_HandleTypeDef *hdma, HAL_DMA_CallbackIDTypeDef CallbackID, void (* pCallback)( DMA_HandleTypeDef * _hdma));
+ ^~~~~~~~~~~~~~~~~
+In file included from ../Inc/stm32f1xx_hal_conf.h:232:0,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:218,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:46,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:45,
+                 from ..\Src\alive.h:11,
+                 from ..\Src\alive.c:8:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h:400:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_DMA_UnRegisterCallback(DMA_HandleTypeDef *hdma, HAL_DMA_CallbackIDTypeDef CallbackID);
+ ^~~~~~~~~~~~~~~~~
+In file included from ../Inc/stm32f1xx_hal_conf.h:240:0,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:218,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:46,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:45,
+                 from ..\Src\alive.h:11,
+                 from ..\Src\alive.c:8:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:197:3: error: unknown type name 'HAL_LockTypeDef'
+   HAL_LockTypeDef             Lock;       /*!< CAN locking object             */
+   ^~~~~~~~~~~~~~~
+In file included from ../Inc/stm32f1xx_hal_conf.h:240:0,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:218,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:46,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:45,
+                 from ..\Src\alive.h:11,
+                 from ..\Src\alive.c:8:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:699:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_CAN_Init(CAN_HandleTypeDef* hcan);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:700:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_CAN_ConfigFilter(CAN_HandleTypeDef* hcan, CAN_FilterConfTypeDef* sFilterConfig);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:701:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_CAN_DeInit(CAN_HandleTypeDef* hcan);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:713:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_CAN_Transmit(CAN_HandleTypeDef *hcan, uint32_t Timeout);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:714:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_CAN_Transmit_IT(CAN_HandleTypeDef *hcan);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:715:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_CAN_Receive(CAN_HandleTypeDef *hcan, uint8_t FIFONumber, uint32_t Timeout);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:716:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_CAN_Receive_IT(CAN_HandleTypeDef *hcan, uint8_t FIFONumber);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:717:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_CAN_Sleep(CAN_HandleTypeDef *hcan);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:718:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_CAN_WakeUp(CAN_HandleTypeDef *hcan);
+ ^~~~~~~~~~~~~~~~~
+In file included from ../Inc/stm32f1xx_hal_conf.h:252:0,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:218,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:46,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:45,
+                 from ..\Src\alive.h:11,
+                 from ..\Src\alive.c:8:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h:198:3: error: unknown type name 'HAL_LockTypeDef'
+   HAL_LockTypeDef               Lock;                   /*!< ADC locking object */
+   ^~~~~~~~~~~~~~~
+In file included from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h:852:0,
+                 from ../Inc/stm32f1xx_hal_conf.h:252,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:218,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:46,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:45,
+                 from ..\Src\alive.h:11,
+                 from ..\Src\alive.c:8:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h:663:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef       HAL_ADCEx_Calibration_Start(ADC_HandleTypeDef* hadc);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h:666:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef       HAL_ADCEx_InjectedStart(ADC_HandleTypeDef* hadc);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h:667:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef       HAL_ADCEx_InjectedStop(ADC_HandleTypeDef* hadc);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h:668:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef       HAL_ADCEx_InjectedPollForConversion(ADC_HandleTypeDef* hadc, uint32_t Timeout);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h:671:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef       HAL_ADCEx_InjectedStart_IT(ADC_HandleTypeDef* hadc);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h:672:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef       HAL_ADCEx_InjectedStop_IT(ADC_HandleTypeDef* hadc);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h:676:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef       HAL_ADCEx_MultiModeStart_DMA(ADC_HandleTypeDef *hadc, uint32_t *pData, uint32_t Length);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h:677:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef       HAL_ADCEx_MultiModeStop_DMA(ADC_HandleTypeDef *hadc);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h:697:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef       HAL_ADCEx_InjectedConfigChannel(ADC_HandleTypeDef* hadc,ADC_InjectionConfTypeDef* sConfigInjected);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h:699:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef       HAL_ADCEx_MultiModeConfigChannel(ADC_HandleTypeDef *hadc, ADC_MultiModeTypeDef *multimode);
+ ^~~~~~~~~~~~~~~~~
+In file included from ../Inc/stm32f1xx_hal_conf.h:252:0,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:218,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:46,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:45,
+                 from ..\Src\alive.h:11,
+                 from ..\Src\alive.c:8:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h:865:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef       HAL_ADC_Init(ADC_HandleTypeDef* hadc);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h:866:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef       HAL_ADC_DeInit(ADC_HandleTypeDef *hadc);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h:881:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef       HAL_ADC_Start(ADC_HandleTypeDef* hadc);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h:882:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef       HAL_ADC_Stop(ADC_HandleTypeDef* hadc);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h:883:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef       HAL_ADC_PollForConversion(ADC_HandleTypeDef* hadc, uint32_t Timeout);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h:884:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef       HAL_ADC_PollForEvent(ADC_HandleTypeDef* hadc, uint32_t EventType, uint32_t Timeout);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h:887:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef       HAL_ADC_Start_IT(ADC_HandleTypeDef* hadc);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h:888:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef       HAL_ADC_Stop_IT(ADC_HandleTypeDef* hadc);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h:891:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef       HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h:892:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef       HAL_ADC_Stop_DMA(ADC_HandleTypeDef* hadc);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h:912:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef       HAL_ADC_ConfigChannel(ADC_HandleTypeDef* hadc, ADC_ChannelConfTypeDef* sConfig);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h:913:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef       HAL_ADC_AnalogWDGConfig(ADC_HandleTypeDef* hadc, ADC_AnalogWDGConfTypeDef* AnalogWDGConfig);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h:939:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef ADC_Enable(ADC_HandleTypeDef* hadc);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h:940:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef ADC_ConversionStop_Disable(ADC_HandleTypeDef* hadc);
+ ^~~~~~~~~~~~~~~~~
+In file included from ../Inc/stm32f1xx_hal_conf.h:264:0,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:218,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:46,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:45,
+                 from ..\Src\alive.h:11,
+                 from ..\Src\alive.c:8:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h:114:3: error: unknown type name 'HAL_LockTypeDef'
+   HAL_LockTypeDef             Lock;             /*!< FLASH locking object                */
+   ^~~~~~~~~~~~~~~
+In file included from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h:264:0,
+                 from ../Inc/stm32f1xx_hal_conf.h:264,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:218,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:46,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:45,
+                 from ..\Src\alive.h:11,
+                 from ..\Src\alive.c:8:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h:766:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef  HAL_FLASHEx_Erase(FLASH_EraseInitTypeDef *pEraseInit, uint32_t *PageError);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h:767:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef  HAL_FLASHEx_Erase_IT(FLASH_EraseInitTypeDef *pEraseInit);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h:777:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef  HAL_FLASHEx_OBErase(void);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h:778:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef  HAL_FLASHEx_OBProgram(FLASH_OBProgramInitTypeDef *pOBInit);
+ ^~~~~~~~~~~~~~~~~
+In file included from ../Inc/stm32f1xx_hal_conf.h:264:0,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:218,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:46,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:45,
+                 from ..\Src\alive.h:11,
+                 from ..\Src\alive.c:8:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h:275:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_FLASH_Program(uint32_t TypeProgram, uint32_t Address, uint64_t Data);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h:276:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_FLASH_Program_IT(uint32_t TypeProgram, uint32_t Address, uint64_t Data);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h:292:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_FLASH_Unlock(void);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h:293:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_FLASH_Lock(void);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h:294:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_FLASH_OB_Unlock(void);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h:295:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_FLASH_OB_Lock(void);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h:320:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef       FLASH_WaitForLastOperation(uint32_t Timeout);
+ ^~~~~~~~~~~~~~~~~
+In file included from ../Inc/stm32f1xx_hal_conf.h:320:0,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:218,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:46,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:45,
+                 from ..\Src\alive.h:11,
+                 from ..\Src\alive.c:8:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:179:3: error: unknown type name 'HAL_LockTypeDef'
+   HAL_LockTypeDef               Lock;             /*!< Locking object                     */
+   ^~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:620:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_UART_Init(UART_HandleTypeDef *huart);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:621:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_HalfDuplex_Init(UART_HandleTypeDef *huart);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:622:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_LIN_Init(UART_HandleTypeDef *huart, uint32_t BreakDetectLength);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:623:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_MultiProcessor_Init(UART_HandleTypeDef *huart, uint8_t Address, uint32_t WakeUpMethod);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:624:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_UART_DeInit (UART_HandleTypeDef *huart);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:635:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:636:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:637:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_UART_Transmit_IT(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:638:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_UART_Receive_IT(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:639:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_UART_Transmit_DMA(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:640:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_UART_Receive_DMA(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:641:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_UART_DMAPause(UART_HandleTypeDef *huart);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:642:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_UART_DMAResume(UART_HandleTypeDef *huart);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:643:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_UART_DMAStop(UART_HandleTypeDef *huart);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:645:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_UART_Abort(UART_HandleTypeDef *huart);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:646:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_UART_AbortTransmit(UART_HandleTypeDef *huart);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:647:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_UART_AbortReceive(UART_HandleTypeDef *huart);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:648:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_UART_Abort_IT(UART_HandleTypeDef *huart);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:649:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_UART_AbortTransmit_IT(UART_HandleTypeDef *huart);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:650:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_UART_AbortReceive_IT(UART_HandleTypeDef *huart);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:669:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_LIN_SendBreak(UART_HandleTypeDef *huart);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:670:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_MultiProcessor_EnterMuteMode(UART_HandleTypeDef *huart);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:671:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_MultiProcessor_ExitMuteMode(UART_HandleTypeDef *huart);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:672:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_HalfDuplex_EnableTransmitter(UART_HandleTypeDef *huart);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:673:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_HalfDuplex_EnableReceiver(UART_HandleTypeDef *huart);
+ ^~~~~~~~~~~~~~~~~
+In file included from ../Inc/stm32f1xx_hal_conf.h:336:0,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:218,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:46,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:45,
+                 from ..\Src\alive.h:11,
+                 from ..\Src\alive.c:8:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_wwdg.h:246:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef     HAL_WWDG_Init(WWDG_HandleTypeDef *hwwdg);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_wwdg.h:256:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef     HAL_WWDG_Refresh(WWDG_HandleTypeDef *hwwdg);
+ ^~~~~~~~~~~~~~~~~
+In file included from ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:218:0,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:46,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:45,
+                 from ..\Src\alive.h:11,
+                 from ..\Src\alive.c:8:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:296:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_Init(void);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:297:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_DeInit(void);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:300:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority);
+ ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:313:1: error: unknown type name 'HAL_StatusTypeDef'
+ HAL_StatusTypeDef HAL_SetTickFreq(HAL_TickFreqTypeDef Freq);
+ ^~~~~~~~~~~~~~~~~
+..\Src\alive.c: In function 'Init_Timer':
+..\Src\alive.c:36:2: warning: implicit declaration of function '__TIM2_CLK_ENABLE' [-Wimplicit-function-declaration]
+  __TIM2_CLK_ENABLE();
+  ^~~~~~~~~~~~~~~~~
+..\Src\alive.c: In function 'PrepareStatusLed':
+..\Src\alive.c:66:2: warning: implicit declaration of function '__GPIOD_CLK_ENABLE' [-Wimplicit-function-declaration]
+  __GPIOD_CLK_ENABLE();
+  ^~~~~~~~~~~~~~~~~~
+
+08:12:57 Build Finished (took 2s.426ms)
+

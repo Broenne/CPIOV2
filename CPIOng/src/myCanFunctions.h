@@ -8,11 +8,14 @@
 #ifndef MYCANFUNCTIONS_H_
 #define MYCANFUNCTIONS_H_
 
-#include "main.h"
+
+#include "include.h"
 
 void PrepareCan(void);
 void SetGlobalCanNodeId(uint8_t canId);
 uint8_t GetGlobalCanNodeId();
+
+//CAN_HandleTypeDef hcan2;
 
 /*
  * 30.11.18

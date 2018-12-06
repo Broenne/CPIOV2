@@ -1,0 +1,53 @@
+/*
+ * IO.c
+ *
+ *  Created on: 05.12.2018
+ *      Author: MB
+ */
+
+#include "IO.h"
+
+/*
+ * Created on: 30.11.18
+ * Author: MB
+Initialisierung der Eingänge auf dem borad.
+Siehe Schaltplan*/
+void InitInputs(void) {
+
+	GPIO_InitTypeDef GPIO_InitStructure;
+
+	// http://stefanfrings.de/stm32/index.html
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+
+	GPIO_InitStructure.GPIO_Pin = (GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2
+			| GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7);
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+	GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+	GPIO_InitStructure.GPIO_Pin = (GPIO_Pin_0 | GPIO_Pin_1);
+	//GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+	GPIO_Init(GPIOB, &GPIO_InitStructure);
+
+	RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOC, ENABLE);
+	GPIO_InitStructure.GPIO_Pin = (GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2
+			| GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5);
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+	GPIO_Init(GPIOC, &GPIO_InitStructure);
+}
+
+uint8_t ReadInputsFromRegisterA(void){
+	return (uint8_t)(GPIO_ReadInputData(GPIOA) & 0xFF); // Inetressant sind nur die untesten 8 bits, siehe Schaltplan
+}
+
+uint8_t ReadInputsFromRegisterB(void){
+	return (uint8_t)GPIO_ReadInputData(GPIOB) & 0x03; // Pb0 = 10, pb1 = 11
+}
+
+uint8_t ReadInputsFromRegisterC(void){
+	return (uint8_t)GPIO_ReadInputData(GPIOC) & 0x3F;
+}

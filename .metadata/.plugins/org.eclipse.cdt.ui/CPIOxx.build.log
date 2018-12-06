@@ -1,0 +1,45 @@
+16:40:53 **** Rebuild of configuration Debug for project CPIOxx ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Src\stm32f1xx_it.o ..\Src\stm32f1xx_it.c 
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Src\system_stm32f1xx.o ..\Src\system_stm32f1xx.c 
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Src\main.o ..\Src\main.c 
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Src\freertos.o ..\Src\freertos.c 
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Src\stm32f1xx_hal_msp.o ..\Src\stm32f1xx_hal_msp.c 
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -g -Wa,--no-warn -x assembler-with-cpp -specs=nano.specs -o startup\startup_stm32f105xc.o ..\startup\startup_stm32f105xc.s 
+arm-atollic-eabi-gcc -o CPIOxx.elf Src\freertos.o Src\main.o Src\stm32f1xx_hal_msp.o Src\stm32f1xx_it.o Src\system_stm32f1xx.o startup\startup_stm32f105xc.o -mthumb -mcpu=cortex-m3 -T../STM32F105RB_FLASH.ld -specs=nosys.specs -static -Wl,-Map=CPIOxx.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
+Src\main.o: In function `StartTask02':
+C:\apps\CPIOxx\CPIOxx\Debug/..\Src/main.c:359: undefined reference to `osDelay'
+Src\main.o: In function `StartDefaultTask':
+main.c:(.text.StartDefaultTask+0x4): undefined reference to `osDelay'
+Src\main.o: In function `SystemClock_Config':
+C:\apps\CPIOxx\CPIOxx\Debug/..\Src/main.c:198: undefined reference to `HAL_RCC_OscConfig'
+C:\apps\CPIOxx\CPIOxx\Debug/..\Src/main.c:212: undefined reference to `HAL_RCC_ClockConfig'
+C:\apps\CPIOxx\CPIOxx\Debug/..\Src/main.c:219: undefined reference to `HAL_RCC_GetHCLKFreq'
+C:\apps\CPIOxx\CPIOxx\Debug/..\Src/main.c:219: undefined reference to `HAL_SYSTICK_Config'
+C:\apps\CPIOxx\CPIOxx\Debug/..\Src/main.c:223: undefined reference to `HAL_SYSTICK_CLKSourceConfig'
+C:\apps\CPIOxx\CPIOxx\Debug/..\Src/main.c:230: undefined reference to `HAL_NVIC_SetPriority'
+Src\main.o: In function `main':
+C:\apps\CPIOxx\CPIOxx\Debug/..\Src/main.c:102: undefined reference to `HAL_Init'
+Src\main.o: In function `MX_GPIO_Init':
+C:\apps\CPIOxx\CPIOxx\Debug/..\Src/main.c:304: undefined reference to `HAL_GPIO_Init'
+C:\apps\CPIOxx\CPIOxx\Debug/..\Src/main.c:315: undefined reference to `HAL_GPIO_Init'
+C:\apps\CPIOxx\CPIOxx\Debug/..\Src/main.c:326: undefined reference to `HAL_GPIO_Init'
+C:\apps\CPIOxx\CPIOxx\Debug/..\Src/main.c:331: undefined reference to `HAL_GPIO_Init'
+Src\main.o: In function `MX_CAN2_Init':
+C:\apps\CPIOxx\CPIOxx\Debug/..\Src/main.c:249: undefined reference to `HAL_CAN_Init'
+Src\main.o: In function `MX_USART1_UART_Init':
+C:\apps\CPIOxx\CPIOxx\Debug/..\Src/main.c:268: undefined reference to `HAL_UART_Init'
+Src\main.o: In function `main':
+C:\apps\CPIOxx\CPIOxx\Debug/..\Src/main.c:138: undefined reference to `osThreadCreate'
+C:\apps\CPIOxx\CPIOxx\Debug/..\Src/main.c:142: undefined reference to `osThreadCreate'
+C:\apps\CPIOxx\CPIOxx\Debug/..\Src/main.c:151: undefined reference to `osMessageCreate'
+C:\apps\CPIOxx\CPIOxx\Debug/..\Src/main.c:159: undefined reference to `osKernelStart'
+Src\stm32f1xx_it.o: In function `SysTick_Handler':
+C:\apps\CPIOxx\CPIOxx\Debug/..\Src/stm32f1xx_it.c:156: undefined reference to `HAL_IncTick'
+C:\apps\CPIOxx\CPIOxx\Debug/..\Src/stm32f1xx_it.c:157: undefined reference to `osSystickHandler'
+Src\stm32f1xx_it.o: In function `CAN2_RX0_IRQHandler':
+C:\apps\CPIOxx\CPIOxx\Debug/..\Src/stm32f1xx_it.c:178: undefined reference to `HAL_CAN_IRQHandler'
+collect2.exe: error: ld returned 1 exit status
+
+16:40:55 Build Finished (took 1s.50ms)
+

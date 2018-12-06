@@ -7,60 +7,94 @@
 
 #include "alive.h"
 
+
+
+static TIM_HandleTypeDef s_TimerInstance;// = { .Instance = TIM2 };
+
 void SwitchMainLed(void) {
-	TIM_ClearITPendingBit(TIM2, TIM_IT_Update); // setz timer zurück, achtung dann kann man ihn auch anders nicht mehr benutzen
-	if (GPIO_ReadOutputDataBit(GPIOD, GPIO_Pin_2)) {
-		GPIO_WriteBit(GPIOD, GPIO_Pin_2, RESET);
-	} else {
-		GPIO_WriteBit(GPIOD, GPIO_Pin_2, SET);
-	}
+	 HAL_GPIO_TogglePin(LED_S_GPIO_Port, LED_S_Pin);
+
 }
 
-void SanCanAlive(void) {
-	uint8_t p[] = { 0x01, 0, 0, 0, 0, 0, 0, 0 };
+//void SanCanAlive(void) {
+//	uint8_t p[] = { 0x01, 0, 0, 0, 0, 0, 0, 0 };
+//
+//	// add error frames
+//	GetApplicationStatus(&p[3]);
+//
+//	SendCan(AliveCanId, p, 8);
+//}
 
-	// add error frames
-	GetApplicationStatus(&p[3]);
 
-	SendCan(AliveCanId, p, 8);
+static void Init_TimerInternal(){
+	 TIM_ClockConfigTypeDef sClockSourceConfig;
+		  TIM_SlaveConfigTypeDef sSlaveConfig;
+		  TIM_MasterConfigTypeDef sMasterConfig;
+
+
+	//	  __TIM2_CLK_ENABLE();
+
+		  __HAL_RCC_TIM2_CLK_ENABLE();
+		  s_TimerInstance.Instance = TIM2;
+		  s_TimerInstance.Init.Prescaler = 720;
+		  s_TimerInstance.Init.CounterMode = TIM_COUNTERMODE_UP;
+		  s_TimerInstance.Init.Period = 9460;
+		  s_TimerInstance.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+		  s_TimerInstance.Init.RepetitionCounter = 0;
+		  //s_TimerInstance.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;//TIM_AUTORELOAD_PRELOAD_ENABLE;//
+		  if (HAL_TIM_Base_Init(&s_TimerInstance) != HAL_OK)
+		  {
+		    _Error_Handler(__FILE__, __LINE__);
+		  }
+
+		  HAL_TIM_Base_Start(&s_TimerInstance);
+		  HAL_NVIC_SetPriority(TIM2_IRQn, 15, 0);
+		  HAL_NVIC_EnableIRQ(TIM2_IRQn);
+
+		  __HAL_TIM_ENABLE_IT(&s_TimerInstance, TIM_IT_UPDATE );
 }
+
+
+
 
 void Init_Timer(void) {
-	TIM_TimeBaseInitTypeDef TIM_TimeBase_InitStructure;
-	NVIC_InitTypeDef NVIC_InitStructure;
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE); // Timer 2 Interrupt enable
-	TIM_TimeBase_InitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-	TIM_TimeBase_InitStructure.TIM_CounterMode = TIM_CounterMode_Up;
-	TIM_TimeBase_InitStructure.TIM_Period = 19460; //1999;
-	TIM_TimeBase_InitStructure.TIM_Prescaler = 720; // prescal auf 72 MHz bezogen -> 72Mhz/36 = 2 Mhz  -> 2Mhz = 0,5 us
-	TIM_TimeBaseInit(TIM2, &TIM_TimeBase_InitStructure);
-
-	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
-
-	NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x0F;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x0F;
-	NVIC_Init(&NVIC_InitStructure);
-
-	TIM_Cmd(TIM2, ENABLE);
+	Init_TimerInternal();
 }
 
-void PrepareStatusLed(void) {
-	GPIO_InitTypeDef GPIO_InitStructure;
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD, ENABLE);
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOD, &GPIO_InitStructure);
+static void PrepareStatusLed(void) {
+	__HAL_RCC_GPIOD_CLK_ENABLE();
+
+	/*Configure GPIO pin Output Level */
+	  HAL_GPIO_WritePin(LED_S_GPIO_Port, LED_S_Pin, GPIO_PIN_RESET);
+
+	  GPIO_InitTypeDef GPIO_InitStruct;
+	/*Configure GPIO pin : LED_S_Pin */
+	  GPIO_InitStruct.Pin = LED_S_Pin;
+	  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+	  GPIO_InitStruct.Pull = GPIO_NOPULL;
+	  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+	  HAL_GPIO_Init(LED_S_GPIO_Port, &GPIO_InitStruct);
+
+
 }
 
 void InitAlive(void) {
-	PrepareStatusLed();
+	//PrepareStatusLed();
 	Init_Timer();
 }
 
-void TIM2_IRQHandler(void) {
+ void TIM2_IRQHandler(void) {
+
+	portDISABLE_INTERRUPTS();
+//	__disable_irq();
+
 	SwitchMainLed();
-	SanCanAlive();
+
+	__HAL_TIM_CLEAR_FLAG(&s_TimerInstance, TIM_FLAG_UPDATE);
+
+	//SanCanAlive();
+
+//	__enable_irq();
+	portENABLE_INTERRUPTS();
+
 }

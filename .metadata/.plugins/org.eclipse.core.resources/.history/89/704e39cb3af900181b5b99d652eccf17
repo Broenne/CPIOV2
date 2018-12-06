@@ -1,0 +1,143 @@
+/*
+ * alive.c
+ *
+ *  Created on: 29.11.2018
+ *      Author: MB
+ */
+
+#include "alive.h"
+
+
+
+static TIM_HandleTypeDef s_TimerInstance;// = { .Instance = TIM2 };
+
+void SwitchMainLed(void) {
+
+
+
+	//TIM_ClearITPendingBit(TIM2, 0);///*TIM_IT_Update*(); // setz timer zurück, achtung dann kann man ihn auch anders nicht mehr benutzen
+	 //HAL_GPIO_WritePin(LED_S_GPIO_Port, LED_S_Pin, GPIO_PIN_RESET);
+
+	 HAL_GPIO_TogglePin(LED_S_GPIO_Port, LED_S_Pin);
+//	if (GPIO_ReadOutputDataBit(GPIOD, GPIO_Pin_2)) {
+//		GPIO_WriteBit(GPIOD, GPIO_Pin_2, RESET);
+//	} else {
+//		GPIO_WriteBit(GPIOD, GPIO_Pin_2, SET);
+//	}
+}
+
+//void SanCanAlive(void) {
+//	uint8_t p[] = { 0x01, 0, 0, 0, 0, 0, 0, 0 };
+//
+//	// add error frames
+//	GetApplicationStatus(&p[3]);
+//
+//	SendCan(AliveCanId, p, 8);
+//}
+
+
+void Init_Timer(void) {
+	  TIM_ClockConfigTypeDef sClockSourceConfig;
+	  TIM_SlaveConfigTypeDef sSlaveConfig;
+	  TIM_MasterConfigTypeDef sMasterConfig;
+
+
+//	  __TIM2_CLK_ENABLE();
+
+	  __HAL_RCC_TIM2_CLK_ENABLE();
+	  s_TimerInstance.Instance = TIM2;
+	  s_TimerInstance.Init.Prescaler = 720;
+	  s_TimerInstance.Init.CounterMode = TIM_COUNTERMODE_UP;
+	  s_TimerInstance.Init.Period = 29460;
+	  s_TimerInstance.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	  s_TimerInstance.Init.RepetitionCounter = 0;
+	  //s_TimerInstance.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;//TIM_AUTORELOAD_PRELOAD_ENABLE;//
+	  if (HAL_TIM_Base_Init(&s_TimerInstance) != HAL_OK)
+	  {
+	    _Error_Handler(__FILE__, __LINE__);
+	  }
+//
+//	  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+//	 if (HAL_TIM_ConfigClockSource(&s_TimerInstance, &sClockSourceConfig) != HAL_OK)
+//	  {
+//	    _Error_Handler(__FILE__, __LINE__);
+//	  }
+
+//	  sSlaveConfig.SlaveMode = TIM_SLAVEMODE_RESET;
+//	  sSlaveConfig.InputTrigger = TIM_TS_ITR0;
+//	  if (HAL_TIM_SlaveConfigSynchronization(&s_TimerInstance, &sSlaveConfig) != HAL_OK)
+//	  {
+//	    _Error_Handler(__FILE__, __LINE__);
+//	  }
+
+//	  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+//	  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+//	  if (HAL_TIMEx_MasterConfigSynchronization(&s_TimerInstance, &sMasterConfig) != HAL_OK)
+//	  {
+//	    _Error_Handler(__FILE__, __LINE__);
+//	  }
+
+	  HAL_TIM_Base_Start(&s_TimerInstance);
+	  HAL_NVIC_SetPriority(TIM2_IRQn, 0, 0);
+	  HAL_NVIC_EnableIRQ(TIM2_IRQn);
+	  __HAL_TIM_ENABLE_IT(&s_TimerInstance, TIM_IT_UPDATE );
+
+//	TIM_TimeBaseInitTypeDef TIM_TimeBase_InitStructure;
+//	NVIC_InitTypeDef NVIC_InitStructure;
+//	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE); // Timer 2 Interrupt enable
+//	TIM_TimeBase_InitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+//	TIM_TimeBase_InitStructure.TIM_CounterMode = TIM_CounterMode_Up;
+//	TIM_TimeBase_InitStructure.TIM_Period = 19460; //1999;
+//	TIM_TimeBase_InitStructure.TIM_Prescaler = 720; // prescal auf 72 MHz bezogen -> 72Mhz/36 = 2 Mhz  -> 2Mhz = 0,5 us
+//	TIM_TimeBaseInit(TIM2, &TIM_TimeBase_InitStructure);
+//
+//	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
+//
+//	NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
+//	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+//	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x0F;
+//	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x0F;
+//	NVIC_Init(&NVIC_InitStructure);
+//
+//	TIM_Cmd(TIM2, ENABLE);
+}
+
+void PrepareStatusLed(void) {
+//	__GPIOD_CLK_ENABLE();
+//	GPIO_InitTypeDef GPIO_InitStructure;
+//
+//	GPIO_InitStructure.Pin = GPIO_PIN_2;
+//
+//	GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP;
+//	GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_HIGH;
+//	GPIO_InitStructure.Pull = GPIO_NOPULL;
+//	HAL_GPIO_Init(GPIOD, &GPIO_InitStructure);
+
+//	GPIO_InitTypeDef GPIO_InitStructure;
+//	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD, ENABLE);
+//	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+//	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
+//	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+//	GPIO_Init(GPIOD, &GPIO_InitStructure);
+}
+
+void InitAlive(void) {
+	PrepareStatusLed();
+	Init_Timer();
+}
+
+ void TIM2_IRQHandler(void) {
+
+//	portDISABLE_INTERRUPTS();
+//	__disable_irq();
+
+	SwitchMainLed();
+
+	__HAL_TIM_CLEAR_FLAG(&s_TimerInstance, TIM_FLAG_UPDATE);
+
+	//SanCanAlive();
+
+//	__enable_irq();
+//	portENABLE_INTERRUPTS();
+
+}
