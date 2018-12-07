@@ -908,3 +908,398 @@ Output sent to: CPIOng.list
 Generate listing file done
 Generate build reports done
 arm-atollic-eabi-objcopy.exe -O ihex CPIOng.elf CPIOng.hex 
+21:52:37 **** Incremental Build of configuration Debug for project CPIOng ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Src\pulse.o ..\Src\pulse.c 
+..\Src\pulse.c: In function 'SendPulsePerCanTask':
+..\Src\pulse.c:87:56: warning: passing argument 3 of 'xQueueReceiveFromISR' makes pointer from integer without a cast [-Wint-conversion]
+   if (xQueueReceiveFromISR(PulsQueue, &currentMessage, 10) == pdTRUE) {
+                                                        ^~
+In file included from ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:104:0,
+                 from ..\Src\include.h:14,
+                 from ..\Src\pulse.h:11,
+                 from ..\Src\pulse.c:8:
+../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:1530:12: note: expected 'BaseType_t * const {aka long int * const}' but argument is of type 'int'
+ BaseType_t xQueueReceiveFromISR( QueueHandle_t xQueue, void * const pvBuffer, BaseType_t * const pxHigherPriorityTaskWoken ) PRIVILEGED_FUNCTION;
+            ^~~~~~~~~~~~~~~~~~~~
+In file included from ..\Src\include.h:14:0,
+                 from ..\Src\pulse.h:11,
+                 from ..\Src\pulse.c:8:
+..\Src\pulse.c: In function 'InitPulseSender':
+../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:470:10: warning: initialization from incompatible pointer type [-Wincompatible-pointer-types]
+ { #name, (thread), (priority), (instances), (stacksz)}
+          ^
+..\Src\pulse.c:118:2: note: in expansion of macro 'osThreadDef'
+  osThreadDef(myTask03, SendPulsePerCanTask, osPriorityAboveNormal, 0, 128);
+  ^~~~~~~~~~~
+../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:470:10: note: (near initialization for 'os_thread_def_myTask03.pthread')
+ { #name, (thread), (priority), (instances), (stacksz)}
+          ^
+..\Src\pulse.c:118:2: note: in expansion of macro 'osThreadDef'
+  osThreadDef(myTask03, SendPulsePerCanTask, osPriorityAboveNormal, 0, 128);
+  ^~~~~~~~~~~
+arm-atollic-eabi-gcc -o CPIOng.elf Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_can.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dma.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_wwdg.o Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.o Middlewares\Third_Party\FreeRTOS\Source\croutine.o Middlewares\Third_Party\FreeRTOS\Source\event_groups.o Middlewares\Third_Party\FreeRTOS\Source\list.o Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM3\port.o Middlewares\Third_Party\FreeRTOS\Source\portable\MemMang\heap_4.o Middlewares\Third_Party\FreeRTOS\Source\queue.o Middlewares\Third_Party\FreeRTOS\Source\tasks.o Middlewares\Third_Party\FreeRTOS\Source\timers.o Src\IO.o Src\alive.o Src\can.o Src\error.o Src\freertos.o Src\helper.o Src\main.o Src\myCanFunctions.o Src\pulse.o Src\stm32f1xx_hal_msp.o Src\stm32f1xx_it.o Src\syscalls.o Src\system_stm32f1xx.o startup\startup_stm32f105xc.o -mthumb -mcpu=cortex-m3 -T../STM32F105RB_FLASH.ld -specs=nosys.specs -static -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  39032	    132	   6732	  45896	   b348	CPIOng.elf
+Print size information done
+Generate listing file
+Output sent to: CPIOng.list
+Generate listing file done
+Generate build reports done
+arm-atollic-eabi-objcopy.exe -O ihex CPIOng.elf CPIOng.hex 
+21:53:03 **** Incremental Build of configuration Debug for project CPIOng ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Src\pulse.o ..\Src\pulse.c 
+..\Src\pulse.c: In function 'SendPulsePerCanTask':
+..\Src\pulse.c:87:56: warning: passing argument 3 of 'xQueueReceiveFromISR' makes pointer from integer without a cast [-Wint-conversion]
+   if (xQueueReceiveFromISR(PulsQueue, &currentMessage, 10) == pdTRUE) {
+                                                        ^~
+In file included from ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:104:0,
+                 from ..\Src\include.h:14,
+                 from ..\Src\pulse.h:11,
+                 from ..\Src\pulse.c:8:
+../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:1530:12: note: expected 'BaseType_t * const {aka long int * const}' but argument is of type 'int'
+ BaseType_t xQueueReceiveFromISR( QueueHandle_t xQueue, void * const pvBuffer, BaseType_t * const pxHigherPriorityTaskWoken ) PRIVILEGED_FUNCTION;
+            ^~~~~~~~~~~~~~~~~~~~
+In file included from ..\Src\include.h:14:0,
+                 from ..\Src\pulse.h:11,
+                 from ..\Src\pulse.c:8:
+..\Src\pulse.c: In function 'InitPulseSender':
+../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:470:10: warning: initialization from incompatible pointer type [-Wincompatible-pointer-types]
+ { #name, (thread), (priority), (instances), (stacksz)}
+          ^
+..\Src\pulse.c:118:2: note: in expansion of macro 'osThreadDef'
+  osThreadDef(myTask03, SendPulsePerCanTask, osPriorityAboveNormal, 0, 128);
+  ^~~~~~~~~~~
+../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:470:10: note: (near initialization for 'os_thread_def_myTask03.pthread')
+ { #name, (thread), (priority), (instances), (stacksz)}
+          ^
+..\Src\pulse.c:118:2: note: in expansion of macro 'osThreadDef'
+  osThreadDef(myTask03, SendPulsePerCanTask, osPriorityAboveNormal, 0, 128);
+  ^~~~~~~~~~~
+arm-atollic-eabi-gcc -o CPIOng.elf Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_can.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dma.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_wwdg.o Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.o Middlewares\Third_Party\FreeRTOS\Source\croutine.o Middlewares\Third_Party\FreeRTOS\Source\event_groups.o Middlewares\Third_Party\FreeRTOS\Source\list.o Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM3\port.o Middlewares\Third_Party\FreeRTOS\Source\portable\MemMang\heap_4.o Middlewares\Third_Party\FreeRTOS\Source\queue.o Middlewares\Third_Party\FreeRTOS\Source\tasks.o Middlewares\Third_Party\FreeRTOS\Source\timers.o Src\IO.o Src\alive.o Src\can.o Src\error.o Src\freertos.o Src\helper.o Src\main.o Src\myCanFunctions.o Src\pulse.o Src\stm32f1xx_hal_msp.o Src\stm32f1xx_it.o Src\syscalls.o Src\system_stm32f1xx.o startup\startup_stm32f105xc.o -mthumb -mcpu=cortex-m3 -T../STM32F105RB_FLASH.ld -specs=nosys.specs -static -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  39032	    132	   6732	  45896	   b348	CPIOng.elf
+Print size information done
+Generate listing file
+Output sent to: CPIOng.list
+Generate listing file done
+Generate build reports done
+arm-atollic-eabi-objcopy.exe -O ihex CPIOng.elf CPIOng.hex 
+21:55:16 **** Incremental Build of configuration Debug for project CPIOng ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Src\pulse.o ..\Src\pulse.c 
+..\Src\pulse.c: In function 'SendPulsePerCanTask':
+..\Src\pulse.c:90:56: warning: passing argument 3 of 'xQueueReceiveFromISR' makes pointer from integer without a cast [-Wint-conversion]
+   if (xQueueReceiveFromISR(PulsQueue, &currentMessage, SubPriorityPulseTimer+SubPriorityPulseTimer+1) == pdTRUE) {
+                                                        ^~~~~~~~~~~~~~~~~~~~~
+In file included from ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:104:0,
+                 from ..\Src\include.h:14,
+                 from ..\Src\pulse.h:11,
+                 from ..\Src\pulse.c:8:
+../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:1530:12: note: expected 'BaseType_t * const {aka long int * const}' but argument is of type 'long unsigned int'
+ BaseType_t xQueueReceiveFromISR( QueueHandle_t xQueue, void * const pvBuffer, BaseType_t * const pxHigherPriorityTaskWoken ) PRIVILEGED_FUNCTION;
+            ^~~~~~~~~~~~~~~~~~~~
+In file included from ..\Src\include.h:14:0,
+                 from ..\Src\pulse.h:11,
+                 from ..\Src\pulse.c:8:
+..\Src\pulse.c: In function 'InitPulseSender':
+../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:470:10: warning: initialization from incompatible pointer type [-Wincompatible-pointer-types]
+ { #name, (thread), (priority), (instances), (stacksz)}
+          ^
+..\Src\pulse.c:121:2: note: in expansion of macro 'osThreadDef'
+  osThreadDef(myTask03, SendPulsePerCanTask, osPriorityAboveNormal, 0, 128);
+  ^~~~~~~~~~~
+../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:470:10: note: (near initialization for 'os_thread_def_myTask03.pthread')
+ { #name, (thread), (priority), (instances), (stacksz)}
+          ^
+..\Src\pulse.c:121:2: note: in expansion of macro 'osThreadDef'
+  osThreadDef(myTask03, SendPulsePerCanTask, osPriorityAboveNormal, 0, 128);
+  ^~~~~~~~~~~
+arm-atollic-eabi-gcc -o CPIOng.elf Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_can.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dma.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_wwdg.o Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.o Middlewares\Third_Party\FreeRTOS\Source\croutine.o Middlewares\Third_Party\FreeRTOS\Source\event_groups.o Middlewares\Third_Party\FreeRTOS\Source\list.o Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM3\port.o Middlewares\Third_Party\FreeRTOS\Source\portable\MemMang\heap_4.o Middlewares\Third_Party\FreeRTOS\Source\queue.o Middlewares\Third_Party\FreeRTOS\Source\tasks.o Middlewares\Third_Party\FreeRTOS\Source\timers.o Src\IO.o Src\alive.o Src\can.o Src\error.o Src\freertos.o Src\helper.o Src\main.o Src\myCanFunctions.o Src\pulse.o Src\stm32f1xx_hal_msp.o Src\stm32f1xx_it.o Src\syscalls.o Src\system_stm32f1xx.o startup\startup_stm32f105xc.o -mthumb -mcpu=cortex-m3 -T../STM32F105RB_FLASH.ld -specs=nosys.specs -static -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  39056	    140	   6732	  45928	   b368	CPIOng.elf
+Print size information done
+Generate listing file
+Output sent to: CPIOng.list
+Generate listing file done
+Generate build reports done
+arm-atollic-eabi-objcopy.exe -O ihex CPIOng.elf CPIOng.hex 
+21:55:45 **** Incremental Build of configuration Debug for project CPIOng ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Src\pulse.o ..\Src\pulse.c 
+..\Src\pulse.c: In function 'SendPulsePerCanTask':
+..\Src\pulse.c:90:56: warning: passing argument 3 of 'xQueueReceiveFromISR' makes pointer from integer without a cast [-Wint-conversion]
+   if (xQueueReceiveFromISR(PulsQueue, &currentMessage, SubPriorityPulseTimer+SubPriorityPulseTimer-1) == pdTRUE) {
+                                                        ^~~~~~~~~~~~~~~~~~~~~
+In file included from ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:104:0,
+                 from ..\Src\include.h:14,
+                 from ..\Src\pulse.h:11,
+                 from ..\Src\pulse.c:8:
+../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:1530:12: note: expected 'BaseType_t * const {aka long int * const}' but argument is of type 'long unsigned int'
+ BaseType_t xQueueReceiveFromISR( QueueHandle_t xQueue, void * const pvBuffer, BaseType_t * const pxHigherPriorityTaskWoken ) PRIVILEGED_FUNCTION;
+            ^~~~~~~~~~~~~~~~~~~~
+In file included from ..\Src\include.h:14:0,
+                 from ..\Src\pulse.h:11,
+                 from ..\Src\pulse.c:8:
+..\Src\pulse.c: In function 'InitPulseSender':
+../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:470:10: warning: initialization from incompatible pointer type [-Wincompatible-pointer-types]
+ { #name, (thread), (priority), (instances), (stacksz)}
+          ^
+..\Src\pulse.c:121:2: note: in expansion of macro 'osThreadDef'
+  osThreadDef(myTask03, SendPulsePerCanTask, osPriorityAboveNormal, 0, 128);
+  ^~~~~~~~~~~
+../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:470:10: note: (near initialization for 'os_thread_def_myTask03.pthread')
+ { #name, (thread), (priority), (instances), (stacksz)}
+          ^
+..\Src\pulse.c:121:2: note: in expansion of macro 'osThreadDef'
+  osThreadDef(myTask03, SendPulsePerCanTask, osPriorityAboveNormal, 0, 128);
+  ^~~~~~~~~~~
+arm-atollic-eabi-gcc -o CPIOng.elf Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_can.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dma.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_wwdg.o Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.o Middlewares\Third_Party\FreeRTOS\Source\croutine.o Middlewares\Third_Party\FreeRTOS\Source\event_groups.o Middlewares\Third_Party\FreeRTOS\Source\list.o Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM3\port.o Middlewares\Third_Party\FreeRTOS\Source\portable\MemMang\heap_4.o Middlewares\Third_Party\FreeRTOS\Source\queue.o Middlewares\Third_Party\FreeRTOS\Source\tasks.o Middlewares\Third_Party\FreeRTOS\Source\timers.o Src\IO.o Src\alive.o Src\can.o Src\error.o Src\freertos.o Src\helper.o Src\main.o Src\myCanFunctions.o Src\pulse.o Src\stm32f1xx_hal_msp.o Src\stm32f1xx_it.o Src\syscalls.o Src\system_stm32f1xx.o startup\startup_stm32f105xc.o -mthumb -mcpu=cortex-m3 -T../STM32F105RB_FLASH.ld -specs=nosys.specs -static -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  39056	    140	   6732	  45928	   b368	CPIOng.elf
+Print size information done
+Generate listing file
+Output sent to: CPIOng.list
+Generate listing file done
+Generate build reports done
+arm-atollic-eabi-objcopy.exe -O ihex CPIOng.elf CPIOng.hex 
+21:56:19 **** Incremental Build of configuration Debug for project CPIOng ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Src\pulse.o ..\Src\pulse.c 
+..\Src\pulse.c: In function 'SendPulsePerCanTask':
+..\Src\pulse.c:90:56: warning: passing argument 3 of 'xQueueReceiveFromISR' makes pointer from integer without a cast [-Wint-conversion]
+   if (xQueueReceiveFromISR(PulsQueue, &currentMessage, SubPriorityPulseTimer+SubPriorityPulseTimer-1) == pdTRUE) {
+                                                        ^~~~~~~~~~~~~~~~~~~~~
+In file included from ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:104:0,
+                 from ..\Src\include.h:14,
+                 from ..\Src\pulse.h:11,
+                 from ..\Src\pulse.c:8:
+../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:1530:12: note: expected 'BaseType_t * const {aka long int * const}' but argument is of type 'long unsigned int'
+ BaseType_t xQueueReceiveFromISR( QueueHandle_t xQueue, void * const pvBuffer, BaseType_t * const pxHigherPriorityTaskWoken ) PRIVILEGED_FUNCTION;
+            ^~~~~~~~~~~~~~~~~~~~
+In file included from ..\Src\include.h:14:0,
+                 from ..\Src\pulse.h:11,
+                 from ..\Src\pulse.c:8:
+..\Src\pulse.c: In function 'InitPulseSender':
+../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:470:10: warning: initialization from incompatible pointer type [-Wincompatible-pointer-types]
+ { #name, (thread), (priority), (instances), (stacksz)}
+          ^
+..\Src\pulse.c:121:2: note: in expansion of macro 'osThreadDef'
+  osThreadDef(myTask03, SendPulsePerCanTask, osPriorityAboveNormal, 0, 128);
+  ^~~~~~~~~~~
+../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:470:10: note: (near initialization for 'os_thread_def_myTask03.pthread')
+ { #name, (thread), (priority), (instances), (stacksz)}
+          ^
+..\Src\pulse.c:121:2: note: in expansion of macro 'osThreadDef'
+  osThreadDef(myTask03, SendPulsePerCanTask, osPriorityAboveNormal, 0, 128);
+  ^~~~~~~~~~~
+arm-atollic-eabi-gcc -o CPIOng.elf Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_can.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dma.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_wwdg.o Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.o Middlewares\Third_Party\FreeRTOS\Source\croutine.o Middlewares\Third_Party\FreeRTOS\Source\event_groups.o Middlewares\Third_Party\FreeRTOS\Source\list.o Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM3\port.o Middlewares\Third_Party\FreeRTOS\Source\portable\MemMang\heap_4.o Middlewares\Third_Party\FreeRTOS\Source\queue.o Middlewares\Third_Party\FreeRTOS\Source\tasks.o Middlewares\Third_Party\FreeRTOS\Source\timers.o Src\IO.o Src\alive.o Src\can.o Src\error.o Src\freertos.o Src\helper.o Src\main.o Src\myCanFunctions.o Src\pulse.o Src\stm32f1xx_hal_msp.o Src\stm32f1xx_it.o Src\syscalls.o Src\system_stm32f1xx.o startup\startup_stm32f105xc.o -mthumb -mcpu=cortex-m3 -T../STM32F105RB_FLASH.ld -specs=nosys.specs -static -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  39056	    140	   6732	  45928	   b368	CPIOng.elf
+Print size information done
+Generate listing file
+Output sent to: CPIOng.list
+Generate listing file done
+Generate build reports done
+arm-atollic-eabi-objcopy.exe -O ihex CPIOng.elf CPIOng.hex 
+21:56:44 **** Incremental Build of configuration Debug for project CPIOng ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Src\pulse.o ..\Src\pulse.c 
+..\Src\pulse.c: In function 'SendPulsePerCanTask':
+..\Src\pulse.c:90:56: warning: passing argument 3 of 'xQueueReceiveFromISR' makes pointer from integer without a cast [-Wint-conversion]
+   if (xQueueReceiveFromISR(PulsQueue, &currentMessage, SubPriorityPulseTimer+SubPriorityPulseTimer-1) == pdTRUE) {
+                                                        ^~~~~~~~~~~~~~~~~~~~~
+In file included from ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:104:0,
+                 from ..\Src\include.h:14,
+                 from ..\Src\pulse.h:11,
+                 from ..\Src\pulse.c:8:
+../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:1530:12: note: expected 'BaseType_t * const {aka long int * const}' but argument is of type 'long unsigned int'
+ BaseType_t xQueueReceiveFromISR( QueueHandle_t xQueue, void * const pvBuffer, BaseType_t * const pxHigherPriorityTaskWoken ) PRIVILEGED_FUNCTION;
+            ^~~~~~~~~~~~~~~~~~~~
+In file included from ..\Src\include.h:14:0,
+                 from ..\Src\pulse.h:11,
+                 from ..\Src\pulse.c:8:
+..\Src\pulse.c: In function 'InitPulseSender':
+../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:470:10: warning: initialization from incompatible pointer type [-Wincompatible-pointer-types]
+ { #name, (thread), (priority), (instances), (stacksz)}
+          ^
+..\Src\pulse.c:121:2: note: in expansion of macro 'osThreadDef'
+  osThreadDef(myTask03, SendPulsePerCanTask, osPriorityAboveNormal, 0, 128);
+  ^~~~~~~~~~~
+../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:470:10: note: (near initialization for 'os_thread_def_myTask03.pthread')
+ { #name, (thread), (priority), (instances), (stacksz)}
+          ^
+..\Src\pulse.c:121:2: note: in expansion of macro 'osThreadDef'
+  osThreadDef(myTask03, SendPulsePerCanTask, osPriorityAboveNormal, 0, 128);
+  ^~~~~~~~~~~
+arm-atollic-eabi-gcc -o CPIOng.elf Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_can.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dma.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_wwdg.o Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.o Middlewares\Third_Party\FreeRTOS\Source\croutine.o Middlewares\Third_Party\FreeRTOS\Source\event_groups.o Middlewares\Third_Party\FreeRTOS\Source\list.o Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM3\port.o Middlewares\Third_Party\FreeRTOS\Source\portable\MemMang\heap_4.o Middlewares\Third_Party\FreeRTOS\Source\queue.o Middlewares\Third_Party\FreeRTOS\Source\tasks.o Middlewares\Third_Party\FreeRTOS\Source\timers.o Src\IO.o Src\alive.o Src\can.o Src\error.o Src\freertos.o Src\helper.o Src\main.o Src\myCanFunctions.o Src\pulse.o Src\stm32f1xx_hal_msp.o Src\stm32f1xx_it.o Src\syscalls.o Src\system_stm32f1xx.o startup\startup_stm32f105xc.o -mthumb -mcpu=cortex-m3 -T../STM32F105RB_FLASH.ld -specs=nosys.specs -static -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  39056	    140	   6732	  45928	   b368	CPIOng.elf
+Print size information done
+Generate listing file
+Output sent to: CPIOng.list
+Generate listing file done
+Generate build reports done
+arm-atollic-eabi-objcopy.exe -O ihex CPIOng.elf CPIOng.hex 
+21:58:23 **** Incremental Build of configuration Debug for project CPIOng ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Src\pulse.o ..\Src\pulse.c 
+In file included from ..\Src\include.h:14:0,
+                 from ..\Src\pulse.h:11,
+                 from ..\Src\pulse.c:8:
+..\Src\pulse.c: In function 'InitPulseSender':
+../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:470:10: warning: initialization from incompatible pointer type [-Wincompatible-pointer-types]
+ { #name, (thread), (priority), (instances), (stacksz)}
+          ^
+..\Src\pulse.c:121:2: note: in expansion of macro 'osThreadDef'
+  osThreadDef(myTask03, SendPulsePerCanTask, osPriorityAboveNormal, 0, 128);
+  ^~~~~~~~~~~
+../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:470:10: note: (near initialization for 'os_thread_def_myTask03.pthread')
+ { #name, (thread), (priority), (instances), (stacksz)}
+          ^
+..\Src\pulse.c:121:2: note: in expansion of macro 'osThreadDef'
+  osThreadDef(myTask03, SendPulsePerCanTask, osPriorityAboveNormal, 0, 128);
+  ^~~~~~~~~~~
+arm-atollic-eabi-gcc -o CPIOng.elf Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_can.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dma.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_wwdg.o Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.o Middlewares\Third_Party\FreeRTOS\Source\croutine.o Middlewares\Third_Party\FreeRTOS\Source\event_groups.o Middlewares\Third_Party\FreeRTOS\Source\list.o Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM3\port.o Middlewares\Third_Party\FreeRTOS\Source\portable\MemMang\heap_4.o Middlewares\Third_Party\FreeRTOS\Source\queue.o Middlewares\Third_Party\FreeRTOS\Source\tasks.o Middlewares\Third_Party\FreeRTOS\Source\timers.o Src\IO.o Src\alive.o Src\can.o Src\error.o Src\freertos.o Src\helper.o Src\main.o Src\myCanFunctions.o Src\pulse.o Src\stm32f1xx_hal_msp.o Src\stm32f1xx_it.o Src\syscalls.o Src\system_stm32f1xx.o startup\startup_stm32f105xc.o -mthumb -mcpu=cortex-m3 -T../STM32F105RB_FLASH.ld -specs=nosys.specs -static -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  39056	    140	   6732	  45928	   b368	CPIOng.elf
+Print size information done
+Generate listing file
+Output sent to: CPIOng.list
+Generate listing file done
+Generate build reports done
+arm-atollic-eabi-objcopy.exe -O ihex CPIOng.elf CPIOng.hex 
+22:01:21 **** Incremental Build of configuration Debug for project CPIOng ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Src\pulse.o ..\Src\pulse.c 
+In file included from ..\Src\include.h:14:0,
+                 from ..\Src\pulse.h:11,
+                 from ..\Src\pulse.c:8:
+..\Src\pulse.c: In function 'InitPulseSender':
+../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:470:10: warning: initialization from incompatible pointer type [-Wincompatible-pointer-types]
+ { #name, (thread), (priority), (instances), (stacksz)}
+          ^
+..\Src\pulse.c:121:2: note: in expansion of macro 'osThreadDef'
+  osThreadDef(myTask03, SendPulsePerCanTask, osPriorityAboveNormal, 0, 128);
+  ^~~~~~~~~~~
+../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:470:10: note: (near initialization for 'os_thread_def_myTask03.pthread')
+ { #name, (thread), (priority), (instances), (stacksz)}
+          ^
+..\Src\pulse.c:121:2: note: in expansion of macro 'osThreadDef'
+  osThreadDef(myTask03, SendPulsePerCanTask, osPriorityAboveNormal, 0, 128);
+  ^~~~~~~~~~~
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Src\main.o ..\Src\main.c 
+..\Src\main.c: In function 'MX_CAN2_Init':
+..\Src\main.c:406:19: warning: passing argument 1 of 'HAL_CAN_Init' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  if (HAL_CAN_Init(&hcan2) != HAL_OK) {
+                   ^
+In file included from ../Inc/stm32f1xx_hal_conf.h:254:0,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from ..\Src\include.h:13,
+                 from ..\Src\main.c:55:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:699:19: note: expected 'CAN_HandleTypeDef * {aka struct <anonymous> *}' but argument is of type 'volatile CAN_HandleTypeDef * {aka volatile struct <anonymous> *}'
+ HAL_StatusTypeDef HAL_CAN_Init(CAN_HandleTypeDef* hcan);
+                   ^~~~~~~~~~~~
+..\Src\main.c:426:27: warning: passing argument 1 of 'HAL_CAN_ConfigFilter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  if (HAL_CAN_ConfigFilter(&hcan2, &sFilterConfig) != HAL_OK) {
+                           ^
+In file included from ../Inc/stm32f1xx_hal_conf.h:254:0,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from ..\Src\include.h:13,
+                 from ..\Src\main.c:55:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:700:19: note: expected 'CAN_HandleTypeDef * {aka struct <anonymous> *}' but argument is of type 'volatile CAN_HandleTypeDef * {aka volatile struct <anonymous> *}'
+ HAL_StatusTypeDef HAL_CAN_ConfigFilter(CAN_HandleTypeDef* hcan, CAN_FilterConfTypeDef* sFilterConfig);
+                   ^~~~~~~~~~~~~~~~~~~~
+..\Src\main.c:434:2: warning: implicit declaration of function 'FilterOnlyMyId' [-Wimplicit-function-declaration]
+  FilterOnlyMyId();
+  ^~~~~~~~~~~~~~
+..\Src\main.c: At top level:
+..\Src\main.c:441:6: warning: conflicting types for 'FilterOnlyMyId'
+ void FilterOnlyMyId(void){
+      ^~~~~~~~~~~~~~
+..\Src\main.c:434:2: note: previous implicit declaration of 'FilterOnlyMyId' was here
+  FilterOnlyMyId();
+  ^~~~~~~~~~~~~~
+..\Src\main.c: In function 'FilterOnlyMyId':
+..\Src\main.c:483:29: warning: passing argument 1 of 'HAL_CAN_ConfigFilter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+    if (HAL_CAN_ConfigFilter(&hcan2, &sFilterConfig) != HAL_OK) {
+                             ^
+In file included from ../Inc/stm32f1xx_hal_conf.h:254:0,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from ..\Src\include.h:13,
+                 from ..\Src\main.c:55:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:700:19: note: expected 'CAN_HandleTypeDef * {aka struct <anonymous> *}' but argument is of type 'volatile CAN_HandleTypeDef * {aka volatile struct <anonymous> *}'
+ HAL_StatusTypeDef HAL_CAN_ConfigFilter(CAN_HandleTypeDef* hcan, CAN_FilterConfTypeDef* sFilterConfig);
+                   ^~~~~~~~~~~~~~~~~~~~
+At top level:
+..\Src\main.c:521:13: warning: 'MX_WWDG_Init' defined but not used [-Wunused-function]
+ static void MX_WWDG_Init(void) {
+             ^~~~~~~~~~~~
+..\Src\main.c:504:13: warning: 'MX_USART1_UART_Init' defined but not used [-Wunused-function]
+ static void MX_USART1_UART_Init(void) {
+             ^~~~~~~~~~~~~~~~~~~
+arm-atollic-eabi-gcc -o CPIOng.elf Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_can.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dma.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_wwdg.o Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.o Middlewares\Third_Party\FreeRTOS\Source\croutine.o Middlewares\Third_Party\FreeRTOS\Source\event_groups.o Middlewares\Third_Party\FreeRTOS\Source\list.o Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM3\port.o Middlewares\Third_Party\FreeRTOS\Source\portable\MemMang\heap_4.o Middlewares\Third_Party\FreeRTOS\Source\queue.o Middlewares\Third_Party\FreeRTOS\Source\tasks.o Middlewares\Third_Party\FreeRTOS\Source\timers.o Src\IO.o Src\alive.o Src\can.o Src\error.o Src\freertos.o Src\helper.o Src\main.o Src\myCanFunctions.o Src\pulse.o Src\stm32f1xx_hal_msp.o Src\stm32f1xx_it.o Src\syscalls.o Src\system_stm32f1xx.o startup\startup_stm32f105xc.o -mthumb -mcpu=cortex-m3 -T../STM32F105RB_FLASH.ld -specs=nosys.specs -static -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  39016	    140	   6732	  45888	   b340	CPIOng.elf
+Print size information done
+Generate listing file
+Output sent to: CPIOng.list
+Generate listing file done
+Generate build reports done
+arm-atollic-eabi-objcopy.exe -O ihex CPIOng.elf CPIOng.hex 
+22:02:35 **** Incremental Build of configuration Debug for project CPIOng ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Src\pulse.o ..\Src\pulse.c 
+In file included from ..\Src\include.h:14:0,
+                 from ..\Src\pulse.h:11,
+                 from ..\Src\pulse.c:8:
+..\Src\pulse.c: In function 'InitPulseSender':
+../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:470:10: warning: initialization from incompatible pointer type [-Wincompatible-pointer-types]
+ { #name, (thread), (priority), (instances), (stacksz)}
+          ^
+..\Src\pulse.c:121:2: note: in expansion of macro 'osThreadDef'
+  osThreadDef(myTask03, SendPulsePerCanTask, osPriorityAboveNormal, 0, 128);
+  ^~~~~~~~~~~
+../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:470:10: note: (near initialization for 'os_thread_def_myTask03.pthread')
+ { #name, (thread), (priority), (instances), (stacksz)}
+          ^
+..\Src\pulse.c:121:2: note: in expansion of macro 'osThreadDef'
+  osThreadDef(myTask03, SendPulsePerCanTask, osPriorityAboveNormal, 0, 128);
+  ^~~~~~~~~~~
+arm-atollic-eabi-gcc -o CPIOng.elf Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_can.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dma.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_wwdg.o Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.o Middlewares\Third_Party\FreeRTOS\Source\croutine.o Middlewares\Third_Party\FreeRTOS\Source\event_groups.o Middlewares\Third_Party\FreeRTOS\Source\list.o Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM3\port.o Middlewares\Third_Party\FreeRTOS\Source\portable\MemMang\heap_4.o Middlewares\Third_Party\FreeRTOS\Source\queue.o Middlewares\Third_Party\FreeRTOS\Source\tasks.o Middlewares\Third_Party\FreeRTOS\Source\timers.o Src\IO.o Src\alive.o Src\can.o Src\error.o Src\freertos.o Src\helper.o Src\main.o Src\myCanFunctions.o Src\pulse.o Src\stm32f1xx_hal_msp.o Src\stm32f1xx_it.o Src\syscalls.o Src\system_stm32f1xx.o startup\startup_stm32f105xc.o -mthumb -mcpu=cortex-m3 -T../STM32F105RB_FLASH.ld -specs=nosys.specs -static -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  38752	    140	   6732	  45624	   b238	CPIOng.elf
+Print size information done
+Generate listing file
+Output sent to: CPIOng.list
+Generate listing file done
+Generate build reports done
+arm-atollic-eabi-objcopy.exe -O ihex CPIOng.elf CPIOng.hex 

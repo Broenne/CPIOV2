@@ -86,8 +86,8 @@ void SendPulsePerCanTask(void * pvParameters) {
 		/* Wait for the maximum period for data to become available on the queue.
 		 The period will be indefinite if INCLUDE_vTaskSuspend is set to 1 in
 		 FreeRTOSConfig.h. */
-		if (xQueueReceive(PulsQueue, &currentMessage, 100) == pdTRUE) {
-		//if (xQueueReceiveFromISR(PulsQueue, &currentMessage, (BaseType_t *)(SubPriorityPulseTimer+SubPriorityPulseTimer-1)) == pdTRUE) {
+
+		if (xQueueReceiveFromISR(PulsQueue, &currentMessage, (BaseType_t *)(SubPriorityPulseTimer+SubPriorityPulseTimer-1)) == pdTRUE) {
 			//printf("Received %d %d \r\n", currentMessage.channel, currentMessage.res);
 			SendCanTimeDif(currentMessage.channel, currentMessage.res);
 		}

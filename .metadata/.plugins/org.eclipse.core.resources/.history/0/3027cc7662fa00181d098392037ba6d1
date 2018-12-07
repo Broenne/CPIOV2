@@ -17,8 +17,8 @@ typedef struct {
 static TIM_HandleTypeDef pulseTimerInstance; // = { .Instance = TIM2 };
 
 static xQueueHandle PulsQueue = NULL;
-uint32_t PreemptPriorityPulseTimer=5;
-uint32_t SubPriorityPulseTimer=5;
+uint32_t PreemptPriorityPulseTimer=2;
+uint32_t SubPriorityPulseTimer=4;
 
 
 /*
@@ -47,7 +47,7 @@ void Init_TimerForPulsTime(void) {
 	}
 
 	HAL_TIM_Base_Start(&pulseTimerInstance);
-	HAL_NVIC_SetPriority(TIM3_IRQn, PreemptPriorityPulseTimer, SubPriorityPulseTimer); // extrem hohe priorität sollte es sein!!!
+	HAL_NVIC_SetPriority(TIM3_IRQn, PreemptPriorityPulseTimer, SubPriorityPulseTimer); // extrem hohe priorität
 	HAL_NVIC_EnableIRQ(TIM3_IRQn);
 
 	__HAL_TIM_ENABLE_IT(&pulseTimerInstance, TIM_IT_UPDATE);
@@ -86,8 +86,8 @@ void SendPulsePerCanTask(void * pvParameters) {
 		/* Wait for the maximum period for data to become available on the queue.
 		 The period will be indefinite if INCLUDE_vTaskSuspend is set to 1 in
 		 FreeRTOSConfig.h. */
-		if (xQueueReceive(PulsQueue, &currentMessage, 100) == pdTRUE) {
-		//if (xQueueReceiveFromISR(PulsQueue, &currentMessage, (BaseType_t *)(SubPriorityPulseTimer+SubPriorityPulseTimer-1)) == pdTRUE) {
+
+		if (xQueueReceiveFromISR(PulsQueue, &currentMessage, SubPriorityPulseTimer+SubPriorityPulseTimer+1) == pdTRUE) {
 			//printf("Received %d %d \r\n", currentMessage.channel, currentMessage.res);
 			SendCanTimeDif(currentMessage.channel, currentMessage.res);
 		}
@@ -121,6 +121,15 @@ void InitPulseSender(void) {
 	osThreadDef(myTask03, SendPulsePerCanTask, osPriorityAboveNormal, 0, 128);
 	myTask03Handle = osThreadCreate(osThread(myTask03), NULL);
 
+//	portBASE_TYPE xReturned;
+//	xTaskHandle xHandle = NULL;
+//
+//	/* Create the task, storing the handle. */
+//	xReturned = xTaskCreate(SendPulsePerCanTask, "CanS", configMINIMAL_STACK_SIZE, (void *) 1, tskIDLE_PRIORITY, &xHandle);
+//
+//	if (xReturned != pdPASS) {
+//		SetPulseSenderCreateTaskError();
+//	}
 
 	// todo mb: wann und wie den task deleten?
 	/* The task was created.  Use the task's handle to delete the task. */
@@ -143,7 +152,7 @@ void SendTimeInfo(uint8_t channel) {
 		res = lastTimeValue[channel] - actualTimeValue;
 	}
 
-	// printf("SendTimeInfo %d \r\n", channel);
+	printf("SendTimeInfo %d \r\n", channel);
 	MessageForSend messageForSend;
 	messageForSend.channel = channel;
 	messageForSend.res = res;

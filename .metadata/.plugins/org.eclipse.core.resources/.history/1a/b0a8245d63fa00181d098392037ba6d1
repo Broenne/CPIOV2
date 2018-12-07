@@ -47,7 +47,7 @@ void Init_TimerForPulsTime(void) {
 	}
 
 	HAL_TIM_Base_Start(&pulseTimerInstance);
-	HAL_NVIC_SetPriority(TIM3_IRQn, PreemptPriorityPulseTimer, SubPriorityPulseTimer); // extrem hohe priorität sollte es sein!!!
+	HAL_NVIC_SetPriority(TIM3_IRQn, PreemptPriorityPulseTimer, SubPriorityPulseTimer); // extrem hohe priorität
 	HAL_NVIC_EnableIRQ(TIM3_IRQn);
 
 	__HAL_TIM_ENABLE_IT(&pulseTimerInstance, TIM_IT_UPDATE);
@@ -86,8 +86,8 @@ void SendPulsePerCanTask(void * pvParameters) {
 		/* Wait for the maximum period for data to become available on the queue.
 		 The period will be indefinite if INCLUDE_vTaskSuspend is set to 1 in
 		 FreeRTOSConfig.h. */
-		if (xQueueReceive(PulsQueue, &currentMessage, 100) == pdTRUE) {
-		//if (xQueueReceiveFromISR(PulsQueue, &currentMessage, (BaseType_t *)(SubPriorityPulseTimer+SubPriorityPulseTimer-1)) == pdTRUE) {
+
+		if (xQueueReceiveFromISR(PulsQueue, &currentMessage, (BaseType_t *)(SubPriorityPulseTimer+SubPriorityPulseTimer-1)) == pdTRUE) {
 			//printf("Received %d %d \r\n", currentMessage.channel, currentMessage.res);
 			SendCanTimeDif(currentMessage.channel, currentMessage.res);
 		}
