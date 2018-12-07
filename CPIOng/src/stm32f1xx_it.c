@@ -211,34 +211,17 @@ void CAN2_RX0_IRQHandler(void)
 {
   /* USER CODE BEGIN CAN2_RX0_IRQn 0 */
 
-	//portDISABLE_INTERRUPTS();
+	portDISABLE_INTERRUPTS();
 
   /* USER CODE END CAN2_RX0_IRQn  0 */
    HAL_CAN_IRQHandler(&hcan2);
 
-//AL_CAN_Receive_IT()
 
-
-	//__HAL_CAN_FIFO_RELEASE(&hcan2, CAN_FIFO0);
-	//printf("hello can interrupt 2 \r\n");
-	//__HAL_CAN_ENABLE_IT(&hcan2, CAN_IT_FMP0);
-	//__HAL_CAN_CLEAR_FLAG(&hcan2, CAN_IT_FMP0);
-
-	//__HAL_CAN_CLEAR_FLAG(&hcan2, CAN_IT_FMP0);
-
-
-	//portENABLE_INTERRUPTS();
+	portENABLE_INTERRUPTS();
 
 
 
-	__HAL_CAN_ENABLE_IT(&hcan2, CAN_IT_EWG |
-		                            CAN_IT_EPV |
-		                            CAN_IT_BOF |
-		                            CAN_IT_LEC |
-		                            CAN_IT_ERR |
-		                            CAN_IT_TME  );
 
-		 __HAL_CAN_ENABLE_IT(&hcan2, CAN_IT_FOV0 | CAN_IT_FMP0);
 
   /* USER CODE BEGIN CAN2_RX0_IRQn 1 */
 

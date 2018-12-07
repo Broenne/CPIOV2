@@ -88,9 +88,18 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 
 
 	 if(hcan->Instance == CAN2){
-		printf("hello can interrupt 2 \r\n");
+		printf("hello can interrupt 2  %d \r\n ", hcan->pRxMsg->Data[0]);
 
 	 }
+
+	 __HAL_CAN_ENABLE_IT(&hcan2, CAN_IT_EWG |
+	 		                            CAN_IT_EPV |
+	 		                            CAN_IT_BOF |
+	 		                            CAN_IT_LEC |
+	 		                            CAN_IT_ERR |
+	 		                            CAN_IT_TME  );
+
+	 __HAL_CAN_ENABLE_IT(&hcan2, CAN_IT_FOV0 | CAN_IT_FMP0);
 
 	 //__HAL_CAN_ENABLE_IT(hcan, CAN_IT_FMP0);
 

@@ -182,26 +182,13 @@ int main(void) {
 	printf("hello wrold \r\n");
 
 	//PrepareCan();
-	//InitAlive();
+	InitAlive();
 
 	for (int i = 0; i < 10; ++i) {
 		SendCanTimeDif(42, i);
 	}
 
-//	  CanRxMsgTypeDef xxx;
-//	  hcan2.pRxMsg = &xxx;
-//	  CanRxMsgTypeDef xxx1;
-//	  hcan2.pRx1Msg = &xxx1;
-//
-//	  CanTxMsgTypeDef tx;
-//	 	  hcan2.pTxMsg = &tx;
 
-
-//  while(1){
-//	  if(HAL_OK == HAL_CAN_Receive(&hcan2, CAN_FIFO0, 20)){
-//		  printf("ccc");
-//	  }
-//  }
 
 	/* Start scheduler */
 	osKernelStart();
