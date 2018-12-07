@@ -236,6 +236,7 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* hcan)
 // geändert oder eingefügt
     GPIO_InitStruct.Pull = GPIO_PULLUP;//GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH; // die war nicht gesettzt
+    GPIO_InitStruct.
 
 
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);

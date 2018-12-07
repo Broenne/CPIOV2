@@ -523,14 +523,14 @@ static void MX_CAN2_Init(void)
       	sFilterConfig.FilterActivation = ENABLE;
       	//sFilterConfig.BankNumber = 0;
 
-//      	HAL_CAN_Receive_IT(&hcan2, CAN_FIFO0);
+      	//HAL_CAN_Receive_IT(&hcan2, CAN_FIFO0);
       	if (HAL_CAN_ConfigFilter(&hcan2, &sFilterConfig) != HAL_OK)
   		{
   			/* Filter configuration Error */
   			Error_Handler();
   		}
 
-//
+
 //  HAL_NVIC_SetPriority(CAN2_RX0_IRQn, 10, 0);
 //  HAL_NVIC_EnableIRQ(CAN2_RX0_IRQn);
 //
