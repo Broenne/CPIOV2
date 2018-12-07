@@ -88,7 +88,7 @@ void SendCanTimeDif(uint8_t channel, uint32_t res) {
 	p[2] = (res >> 8) & 0xFF;
 	p[3] = res & 0xFF;
 
-	uint32_t canId =42;//= 0x180 + GetGlobalCanNodeId() + channel;
+	uint32_t canId = 0x180 + GetGlobalCanNodeId() + channel;
 	SendCan(canId, p, 4);
 }
 

@@ -45,7 +45,7 @@ uint8_t ReadInputsFromRegisterB(void) {
 
 	uint8_t b0 = CalculateAnalogToHighOrLow(adcbuffer[8]);
 	uint8_t b1 = CalculateAnalogToHighOrLow(adcbuffer[9]);
-	printf("value analog b2 %d \r\n", b1);
+	//printf("value analog b2 %d \r\n", b1);
 	return ((b1 << 1) & b0);
 	//return 0;
 	//return (uint8_t)GPIO_ReadInputData(GPIOB) & 0x03; // Pb0 = 10, pb1 = 11

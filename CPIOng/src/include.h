@@ -20,6 +20,7 @@
 #include "alive.h"
 #include "can.h"
 #include "myCanFunctions.h"
+#include "pulse.h"
 
 
 

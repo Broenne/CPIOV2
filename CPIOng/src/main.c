@@ -187,6 +187,8 @@ int main(void) {
 
 	InitReadIO();
 
+	InitPulse();
+
 	//PrepareCan();
 	InitAlive();
 
