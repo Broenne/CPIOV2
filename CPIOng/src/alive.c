@@ -16,14 +16,14 @@ void SwitchMainLed(void) {
 
 }
 
-//void SanCanAlive(void) {
-//	uint8_t p[] = { 0x01, 0, 0, 0, 0, 0, 0, 0 };
-//
-//	// add error frames
-//	GetApplicationStatus(&p[3]);
-//
-//	SendCan(AliveCanId, p, 8);
-//}
+void SanCanAlive(void) {
+	uint8_t p[] = { 0x01, 0, 0, 0, 0, 0, 0, 0 };
+
+	// add error frames
+	//GetApplicationStatus(&p[3]);
+
+	SendCan(AliveCanId, p, 8);
+}
 
 
 static void Init_TimerInternal(){
@@ -86,15 +86,13 @@ void InitAlive(void) {
  void TIM2_IRQHandler(void) {
 
 	portDISABLE_INTERRUPTS();
-//	__disable_irq();
 
 	SwitchMainLed();
 
 	__HAL_TIM_CLEAR_FLAG(&s_TimerInstance, TIM_FLAG_UPDATE);
 
-	//SanCanAlive();
+	SanCanAlive();
 
-//	__enable_irq();
 	portENABLE_INTERRUPTS();
 
 }

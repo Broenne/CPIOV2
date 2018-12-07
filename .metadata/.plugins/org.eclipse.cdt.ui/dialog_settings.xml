@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<item value="2155" key="org.eclipse.cdt.uiformatter_pagemodify_dialog.preferred_x"/>
+	<item value="5" key="org.eclipse.cdt.uiformatter_pagemodify_dialog.last_focus"/>
+	<item value="142" key="org.eclipse.cdt.uiformatter_pagemodify_dialog.preferred_y"/>
+	<item value="0" key="org.eclipse.cdt.uiformatter_page.white_space_tab_page.node"/>
 	<item value="Default C source template" key="LastUsedSourceTemplate"/>
+	<item value="1117" key="org.eclipse.cdt.uiformatter_pagemodify_dialog.preferred_width"/>
+	<item value="875" key="org.eclipse.cdt.uiformatter_pagemodify_dialog.preferred_height"/>
 	<item value="Default C header template" key="LastUsedHeaderTemplate"/>
+	<item value="0" key="org.eclipse.cdt.uiformatter_page.white_space.c_view.inner"/>
+	<item value="1" key="formatter_page.modify_dialog_tab_page.last_focus_index"/>
+	<item value="1" key="org.eclipse.cdt.uiformatter_page.line_wrapping_tab_page.last_category_index"/>
 	<section name="org.eclipse.cdt.ui.OPEN_ACTION_SELECTION_DIALOG_SECTION">
 		<item value="398" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
@@ -19,6 +28,7 @@
 		<item value="false" key="caseSensitive"/>
 		<item value="227191" key="searchFlags"/>
 		<list key="previousPatterns">
+			<item value="GPIO_Mode_IPU"/>
 			<item value="stm32f10x_tim"/>
 			<item value="xSemaphoreGiveFromISR"/>
 			<item value="vApplicationTickHook"/>

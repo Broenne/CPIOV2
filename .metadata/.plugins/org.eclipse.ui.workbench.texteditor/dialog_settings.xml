@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="" key="selection"/>
+		<item value="callback" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="Callback"/>
 			<item value="CAN"/>
 			<item value="PIN5"/>
 			<item value="IN5_Pin"/>
@@ -15,7 +16,6 @@
 			<item value="#include &quot;stm32f1xx_hal.h&quot;"/>
 			<item value="TIM_ClearITPendingBit"/>
 			<item value="xIdleTaskHandle"/>
-			<item value="BAck"/>
 		</list>
 		<list key="replacehistory">
 		</list>

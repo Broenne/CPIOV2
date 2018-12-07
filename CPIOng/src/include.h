@@ -14,9 +14,13 @@
 #include "cmsis_os.h"
 
 
+#include "helper.h"
+#include "error.h"
+
 #include "alive.h"
 #include "can.h"
 #include "myCanFunctions.h"
+
 
 
 #endif /* INCLUDE_H_ */
