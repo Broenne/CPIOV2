@@ -532,9 +532,6 @@ static void MX_CAN2_Init(void)
   			Error_Handler();
   		}
       	hcan2.Instance = CAN2;
-
-
-      	__HAL_CAN_ENABLE_IT(&hcan2, CAN_IT_FMP0 );
 }
 
 /* USART1 init function */
