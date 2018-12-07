@@ -75,7 +75,7 @@ uint8_t GetGlobalCanNodeId() {
 
 void SetGlobalCanNodeId(uint8_t canId) {
 	// todo mb: einschränken
-	SafeGlobalCanId(canId);
+	//SafeGlobalCanId(canId);
 	globalCanId = canId;
 }
 

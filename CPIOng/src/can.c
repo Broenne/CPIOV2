@@ -88,9 +88,39 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 
 
 	 if(hcan->Instance == CAN2){
-		printf("hello can interrupt 2  %d \r\n ", hcan->pRxMsg->Data[0]);
+		printf("hello can interrupt 2 id: %d  data1  %d \r\n ", hcan->pRxMsg->StdId, hcan->pRxMsg->Data[0]);
+
+
+		////	// default id 0
+			if (0x00 == hcan->pRxMsg->StdId) {
+					switch (hcan->pRxMsg->Data[0]) {
+						case 0x01:
+							SetGlobalCanNodeId(RxMessage.Data[1]);
+							printf("Incoming id 0x00 %d", GetGlobalCanNodeId());
+							break;
+						case 0x02:
+							ActivateDebug(RxMessage.Data[1]);
+						default:
+							break;
+					}
+			}
+		////
+		//////	// eigene can id
+		//////	if(GetGloablCanIdFromEeeprom()==RxMessage.StdId){
+		//////			if(0x02 == RxMessage.RTR){
+		//////				// todo mb: über que wegschreiben NIEMALS IN ITERRUPT!!!!!
+		//////				uint8_t data[2];
+		//////				GetInputs(data);
+		//////				SendCan(GetGloablCanIdFromEeeprom(), data, 2);
+		//////				//printf("ddd %i", data[1]);
+		//////			}
+		//////	}
 
 	 }
+
+
+
+
 
 	 __HAL_CAN_ENABLE_IT(&hcan2, CAN_IT_EWG |
 	 		                            CAN_IT_EPV |

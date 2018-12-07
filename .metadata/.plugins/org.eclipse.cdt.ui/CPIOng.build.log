@@ -1,1 +1,35 @@
-Info: Nothing to build for CPIOng
+17:53:39 **** Incremental Build of configuration Debug for project CPIOng ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Src\error.o ..\Src\error.c 
+..\Src\error.c: In function 'GetApplicationStatus':
+..\Src\error.c:19:2: warning: implicit declaration of function 'memcpy' [-Wimplicit-function-declaration]
+  memcpy(data,errorFlgas,2);
+  ^~~~~~
+..\Src\error.c:19:2: warning: incompatible implicit declaration of built-in function 'memcpy'
+..\Src\error.c:19:2: note: include '<string.h>' or provide a declaration of 'memcpy'
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o Src\can.o ..\Src\can.c 
+..\Src\can.c: In function 'CAN2_init_GPIO':
+..\Src\can.c:13:2: warning: implicit declaration of function 'CAN2_init_GPIOInternal' [-Wimplicit-function-declaration]
+  CAN2_init_GPIOInternal();
+  ^~~~~~~~~~~~~~~~~~~~~~
+..\Src\can.c: In function 'InitCanFilter':
+..\Src\can.c:17:2: warning: implicit declaration of function 'FilterOnlyIdNull' [-Wimplicit-function-declaration]
+  FilterOnlyIdNull();
+  ^~~~~~~~~~~~~~~~
+..\Src\can.c: In function 'SendCan':
+..\Src\can.c:37:2: warning: implicit declaration of function 'memcpy' [-Wimplicit-function-declaration]
+  memcpy(canMessage.Data, data, len * sizeof(uint8_t));
+  ^~~~~~
+..\Src\can.c:37:2: warning: incompatible implicit declaration of built-in function 'memcpy'
+..\Src\can.c:37:2: note: include '<string.h>' or provide a declaration of 'memcpy'
+..\Src\can.c: In function 'HAL_CAN_RxCpltCallback':
+..\Src\can.c:91:38: warning: format '%d' expects argument of type 'int', but argument 2 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+   printf("hello can interrupt 2 id: %d  data1  %d \r\n ", hcan->pRxMsg->StdId, hcan->pRxMsg->Data[0]);
+                                      ^
+..\Src\can.c:98:27: error: 'RxMessage' undeclared (first use in this function)
+        SetGlobalCanNodeId(RxMessage.Data[1]);
+                           ^~~~~~~~~
+..\Src\can.c:98:27: note: each undeclared identifier is reported only once for each function it appears in
+
+17:53:39 Build Finished (took 300ms)
+
