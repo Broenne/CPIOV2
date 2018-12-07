@@ -59,10 +59,12 @@
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
-ADC_HandleTypeDef hadc1;
+ADC_HandleTypeDef hadc1; // todo mb: funktion zum übergeben schreiben
 DMA_HandleTypeDef hdma_adc1;
 
 volatile CAN_HandleTypeDef hcan2;
+
+
 
 UART_HandleTypeDef huart1;
 
@@ -91,6 +93,8 @@ void StartDefaultTask(void const * argument);
 void StartIdle_Task(void const * argument);
 void StartTask03(void const * argument);
 void Callback01(void const * argument);
+
+
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
@@ -129,8 +133,8 @@ int main(void) {
 
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
-//  MX_DMA_Init();
-//  MX_ADC1_Init();
+    MX_DMA_Init();
+    MX_ADC1_Init();
 	MX_CAN2_Init();
 //  MX_USART1_UART_Init();
 	//MX_WWDG_Init();
@@ -180,6 +184,8 @@ int main(void) {
 	/* USER CODE END RTOS_QUEUES */
 
 	printf("hello wrold \r\n");
+
+	InitReadIO();
 
 	//PrepareCan();
 	InitAlive();
@@ -467,7 +473,75 @@ static void MX_CAN2_Init(void) {
 	hcan2.Instance = CAN2;
 
 	__HAL_CAN_ENABLE_IT(&hcan2, CAN_IT_FMP0);
+
+	FilterOnlyMyId();
 }
+
+
+
+
+
+void FilterOnlyMyId(void){
+//	CAN_FilterInitTypeDef CAN_FilterInitStructure;
+//		// except every
+//		CAN_FilterInitStructure.CAN_FilterNumber = 14; // 0..13 for CAN1, 14..27 for CAN2
+//		CAN_FilterInitStructure.CAN_FilterMode = CAN_FilterMode_IdMask;
+//		CAN_FilterInitStructure.CAN_FilterScale = CAN_FilterScale_16bit;
+//	//	CAN_FilterInitStructure.CAN_FilterIdHigh = 0x0000;
+//	//	CAN_FilterInitStructure.CAN_FilterIdLow = 0x0000;
+//	//	CAN_FilterInitStructure.CAN_FilterMaskIdHigh = 0xFFFF;//0x0000;
+//	//	CAN_FilterInitStructure.CAN_FilterMaskIdLow = 0x0000;
+//
+//		// 0x110 - 0x11F
+//	//	CAN_FilterInitStructure.CAN_FilterIdHigh =  0x0000;
+//	//	CAN_FilterInitStructure.CAN_FilterIdLow = 0x0110 << 5; //     ID   001 0001 0000
+//	//	CAN_FilterInitStructure.CAN_FilterMaskIdHigh = 0xFFFF;
+//	//	CAN_FilterInitStructure.CAN_FilterMaskIdLow = 0x07F0 << 5; // Mask 111 1111 0000
+//		CAN_FilterInitStructure.CAN_FilterIdHigh =  0x0000;
+//		CAN_FilterInitStructure.CAN_FilterIdLow = GetGloablCanIdFromEeeprom() << 5;
+//		CAN_FilterInitStructure.CAN_FilterMaskIdHigh = 0xFFFF;
+//		CAN_FilterInitStructure.CAN_FilterMaskIdLow = 0x07FF << 5;
+//
+//		CAN_FilterInitStructure.CAN_FilterFIFOAssignment = 0;
+//		CAN_FilterInitStructure.CAN_FilterActivation = ENABLE;
+//		CAN_FilterInit(&CAN_FilterInitStructure);
+
+
+		CAN_FilterConfTypeDef sFilterConfig;
+			//sFilterConfig.FilterIdHigh =
+			sFilterConfig.FilterNumber = 15;
+			sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
+			sFilterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
+			sFilterConfig.FilterMaskIdHigh = 0xFFFF;;
+			sFilterConfig.FilterMaskIdLow = 0x07FF << 5;
+			sFilterConfig.FilterIdHigh = 0x0000;
+			sFilterConfig.FilterIdLow = GetGlobalCanNodeId() << 5;
+			sFilterConfig.FilterFIFOAssignment = CAN_FIFO0;
+			sFilterConfig.FilterActivation = ENABLE;
+			//sFilterConfig.BankNumber = 0;
+
+			// info mb: der filter muss auf can 1 gesetzt werden, auch wenn nur can 2 genutzt wird (warum auch immer)
+			hcan2.Instance = CAN1;
+		//      	HAL_CAN_Receive_IT(&hcan2, CAN_FIFO0);
+			if (HAL_CAN_ConfigFilter(&hcan2, &sFilterConfig) != HAL_OK) {
+				/* Filter configuration Error */
+				Error_Handler();
+			}
+			hcan2.Instance = CAN2;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* USART1 init function */
 static void MX_USART1_UART_Init(void) {

@@ -10,7 +10,7 @@
 
 extern fn_ptr;
 
-static uint8_t globalCanId;
+static uint8_t globalCanId = 42;
 
 
 
@@ -97,7 +97,7 @@ void SendCanTimeDif(uint8_t channel, uint32_t res) {
 void GetInputs(uint8_t* data){
 	uint8_t val[2];
 	val [0] = ReadInputsFromRegisterA();
-	val [1]= 0;
+	val [1]= 0; // muss der auf 0 vorher?
 	val [1] = ReadInputsFromRegisterB();
 	val [1] = (ReadInputsFromRegisterC() << 2 ) | val [1];
 	memcpy(data, val,2);

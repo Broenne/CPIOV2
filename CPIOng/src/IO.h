@@ -10,7 +10,7 @@
 
 #include "include.h"
 
-//void InitInputs(void);
+void InitReadIO(void);
 uint8_t ReadInputsFromRegisterA(void);
 uint8_t ReadInputsFromRegisterB(void);
 uint8_t ReadInputsFromRegisterC(void);
