@@ -83,8 +83,6 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 
 
 
-
-
  void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* hcan)
 {
 
@@ -116,16 +114,13 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 						SendCan(GetGlobalCanNodeId(), data, 2);
 						//printf("ddd %i", data[1]);
 					}
-
-					if(SET_TIMER_CALIBRATION_CMD == hcan->pRxMsg->Data[0]){
-						SetTimerPulseCorrecturFactor(0); // todo mb: datnfed in int 16 wandeln
-					}
-
 			}
 
-
-
 	 }
+
+
+
+
 
 	 __HAL_CAN_ENABLE_IT(&hcan2, CAN_IT_EWG |
 	 		                            CAN_IT_EPV |
@@ -135,6 +130,14 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 	 		                            CAN_IT_TME  );
 
 	 __HAL_CAN_ENABLE_IT(&hcan2, CAN_IT_FOV0 | CAN_IT_FMP0);
+
+	 //__HAL_CAN_ENABLE_IT(hcan, CAN_IT_FMP0);
+
+  /* Prevent unused argument(s) compilation warning */
+  //UNUSED(hcan);
+  /* NOTE : This function Should not be modified, when the callback is needed,
+            the HAL_CAN_RxCpltCallback can be implemented in the user file
+   */
 }
 
 

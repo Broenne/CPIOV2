@@ -5,7 +5,6 @@
 //#include "main.h"
 #include "include.h"
 
-#define SET_TIMER_CALIBRATION_CMD ((uint16_t) 0x01)
 
 void CAN2_init_GPIO(void);
 

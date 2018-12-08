@@ -83,8 +83,6 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 
 
 
-
-
  void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* hcan)
 {
 
@@ -116,14 +114,7 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 						SendCan(GetGlobalCanNodeId(), data, 2);
 						//printf("ddd %i", data[1]);
 					}
-
-					if(SET_TIMER_CALIBRATION_CMD == hcan->pRxMsg->Data[0]){
-						SetTimerPulseCorrecturFactor(0); // todo mb: datnfed in int 16 wandeln
-					}
-
 			}
-
-
 
 	 }
 

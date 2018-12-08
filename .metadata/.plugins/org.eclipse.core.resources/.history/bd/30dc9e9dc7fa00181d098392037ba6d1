@@ -13,7 +13,6 @@
 volatile static uint32_t tickMs;
 volatile static uint32_t lastTimeValue[8];
 
-void SetTimerPulseCorrecturFactor(uint16_t value);
 void InitPulse(void);
 void InitPulseSender(void);
 

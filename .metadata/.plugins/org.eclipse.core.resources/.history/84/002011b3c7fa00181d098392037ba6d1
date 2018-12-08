@@ -27,9 +27,8 @@ void InitTimerPulseCorrecturFactor(){
 	TimerCorrectureFactor = 0; // todo mb: load from eeprom
 }
 
-void SetTimerPulseCorrecturFactor(uint16_t value){
-	// Info, hier nur int 16 erlaubt, korrektur sonst viel zu groﬂ. Sollen wir den Bereich noch einschr‰nken?
-	TimerCorrectureFactor = (uint16_t)value;
+void SetTimerPulseCorrecturFactor(uint32_t value){
+	TimerCorrectureFactor = value;
 	// todo mb: ssafe to eeprom
 }
 
@@ -49,7 +48,7 @@ void Init_TimerForPulsTime(void) {
 	// calculate:
 	// updateFrequenz = Clock/((PSC-1)*(Period-1)
 
-	InitTimerPulseCorrecturFactor();
+	InitTimerCorrecturFactor();
 
 	__HAL_RCC_TIM3_CLK_ENABLE()	;
 	pulseTimerInstance.Instance = TIM3;
