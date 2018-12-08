@@ -20,9 +20,40 @@ namespace CPIOngConfig
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        #region Constructor
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="MainWindow" /> class.
+        /// </summary>
+        /// <param name="logger">The logger.</param>
+        /// <param name="mainWindowViewModel">The main window view model.</param>
+        public MainWindow(MainWindowViewModel mainWindowViewModel)
         {
-            InitializeComponent();
+            // todo mb: das muss auto rein
+            try
+            {
+                this.InitializeComponent();
+                this.DataContext = mainWindowViewModel;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
+        #endregion
+
+        #region Properties
+
+        #endregion
+
+        #region Private Methods
+
+        private void ApplicationExit(object sender, ExitEventArgs e)
+        {
+            // todo mb
+        }
+
+        #endregion
     }
 }
