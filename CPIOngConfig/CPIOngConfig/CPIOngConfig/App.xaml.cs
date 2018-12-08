@@ -20,7 +20,7 @@ namespace CPIOngConfig
         /// <value>
         /// The OSCI BOOTSTRAPPER.
         /// </value>
-        public ConfigBootstrapper OsciBootstrapper { get; private set; }
+        public ConfigBootstrapper ConfigBootstrapper { get; private set; }
 
         #region Protected Methods
 
@@ -33,8 +33,8 @@ namespace CPIOngConfig
             try
             {
                 // Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
-                this.OsciBootstrapper = new ConfigBootstrapper();
-                this.OsciBootstrapper.Run();
+                this.ConfigBootstrapper = new ConfigBootstrapper();
+                this.ConfigBootstrapper.Run();
                 
             }
             catch (Exception ex)
@@ -48,7 +48,7 @@ namespace CPIOngConfig
 
         private void ApplicationExit(object sender, ExitEventArgs e)
         {
-            this.OsciBootstrapper.Dispose(); // todo mb: store values
+            this.ConfigBootstrapper.Dispose(); // todo mb: store values
         }
     }
 }
