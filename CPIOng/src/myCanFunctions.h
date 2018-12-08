@@ -2,7 +2,7 @@
  * myCanFunctions.h
  *
  *  Created on: 29.11.2018
- *      Author: tbe241
+ *      Author: MB
  */
 
 #ifndef MYCANFUNCTIONS_H_
@@ -15,7 +15,13 @@ void PrepareCan(void);
 void SetGlobalCanNodeId(uint8_t canId);
 uint8_t GetGlobalCanNodeId();
 
-//CAN_HandleTypeDef hcan2;
+/*
+ * 8.12.18
+ * MB
+* Funktion um den Filter auf die aktuelle ID zu setzen
+  * */
+//void FilterOnlyMyId(CAN_HandleTypeDef* hcan);
+
 
 /*
  * 30.11.18

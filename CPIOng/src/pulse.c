@@ -7,7 +7,7 @@
 
 #include "pulse.h"
 
-#define QUEUE_SIZE_FOR_PULSE_INFO		( ( unsigned short ) 100 )
+#define QUEUE_SIZE_FOR_PULSE_INFO		( ( unsigned short ) 80 ) // 16 * 5
 
 typedef struct {
 	uint8_t channel;
@@ -172,20 +172,6 @@ void SendTimeInfo(uint8_t channel) {
 		SetPossiblePulseSendQueueFullError();
 	}
 
-//	static  portBASE_TYPE xTaskWokenByPost;
-//
-//	// We have not woken a task at the start of the ISR.
-//	xTaskWokenByPost = pdFALSE;
-//
-//	 xTaskWokenByPost = xQueueSendFromISR( PulsQueue, &messageForSend, xTaskWokenByPost );
-//	 if( xTaskWokenByPost )
-//	  {
-//	    // We should switch context so the ISR returns to a different task.
-//	    // NOTE: How this is done depends on the port you are using. Check
-//	    // the documentation and examples for your port.
-//	    portYIELD_FROM_ISR();
-//	  }
-
 	lastTimeValue[channel] = actualTimeValue;
 }
 
@@ -255,7 +241,7 @@ void TIM3_IRQHandler(void) {
 //	    uxSavedInterruptStatus = taskENTER_CRITICAL_FROM_ISR();
 
 	++tickMs;
-	CheckInputsRegisterA();
+	CheckInputsRegisterA(); // todo mb: eine für kanäle
 	CheckInputsRegisterB();
 	CheckInputsRegisterC();
 

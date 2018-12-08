@@ -7,20 +7,6 @@
 
 #include "storages.h"
 
-//uint16_t VirtAddVarTab[NumbOfVar] = { 0x0000, 0x0001, 0x0002, 0x003, 0x004,
-//		0x005, 0x006 };
-
-void InitVirtualEeprom(void) {
-//	//__disable_irq();
-//	portDISABLE_INTERRUPTS();
-//	FLASH_Unlock();
-//	EE_Init();
-//	FLASH_Lock();
-//	delay_ms(2);
-//	portENABLE_INTERRUPTS();
-//	//__enable_irq();
-}
-
 #define ADDRESS_CAN_ID  ((uint16_t)0x0000)
 
 void SafeGlobalCanId(uint8_t id) {
