@@ -66,14 +66,14 @@ extern "C" {
 //  HAL_TIMEOUT  = 0x03U
 //} HAL_StatusTypeDef;
 
-/**
-  * @brief  HAL Lock structures definition
-  */
-typedef enum
-{
-  HAL_UNLOCKED = 0x00U,
-  HAL_LOCKED   = 0x01U
-} HAL_LockTypeDef;
+///**
+//  * @brief  HAL Lock structures definition
+//  */
+//typedef enum
+//{
+//  HAL_UNLOCKED = 0x00U,
+//  HAL_LOCKED   = 0x01U
+//} HAL_LockTypeDef;
 
 /* Exported macro ------------------------------------------------------------*/
 #define HAL_MAX_DELAY      0xFFFFFFFFU

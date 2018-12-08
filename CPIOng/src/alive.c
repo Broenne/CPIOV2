@@ -14,6 +14,8 @@ void SwitchMainLed(void) {
 
 }
 
+static uint32_t AliveCanId = 0;
+
 void SanCanAlive(void) {
 	uint8_t p[] = { 0x01, 0, 0, 0, 0, 0, 0, 0 };
 
@@ -27,8 +29,6 @@ static void Init_TimerInternal() {
 	TIM_ClockConfigTypeDef sClockSourceConfig;
 	TIM_SlaveConfigTypeDef sSlaveConfig;
 	TIM_MasterConfigTypeDef sMasterConfig;
-
-	//	  __TIM2_CLK_ENABLE();
 
 	__HAL_RCC_TIM2_CLK_ENABLE()	;
 	s_TimerInstance.Instance = TIM2;
@@ -53,25 +53,8 @@ void Init_Timer(void) {
 	Init_TimerInternal();
 }
 
-static void PrepareStatusLed(void) {
-	__HAL_RCC_GPIOD_CLK_ENABLE()
-	;
-
-	/*Configure GPIO pin Output Level */
-	HAL_GPIO_WritePin(LED_S_GPIO_Port, LED_S_Pin, GPIO_PIN_RESET);
-
-	GPIO_InitTypeDef GPIO_InitStruct;
-	/*Configure GPIO pin : LED_S_Pin */
-	GPIO_InitStruct.Pin = LED_S_Pin;
-	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-	HAL_GPIO_Init(LED_S_GPIO_Port, &GPIO_InitStruct);
-
-}
-
 void InitAlive(void) {
-	//PrepareStatusLed();
+	AliveCanId = (uint32_t)GetGlobalCanNodeId();
 	Init_Timer();
 }
 

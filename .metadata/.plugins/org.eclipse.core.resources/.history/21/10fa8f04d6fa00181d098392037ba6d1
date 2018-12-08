@@ -1,0 +1,12 @@
+/*
+ * eeprom.c
+ *
+ *  Created on: 08.12.2018
+ *      Author: MB
+ */
+
+
+static void InitEeprom(){
+
+	  EE_Status ee_status = EE_OK;
+}

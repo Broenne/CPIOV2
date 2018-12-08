@@ -31,6 +31,9 @@ void SetTimerPulseCorrecturFactor(uint16_t value){
 	// Info, hier nur int 16 erlaubt, korrektur sonst viel zu groﬂ. Sollen wir den Bereich noch einschr‰nken?
 	TimerCorrectureFactor = (uint16_t)value;
 	// todo mb: ssafe to eeprom
+
+	// REset();
+
 }
 
 uint32_t GetTimerPulseCorrecturFactor(){
@@ -135,8 +138,8 @@ void InitPulseSender(void) {
 
 	//  /* Create the thread(s) */
 	//  /* definition and creation of defaultTask */
-	osThreadDef(myTask03, SendPulsePerCanTask, osPriorityAboveNormal, 0, 128);
-	myTask03Handle = osThreadCreate(osThread(myTask03), NULL);
+	osThreadDef(PulseTask, SendPulsePerCanTask, osPriorityAboveNormal, 0, 128);
+	myTask03Handle = osThreadCreate(osThread(PulseTask), NULL);
 
 
 	// todo mb: wann und wie den task deleten?

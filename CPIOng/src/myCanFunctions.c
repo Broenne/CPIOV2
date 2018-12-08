@@ -10,63 +10,84 @@
 
 extern fn_ptr;
 
-static uint8_t globalCanId = 42;
+static uint8_t globalCanId = 2;
 
+extern CAN_HandleTypeDef hcan2;
+osThreadId canInputTaskHandle;
 
+/*
+ * Created on: 30.11.18
+ * Author: MB
+ * Diese Funktion arbeitet die queue ab.
+ * Es besteht keine Priorität und es ist darauf zu achten, das de Prozessor ausreichend Zeit hat, die Information los zu werden.
+ * */
+void CanWorkerTask(void * pvParameters) {
+	/* The parameter value is expected to be 1 as 1 is passed in the  pvParameters value in the call to xTaskCreate() below.*/
+	//configASSERT(((uint32_t ) pvParameters) == 1);
+	//int i = 0;
+	while (1) {
+		//printf("run %d \r\n", ++i);
 
+		CAN_HandleTypeDef* hcan = &hcan2;
 
-static void CAN2_init_GPIOInternal(void) {
+		// todo mb: das ist schlecht, am besten in queue und koioe anlegen
+		if (hcan->Instance == CAN2) {
+				printf("hello can interrupt 2 id: %d  data1  %d \r\n ", hcan->pRxMsg->StdId, hcan->pRxMsg->Data[0]);
 
-//	  hcan2.Instance = CAN2;
-//	  hcan2.Init.Prescaler = 16;
-//	  hcan2.Init.Mode = CAN_MODE_NORMAL;
-//	  hcan2.Init.SJW = CAN_SJW_1TQ;
-//	  hcan2.Init.BS1 = CAN_BS1_11TQ;
-//	  hcan2.Init.BS2 = CAN_BS2_4TQ;
-//	  hcan2.Init.TTCM = DISABLE;
-//	  hcan2.Init.ABOM = DISABLE;
-//	  hcan2.Init.AWUM = DISABLE;
-//	  hcan2.Init.NART = DISABLE;
-//	  hcan2.Init.RFLM = DISABLE;
-//	  hcan2.Init.TXFP = DISABLE;
-//	  if (HAL_CAN_Init(&hcan2) != HAL_OK)
-//	  {
-//	    _Error_Handler(__FILE__, __LINE__);
-//	  }
+				////	// default id 0
+				if (0x00 == hcan->pRxMsg->StdId) {
+					switch (hcan->pRxMsg->Data[0]) {
+					case 0x01:
+						SetGlobalCanNodeId(hcan->pRxMsg->Data[1]);
+						printf("Incoming id 0x00 %d", GetGlobalCanNodeId());
+						break;
+					case 0x02:
+						ActivateDebug(hcan->pRxMsg->Data[1]);
+					default:
+						break;
+					}
+				}
+				////
+				// eigene can id
+				if (GetGlobalCanNodeId() == hcan->pRxMsg->StdId) {
+					if (0x02 == hcan->pRxMsg->RTR) {
+						// todo mb: über que wegschreiben NIEMALS IN ITERRUPT!!!!!
+						uint8_t data[2];
+						GetInputs(data);
+						SendCan(GetGlobalCanNodeId(), data, 2);
+						//printf("ddd %i", data[1]);
+					}
 
-//	// CAN RX
-//	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;           // PB5=CANRX
-//	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;        // Pin Mode
-//	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;    // Pin Taktung
-//	GPIO_Init(GPIOB, &GPIO_InitStructure);
-//
-//	// CAN TX
-//	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;             // PB6=CANTX
-//	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;       // Pin Mode
-//	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;     // Pin Taktung
-//	GPIO_Init(GPIOB, &GPIO_InitStructure);
-//
-//	// CAN2 Periph clock enable
-//	RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN1, ENABLE); // CAN1 Takt freigeben sonst geht can 2 nicht
-//	RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN2, ENABLE);  // CAN2 Takt freigeben
-//	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE); // AFIO Takt freigeben (für Remapping)
-//
-//	// Remapping CANRX und CANTX
-//	GPIO_PinRemapConfig(GPIO_Remap_CAN2, ENABLE);
+					if (SET_TIMER_CALIBRATION_CMD == hcan->pRxMsg->Data[0]) {
+						SetTimerPulseCorrecturFactor(0); // todo mb: datnfed in int 16 wandeln
+					}
 
+				}
+
+			}
+	}
+
+	printf("Sender task error \r\n");
+}
+
+/*
+ * Created on: 30.11.18
+ * Author: MB
+ * Diese Funktion initialisiert die Queue
+ * Diese und startet den task um diese abzuarbeiten.
+ * */
+void InitCanInputTask(void) {
+
+	osThreadDef(canInputTask, CanWorkerTask, osPriorityNormal, 0, 128);
+	canInputTaskHandle = osThreadCreate(osThread(canInputTask), NULL);
+
+	// todo mb: wann und wie den task deleten?
 }
 
 
-
-
-
-
 void PrepareCan(void) {
-	//CAN2_init_GPIO();
-
-	CAN2_init_GPIOInternal();
-
-	//init_CAN2();
+	globalCanId = GetGloablCanIdFromEeeprom(); // set Methode kan wegen reset nicht genutzt weden
+	InitCanInputTask();
 }
 
 uint8_t GetGlobalCanNodeId() {
@@ -75,8 +96,9 @@ uint8_t GetGlobalCanNodeId() {
 
 void SetGlobalCanNodeId(uint8_t canId) {
 	// todo mb: einschränken
-	//SafeGlobalCanId(canId);
-	globalCanId = canId;
+	SafeGlobalCanId(canId);
+	Reset();
+	//globalCanId = canId;
 }
 
 void SendCanTimeDif(uint8_t channel, uint32_t res) {

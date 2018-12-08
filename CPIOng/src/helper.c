@@ -34,22 +34,33 @@ volatile static int printMode = 1; // todo mb: während der entwicklung an
  * 1 = debug on uart
  *
  */
-void ActivateDebug(uint activate){
+void ActivateDebug(uint activate) {
 	printMode = activate;
 }
 
-int GetDebugStatusInfo(){
+int GetDebugStatusInfo() {
 	return printMode;
 }
 
 int _write(int file, char *ptr, int len) {
-	//if(GetDebugStatusInfo()){
+	if (GetDebugStatusInfo()) {
 		int i = 0;
-			for (i = 0; i < len; i++)
-				ITM_SendChar((*ptr++));
-				//UART_PutChar(*ptr++);
-			return len;
-	//}
+		for (i = 0; i < len; i++)
+			ITM_SendChar((*ptr++));
+		//UART_PutChar(*ptr++);
+		return len;
+	}
+
 	return 0;
+}
+
+void Reset(void) {
+	printf("Reboot...\n");
+
+	vTaskDelay(100);
+	NVIC_SystemReset();
+	while (1) {
+		;   //wait for reset
+	}
 }
 

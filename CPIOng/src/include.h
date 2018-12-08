@@ -14,7 +14,11 @@
 #include "cmsis_os.h"
 
 
+#include "eeprom/eeprom.h"
+#include "eeprom/eepromConfig.h"
+
 #include "helper.h"
+#include "storages.h"
 #include "error.h"
 #include "IO.h"
 #include "alive.h"

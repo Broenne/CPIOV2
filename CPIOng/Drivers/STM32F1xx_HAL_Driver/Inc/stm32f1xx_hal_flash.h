@@ -98,6 +98,23 @@ typedef enum
   FLASH_PROC_PROGRAMDOUBLEWORD = 5U
 } FLASH_ProcedureTypeDef;
 
+
+
+
+
+// tdo mb: von hand rein
+typedef enum
+{
+  FLASH_BUSY = 1,
+  FLASH_ERROR_PG,
+  FLASH_ERROR_WRP,
+  FLASH_COMPLETE,
+  FLASH_TIMEOUT
+}FLASH_Status;
+
+
+
+
 /** 
   * @brief  FLASH handle Structure definition  
   */

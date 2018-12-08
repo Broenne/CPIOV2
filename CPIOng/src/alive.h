@@ -16,7 +16,6 @@
 
 // todo mb: hier die eingestellte
 
-#define AliveCanId (uint16_t)0x123
 
 
 void InitAlive(void);

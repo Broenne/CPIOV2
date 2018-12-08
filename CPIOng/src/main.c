@@ -127,6 +127,12 @@ int main(void) {
 	/* Configure the system clock */
 	SystemClock_Config();
 
+
+
+
+	//EE_Format();
+
+
 	/* USER CODE BEGIN SysInit */
 
 	/* USER CODE END SysInit */
@@ -140,11 +146,13 @@ int main(void) {
 
 	printf("hello wrold \r\n");
 
+	PrepareCan();
+
 	InitReadIO();
 
 	InitPulse();
 
-	//PrepareCan();
+
 	InitAlive();
 
 	for (int i = 0; i < 10; ++i) {

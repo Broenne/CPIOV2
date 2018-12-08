@@ -62,6 +62,15 @@
    HAL_TIMEOUT  = 0x03U
  } HAL_StatusTypeDef;
 
+ /**
+   * @brief  HAL Lock structures definition
+   */
+ typedef enum
+ {
+   HAL_UNLOCKED = 0x00U,
+   HAL_LOCKED   = 0x01U
+ } HAL_LockTypeDef;
+
 
 #define HAL_MODULE_ENABLED  
 #define HAL_ADC_MODULE_ENABLED

@@ -15,5 +15,6 @@
 //void delay_ms(unsigned int d);
 //void delay_us(unsigned int d);
 void ActivateDebug(uint activate);
+void Reset(void);
 
 #endif /* HELPER_H_ */
