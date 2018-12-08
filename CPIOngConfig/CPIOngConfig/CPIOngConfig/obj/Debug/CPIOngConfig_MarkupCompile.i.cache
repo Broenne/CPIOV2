@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\App.xaml
-2-787453874
+3216930845
 
-13228123432
+141775343363
 126-839597379
-ConfigID\ConfigCanId.xaml;MainWindow.xaml;
+Adapter\SelectAdapterView.xaml;ConfigID\ConfigCanId.xaml;MainWindow.xaml;
 
-True
+False
 

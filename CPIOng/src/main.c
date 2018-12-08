@@ -426,7 +426,6 @@ void FilterOnlyMyId(CAN_HandleTypeDef* hcan) {
 	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
 	sFilterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
 	sFilterConfig.FilterMaskIdHigh = 0xFFFF;
-	;
 	sFilterConfig.FilterMaskIdLow = 0x07FF << 5;
 	sFilterConfig.FilterIdHigh = 0x0000;
 	sFilterConfig.FilterIdLow = ccc << 5;
@@ -434,14 +433,24 @@ void FilterOnlyMyId(CAN_HandleTypeDef* hcan) {
 	sFilterConfig.FilterActivation = ENABLE;
 	//sFilterConfig.BankNumber = 0;
 
-	// info mb: der filter muss auf can 1 gesetzt werden, auch wenn nur can 2 genutzt wird (warum auch immer)
-	hcan2.Instance = CAN1;
-	if (HAL_CAN_ConfigFilter(&hcan2, &sFilterConfig) != HAL_OK) {
-		/* Filter configuration Error */
-		Error_Handler();
-	}
 
-	hcan2.Instance = CAN2;
+	hcan->Instance = CAN1;
+		if (HAL_CAN_ConfigFilter(hcan, &sFilterConfig) != HAL_OK) {
+			/* Filter configuration Error */
+			Error_Handler();
+		}
+
+	hcan->Instance = CAN2;
+
+
+	// info mb: der filter muss auf can 1 gesetzt werden, auch wenn nur can 2 genutzt wird (warum auch immer)
+//	hcan2.Instance = CAN1;
+//	if (HAL_CAN_ConfigFilter(&hcan2, &sFilterConfig) != HAL_OK) {
+//		/* Filter configuration Error */
+//		Error_Handler();
+//	}
+//
+//	hcan2.Instance = CAN2;
 }
 
 
