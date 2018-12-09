@@ -39,7 +39,7 @@ static void Init_TimerInternal() {
 	s_TimerInstance.Init.RepetitionCounter = 0;
 	//s_TimerInstance.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;//TIM_AUTORELOAD_PRELOAD_ENABLE;//
 	if (HAL_TIM_Base_Init(&s_TimerInstance) != HAL_OK) {
-		_Error_Handler(__FILE__, __LINE__);
+		//_Error_Handler(__FILE__, __LINE__);
 	}
 
 	HAL_TIM_Base_Start(&s_TimerInstance);

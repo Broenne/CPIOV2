@@ -8,5 +8,6 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <ContentPresenter Content="{Binding ConfigCanId}"></ContentPresenter>
+        <ContentPresenter Content="{Binding SelectAdapterView}"></ContentPresenter>
     </Grid>
 </Window>

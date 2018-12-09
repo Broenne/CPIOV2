@@ -73,8 +73,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Adapter\SelectAdapterView.xaml.cs">
+      <DependentUpon>SelectAdapterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Adapter\SelectAdapterViewModel.cs" />
     <Compile Include="CPIOngConfigContainerModule.cs" />
+    <Page Include="Adapter\SelectAdapterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ConfigID\ConfigCanId.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InputBinary\InputBinaryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -88,6 +100,10 @@
     </Compile>
     <Compile Include="ConfigID\ConfigCanId.xaml.cs">
       <DependentUpon>ConfigCanId.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EnumBooleanConverter.cs" />
+    <Compile Include="InputBinary\InputBinaryView.xaml.cs">
+      <DependentUpon>InputBinaryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -128,6 +144,15 @@
       <Project>{EEF0A165-40BD-420A-8EAA-63E2F528935A}</Project>
       <Name>CPIOngConfig.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Helper\Helper.csproj">
+      <Project>{46C30283-6BC6-4F9D-B4A9-B05E5D83EC16}</Project>
+      <Name>Helper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ConfigureID\" />
+    <Folder Include="InputAnalog\" />
+    <Folder Include="Pulse\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

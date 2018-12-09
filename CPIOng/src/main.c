@@ -87,10 +87,10 @@ static void MX_ADC1_Init(void);
 static void MX_CAN2_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_WWDG_Init(void);
-void StartDefaultTask(void const * argument);
-void StartIdle_Task(void const * argument);
-void StartTask03(void const * argument);
-void Callback01(void const * argument);
+//void StartDefaultTask(void const * argument);
+//void StartIdle_Task(void const * argument);
+//void StartTask03(void const * argument);
+//void Callback01(void const * argument);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
@@ -132,7 +132,7 @@ int main(void) {
 	printf("hello CPIO next generation\r\n");
 
 	PrepareCan();
-	FilterOnlyMyId(&hcan2);
+	FilterOnlyMyId(&hcan2); // das muss hier expliziet passierne, um den Filter nach dem setzen einer neuen can id und reset diesen zu reintiaisieren
 
 	InitReadIO();
 
@@ -175,7 +175,7 @@ void SystemClock_Config(void) {
 	RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
 	RCC_OscInitStruct.PLL2.PLL2State = RCC_PLL_NONE;
 	if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
-		_Error_Handler(__FILE__, __LINE__);
+		//_Error_Handler(__FILE__, __LINE__);
 	}
 
 	/**Initializes the CPU, AHB and APB busses clocks
@@ -187,13 +187,13 @@ void SystemClock_Config(void) {
 	RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
 
 	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK) {
-		_Error_Handler(__FILE__, __LINE__);
+		//_Error_Handler(__FILE__, __LINE__);
 	}
 
 	PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC;
 	PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV4;
 	if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK) {
-		_Error_Handler(__FILE__, __LINE__);
+		//_Error_Handler(__FILE__, __LINE__);
 	}
 
 	/**Configure the Systick interrupt time
@@ -227,7 +227,7 @@ static void MX_ADC1_Init(void) {
 	hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
 	hadc1.Init.NbrOfConversion = 16;
 	if (HAL_ADC_Init(&hadc1) != HAL_OK) {
-		_Error_Handler(__FILE__, __LINE__);
+		//_Error_Handler(__FILE__, __LINE__);
 	}
 
 	/**Configure Regular Channel
@@ -236,7 +236,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Rank = ADC_REGULAR_RANK_1;
 	sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		_Error_Handler(__FILE__, __LINE__);
+		//_Error_Handler(__FILE__, __LINE__);
 	}
 
 	/**Configure Regular Channel
@@ -244,7 +244,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_1;
 	sConfig.Rank = ADC_REGULAR_RANK_2;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		_Error_Handler(__FILE__, __LINE__);
+		//_Error_Handler(__FILE__, __LINE__);
 	}
 
 	/**Configure Regular Channel
@@ -252,7 +252,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_2;
 	sConfig.Rank = ADC_REGULAR_RANK_3;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		_Error_Handler(__FILE__, __LINE__);
+		//_Error_Handler(__FILE__, __LINE__);
 	}
 
 	/**Configure Regular Channel
@@ -260,7 +260,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_3;
 	sConfig.Rank = ADC_REGULAR_RANK_4;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		_Error_Handler(__FILE__, __LINE__);
+		//_Error_Handler(__FILE__, __LINE__);
 	}
 
 	/**Configure Regular Channel
@@ -268,7 +268,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_4;
 	sConfig.Rank = ADC_REGULAR_RANK_5;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		_Error_Handler(__FILE__, __LINE__);
+		//_Error_Handler(__FILE__, __LINE__);
 	}
 
 	/**Configure Regular Channel
@@ -276,7 +276,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_5;
 	sConfig.Rank = ADC_REGULAR_RANK_6;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		_Error_Handler(__FILE__, __LINE__);
+		//_Error_Handler(__FILE__, __LINE__);
 	}
 
 	/**Configure Regular Channel
@@ -284,7 +284,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_6;
 	sConfig.Rank = ADC_REGULAR_RANK_7;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		_Error_Handler(__FILE__, __LINE__);
+		//_Error_Handler(__FILE__, __LINE__);
 	}
 
 	/**Configure Regular Channel
@@ -292,7 +292,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_7;
 	sConfig.Rank = ADC_REGULAR_RANK_8;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		_Error_Handler(__FILE__, __LINE__);
+		//_Error_Handler(__FILE__, __LINE__);
 	}
 
 	/**Configure Regular Channel
@@ -300,7 +300,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_8;
 	sConfig.Rank = ADC_REGULAR_RANK_9;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		_Error_Handler(__FILE__, __LINE__);
+		//_Error_Handler(__FILE__, __LINE__);
 	}
 
 	/**Configure Regular Channel
@@ -308,7 +308,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_9;
 	sConfig.Rank = ADC_REGULAR_RANK_10;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		_Error_Handler(__FILE__, __LINE__);
+		//_Error_Handler(__FILE__, __LINE__);
 	}
 
 	/**Configure Regular Channel
@@ -316,7 +316,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_10;
 	sConfig.Rank = ADC_REGULAR_RANK_11;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		_Error_Handler(__FILE__, __LINE__);
+		//_Error_Handler(__FILE__, __LINE__);
 	}
 
 	/**Configure Regular Channel
@@ -324,7 +324,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_11;
 	sConfig.Rank = ADC_REGULAR_RANK_12;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		_Error_Handler(__FILE__, __LINE__);
+		//_Error_Handler(__FILE__, __LINE__);
 	}
 
 	/**Configure Regular Channel
@@ -332,7 +332,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_12;
 	sConfig.Rank = ADC_REGULAR_RANK_13;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		_Error_Handler(__FILE__, __LINE__);
+		//_Error_Handler(__FILE__, __LINE__);
 	}
 
 	/**Configure Regular Channel
@@ -340,7 +340,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_13;
 	sConfig.Rank = ADC_REGULAR_RANK_14;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		_Error_Handler(__FILE__, __LINE__);
+		//_Error_Handler(__FILE__, __LINE__);
 	}
 
 	/**Configure Regular Channel
@@ -348,7 +348,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_14;
 	sConfig.Rank = ADC_REGULAR_RANK_15;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		_Error_Handler(__FILE__, __LINE__);
+		//_Error_Handler(__FILE__, __LINE__);
 	}
 
 	/**Configure Regular Channel
@@ -356,7 +356,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_15;
 	sConfig.Rank = ADC_REGULAR_RANK_16;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		_Error_Handler(__FILE__, __LINE__);
+		//_Error_Handler(__FILE__, __LINE__);
 	}
 
 }
@@ -378,7 +378,7 @@ void FilterIdNull(void) {
 	//      	HAL_CAN_Receive_IT(&hcan2, CAN_FIFO0);
 	if (HAL_CAN_ConfigFilter(&hcan2, &sFilterConfig) != HAL_OK) {
 		/* Filter configuration Error */
-		Error_Handler();
+		//Error_Handler();
 	}
 	hcan2.Instance = CAN2;
 }
@@ -407,7 +407,7 @@ static void MX_CAN2_Init(void) {
 	hcan2.Init.TXFP = DISABLE;
 
 	if (HAL_CAN_Init(&hcan2) != HAL_OK) {
-		_Error_Handler(__FILE__, __LINE__);
+		//_Error_Handler(__FILE__, __LINE__);
 	}
 
 	FilterIdNull();
@@ -420,7 +420,7 @@ static void MX_CAN2_Init(void) {
 
 void FilterOnlyMyId(CAN_HandleTypeDef* hcan) {
 
-	int ccc=GetGlobalCanNodeId();
+	int globalCanId=GetGlobalCanNodeId();
 	CAN_FilterConfTypeDef sFilterConfig;
 	sFilterConfig.FilterNumber = 15;
 	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
@@ -428,29 +428,18 @@ void FilterOnlyMyId(CAN_HandleTypeDef* hcan) {
 	sFilterConfig.FilterMaskIdHigh = 0xFFFF;
 	sFilterConfig.FilterMaskIdLow = 0x07FF << 5;
 	sFilterConfig.FilterIdHigh = 0x0000;
-	sFilterConfig.FilterIdLow = ccc << 5;
+	sFilterConfig.FilterIdLow = globalCanId << 5;
 	sFilterConfig.FilterFIFOAssignment = CAN_FIFO0;
 	sFilterConfig.FilterActivation = ENABLE;
-	//sFilterConfig.BankNumber = 0;
 
-
+	// info mb: der filter muss auf can 1 gesetzt werden, auch wenn nur can 2 genutzt wird (warum auch immer)
 	hcan->Instance = CAN1;
 		if (HAL_CAN_ConfigFilter(hcan, &sFilterConfig) != HAL_OK) {
 			/* Filter configuration Error */
-			Error_Handler();
+			//Error_Handler();
 		}
 
 	hcan->Instance = CAN2;
-
-
-	// info mb: der filter muss auf can 1 gesetzt werden, auch wenn nur can 2 genutzt wird (warum auch immer)
-//	hcan2.Instance = CAN1;
-//	if (HAL_CAN_ConfigFilter(&hcan2, &sFilterConfig) != HAL_OK) {
-//		/* Filter configuration Error */
-//		Error_Handler();
-//	}
-//
-//	hcan2.Instance = CAN2;
 }
 
 
@@ -580,75 +569,75 @@ static void MX_GPIO_Init(void) {
 
 /* USER CODE END 4 */
 
-/* USER CODE BEGIN Header_StartDefaultTask */
-/**
- * @brief  Function implementing the defaultTask thread.
- * @param  argument: Not used
- * @retval None
- */
-/* USER CODE END Header_StartDefaultTask */
-void StartDefaultTask(void const * argument) {
-
-	/* USER CODE BEGIN 5 */
-	/* Infinite loop */
-	for (;;) {
-		osDelay(1);
-	}
-	/* USER CODE END 5 */
-}
-
-/* USER CODE BEGIN Header_StartIdle_Task */
-/**
- * @brief Function implementing the Idle_Task thread.
- * @param argument: Not used
- * @retval None
- */
-/* USER CODE END Header_StartIdle_Task */
-void StartIdle_Task(void const * argument) {
-	/* USER CODE BEGIN StartIdle_Task */
-	/* Infinite loop */
-	for (;;) {
-		osDelay(1);
-	}
-	/* USER CODE END StartIdle_Task */
-}
-
-/* USER CODE BEGIN Header_StartTask03 */
-/**
- * @brief Function implementing the myTask03 thread.
- * @param argument: Not used
- * @retval None
- */
-/* USER CODE END Header_StartTask03 */
-void StartTask03(void const * argument) {
-	/* USER CODE BEGIN StartTask03 */
-	/* Infinite loop */
-	for (;;) {
-		osDelay(1);
-	}
-	/* USER CODE END StartTask03 */
-}
-
-/* Callback01 function */
-void Callback01(void const * argument) {
-	/* USER CODE BEGIN Callback01 */
-
-	/* USER CODE END Callback01 */
-}
-
-/**
- * @brief  This function is executed in case of error occurrence.
- * @param  file: The file name as string.
- * @param  line: The line in file as a number.
- * @retval None
- */
-void _Error_Handler(char *file, int line) {
-	/* USER CODE BEGIN Error_Handler_Debug */
-	/* User can add his own implementation to report the HAL error return state */
-	while (1) {
-	}
-	/* USER CODE END Error_Handler_Debug */
-}
+///* USER CODE BEGIN Header_StartDefaultTask */
+///**
+// * @brief  Function implementing the defaultTask thread.
+// * @param  argument: Not used
+// * @retval None
+// */
+///* USER CODE END Header_StartDefaultTask */
+//void StartDefaultTask(void const * argument) {
+//
+//	/* USER CODE BEGIN 5 */
+//	/* Infinite loop */
+//	for (;;) {
+//		osDelay(1);
+//	}
+//	/* USER CODE END 5 */
+//}
+//
+///* USER CODE BEGIN Header_StartIdle_Task */
+///**
+// * @brief Function implementing the Idle_Task thread.
+// * @param argument: Not used
+// * @retval None
+// */
+///* USER CODE END Header_StartIdle_Task */
+//void StartIdle_Task(void const * argument) {
+//	/* USER CODE BEGIN StartIdle_Task */
+//	/* Infinite loop */
+//	for (;;) {
+//		osDelay(1);
+//	}
+//	/* USER CODE END StartIdle_Task */
+//}
+//
+///* USER CODE BEGIN Header_StartTask03 */
+///**
+// * @brief Function implementing the myTask03 thread.
+// * @param argument: Not used
+// * @retval None
+// */
+///* USER CODE END Header_StartTask03 */
+//void StartTask03(void const * argument) {
+//	/* USER CODE BEGIN StartTask03 */
+//	/* Infinite loop */
+//	for (;;) {
+//		osDelay(1);
+//	}
+//	/* USER CODE END StartTask03 */
+//}
+//
+///* Callback01 function */
+//void Callback01(void const * argument) {
+//	/* USER CODE BEGIN Callback01 */
+//
+//	/* USER CODE END Callback01 */
+//}
+//
+///**
+// * @brief  This function is executed in case of error occurrence.
+// * @param  file: The file name as string.
+// * @param  line: The line in file as a number.
+// * @retval None
+// */
+//void _Error_Handler(char *file, int line) {
+//	/* USER CODE BEGIN Error_Handler_Debug */
+//	/* User can add his own implementation to report the HAL error return state */
+//	while (1) {
+//	}
+//	/* USER CODE END Error_Handler_Debug */
+//}
 
 #ifdef  USE_FULL_ASSERT
 /**

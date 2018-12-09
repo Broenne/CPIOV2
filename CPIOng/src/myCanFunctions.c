@@ -18,8 +18,6 @@ osThreadId canInputTaskHandle;
 
 xQueueHandle CanQueueHandle = NULL;
 
-
-
 /*
  * Created on: 30.11.18
  * Author: MB
@@ -27,7 +25,6 @@ xQueueHandle CanQueueHandle = NULL;
  * Es besteht keine Priorität und es ist darauf zu achten, das de Prozessor ausreichend Zeit hat, die Information los zu werden.
  * */
 void CanWorkerTask(void * pvParameters) {
-
 
 	while (1) {
 		//printf("run %d \r\n", ++i);
@@ -41,7 +38,6 @@ void CanWorkerTask(void * pvParameters) {
 
 		if (xQueueReceive(CanQueueHandle, hcan, 100) == pdTRUE) {
 			if (hcan->Instance == CAN2) {
-				printf("hello can interrupt 2 id: %d  data1  %d \r\n ", hcan->pRxMsg->StdId, hcan->pRxMsg->Data[0]);
 
 				// default id 0
 				if (0x00 == hcan->pRxMsg->StdId) {
