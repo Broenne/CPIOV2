@@ -17,8 +17,8 @@ typedef struct {
 static TIM_HandleTypeDef pulseTimerInstance; // = { .Instance = TIM2 };
 
 static xQueueHandle PulsQueue = NULL;
-uint32_t PreemptPriorityPulseTimer = 5;
-uint32_t SubPriorityPulseTimer = 0;
+uint32_t PreemptPriorityPulseTimer=5;
+uint32_t SubPriorityPulseTimer=5;
 
 
 static uint32_t TimerCorrectureFactor = 0;
@@ -95,8 +95,11 @@ void InitPulse(void) {
  * Es besteht keine Priorität und es ist darauf zu achten, das de Prozessor ausreichend Zeit hat, die Information los zu werden.
  * */
 void SendPulsePerCanTask(void * pvParameters) {
-
+	/* The parameter value is expected to be 1 as 1 is passed in the  pvParameters value in the call to xTaskCreate() below.*/
+	//configASSERT(((uint32_t ) pvParameters) == 1);
+	//int i = 0;
 	while (1) {
+		//printf("run %d \r\n", ++i);
 		static MessageForSend currentMessage;
 		currentMessage.channel = 0;
 		currentMessage.res = 1;
@@ -135,7 +138,7 @@ void InitPulseSender(void) {
 
 	//  /* Create the thread(s) */
 	//  /* definition and creation of defaultTask */
-	osThreadDef(PulseTask, SendPulsePerCanTask, osPriorityNormal, 0, 128);
+	osThreadDef(PulseTask, SendPulsePerCanTask, osPriorityAboveNormal, 0, 128);
 	myTask03Handle = osThreadCreate(osThread(PulseTask), NULL);
 
 

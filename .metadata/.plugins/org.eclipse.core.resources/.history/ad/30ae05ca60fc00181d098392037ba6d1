@@ -18,7 +18,7 @@ extern CAN_HandleTypeDef hcan2;
 void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 
 	//CanTxMsgTypeDef
-	static CanTxMsgTypeDef canMessage;
+	CanTxMsgTypeDef canMessage;
 	canMessage.StdId = id;
 	canMessage.ExtId = 0;
 	canMessage.RTR = CAN_RTR_DATA;
@@ -35,7 +35,7 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 			break;
 		}
 
-		vTaskDelay(5);
+		vTaskDelay(20);
 	}
 
 	hcan2.pTxMsg = &canMessage;

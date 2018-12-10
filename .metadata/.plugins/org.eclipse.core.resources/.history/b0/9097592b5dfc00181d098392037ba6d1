@@ -17,8 +17,8 @@ typedef struct {
 static TIM_HandleTypeDef pulseTimerInstance; // = { .Instance = TIM2 };
 
 static xQueueHandle PulsQueue = NULL;
-uint32_t PreemptPriorityPulseTimer = 5;
-uint32_t SubPriorityPulseTimer = 0;
+uint32_t PreemptPriorityPulseTimer=5;
+uint32_t SubPriorityPulseTimer=5;
 
 
 static uint32_t TimerCorrectureFactor = 0;
@@ -95,8 +95,11 @@ void InitPulse(void) {
  * Es besteht keine Priorität und es ist darauf zu achten, das de Prozessor ausreichend Zeit hat, die Information los zu werden.
  * */
 void SendPulsePerCanTask(void * pvParameters) {
-
+	/* The parameter value is expected to be 1 as 1 is passed in the  pvParameters value in the call to xTaskCreate() below.*/
+	//configASSERT(((uint32_t ) pvParameters) == 1);
+	//int i = 0;
 	while (1) {
+		//printf("run %d \r\n", ++i);
 		static MessageForSend currentMessage;
 		currentMessage.channel = 0;
 		currentMessage.res = 1;
@@ -109,7 +112,7 @@ void SendPulsePerCanTask(void * pvParameters) {
 			SendCanTimeDif(currentMessage.channel, currentMessage.res);
 		}
 		else{
-			//vTaskDelay(10);
+			vTaskDelay(10);
 		}
 
 	}
@@ -135,7 +138,7 @@ void InitPulseSender(void) {
 
 	//  /* Create the thread(s) */
 	//  /* definition and creation of defaultTask */
-	osThreadDef(PulseTask, SendPulsePerCanTask, osPriorityNormal, 0, 128);
+	osThreadDef(PulseTask, SendPulsePerCanTask, osPriorityAboveNormal, 0, 128);
 	myTask03Handle = osThreadCreate(osThread(PulseTask), NULL);
 
 
@@ -161,7 +164,7 @@ void SendTimeInfo(uint8_t channel) {
 	}
 
 	// printf("SendTimeInfo %d \r\n", channel);
-	static MessageForSend messageForSend;
+	MessageForSend messageForSend;
 	messageForSend.channel = channel;
 	messageForSend.res = res;
 
@@ -174,23 +177,70 @@ void SendTimeInfo(uint8_t channel) {
 
 
 void CheckPulseInputs(void){
-	static uint16_t oldValue = 0;
-	static uint8_t data[2];
-	static uint16_t value = 0;
-	ReadInputs(&data[0]);
-	value = data[0];
-	value = value | (data[1] << 8);
-	if (value != oldValue) {
-		uint16_t dif = value ^ oldValue;
-		for (int i = 0; i < 16; ++i) {
-			if ((dif >> i) & 0x01 && (value >> i & 0x01)) {
-				SendTimeInfo(i);
+	static uint8_t oldGpioC = 0;
+		uint8_t gpioC = ReadInputsFromRegisterC();
+
+		if (gpioC != oldGpioC) {
+			uint8_t dif = gpioC ^ oldGpioC;
+			for (int i = 0; i < 6; ++i) {
+				if ((dif >> i) & 0x01 && (gpioC >> i & 0x01)) {
+					SendTimeInfo(10 + i);
+				}
 			}
 		}
-	}
 
-	oldValue = value;
+		oldGpioC = gpioC;
 }
+
+
+
+//void CheckInputsRegisterA(void) {
+//	static uint8_t oldGpioA = 0;
+//	uint8_t gpioA = ReadInputsFromRegisterA();
+//
+//	if (gpioA != oldGpioA) {
+//		uint8_t dif = gpioA ^ oldGpioA; // PinA0 -> I0 	// PinA1 -> I1	// PinA2 -> I2	// PinA3 -> I3	// PinA4 -> I4	// PinA5 -> I5	// PinA6 -> I6	// PinA7 -> I7
+//		for (int i = 0; i < 8; ++i) {	// Änderung bit und steigende Flanke
+//			if ((dif >> i) & 0x01 && (gpioA >> i & 0x01)) {
+//				SendTimeInfo(i); // Achtung, nur bei a
+//			}
+//		}
+//	}
+//
+//	oldGpioA = gpioA; // Wert merken
+//}
+//
+//void CheckInputsRegisterB(void) {
+//	static uint8_t oldGpioB = 0;
+//	uint8_t gpioB = ReadInputsFromRegisterB();
+//
+//	if (gpioB != oldGpioB) {
+//		uint8_t dif = gpioB ^ oldGpioB;
+//		for (int i = 0; i < 2; ++i) {
+//			if ((dif >> i) & 0x01 && (gpioB >> i & 0x01)) {
+//				SendTimeInfo(8 + i);
+//			}
+//		}
+//	}
+//
+//	oldGpioB = gpioB;
+//}
+//
+//void CheckInputsRegisterC(void) {
+//	static uint8_t oldGpioC = 0;
+//	uint8_t gpioC = ReadInputsFromRegisterC();
+//
+//	if (gpioC != oldGpioC) {
+//		uint8_t dif = gpioC ^ oldGpioC;
+//		for (int i = 0; i < 6; ++i) {
+//			if ((dif >> i) & 0x01 && (gpioC >> i & 0x01)) {
+//				SendTimeInfo(10 + i);
+//			}
+//		}
+//	}
+//
+//	oldGpioC = gpioC;
+//}
 
 /*
  * Created on: 30.11.18
@@ -202,11 +252,23 @@ void CheckPulseInputs(void){
 void TIM3_IRQHandler(void) {
 
 	portDISABLE_INTERRUPTS();
+	//__disable_irq();
+//	UBaseType_t uxSavedInterruptStatus;
+//
+//	    /* Call taskENTER_CRITICAL_FROM_ISR() to create a critical section, saving the
+//	    returned value into a local stack variable. */
+//	    uxSavedInterruptStatus = taskENTER_CRITICAL_FROM_ISR();
 
 	++tickMs;
 	CheckPulseInputs();
+//	CheckInputsRegisterA(); // todo mb: eine für kanäle
+//	CheckInputsRegisterB();
+//	CheckInputsRegisterC();
 
 	__HAL_TIM_CLEAR_FLAG(&pulseTimerInstance, TIM_FLAG_UPDATE);
 
 	portENABLE_INTERRUPTS();
+	//__enable_irq();
+	//taskEXIT_CRITICAL_FROM_ISR( uxSavedInterruptStatus );
+
 }

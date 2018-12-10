@@ -17,7 +17,7 @@ typedef struct {
 static TIM_HandleTypeDef pulseTimerInstance; // = { .Instance = TIM2 };
 
 static xQueueHandle PulsQueue = NULL;
-uint32_t PreemptPriorityPulseTimer = 5;
+uint32_t PreemptPriorityPulseTimer = 16;
 uint32_t SubPriorityPulseTimer = 0;
 
 
