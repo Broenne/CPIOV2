@@ -7,7 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <ContentPresenter Content="{Binding ConfigCanId}"></ContentPresenter>
-        <ContentPresenter Content="{Binding SelectAdapterView}"></ContentPresenter>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ContentPresenter Grid.Row="0" Content="{Binding ConfigCanId}"></ContentPresenter>
+        <ContentPresenter Grid.Row="1" Content="{Binding SelectAdapterView}"></ContentPresenter>
+        <ContentPresenter Grid.Row="2" Content="{Binding InputBinaryView}"></ContentPresenter>
     </Grid>
 </Window>

@@ -101,10 +101,10 @@
     <Compile Include="ConfigID\ConfigCanId.xaml.cs">
       <DependentUpon>ConfigCanId.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EnumBooleanConverter.cs" />
     <Compile Include="InputBinary\InputBinaryView.xaml.cs">
       <DependentUpon>InputBinaryView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InputBinary\InputBinaryViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -140,9 +140,25 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ConfigLogicLayer.Contracts\ConfigLogicLayer.Contracts.csproj">
+      <Project>{5F6090C0-1692-4C5A-BE8F-ABB0EFD2CF5B}</Project>
+      <Name>ConfigLogicLayer.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ConfigLogicLayer\ConfigLogicLayer.csproj">
+      <Project>{64E393DE-3DD6-49A9-B023-433F75F34290}</Project>
+      <Name>ConfigLogicLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CPIOngConfig.Contracts\CPIOngConfig.Contracts.csproj">
       <Project>{EEF0A165-40BD-420A-8EAA-63E2F528935A}</Project>
       <Name>CPIOngConfig.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hal.PeakCan\Hal.PeakCan.csproj">
+      <Project>{BA58C5B0-4EF8-47FB-8DC2-73C4E9598F0D}</Project>
+      <Name>Hal.PeakCan</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Helper.Contracts\Helper.Contracts.csproj">
+      <Project>{6D139AE5-A46B-4EC3-8C46-89704CE60CD5}</Project>
+      <Name>Helper.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Helper\Helper.csproj">
       <Project>{46C30283-6BC6-4F9D-B4A9-B05E5D83EC16}</Project>
@@ -153,6 +169,7 @@
     <Folder Include="ConfigureID\" />
     <Folder Include="InputAnalog\" />
     <Folder Include="Pulse\" />
+    <Folder Include="TimeCalibration\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
