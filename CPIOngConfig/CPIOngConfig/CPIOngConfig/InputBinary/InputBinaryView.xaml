@@ -1,0 +1,96 @@
+﻿<UserControl x:Class="CPIOngConfig.InputBinary.InputBinaryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CPIOngConfig.InputBinary"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Ellipse">
+                <Setter Property="Height" Value="12"></Setter>
+                <Setter Property="Width" Value="12"></Setter>
+                <Setter Property="Stroke" Value="Black"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Button Content="Get" Command="{Binding GetCommand}"></Button>
+        </Grid>
+        <Grid  Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Ellipse Fill="{Binding Input[0].Color}"></Ellipse>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Ellipse Fill="{Binding Input[1].Color}"></Ellipse>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Ellipse Fill="{Binding Input[2].Color}"></Ellipse>
+            </Grid>
+            <Grid Grid.Column="3">
+                <Ellipse Fill="{Binding Input[3].Color}"></Ellipse>
+            </Grid>
+            <Grid Grid.Column="4">
+                <Ellipse Fill="{Binding Input[4].Color}"></Ellipse>
+            </Grid>
+            <Grid Grid.Column="5">
+                <Ellipse Fill="{Binding Input[5].Color}"></Ellipse>
+            </Grid>
+            <Grid Grid.Column="6">
+                <Ellipse Fill="{Binding Input[6].Color}"></Ellipse>
+            </Grid>
+            <Grid Grid.Column="7">
+                <Ellipse Fill="{Binding Input[7].Color}"></Ellipse>
+            </Grid>
+            <Grid Grid.Column="8">
+                <Ellipse Fill="{Binding Input[8].Color}"></Ellipse>
+            </Grid>
+            <Grid Grid.Column="9">
+                <Ellipse Fill="{Binding Input[9].Color}"></Ellipse>
+            </Grid>
+            <Grid Grid.Column="10">
+                <Ellipse Fill="{Binding Input[10].Color}"></Ellipse>
+            </Grid>
+            <Grid Grid.Column="11">
+                <Ellipse Fill="{Binding Input[11].Color}"></Ellipse>
+            </Grid>
+            <Grid Grid.Column="12">
+                <Ellipse Fill="{Binding Input[12].Color}"></Ellipse>
+            </Grid>
+            <Grid Grid.Column="13">
+                <Ellipse Fill="{Binding Input[13].Color}"></Ellipse>
+            </Grid>
+            <Grid Grid.Column="14">
+                <Ellipse Fill="{Binding Input[14].Color}"></Ellipse>
+            </Grid>
+            <Grid Grid.Column="15">
+                <Ellipse Fill="{Binding Input[15].Color}"></Ellipse>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

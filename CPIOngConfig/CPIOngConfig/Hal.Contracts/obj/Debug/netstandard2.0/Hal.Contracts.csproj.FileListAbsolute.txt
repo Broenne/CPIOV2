@@ -1,0 +1,8 @@
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.Contracts\bin\Debug\netstandard2.0\Hal.Contracts.deps.json
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.Contracts\bin\Debug\netstandard2.0\Hal.Contracts.dll
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.Contracts\bin\Debug\netstandard2.0\Hal.Contracts.pdb
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.Contracts\obj\Debug\netstandard2.0\Hal.Contracts.csproj.CoreCompileInputs.cache
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.Contracts\obj\Debug\netstandard2.0\Hal.Contracts.AssemblyInfoInputs.cache
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.Contracts\obj\Debug\netstandard2.0\Hal.Contracts.AssemblyInfo.cs
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.Contracts\obj\Debug\netstandard2.0\Hal.Contracts.dll
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.Contracts\obj\Debug\netstandard2.0\Hal.Contracts.pdb

@@ -1,0 +1,8 @@
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper.Contracts\bin\Debug\netstandard2.0\Helper.Contracts.deps.json
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper.Contracts\bin\Debug\netstandard2.0\Helper.Contracts.dll
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper.Contracts\bin\Debug\netstandard2.0\Helper.Contracts.pdb
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper.Contracts\obj\Debug\netstandard2.0\Helper.Contracts.csproj.CoreCompileInputs.cache
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper.Contracts\obj\Debug\netstandard2.0\Helper.Contracts.AssemblyInfoInputs.cache
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper.Contracts\obj\Debug\netstandard2.0\Helper.Contracts.AssemblyInfo.cs
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper.Contracts\obj\Debug\netstandard2.0\Helper.Contracts.dll
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper.Contracts\obj\Debug\netstandard2.0\Helper.Contracts.pdb

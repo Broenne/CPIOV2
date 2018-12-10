@@ -1,0 +1,8 @@
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer.Contracts\bin\Debug\netstandard2.0\ConfigLogicLayer.Contracts.deps.json
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer.Contracts\bin\Debug\netstandard2.0\ConfigLogicLayer.Contracts.dll
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer.Contracts\bin\Debug\netstandard2.0\ConfigLogicLayer.Contracts.pdb
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer.Contracts\obj\Debug\netstandard2.0\ConfigLogicLayer.Contracts.csproj.CoreCompileInputs.cache
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer.Contracts\obj\Debug\netstandard2.0\ConfigLogicLayer.Contracts.AssemblyInfoInputs.cache
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer.Contracts\obj\Debug\netstandard2.0\ConfigLogicLayer.Contracts.AssemblyInfo.cs
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer.Contracts\obj\Debug\netstandard2.0\ConfigLogicLayer.Contracts.dll
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer.Contracts\obj\Debug\netstandard2.0\ConfigLogicLayer.Contracts.pdb

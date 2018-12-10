@@ -11,6 +11,7 @@
 #include "include.h"
 
 void InitReadIO(void);
+void ReadInputs(uint8_t* data);
 uint8_t ReadInputsFromRegisterA(void);
 uint8_t ReadInputsFromRegisterB(void);
 uint8_t ReadInputsFromRegisterC(void);

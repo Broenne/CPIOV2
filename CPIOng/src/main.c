@@ -138,7 +138,7 @@ int main(void) {
 
 	InitPulse();
 
-	InitAlive();
+	//InitAlive();
 
 	/* Start scheduler */
 	osKernelStart();
@@ -226,6 +226,7 @@ static void MX_ADC1_Init(void) {
 	hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
 	hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
 	hadc1.Init.NbrOfConversion = 16;
+
 	if (HAL_ADC_Init(&hadc1) != HAL_OK) {
 		//_Error_Handler(__FILE__, __LINE__);
 	}
@@ -358,6 +359,42 @@ static void MX_ADC1_Init(void) {
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
 		//_Error_Handler(__FILE__, __LINE__);
 	}
+
+
+
+
+
+//
+//
+//
+//	 hdma_adc1.Instance = DMA1_Channel1;
+//	    hdma_adc1.Init.Direction = DMA_PERIPH_TO_MEMORY;
+//	    hdma_adc1.Init.PeriphInc = DMA_PINC_DISABLE;
+//	    hdma_adc1.Init.MemInc = DMA_MINC_ENABLE;
+//	    hdma_adc1.Init.PeriphDataAlignment = DMA_PDATAALIGN_HALFWORD;
+//	    hdma_adc1.Init.MemDataAlignment = DMA_MDATAALIGN_HALFWORD;
+//	    hdma_adc1.Init.Mode = DMA_CIRCULAR;
+//	    hdma_adc1.Init.Priority = DMA_PRIORITY_LOW;
+//
+//	    if (HAL_DMA_Init(&hdma_adc1) != HAL_OK)
+//	    {
+//
+//	    }
+//
+//	    __HAL_LINKDMA(hadc,DMA_Handle,hdma_adc1);
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+
 
 }
 

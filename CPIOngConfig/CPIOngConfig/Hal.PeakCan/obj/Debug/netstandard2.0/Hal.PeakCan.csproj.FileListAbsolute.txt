@@ -1,0 +1,14 @@
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.PeakCan\obj\Debug\netstandard2.0\Hal.PeakCan.csproj.CoreCompileInputs.cache
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.PeakCan\obj\Debug\netstandard2.0\Hal.PeakCan.AssemblyInfoInputs.cache
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.PeakCan\obj\Debug\netstandard2.0\Hal.PeakCan.AssemblyInfo.cs
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.PeakCan\bin\Debug\netstandard2.0\Hal.PeakCan.deps.json
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.PeakCan\bin\Debug\netstandard2.0\Hal.PeakCan.dll
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.PeakCan\bin\Debug\netstandard2.0\Hal.PeakCan.pdb
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.PeakCan\obj\Debug\netstandard2.0\Hal.PeakCan.dll
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.PeakCan\obj\Debug\netstandard2.0\Hal.PeakCan.pdb
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.PeakCan\obj\Debug\netstandard2.0\Hal.PeakCan.csprojResolveAssemblyReference.cache
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.PeakCan\bin\Debug\netstandard2.0\Hal.PeakCan.Contracts.dll
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.PeakCan\bin\Debug\netstandard2.0\Helper.Contracts.dll
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.PeakCan\bin\Debug\netstandard2.0\Hal.PeakCan.Contracts.pdb
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.PeakCan\bin\Debug\netstandard2.0\Helper.Contracts.pdb
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.PeakCan\obj\Debug\netstandard2.0\Hal.PeakCan.csproj.CopyComplete

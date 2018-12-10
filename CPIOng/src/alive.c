@@ -7,6 +7,10 @@
 
 #include "alive.h"
 
+
+
+#define AliveOffset ((uint32_t)0x200)
+
 static TIM_HandleTypeDef s_TimerInstance; // = { .Instance = TIM2 };
 
 void SwitchMainLed(void) {
@@ -54,7 +58,7 @@ void Init_Timer(void) {
 }
 
 void InitAlive(void) {
-	AliveCanId = (uint32_t)GetGlobalCanNodeId();
+	AliveCanId = (uint32_t)GetGlobalCanNodeId() + AliveOffset;
 	Init_Timer();
 }
 

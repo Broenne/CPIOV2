@@ -1,0 +1,16 @@
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\bin\Debug\netstandard2.0\ConfigLogicLayer.deps.json
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\bin\Debug\netstandard2.0\ConfigLogicLayer.dll
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\obj\Debug\netstandard2.0\ConfigLogicLayer.csproj.CoreCompileInputs.cache
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\obj\Debug\netstandard2.0\ConfigLogicLayer.AssemblyInfoInputs.cache
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\obj\Debug\netstandard2.0\ConfigLogicLayer.AssemblyInfo.cs
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\bin\Debug\netstandard2.0\ConfigLogicLayer.pdb
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\obj\Debug\netstandard2.0\ConfigLogicLayer.dll
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\obj\Debug\netstandard2.0\ConfigLogicLayer.pdb
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\obj\Debug\netstandard2.0\ConfigLogicLayer.csprojResolveAssemblyReference.cache
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\bin\Debug\netstandard2.0\Hal.PeakCan.Contracts.dll
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\bin\Debug\netstandard2.0\Helper.Contracts.dll
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\bin\Debug\netstandard2.0\Hal.PeakCan.Contracts.pdb
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\bin\Debug\netstandard2.0\Helper.Contracts.pdb
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\obj\Debug\netstandard2.0\ConfigLogicLayer.csproj.CopyComplete
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\bin\Debug\netstandard2.0\ConfigLogicLayer.Contracts.dll
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\bin\Debug\netstandard2.0\ConfigLogicLayer.Contracts.pdb
