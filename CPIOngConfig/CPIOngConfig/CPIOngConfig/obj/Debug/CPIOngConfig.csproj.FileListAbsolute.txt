@@ -146,6 +146,3 @@ C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\bin\Debug\Hal.PeakCan.dll
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\bin\Debug\Hal.PeakCan.pdb
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\Pulse\PulseView.g.cs
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\Pulse\PulseView.baml
-C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\Pulse\PulseList.g.cs
-C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\GeneratedInternalTypeHelper.g.cs
-C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\Pulse\PulseList.baml

@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:CPIOngConfig.Pulse"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+       
+</UserControl.Resources>
     <Grid>
         <ListView ItemsSource="{Binding PulseDataForViewList}">
             <ListView.View>
@@ -21,29 +24,26 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-
                     <GridViewColumn>
-                        
-                                    <GridViewColumn>
-                                        <GridViewColumn.CellTemplate>
-                                            <!--<DataTemplate>
-                                                <local:PulseList Content="{Binding Times}"></local:PulseList>
-                                            </DataTemplate>-->
-                                            <DataTemplate>
-                                                <TextBox Text="{Binding Tim, Mode=OneWay}" IsReadOnly="True" />
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-
-                        <!--<ListBox Margin="20" ItemsSource="{Binding Times}">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBox Text="{Binding Tim}" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>-->
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <!--<ListBox Margin="20" ItemsSource="{Binding Converter={StaticResource TimeListConverter}}">-->
+                                <ListBox Margin="20" ItemsSource="{Binding Times}" >
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel IsItemsHost="True" />
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBox Text="{Binding Tim}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
                 </GridView>

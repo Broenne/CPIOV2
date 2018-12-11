@@ -11,7 +11,9 @@
         "dependencies": {
           "Autofac": "3.5.2",
           "Helper.Contracts": "1.0.0",
-          "NETStandard.Library": "2.0.1"
+          "NETStandard.Library": "2.0.1",
+          "PresentationFramework": "4.0.0.0",
+          "WindowsBase": "4.0.0.0"
         },
         "runtime": {
           "Helper.dll": {}
@@ -31,6 +33,16 @@
       "Helper.Contracts/1.0.0": {
         "runtime": {
           "Helper.Contracts.dll": {}
+        }
+      },
+      "PresentationFramework/4.0.0.0": {
+        "runtime": {
+          "PresentationFramework.dll": {}
+        }
+      },
+      "WindowsBase/4.0.0.0": {
+        "runtime": {
+          "WindowsBase.dll": {}
         }
       }
     }
@@ -64,6 +76,16 @@
     },
     "Helper.Contracts/1.0.0": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "PresentationFramework/4.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "WindowsBase/4.0.0.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }
