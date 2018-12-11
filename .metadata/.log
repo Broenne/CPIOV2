@@ -3860,3 +3860,17 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 !MESSAGE Request for monitor: 'RequestMonitor (com.atollic.truestudio.sfrview.ui.SfrView$4@317fb): Status ERROR: org.eclipse.cdt.dsf.gdb code=10001 Connection is shut down null' resulted in an error.
 !SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10001 2018-12-11 07:45:34.258
 !MESSAGE Connection is shut down
+
+!ENTRY TrueSTUDIO 4 0 2018-12-11 13:02:59.702
+!MESSAGE ST-LINK GDB server failed to start (exit code = 2)
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2018-12-11 13:02:59.748
+!MESSAGE Error in initializing ST-Link device.
+Reason: (2) ST-Link DLL error.
+
+!ENTRY TrueSTUDIO 4 0 2018-12-11 13:03:26.448
+!MESSAGE ST-LINK GDB server failed to start (exit code = 2)
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2018-12-11 13:03:26.516
+!MESSAGE Error in initializing ST-Link device.
+Reason: (2) ST-Link DLL error.

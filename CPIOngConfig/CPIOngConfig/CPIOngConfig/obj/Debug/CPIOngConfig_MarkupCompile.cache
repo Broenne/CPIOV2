@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\App.xaml
-4-1220801258
+6-1870050
 
-13320866499
+161698968743
 131-218545339
-Adapter\SelectAdapterView.xaml;ConfigID\ConfigCanId.xaml;InputBinary\InputBinaryView.xaml;MainWindow.xaml;
+Adapter\SelectAdapterView.xaml;ConfigID\ConfigCanId.xaml;InputBinary\InputBinaryView.xaml;MainWindow.xaml;Pulse\PulseList.xaml;Pulse\PulseView.xaml;
 
 False
 

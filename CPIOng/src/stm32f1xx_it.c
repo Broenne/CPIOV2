@@ -256,6 +256,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 }
 
 
+
+
+
 /* USER CODE BEGIN 1 */
 
 /* USER CODE END 1 */

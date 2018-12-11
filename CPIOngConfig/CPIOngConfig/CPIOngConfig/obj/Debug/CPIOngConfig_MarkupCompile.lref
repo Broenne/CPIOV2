@@ -4,4 +4,6 @@ FC:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\Adapter\SelectAdapterView
 FC:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\ConfigID\ConfigCanId.xaml;;
 FC:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\InputBinary\InputBinaryView.xaml;;
 FC:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\MainWindow.xaml;;
+FC:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\Pulse\PulseView.xaml;;
+FC:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\Pulse\PulseList.xaml;;
 

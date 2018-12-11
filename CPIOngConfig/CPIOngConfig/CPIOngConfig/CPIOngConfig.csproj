@@ -78,6 +78,13 @@
     </Compile>
     <Compile Include="Adapter\SelectAdapterViewModel.cs" />
     <Compile Include="CPIOngConfigContainerModule.cs" />
+    <Compile Include="Pulse\PulseList.xaml.cs">
+      <DependentUpon>PulseList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pulse\PulseView.xaml.cs">
+      <DependentUpon>PulseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pulse\PulseViewModel.cs" />
     <Page Include="Adapter\SelectAdapterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -109,6 +116,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pulse\PulseList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pulse\PulseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigBootstrapper.cs" />
@@ -168,7 +183,6 @@
   <ItemGroup>
     <Folder Include="ConfigureID\" />
     <Folder Include="InputAnalog\" />
-    <Folder Include="Pulse\" />
     <Folder Include="TimeCalibration\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

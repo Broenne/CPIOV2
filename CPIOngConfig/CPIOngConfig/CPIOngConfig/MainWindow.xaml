@@ -8,12 +8,14 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <ContentPresenter Grid.Row="0" Content="{Binding ConfigCanId}"></ContentPresenter>
         <ContentPresenter Grid.Row="1" Content="{Binding SelectAdapterView}"></ContentPresenter>
         <ContentPresenter Grid.Row="2" Content="{Binding InputBinaryView}"></ContentPresenter>
+        <ContentPresenter Grid.Row="3" Content="{Binding PulseView}"></ContentPresenter>
     </Grid>
 </Window>

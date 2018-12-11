@@ -15,14 +15,17 @@ using System.Windows.Shapes;
 
 namespace CPIOngConfig.Pulse
 {
+    using CPIOngConfig.Contracts.Pulse;
+
     /// <summary>
     /// Interaction logic for PulseView.xaml
     /// </summary>
-    public partial class PulseView : UserControl
+    public partial class PulseView : UserControl, IPulseView
     {
-        public PulseView()
+        public PulseView(IPulseViewModel vm)
         {
-            InitializeComponent();
+            this.InitializeComponent();
+            this.DataContext = vm;
         }
     }
 }
