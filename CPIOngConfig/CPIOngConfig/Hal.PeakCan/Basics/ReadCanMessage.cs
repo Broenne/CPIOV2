@@ -6,7 +6,7 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-
+    using Hal.PeakCan.Contracts.Basics;
     using Hal.PeakCan.PCANDll;
 
     using HardwareAbstaction.PCAN.Init;
@@ -20,7 +20,7 @@
     ///     Read the CAN message.
     /// </summary>
     /// <seealso cref="IReadCanMessage" />
-    public class ReadCanMessage : IReadCanMessage //: IReadCanMessage
+    public class ReadCanMessage : IReadCanMessage 
     {
         private static readonly object LockRead = new object();
 
@@ -152,96 +152,7 @@
             }
         }
 
-        ///// <summary>
-        /////     Gets the actual handle.
-        ///// </summary>
-        ///// <returns>Return the actual handle.</returns>
-        //public string GetActualHandle()
-        //{
-        //    return this.MPcanHandle.ToString("X"); // todo mb: hier namen rein bauen?!
-        //}
-
-        ///// <summary>
-        /////     Tries the get value.
-        ///// </summary>
-        ///// <param name="id">The identifier.</param>
-        ///// <param name="data">The data to read.</param>
-        ///// <returns>Return if result ok.</returns>
-        //public bool TryGetValue(uint id, uint datat1, uint data2, ref byte[] data)
-        //{
-        //    lock (LockRead)
-        //    {
-        //        this.Logger.LogTrace("Begin :" + this.GetType().Name);
-
-        //        try
-        //        {
-        //            TpcanMsg readCanMsg;
-        //            this.ReadRaw(id, out readCanMsg, datat1, data2);
-
-        //            data = readCanMsg.Data;
-
-        //            if (readCanMsg.Id == id && readCanMsg.Data[0] == datat1 && readCanMsg.Data[1] == data2)
-        //            {
-        //                return true;
-        //            }
-        //            else
-        //            {
-        //                return false;
-        //            }
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            this.Logger.LogError(e);
-        //            throw;
-        //        }
-        //        finally
-        //        {
-        //            this.Logger.LogTrace("End :" + this.GetType().Name);
-        //        }
-        //    }
-        //}
-
-        ///// <summary>
-        /////     Tries the get value.
-        ///// </summary>
-        ///// <param name="id">The identifier.</param>
-        ///// <param name="data">The data to read.</param>
-        ///// <returns>Return if result ok.</returns>
-        //public bool TryGetValue(uint id, ref byte[] data)
-        //{
-        //    lock (LockRead)
-        //    {
-        //        this.Logger.LogTrace("Begin :" + this.GetType().Name);
-
-        //        try
-        //        {
-        //            TpcanMsg readCanMsg;
-        //            this.ReadRaw(id, out readCanMsg);
-
-        //            data = readCanMsg.Data;
-
-        //            if (readCanMsg.Id == id)
-        //            {
-        //                // this.Logger.LogTrace("GEHT#################" + Encoding.Default.GetString(data));
-        //                return true;
-        //            }
-        //            else
-        //            {
-        //                // this.Logger.LogTrace("Bus status" + status);
-        //                return false;
-        //            }
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            this.Logger.LogError(e);
-        //            throw;
-        //        }
-        //        finally
-        //        {
-        //            this.Logger.LogTrace("End :" + this.GetType().Name);
-        //        }
-        //    }
-        //}
+       
 
         //#endregion
 

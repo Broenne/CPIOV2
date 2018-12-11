@@ -228,7 +228,7 @@ void SystemClock_Config(void) {
 	__HAL_RCC_PLLI2S_ENABLE();
 
 	/* SysTick_IRQn interrupt configuration */
-	HAL_NVIC_SetPriority(SysTick_IRQn, 14, 0);
+	HAL_NVIC_SetPriority(SysTick_IRQn, 15, 0);
 }
 
 /* ADC1 init function */

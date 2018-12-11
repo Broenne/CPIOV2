@@ -8,8 +8,6 @@ namespace ConfigLogicLayer.DigitalInputState
 
     using Hal.PeakCan.Contracts.Basics;
 
-    using HardwareAbstaction.PCAN.Basics;
-
     using Helper.Contracts.Logger;
 
     public class GetDigitalInputs : IGetDigitalInputs
