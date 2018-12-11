@@ -11,7 +11,10 @@
 
 #define AliveOffset ((uint32_t)0x200)
 
-static TIM_HandleTypeDef s_TimerInstance; // = { .Instance = TIM2 };
+static TIM_HandleTypeDef s_TimerInstance;
+
+extern xQueueHandle CanQueueSenderHandle;
+
 
 void SwitchMainLed(void) {
 	HAL_GPIO_TogglePin(LED_S_GPIO_Port, LED_S_Pin);
@@ -26,7 +29,24 @@ void SanCanAlive(void) {
 	// add error frames
 	//GetApplicationStatus(&p[3]);
 
-	SendCan(AliveCanId, p, 8);
+
+	static CAN_HandleTypeDef hcan;
+	hcan.Instance=CAN2;
+	static CanTxMsgTypeDef TxMessage;
+	static CanRxMsgTypeDef RxMessage;
+	hcan.pTxMsg = &TxMessage;
+	hcan.pRxMsg = &RxMessage;
+	hcan.pTxMsg->StdId = AliveCanId;
+	memcpy(hcan.pTxMsg->Data, p, sizeof(p));
+
+	// es muss sicher gestellt sein, das der worker tak schon läuft
+	if (xQueueSendFromISR(CanQueueSenderHandle, &hcan, 0) != pdTRUE) {
+			printf("allive error");
+	}
+
+
+
+	//SendCan(AliveCanId, p, 8);
 }
 
 static void Init_TimerInternal() {

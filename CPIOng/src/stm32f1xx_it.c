@@ -213,20 +213,48 @@ void CAN2_RX0_IRQHandler(void)
 
 	portDISABLE_INTERRUPTS();
 
-  /* USER CODE END CAN2_RX0_IRQn  0 */
-   HAL_CAN_IRQHandler(&hcan2);
+	  /* USER CODE END CAN2_RX0_IRQn  0 */
+	   HAL_CAN_IRQHandler(&hcan2);
 
 
 	portENABLE_INTERRUPTS();
-
-
-
 
 
   /* USER CODE BEGIN CAN2_RX0_IRQn 1 */
 
   /* USER CODE END CAN2_RX0_IRQn 1 */
 }
+
+
+
+extern UART_HandleTypeDef huart1;
+extern uint8_t text;
+
+//static UART_HandleTypeDef s_UARTHandle = UART_HandleTypeDef();
+
+void USART1_IRQHandler()
+{
+	//portDISABLE_INTERRUPTS();
+	HAL_UART_IRQHandler(&huart1);
+	//USART_ClearITPendingBit(&huart1, UART_IT_RXNE);
+//	__HAL_UART_CLEAR_FLAG(&huart1, UART_IT_RXNE);
+//	__HAL_UART_ENABLE_IT(&huart1, UART_IT_RXNE);
+//	portENABLE_INTERRUPTS();
+}
+
+/* This callback is called by the HAL_UART_IRQHandler when the given number of bytes are received */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+  if (huart->Instance == USART1)
+  {
+    /* Transmit one byte with 100 ms timeout */
+    HAL_UART_Transmit(&huart1, &text, 1, 100);
+
+    /* Receive one byte in interrupt mode */
+    HAL_UART_Receive_IT(&huart1, &text, 1);
+  }
+}
+
 
 /* USER CODE BEGIN 1 */
 

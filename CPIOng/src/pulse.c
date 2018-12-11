@@ -30,10 +30,7 @@ void InitTimerPulseCorrecturFactor(){
 void SetTimerPulseCorrecturFactor(uint16_t value){
 	// Info, hier nur int 16 erlaubt, korrektur sonst viel zu groﬂ. Sollen wir den Bereich noch einschr‰nken?
 	TimerCorrectureFactor = (uint16_t)value;
-	// todo mb: ssafe to eeprom
-
-	// REset();
-
+	Reset();
 }
 
 uint32_t GetTimerPulseCorrecturFactor(){
@@ -51,22 +48,33 @@ void Init_TimerForPulsTime(void) {
 
 	// calculate:
 	// updateFrequenz = Clock/((PSC-1)*(Period-1)
-
 	InitTimerPulseCorrecturFactor();
 
 	__HAL_RCC_TIM3_CLK_ENABLE()	;
 	pulseTimerInstance.Instance = TIM3;
-	pulseTimerInstance.Init.Prescaler = 9;
 	pulseTimerInstance.Init.CounterMode = TIM_COUNTERMODE_UP;
-	pulseTimerInstance.Init.Period = 9001 + GetTimerPulseCorrecturFactor();
+
+	pulseTimerInstance.Init.Prescaler = 1;//9;
+	pulseTimerInstance.Init.Period = 36000;//801;// + GetTimerPulseCorrecturFactor();
+
+//	pulseTimerInstance.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+//	pulseTimerInstance.Init.Prescaler = 1;
+//	pulseTimerInstance.Init.AutoReloadPreload = 3600;
+
+
+
 	pulseTimerInstance.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
 	pulseTimerInstance.Init.RepetitionCounter = 0;
+	pulseTimerInstance.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
 	//s_TimerInstance.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;//TIM_AUTORELOAD_PRELOAD_ENABLE;//
 	if (HAL_TIM_Base_Init(&pulseTimerInstance) != HAL_OK) {
 		//_Error_Handler(__FILE__, __LINE__);
 	}
 
 	HAL_TIM_Base_Start(&pulseTimerInstance);
+
+
+
 	HAL_NVIC_SetPriority(TIM3_IRQn, PreemptPriorityPulseTimer, SubPriorityPulseTimer); // extrem hohe priorit‰t sollte es sein!!!
 	HAL_NVIC_EnableIRQ(TIM3_IRQn);
 
@@ -84,7 +92,6 @@ void InitQueueForPulse(void) {
 void InitPulse(void) {
 	InitQueueForPulse();
 	InitPulseSender();
-	//InitInputs(); // todo mb: das in main
 	Init_TimerForPulsTime();
 }
 
@@ -137,11 +144,7 @@ void InitPulseSender(void) {
 	//  /* definition and creation of defaultTask */
 	osThreadDef(PulseTask, SendPulsePerCanTask, osPriorityNormal, 0, 128);
 	myTask03Handle = osThreadCreate(osThread(PulseTask), NULL);
-
-
 	// todo mb: wann und wie den task deleten?
-	/* The task was created.  Use the task's handle to delete the task. */
-	//vTaskDelete( xHandle );
 }
 
 /*
@@ -192,6 +195,8 @@ void CheckPulseInputs(void){
 	oldValue = value;
 }
 
+
+
 /*
  * Created on: 30.11.18
  * Author: MB
@@ -203,9 +208,10 @@ void TIM3_IRQHandler(void) {
 
 	portDISABLE_INTERRUPTS();
 
+
+	//if(pulseTimerInstance.)
 	++tickMs;
 	CheckPulseInputs();
-
 	__HAL_TIM_CLEAR_FLAG(&pulseTimerInstance, TIM_FLAG_UPDATE);
 
 	portENABLE_INTERRUPTS();

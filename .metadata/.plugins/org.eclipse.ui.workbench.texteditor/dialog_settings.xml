@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="myQueue01" key="selection"/>
+		<item value="" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="USART_IRQHandler"/>
+			<item value="Msp"/>
+			<item value="PAGE_SIZE"/>
 			<item value="myQueue01"/>
 			<item value="DMA_MemoryBaseAddr"/>
 			<item value="ADCBuffer"/>
 			<item value="Callback"/>
 			<item value="CAN"/>
-			<item value="PIN5"/>
-			<item value="IN5_Pin"/>
-			<item value="Speed"/>
 		</list>
 		<list key="replacehistory">
 		</list>

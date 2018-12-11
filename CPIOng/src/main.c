@@ -65,6 +65,7 @@ DMA_HandleTypeDef hdma_adc1;
 volatile CAN_HandleTypeDef hcan2;
 
 UART_HandleTypeDef huart1;
+uint8_t text;
 
 WWDG_HandleTypeDef hwwdg;
 
@@ -114,7 +115,7 @@ int main(void) {
 	/* MCU Configuration----------------------------------------------------------*/
 
 	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-	HAL_Init();
+ 	HAL_Init();
 
 	/* USER CODE BEGIN Init */
 
@@ -128,8 +129,9 @@ int main(void) {
 	MX_DMA_Init();
 	MX_ADC1_Init();
 	MX_CAN2_Init();
+	MX_USART1_UART_Init();
 
-	printf("hello CPIO next generation\r\n");
+	//printf("hello CPIO next generation\r\n");
 
 	PrepareCan();
 	FilterOnlyMyId(&hcan2); // das muss hier expliziet passierne, um den Filter nach dem setzen einer neuen can id und reset diesen zu reintiaisieren
@@ -139,6 +141,23 @@ int main(void) {
 	InitPulse();
 
 	InitAlive();
+
+
+
+//https://electronics.stackexchange.com/questions/325442/stm32f1xx-hal-uart-recieve
+
+	//HAL_UART_Receive_IT(&huart1, &text, 1);
+
+//	while(1){
+//		HAL_UART_Receive(&huart1, text, sizeof(text), 100);
+//		;
+//	}
+
+
+
+
+
+
 
 	/* Start scheduler */
 	osKernelStart();
@@ -359,43 +378,6 @@ static void MX_ADC1_Init(void) {
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
 		//_Error_Handler(__FILE__, __LINE__);
 	}
-
-
-
-
-
-//
-//
-//
-//	 hdma_adc1.Instance = DMA1_Channel1;
-//	    hdma_adc1.Init.Direction = DMA_PERIPH_TO_MEMORY;
-//	    hdma_adc1.Init.PeriphInc = DMA_PINC_DISABLE;
-//	    hdma_adc1.Init.MemInc = DMA_MINC_ENABLE;
-//	    hdma_adc1.Init.PeriphDataAlignment = DMA_PDATAALIGN_HALFWORD;
-//	    hdma_adc1.Init.MemDataAlignment = DMA_MDATAALIGN_HALFWORD;
-//	    hdma_adc1.Init.Mode = DMA_CIRCULAR;
-//	    hdma_adc1.Init.Priority = DMA_PRIORITY_LOW;
-//
-//	    if (HAL_DMA_Init(&hdma_adc1) != HAL_OK)
-//	    {
-//
-//	    }
-//
-//	    __HAL_LINKDMA(hadc,DMA_Handle,hdma_adc1);
-//
-//
-//
-//
-//
-
-
-
-
-
-
-
-
-
 }
 
 void FilterIdNull(void) {
@@ -417,6 +399,7 @@ void FilterIdNull(void) {
 		/* Filter configuration Error */
 		//Error_Handler();
 	}
+
 	hcan2.Instance = CAN2;
 }
 
@@ -451,13 +434,11 @@ static void MX_CAN2_Init(void) {
 
 	__HAL_CAN_ENABLE_IT(&hcan2, CAN_IT_FMP0);
 
-
 }
-
 
 void FilterOnlyMyId(CAN_HandleTypeDef* hcan) {
 
-	int globalCanId=GetGlobalCanNodeId();
+	int globalCanId = GetGlobalCanNodeId();
 	CAN_FilterConfTypeDef sFilterConfig;
 	sFilterConfig.FilterNumber = 15;
 	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
@@ -471,17 +452,19 @@ void FilterOnlyMyId(CAN_HandleTypeDef* hcan) {
 
 	// info mb: der filter muss auf can 1 gesetzt werden, auch wenn nur can 2 genutzt wird (warum auch immer)
 	hcan->Instance = CAN1;
-		if (HAL_CAN_ConfigFilter(hcan, &sFilterConfig) != HAL_OK) {
-			/* Filter configuration Error */
-			//Error_Handler();
-		}
+	if (HAL_CAN_ConfigFilter(hcan, &sFilterConfig) != HAL_OK) {
+		/* Filter configuration Error */
+		//Error_Handler();
+	}
 
 	hcan->Instance = CAN2;
 }
 
-
 /* USART1 init function */
 static void MX_USART1_UART_Init(void) {
+
+//	static uint8_t rxBuff[100];
+//	huart1.pRxBuffPtr = &rxBuff[0];
 
 	huart1.Instance = USART1;
 	huart1.Init.BaudRate = 57600;
@@ -492,10 +475,16 @@ static void MX_USART1_UART_Init(void) {
 	huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
 	huart1.Init.OverSampling = UART_OVERSAMPLING_16;
 	if (HAL_HalfDuplex_Init(&huart1) != HAL_OK) {
-		_Error_Handler(__FILE__, __LINE__);
+		//_Error_Handler(__FILE__, __LINE__);
 	}
 
+	__HAL_UART_ENABLE_IT(&huart1, UART_IT_RXNE);
+	__HAL_UART_ENABLE_IT(&huart1, UART_IT_PE);
+	__HAL_UART_ENABLE_IT(&huart1, UART_IT_ERR);
+	HAL_NVIC_SetPriority(USART1_IRQn, 8, 0);
 }
+
+
 
 /* WWDG init function */
 static void MX_WWDG_Init(void) {
@@ -675,7 +664,6 @@ static void MX_GPIO_Init(void) {
 //	}
 //	/* USER CODE END Error_Handler_Debug */
 //}
-
 #ifdef  USE_FULL_ASSERT
 /**
  * @brief  Reports the name of the source file and the source line number

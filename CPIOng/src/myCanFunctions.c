@@ -17,6 +17,7 @@ static uint8_t globalCanId = 2;
 osThreadId canInputTaskHandle;
 
 xQueueHandle CanQueueHandle = NULL;
+xQueueHandle CanQueueSenderHandle = NULL;
 
 /*
  * Created on: 30.11.18
@@ -27,8 +28,6 @@ xQueueHandle CanQueueHandle = NULL;
 void CanWorkerTask(void * pvParameters) {
 
 	while (1) {
-		//printf("run %d \r\n", ++i);
-
 		CAN_HandleTypeDef can;
 		CAN_HandleTypeDef* hcan = &can;
 		static CanTxMsgTypeDef TxMessage;
@@ -36,6 +35,7 @@ void CanWorkerTask(void * pvParameters) {
 		hcan->pTxMsg = &TxMessage;
 		hcan->pRxMsg = &RxMessage;
 
+		// mepfänger
 		if (xQueueReceive(CanQueueHandle, hcan, 100) == pdTRUE) {
 			if (hcan->Instance == CAN2) {
 
@@ -52,28 +52,25 @@ void CanWorkerTask(void * pvParameters) {
 						break;
 					}
 				}
-
 				// eigene can id
 				if (GetGlobalCanNodeId() == hcan->pRxMsg->StdId) {
 					if (0x02 == hcan->pRxMsg->RTR) {
-						// todo mb: über que wegschreiben NIEMALS IN ITERRUPT!!!!!
 						uint8_t data[8];
 						GetInputs(&data);
-						SendCan(GetGlobalCanNodeId(), data, 8);
-						//printf("ddd %i", data[1]);
+						SendCan(GetGlobalCanNodeId(), data, 8); // ab in ide ander queu un einfach weg
 					}
 
 					if (SET_TIMER_CALIBRATION_CMD == hcan->pRxMsg->Data[0]) {
 						SetTimerPulseCorrecturFactor(0); // todo mb: datnfed in int 16 wandeln
 					}
-
 				}
-
 			}
-		} else {
-			vTaskDelay(10);
 		}
 
+		// zum senden
+		if (xQueueReceive(CanQueueSenderHandle, hcan, 100) == pdTRUE) {
+			SendCan(hcan->pTxMsg->StdId, hcan->pTxMsg->Data, 8);
+		}
 	}
 
 	printf("Sender task error \r\n");
@@ -88,11 +85,10 @@ void CanWorkerTask(void * pvParameters) {
 void InitCanInputTask(void) {
 
 	CanQueueHandle = xQueueCreate(QUEUE_SIZE_FOR_CAN, sizeof(CAN_HandleTypeDef));
+	CanQueueSenderHandle = xQueueCreate(1, sizeof(CAN_HandleTypeDef));
 
-	osThreadDef(canInputTask, CanWorkerTask, osPriorityNormal, 0, 128);
+	osThreadDef(canInputTask, CanWorkerTask, osPriorityNormal, 0, 256);
 	canInputTaskHandle = osThreadCreate(osThread(canInputTask), NULL);
-
-	// todo mb: wann und wie den task deleten?
 }
 
 void PrepareCan(void) {
@@ -108,7 +104,6 @@ void SetGlobalCanNodeId(uint8_t canId) {
 	// todo mb: einschränken
 	SafeGlobalCanId(canId);
 	Reset();
-	//globalCanId = canId;
 }
 
 void SendCanTimeDif(uint8_t channel, uint32_t res) {
@@ -126,13 +121,7 @@ void SendCanTimeDif(uint8_t channel, uint32_t res) {
 
 void GetInputs(uint8_t* data) {
 	uint8_t val[2];
-//	val[0] = ReadInputsFromRegisterA();
-//	val[1] = 0; // muss der auf 0 vorher?
-//	val[1] = ReadInputsFromRegisterB();
-//	val[1] = (ReadInputsFromRegisterC() << 2) | val[1];
-
 	ReadInputs(&val[0]);
-
 	memcpy(data, &val, sizeof(val));
 }
 

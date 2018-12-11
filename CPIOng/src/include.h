@@ -17,8 +17,6 @@
 #include "eeprom/eeprom.h"
 #include "eeprom/eepromConfig.h"
 
-#include "usart/usart.h"
-
 #include "helper.h"
 #include "storages.h"
 #include "error.h"
@@ -27,6 +25,7 @@
 #include "can.h"
 #include "myCanFunctions.h"
 #include "pulse.h"
+#include "usart/usart.h"
 
 
 

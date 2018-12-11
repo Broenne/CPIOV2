@@ -2,7 +2,7 @@
  * eeprom.h
  *
  *  Created on: 08.12.2018
- *      Author: tbe241
+ *      Author: MB
  */
 
 #ifndef EEPROM_EEPROM_H_

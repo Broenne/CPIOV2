@@ -8,6 +8,7 @@
 #include "can.h"
 
 extern CAN_HandleTypeDef hcan2;
+extern xQueueHandle CanQueueHandle;
 
 /*
  * Created on: 30.11.18
@@ -45,8 +46,6 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 		SetCanSendError();
 	}
 }
-
-extern xQueueHandle CanQueueHandle;
 
 void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* hcan) {
 
