@@ -28,7 +28,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <!--<ListBox Margin="20" ItemsSource="{Binding Converter={StaticResource TimeListConverter}}">-->
-                                <ListBox Margin="20" ItemsSource="{Binding Times}" >
+                                <ListBox Margin="3" ItemsSource="{Binding Times}" Width="400" >
                                     <ListBox.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <WrapPanel IsItemsHost="True" />
@@ -37,7 +37,7 @@
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Vertical">
-                                                <TextBox Text="{Binding Tim}" />
+                                                <TextBox Width="30" Text="{Binding Tim}" />
                                             </StackPanel>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>

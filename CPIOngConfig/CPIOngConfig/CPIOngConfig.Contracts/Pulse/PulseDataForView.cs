@@ -1,65 +1,82 @@
 ﻿namespace CPIOngConfig.Contracts.Pulse
 {
     using System.Collections.Generic;
-
+    using System.Collections.ObjectModel;
+    using System.Windows.Threading;
     using Prism.Mvvm;
 
     public class TimePulse : BindableBase
     {
+        private string tim;
+
+        #region Constructor
+
         public TimePulse(string tim)
         {
             this.Tim = tim;
         }
 
-        private string tim;
+        #endregion
+
+        #region Properties
 
         public string Tim
         {
-            get => tim;
+            get => this.tim;
             set => this.SetProperty(ref this.tim, value);
         }
+
+        #endregion
     }
 
-
-
     /// <summary>
-    /// The pulse for data view.
+    ///     The pulse for data view.
     /// </summary>
     /// <seealso cref="Prism.Mvvm.BindableBase" />
     public class PulseDataForView : BindableBase
     {
+        private List<TimePulse> times;
+
+        #region Constructor
+
         public PulseDataForView(string name)
         {
             this.Name = name;
-            this.Times = new List<TimePulse>()
-                             {
-                                 new TimePulse("12")
-                             };
-
-            this.AddTime(3);
-
-
+            this.Times = new ObservableCollection<TimePulse>();
         }
+
+        #endregion
+
+        #region Properties,
+
+
 
         public string Name { get; }
 
-        private List<TimePulse> times;
+        //public List<TimePulse> Times
+        //{
+        //    get => this.times;
+        //    set => this.SetProperty(ref this.times, value);
+        //}
 
 
+        public ObservableCollection<TimePulse> Times { get; }
+        #endregion
 
-        public List<TimePulse> Times
-        {
-            get => times;
-                set => this.SetProperty(ref this.times, value);
-        }
-
+        #region Public Methods
 
         public void AddTime(uint dif)
         {
-            this.Times.Add(new TimePulse("3"));
+            //Internal.Add(new TimePulse(dif.ToString()));
+            this.Times.Add( new TimePulse(dif.ToString()));// = this.Internal;
 
-            this.Times.Add(new TimePulse("4"));
+            if (this.Times.Count > 100)
+            {
+                this.Times.RemoveAt(0);
+            }
+
         }
 
+        #endregion
     }
 }

@@ -82,6 +82,7 @@
       <DependentUpon>PulseView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pulse\PulseViewModel.cs" />
+    <Compile Include="RootDispatcherFetcher.cs" />
     <Page Include="Adapter\SelectAdapterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
