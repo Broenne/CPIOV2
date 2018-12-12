@@ -67,6 +67,7 @@ volatile CAN_HandleTypeDef hcan2;
 UART_HandleTypeDef huart1;
 uint8_t text;
 
+
 WWDG_HandleTypeDef hwwdg;
 
 osThreadId defaultTaskHandle;
@@ -146,7 +147,9 @@ int main(void) {
 
 //https://electronics.stackexchange.com/questions/325442/stm32f1xx-hal-uart-recieve
 
-	//HAL_UART_Receive_IT(&huart1, &text, 1);
+	if(HAL_UART_Receive_IT(&huart1, &text, 1) != HAL_OK){
+		printf("error init uart receive");
+	}
 
 //	while(1){
 //		HAL_UART_Receive(&huart1, text, sizeof(text), 100);
@@ -171,6 +174,13 @@ int main(void) {
 	/* USER CODE END 3 */
 
 }
+
+
+
+
+
+
+
 
 /**
  * @brief System Clock Configuration
@@ -432,9 +442,11 @@ static void MX_CAN2_Init(void) {
 
 	FilterIdNull();
 
+	// todo mb: hier muss es noch
 	__HAL_CAN_ENABLE_IT(&hcan2, CAN_IT_FMP0);
 
 }
+
 
 void FilterOnlyMyId(CAN_HandleTypeDef* hcan) {
 
@@ -463,8 +475,8 @@ void FilterOnlyMyId(CAN_HandleTypeDef* hcan) {
 /* USART1 init function */
 static void MX_USART1_UART_Init(void) {
 
-//	static uint8_t rxBuff[100];
-//	huart1.pRxBuffPtr = &rxBuff[0];
+	static uint8_t rxBuff[100];
+	huart1.pRxBuffPtr = &rxBuff[0];
 
 	huart1.Instance = USART1;
 	huart1.Init.BaudRate = 57600;
@@ -474,14 +486,19 @@ static void MX_USART1_UART_Init(void) {
 	huart1.Init.Mode = UART_MODE_TX_RX;
 	huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
 	huart1.Init.OverSampling = UART_OVERSAMPLING_16;
-	if (HAL_HalfDuplex_Init(&huart1) != HAL_OK) {
+
+	HAL_UART_DeInit(&huart1);
+
+	if (HAL_UART_Init(&huart1) != HAL_OK) {
+		printf("Error uart init");
 		//_Error_Handler(__FILE__, __LINE__);
 	}
 
-	__HAL_UART_ENABLE_IT(&huart1, UART_IT_RXNE);
-	__HAL_UART_ENABLE_IT(&huart1, UART_IT_PE);
-	__HAL_UART_ENABLE_IT(&huart1, UART_IT_ERR);
+
 	HAL_NVIC_SetPriority(USART1_IRQn, 8, 0);
+
+	// https://simonmartin.ch/resources/stm32/dl/STM32%20Tutorial%2003%20-%20UART%20Communication%20using%20HAL%20(and%20FreeRTOS).pdf
+
 }
 
 
@@ -527,14 +544,10 @@ static void MX_GPIO_Init(void) {
 	GPIO_InitTypeDef GPIO_InitStruct;
 
 	/* GPIO Ports Clock Enable */
-	__HAL_RCC_GPIOC_CLK_ENABLE()
-	;
-	__HAL_RCC_GPIOD_CLK_ENABLE()
-	;
-	__HAL_RCC_GPIOA_CLK_ENABLE()
-	;
-	__HAL_RCC_GPIOB_CLK_ENABLE()
-	;
+	__HAL_RCC_GPIOC_CLK_ENABLE();
+	__HAL_RCC_GPIOD_CLK_ENABLE();
+	__HAL_RCC_GPIOA_CLK_ENABLE();
+	__HAL_RCC_GPIOB_CLK_ENABLE();
 
 	/*Configure GPIO pin Output Level */
 	HAL_GPIO_WritePin(GPIOB,
@@ -576,11 +589,11 @@ static void MX_GPIO_Init(void) {
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
 	HAL_GPIO_Init(PRINT_3_GPIO_Port, &GPIO_InitStruct);
 
-	/*Configure GPIO pin : PA10 */
-	GPIO_InitStruct.Pin = GPIO_PIN_10;
-	GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+//	/*Configure GPIO pin : PA10 */
+//	GPIO_InitStruct.Pin = GPIO_PIN_10;
+//	GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+//	GPIO_InitStruct.Pull = GPIO_NOPULL;
+//	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 	/*Configure GPIO pin : LED_S_Pin */
 	GPIO_InitStruct.Pin = LED_S_Pin;
