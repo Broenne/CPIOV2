@@ -20,6 +20,7 @@ static xQueueHandle PulsQueue = NULL;
 uint32_t PreemptPriorityPulseTimer = 5;
 uint32_t SubPriorityPulseTimer = 0;
 
+osThreadId myTask03Handle;
 
 static uint32_t TimerCorrectureFactor = 0;
 
@@ -69,15 +70,12 @@ void Init_TimerForPulsTime(void) {
 
 	HAL_NVIC_SetPriority(TIM3_IRQn, PreemptPriorityPulseTimer, SubPriorityPulseTimer); // extrem hohe priorität sollte es sein!!!
 	HAL_NVIC_EnableIRQ(TIM3_IRQn);
-	//__HAL_TIM_ENABLE_IT(&pulseTimerInstance, TIM_IT_UPDATE);
 }
 
 //osMessageQId myQueue01Handle;
 
 void InitQueueForPulse(void) {
 	PulsQueue = xQueueCreate(QUEUE_SIZE_FOR_PULSE_INFO, sizeof(MessageForSend));
-//	  osMessageQDef(myQueue01, 16, uint16_t);
-//	  myQueue01Handle = osMessageCreate(osMessageQ(myQueue01), NULL);
 }
 
 void InitPulse(void) {
@@ -98,31 +96,15 @@ void SendPulsePerCanTask(void * pvParameters) {
 		static MessageForSend currentMessage;
 		currentMessage.channel = 0;
 		currentMessage.res = 1;
-		/* Wait for the maximum period for data to become available on the queue.
-		 The period will be indefinite if INCLUDE_vTaskSuspend is set to 1 in
-		 FreeRTOSConfig.h. */
+
 		if (xQueueReceive(PulsQueue, &currentMessage, 100) == pdTRUE) {
-		//if (xQueueReceiveFromISR(PulsQueue, &currentMessage, (BaseType_t *)(SubPriorityPulseTimer+SubPriorityPulseTimer-1)) == pdTRUE) {
-			//printf("Received %d %d \r\n", currentMessage.channel, currentMessage.res);
 			SendCanTimeDif(currentMessage.channel, currentMessage.res);
 		}
-		else{
-			//vTaskDelay(10);
-		}
-
 	}
 
 	printf("Sender task error \r\n");
 }
 
-/*
- * Created on: 30.11.18
- * Author: MB
- * Funktion zum initailiserne der Queue zum senden der Impulsinformation.
-
- * */
-
-osThreadId myTask03Handle;
 /*
  * Created on: 30.11.18
  * Author: MB

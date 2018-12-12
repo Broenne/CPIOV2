@@ -26,6 +26,7 @@
 #include "myCanFunctions.h"
 #include "pulse.h"
 #include "usart/usart.h"
+#include "analog.h"
 
 
 

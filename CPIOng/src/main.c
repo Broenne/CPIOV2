@@ -64,8 +64,9 @@ DMA_HandleTypeDef hdma_adc1;
 
 volatile CAN_HandleTypeDef hcan2;
 
+// todo mb: funktion übergabe
 UART_HandleTypeDef huart1;
-uint8_t text;
+
 
 
 WWDG_HandleTypeDef hwwdg;
@@ -143,17 +144,14 @@ int main(void) {
 
 	InitAlive();
 
+	InitAnalog();
+
 
 
 //https://electronics.stackexchange.com/questions/325442/stm32f1xx-hal-uart-recieve
 
-	if(HAL_UART_Receive_IT(&huart1, &text, 1) != HAL_OK){
-		printf("error init uart receive");
-	}
-
-//	while(1){
-//		HAL_UART_Receive(&huart1, text, sizeof(text), 100);
-//		;
+//	if(HAL_UART_Receive_IT(&huart1, (uint8_t *)text, 20) != HAL_OK){
+//		printf("error init uart receive");
 //	}
 
 
@@ -493,12 +491,9 @@ static void MX_USART1_UART_Init(void) {
 		printf("Error uart init");
 		//_Error_Handler(__FILE__, __LINE__);
 	}
-
-
-	HAL_NVIC_SetPriority(USART1_IRQn, 8, 0);
-
-	// https://simonmartin.ch/resources/stm32/dl/STM32%20Tutorial%2003%20-%20UART%20Communication%20using%20HAL%20(and%20FreeRTOS).pdf
-
+//
+//	HAL_NVIC_SetPriority(USART1_IRQn, 12, 0);
+//	HAL_NVIC_EnableIRQ(USART1_IRQn);
 }
 
 
