@@ -18,15 +18,20 @@ uint8_t text;
 void ReadUartTask(void){
 	char inputData[50];
 	int pos = 0;
-	std::string xxx;
+	//std::string cmd;
+
 	while(1){
 			if(HAL_UART_Receive(&huart1, &text, sizeof(text), 0) == HAL_OK){
 
 
 				if(text == 0x00 ){
 					// clear all, NULL-terminierter String
-					//memcpy(string, inputData, pos);
-					//printf();
+
+
+					if(strncmp(resCutted, "AnaCh1", 6)){
+						printf("AnaCh1 result \r\n");
+					}
+
 					pos = 0;
 
 				}else{

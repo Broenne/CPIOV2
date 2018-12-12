@@ -12,6 +12,9 @@
 //#include "stm32f1xx_hal_gpio.h"
 #include "stm32f1xx_hal.h"
 #include "cmsis_os.h"
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 
 
 #include "eeprom/eeprom.h"
@@ -27,7 +30,6 @@
 #include "pulse.h"
 #include "usart/usart.h"
 #include "analog.h"
-
 
 
 #endif /* INCLUDE_H_ */
