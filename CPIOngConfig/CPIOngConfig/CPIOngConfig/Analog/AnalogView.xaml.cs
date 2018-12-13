@@ -2,6 +2,8 @@
 {
     using System.Windows.Controls;
 
+    using CPIOngConfig.Contracts.Analog;
+
     /// <summary>
     ///     Interaction logic for AnalogView.xaml
     /// </summary>

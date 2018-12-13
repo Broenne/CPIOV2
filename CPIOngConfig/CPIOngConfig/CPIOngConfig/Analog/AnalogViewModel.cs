@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CPIOngConfig.Analog
+﻿namespace CPIOngConfig.Analog
 {
+    using System;
     using System.IO.Ports;
     using System.Threading;
     using System.Windows.Input;
@@ -18,17 +13,21 @@ namespace CPIOngConfig.Analog
 
     public class AnalogViewModel : BindableBase, IAnalogViewModel
     {
+        private string result;
+
+        #region Constructor
+
         public AnalogViewModel(ILogger logegr)
         {
             this.Logegr = logegr;
-            this.OpenValueCommand = new RelayCommand(OpenValueCommandAction);
+            this.OpenValueCommand = new RelayCommand(this.OpenValueCommandAction);
         }
 
-        private ILogger Logegr { get; }
+        #endregion
 
-        private ICommand OpenValueCommand { get; }
+        #region Properties
 
-        private string result;
+        public ICommand OpenValueCommand { get; }
 
         public string Result
         {
@@ -36,29 +35,63 @@ namespace CPIOngConfig.Analog
             set => this.SetProperty(ref this.result, value);
         }
 
+        private ILogger Logegr { get; }
+
         private SerialPort SerialPort { get; set; }
 
         private Timer Timer { get; set; }
 
+        #endregion
+
+        #region Private Methods
+
         private void OpenValueCommandAction(object obj)
         {
-            SerialPort = new SerialPort();
+            this.SerialPort = new SerialPort();
             this.SerialPort.BaudRate = 57600;
             this.SerialPort.PortName = "COM19";
             this.SerialPort.Open();
 
 
-            this.Timer = new Timer(RequestCallback, null, 0, 250);
+            this.SerialPort.WriteLine("AnaCh15\0");
 
+
+            Thread.Sleep(100);
+
+            string res = string.Empty;
+            // achtung endloss abbruch
+            //do
+            //{
+            res = this.SerialPort.ReadLine();
+            //}
+            //while (string.IsNullOrEmpty(res));
+
+            this.Result = res;
+
+            this.SerialPort.Close();
+
+
+            //this.Timer = new Timer(this.RequestCallback, null, 0, 2500);
         }
 
         private void RequestCallback(object obj)
         {
             try
             {
-                this.SerialPort.WriteLine("AnaCh1");
+                this.SerialPort.WriteLine("AnaCh1\0");
 
-                Result = this.SerialPort.ReadLine();
+
+                Thread.Sleep(100);
+
+                string res = string.Empty;
+                // achtung endloss abbruch
+                //do
+                //{
+                    res = this.SerialPort.ReadLine();
+                //}
+                //while (string.IsNullOrEmpty(res));
+
+                this.Result = res;
             }
             catch (Exception ex)
             {
@@ -66,5 +99,6 @@ namespace CPIOngConfig.Analog
             }
         }
 
+        #endregion
     }
 }

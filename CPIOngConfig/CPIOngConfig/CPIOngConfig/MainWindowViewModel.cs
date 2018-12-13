@@ -9,6 +9,7 @@ namespace CPIOngConfig
     using CPIOngConfig.Analog;
     using CPIOngConfig.ConfigInputs;
     using CPIOngConfig.Contracts.Adapter;
+    using CPIOngConfig.Contracts.Analog;
     using CPIOngConfig.InputBinary;
     using CPIOngConfig.Pulse;
 
@@ -35,7 +36,7 @@ namespace CPIOngConfig
 
             public IConfigInputsAllView ConfigInputsAllView { get; }
 
-            private IAnalogView AnalogView { get; }
+            public IAnalogView AnalogView { get; }
         }
 
 

@@ -24,7 +24,7 @@
                 <ContentPresenter Content="{Binding ConfigInputsAllView}"></ContentPresenter>
             </TabItem>
             <TabItem Header="Analog" >
-                <ContentPresenter Content="{Binding AnalogAllView}"></ContentPresenter>
+                <ContentPresenter Content="{Binding AnalogView}"></ContentPresenter>
             </TabItem>
         </TabControl>
     </Grid>

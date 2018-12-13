@@ -10,4 +10,6 @@
 
 #include "../include.h"
 
+int __io_putchar(int ch);
+
 #endif /* USART_USART_H_ */

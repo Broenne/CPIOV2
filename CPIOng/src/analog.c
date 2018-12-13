@@ -26,11 +26,11 @@ void SendAnalogValue(char* data, int len) {
 		sprintf(str, "%d", i);
 		strcat(cmp, str);
 
+		char resString[20];
 		if (0 == strncmp(data, cmp, len)) {
 			int res = ReadChannelAnalog((uint)i);
-			printf("%d  \r\n", res);
-			// printf("AnaCh result %d \r\n", i);
-			// printf("AnaCh result \r\n");
+			sprintf(resString, "%d  \r\n", res);
+			printf(resString);
 			break;
 		}
 	}
@@ -46,7 +46,6 @@ void ReadUartTask(void) {
 
 			if (text == 0x00) {
 				// clear all, NULL-terminierter String
-
 				SendAnalogValue(inputData, pos);
 				pos = 0;
 				continue;

@@ -67,5 +67,5 @@ void SetPulseSenderCreateTaskError(void){
 }
 
 void SetCanSendError(void){
-	printf("Error in can send");
+	printf("Error in can send \r\n");
 }
