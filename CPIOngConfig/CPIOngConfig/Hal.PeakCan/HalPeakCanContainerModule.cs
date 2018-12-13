@@ -3,7 +3,8 @@
     using System.Reflection;
 
     using Autofac;
-
+    using Hal.PeakCan.Basics;
+    using Hal.PeakCan.Contracts.Basics;
     using HardwareAbstaction.PCAN.Init;
 
     using Module = Autofac.Module;
@@ -26,6 +27,8 @@
             builder.RegisterAssemblyTypes(dataAccess).AsImplementedInterfaces();
 
             builder.RegisterType<PreparePeakCan>().As<IPreparePeakCan>().SingleInstance();
+            builder.RegisterType<ReadCanMessageEvent>().As<IReadCanMessageEvent>().SingleInstance();
+
         }
 
         #endregion

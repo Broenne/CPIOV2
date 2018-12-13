@@ -7,15 +7,25 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-        </Grid.RowDefinitions>
-        <ContentPresenter Grid.Row="0" Content="{Binding ConfigCanId}"></ContentPresenter>
-        <ContentPresenter Grid.Row="1" Content="{Binding SelectAdapterView}"></ContentPresenter>
-        <ContentPresenter Grid.Row="2" Content="{Binding InputBinaryView}"></ContentPresenter>
-        <ContentPresenter Grid.Row="3" Content="{Binding PulseView}"></ContentPresenter>
+        <TabControl>
+            <TabItem Header="General">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <ContentPresenter Grid.Row="0" Content="{Binding ConfigCanId}"></ContentPresenter>
+                    <ContentPresenter Grid.Row="1" Content="{Binding SelectAdapterView}"></ContentPresenter>
+                    <ContentPresenter Grid.Row="2" Content="{Binding InputBinaryView}"></ContentPresenter>
+                </Grid>
+            </TabItem>
+            <TabItem Header="ConfigInputs" >
+                <ContentPresenter Content="{Binding ConfigInputsAllView}"></ContentPresenter>
+            </TabItem>
+            <TabItem Header="Analog" >
+                <ContentPresenter Content="{Binding AnalogAllView}"></ContentPresenter>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

@@ -1,4 +1,8 @@
-﻿namespace HardwareAbstaction.PCAN.Basics
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Hal.PeakCan.Contracts.Basics;
+
+namespace HardwareAbstaction.PCAN.Basics
 {
     using System;
     using System.Collections.Concurrent;
@@ -6,7 +10,7 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    using Hal.PeakCan.Contracts.Basics;
+
     using Hal.PeakCan.PCANDll;
 
     using HardwareAbstaction.PCAN.Init;
@@ -20,7 +24,7 @@
     ///     Read the CAN message.
     /// </summary>
     /// <seealso cref="IReadCanMessage" />
-    public class ReadCanMessage : IReadCanMessage 
+    public class ReadCanMessage : IReadCanMessage //: IReadCanMessage
     {
         private static readonly object LockRead = new object();
 
@@ -31,8 +35,9 @@
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="preparePeakCan">The prepare peak can.</param>
-        public ReadCanMessage(ILogger logger, IPreparePeakCan preparePeakCan)
+        public ReadCanMessage(ILogger logger, IPreparePeakCan preparePeakCan, IReadCanMessageEvent readCanMessageEvent)
         {
+            ReadCanMessageEvent = readCanMessageEvent;
             try
             {
                 logger.LogEnd(this.GetType());
@@ -75,109 +80,51 @@
 
         private IPreparePeakCan PreparePeakCan { get; }
 
-        //#endregion
 
-        //#region Public Methods
-
-        ///// <summary>
-        /////     Clears the message buffer.
-        ///// </summary>
-        //public void ClearExtendedMessageBuffer()
-        //{
-        //    this.ClearMessageBuffer(TpcanMessageType.PCAN_MESSAGE_EXTENDED);
-        //}
-
-        ///// <summary>
-        /////     Clears the message buffer.
-        ///// </summary>
-        ///// <param name="type">The type of message.</param>
-        //public void ClearMessageBuffer(TpcanMessageType type = TpcanMessageType.PCAN_MESSAGE_STANDARD)
-        //{
-        //    TpcanMsg readCanMsg;
-        //    readCanMsg.Id = 0x1B;
-        //    readCanMsg.Len = 8;
-
-        //    readCanMsg.Msgtype = type;
-
-        //    while (TPCANStatus.PCAN_ERROR_QRCVEMPTY
-        //           != PcanBasicDllWrapper.Read(this.MPcanHandle, out readCanMsg, out _))
-        //    {
-        //        // Console.WriteLine($"clear {readCanMsg.Id}");
-        //        this.Logger.LogTrace("read empty" + readCanMsg.Id);
-        //    }
-        //}
-
-        /// <summary>
-        ///     Reads the can MSG.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns>
-        ///     Return the CAN message.
-        /// </returns>
-        /// <exception cref="DigitalReadException">Throw digital read exception.</exception>
-        /// <exception cref="System.Exception">Answer not correct, necessary to log.</exception>
-        [SuppressMessage(
-            "StyleCop.CSharp.NamingRules",
-            "SA1305:FieldNamesMustNotUseHungarianNotation",
-            Justification = "Reviewed. Suppression is OK here.")]
-        public byte[] Do(uint id)
+        public void Start()
         {
-            lock (LockRead)
+            try
             {
-                try
+                Task.Run(() =>
                 {
-                    TpcanMsg readCanMsg;
-                    TPCANStatus res;
-                    this.ReadRaw(id, out readCanMsg /*, out res*/);
+                    this.ReadRaw();
 
-                    if (readCanMsg.Id == id)
-                    {
-                        this.Logger.LogDebug("GEHT#################");
-                    }
-                    else
-                    {
-                        throw new Exception("antwort passt nicht, muss man das locken?");
-                    }
-
-                    this.Logger.LogDebug("post read readCanMsg.Id: " + readCanMsg.Id);
-                    //this.Logger.LogDebug("res: " + res);
-
-                    return readCanMsg.Data;
-                }
-                catch (Exception e)
-                {
-                    this.Logger.LogError(e);
-                    throw;
-                }
+                });
             }
-        }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }        
 
-       
 
-        //#endregion
+        private IReadCanMessageEvent ReadCanMessageEvent { get; }
 
         //#region Private Methods
 
-        private void ReadRaw(uint id, out TpcanMsg readCanMsg)
+        private void ReadRaw()
         {
-            //this.Logger.LogTrace("Begin :" + this.GetType().Name + $"  {DateTime.Now.ToString(HelperStrings.TimeString)}");
-
             try
             {
                 TPCANStatus result;
 
                 
-                // Console.WriteLine($"in raw  { DateTime.Now.ToString(HelperStrings.TimeString)}");
                 do
                 {
-                    PcanBasicDllWrapper.FilterMessages(this.MPcanHandle, id, id, TpcanMode.PCAN_MODE_STANDARD);
+                    TpcanMsg readCanMsg;
+                    //PcanBasicDllWrapper.FilterMessages(this.MPcanHandle, id, id, TpcanMode.PCAN_MODE_STANDARD);
                     result = PcanBasicDllWrapper.Read(this.MPcanHandle, out readCanMsg, out _);
                     if (result == TPCANStatus.PCAN_ERROR_OK)
                     {
-                        break;
+                        this.ReadCanMessageEvent.OnReached(new ReadCanMessageEventArgs(readCanMsg.Id, readCanMsg.Data));
+                       // send event
+                    }
+                    else
+                    {
+                        Thread.Sleep(1);
                     }
                 }
-                while ((result & TPCANStatus.PCAN_ERROR_QRCVEMPTY) != TPCANStatus.PCAN_ERROR_QRCVEMPTY);
+                while (true);
 
                 ;
             }
@@ -185,23 +132,7 @@
             {
                 throw;
             }
-        }
-
-        //        // Console.WriteLine($"out raw  { DateTime.Now.ToString(HelperStrings.TimeString)}");
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        this.Logger.LogError(e);
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        this.Logger.LogTrace(
-        //            "End :" + this.GetType().Name + $"  {DateTime.Now.ToString(HelperStrings.TimeString)}");
-        //    }
-        //}
-
-                //#endregion
+        }     
 
     }
 }

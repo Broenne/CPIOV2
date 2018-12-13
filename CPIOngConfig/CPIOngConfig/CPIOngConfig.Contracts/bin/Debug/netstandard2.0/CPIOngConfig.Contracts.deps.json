@@ -11,7 +11,8 @@
         "dependencies": {
           "NETStandard.Library": "2.0.1",
           "Prism.Core": "6.2.0",
-          "PresentationCore": "4.0.0.0"
+          "PresentationCore": "4.0.0.0",
+          "WindowsBase": "4.0.0.0"
         },
         "runtime": {
           "CPIOngConfig.Contracts.dll": {}
@@ -31,6 +32,11 @@
       "PresentationCore/4.0.0.0": {
         "runtime": {
           "PresentationCore.dll": {}
+        }
+      },
+      "WindowsBase/4.0.0.0": {
+        "runtime": {
+          "WindowsBase.dll": {}
         }
       }
     }
@@ -63,6 +69,11 @@
       "hashPath": "prism.core.6.2.0.nupkg.sha512"
     },
     "PresentationCore/4.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "WindowsBase/4.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

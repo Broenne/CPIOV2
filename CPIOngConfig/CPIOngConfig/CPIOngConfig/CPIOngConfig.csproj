@@ -77,6 +77,17 @@
       <DependentUpon>SelectAdapterView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Adapter\SelectAdapterViewModel.cs" />
+    <Compile Include="Analog\AnalogView.xaml.cs">
+      <DependentUpon>AnalogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigInputs\ConfigInputsAllView.xaml.cs">
+      <DependentUpon>ConfigInputsAllView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigInputs\ConfigInputsAllViewModel.cs" />
+    <Compile Include="ConfigInputs\ConfigureInputsView.xaml.cs">
+      <DependentUpon>ConfigureInputsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigInputs\ConfigureInputsViewModel.cs" />
     <Compile Include="CPIOngConfigContainerModule.cs" />
     <Compile Include="Pulse\PulseView.xaml.cs">
       <DependentUpon>PulseView.xaml</DependentUpon>
@@ -87,9 +98,21 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Analog\AnalogView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ConfigID\ConfigCanId.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ConfigInputs\ConfigInputsAllView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ConfigInputs\ConfigureInputsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="InputBinary\InputBinaryView.xaml">
       <SubType>Designer</SubType>

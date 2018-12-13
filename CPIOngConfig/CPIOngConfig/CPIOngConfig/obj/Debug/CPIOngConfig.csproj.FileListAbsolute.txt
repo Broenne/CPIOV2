@@ -146,3 +146,9 @@ C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\bin\Debug\Hal.PeakCan.dll
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\bin\Debug\Hal.PeakCan.pdb
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\Pulse\PulseView.g.cs
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\Pulse\PulseView.baml
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\Analog\AnalogView.g.cs
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\ConfigInputs\ConfigInputsAllView.g.cs
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\ConfigInputs\ConfigureInputsView.g.cs
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\Analog\AnalogView.baml
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\ConfigInputs\ConfigInputsAllView.baml
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\ConfigInputs\ConfigureInputsView.baml
