@@ -2,7 +2,9 @@
 {
     using System;
     using System.IO.Ports;
+    using System.Text;
     using System.Threading;
+    using System.Threading.Tasks;
     using System.Windows.Input;
 
     using Global.UiHelper;
@@ -39,7 +41,6 @@
 
         private SerialPort SerialPort { get; set; }
 
-        private Timer Timer { get; set; }
 
         #endregion
 
@@ -50,54 +51,92 @@
             this.SerialPort = new SerialPort();
             this.SerialPort.BaudRate = 57600;
             this.SerialPort.PortName = "COM19";
-            this.SerialPort.Open();
-
-
-            this.SerialPort.WriteLine("AnaCh15\0");
-
-
-            Thread.Sleep(100);
-
-            string res = string.Empty;
-            // achtung endloss abbruch
-            //do
-            //{
-            res = this.SerialPort.ReadLine();
-            //}
-            //while (string.IsNullOrEmpty(res));
-
-            this.Result = res;
-
             this.SerialPort.Close();
+            this.SerialPort.Open();
+            this.SerialPort.ReadTimeout = 200;
 
 
-            //this.Timer = new Timer(this.RequestCallback, null, 0, 2500);
+            
+           // this.SerialPort.WriteLine("AnaCh15\0");
+            //this.SerialPort.Write(Encoding.ASCII.GetBytes("AnaCh15\0"), 0, 8);//"AnaCh15\0"
+
+            Task.Run(
+                () =>
+                    {
+
+                        while(true)
+                        {
+                            this.SerialPort.DiscardInBuffer();
+                            this.SerialPort.WriteLine("AnaCh15");
+                            string res = string.Empty;
+                            Thread.Sleep(50);
+                            // achtung endloss abbruch
+                            //do
+                            //{
+                            try
+                            {
+                                res = this.SerialPort.ReadLine();
+                            }
+                            catch (TimeoutException ex)
+                            {
+                                ; // ignore
+                            }
+
+                            //}
+                            //while (string.IsNullOrEmpty(res));
+
+                            this.Result = res;
+                        }
+                      
+
+
+                    });
+
+            //this.SerialPort.Close();
+
+
+            //this.Timer = new Timer(this.RequestCallback, null, 0, 100);
         }
 
-        private void RequestCallback(object obj)
-        {
-            try
-            {
-                this.SerialPort.WriteLine("AnaCh1\0");
 
 
-                Thread.Sleep(100);
 
-                string res = string.Empty;
-                // achtung endloss abbruch
-                //do
-                //{
-                    res = this.SerialPort.ReadLine();
-                //}
-                //while (string.IsNullOrEmpty(res));
 
-                this.Result = res;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
+        //private void RequestCallback(object obj)
+        //{
+        //    try
+        //    {
+
+
+
+
+        //        this.SerialPort.WriteLine("AnaCh15");
+
+        //        string res = string.Empty;
+        //        //Thread.Sleep(100);
+        //        Thread.Sleep(10);
+        //        // achtung endloss abbruch
+        //        //do
+        //        //{
+        //        try
+        //        {
+        //            res = this.SerialPort.ReadLine();
+        //        }
+        //        catch (TimeoutException ex)
+        //        {
+        //            ; // ignore
+        //        }
+
+        //        //}
+        //        //while (string.IsNullOrEmpty(res));
+
+        //        this.Result = res;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw;
+        //    }
+        //}
 
         #endregion
     }

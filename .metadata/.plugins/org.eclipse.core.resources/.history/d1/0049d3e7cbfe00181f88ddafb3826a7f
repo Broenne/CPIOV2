@@ -27,15 +27,12 @@ void SendAnalogValue(char* data, int len) {
 		sprintf(str, "%d", i);
 		strcat(cmp, str);
 
-		char resString[20];
+		static char resString[20];
 		if (0 == strncmp(data, cmp, len)) {
 			int res = ReadChannelAnalog((uint)i);
 			sprintf(resString, "%d  \r\n", res);
-
-			HAL_UART_Transmit(&huart1, (uint8_t*) &resString, 8, 100);
 			// vTaskDelay(20);
-			//printf(resString);
-			//printf("hallo123 \r\n");
+			printf(resString);
 			break;
 		}
 	}

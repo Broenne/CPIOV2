@@ -19,7 +19,6 @@ uint8_t text;
 
 
 void SendAnalogValue(char* data, int len) {
-
 	for (int i = 15; 0 != i; --i) {
 		char cmp[sizeof(ANA_CHANNEL_COMMAND) + 2];
 		strcpy(cmp, ANA_CHANNEL_COMMAND);
@@ -31,11 +30,7 @@ void SendAnalogValue(char* data, int len) {
 		if (0 == strncmp(data, cmp, len)) {
 			int res = ReadChannelAnalog((uint)i);
 			sprintf(resString, "%d  \r\n", res);
-
-			HAL_UART_Transmit(&huart1, (uint8_t*) &resString, 8, 100);
-			// vTaskDelay(20);
-			//printf(resString);
-			//printf("hallo123 \r\n");
+			printf(resString);
 			break;
 		}
 	}
@@ -47,12 +42,13 @@ void ReadUartTask(void) {
 	//std::string cmd;
 
 	while (1) {
-		if (HAL_UART_Receive(&huart1, &text, sizeof(text), 10) == HAL_OK) {
+		if (HAL_UART_Receive(&huart1, &text, sizeof(text), 0) == HAL_OK) {
 
 			if (text == '\n') {
 				// clear all, NULL-terminierter String
 
 				SendAnalogValue(inputData, pos);
+				HAL_UART_
 				pos = 0;
 				continue;
 
@@ -63,7 +59,6 @@ void ReadUartTask(void) {
 			++pos;
 
 		} else {
-
 			// printf("no data \r\n");
 		}
 	}
