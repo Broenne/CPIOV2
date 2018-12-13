@@ -12,11 +12,80 @@
 
 
 extern UART_HandleTypeDef huart1;
+#define TBUFSIZE     (256)
+#define RBUFSIZE     (256)
+#define TMASK        (TBUFSIZE-1)
+#define RMASK        (RBUFSIZE-1)
+#define RBUFLEN      (uint8_t)(r_in - r_out)
+#define TBUFLEN      (uint8_t)(t_in - t_out)
+
+
+static volatile uint8_t tbuf[TBUFSIZE];
+static volatile uint8_t rbuf[RBUFSIZE];
+static volatile uint8_t rmsg =0;
+static volatile uint8_t t_in =0;
+static volatile uint8_t t_out=0;
+static volatile uint8_t r_in =0;
+static volatile uint8_t r_out=0;
+static volatile uint8_t txien=0;
+
+
 
 int __io_putchar(int ch) {
-  HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF);
-  return ch;
+//  HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF);
+//  return ch;
+
+
+//	int timeout = 0xFFFF;//UART_TIMEOUT;
+//	  while ((TBUFLEN > (TBUFSIZE-8)) && timeout--) // wait a moment, if buffer full
+//	  {
+//	    //RTOS_WAIT_TICK;
+//		  vTaskDelay(1);
+//	  }
+
+
+	  HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF);
+	  //UART_PushChar(ch);
+	  return 0;
+
 }
+
+
+//static void UART_PushChar(char ch)
+//{
+//  if (ch == '\n')
+//  {
+//    tbuf[t_in++ & TMASK] = '\r';    // add [CR]
+//    tbuf[t_in++ & TMASK] = '\n';    // add [NL]
+//    newline = 1;
+//  }
+//  else
+//  {
+//    tbuf[t_in++ & TMASK] = ch;   // next char
+//    newline = 0;
+//  }
+//  if (txien == DISABLE)
+//  {
+//    txien  = ENABLE;
+//    USART_ITConfig(Open_USART, USART_IT_TXE, ENABLE);  // enable TX interrupt
+//  }
+//}
+//
+
+
+//int UART_PutChar(char ch)
+//{
+//  int timeout = UART_TIMEOUT;
+//  while ((TBUFLEN > (TBUFSIZE-8)) && timeout--) // wait a moment, if buffer full
+//  {
+//    RTOS_WAIT_TICK;
+//  }
+//  UART_PushChar(ch);
+//  return 0;
+//}
+
+
+
 
 
 
@@ -64,112 +133,7 @@ int __io_putchar(int ch) {
 //
 //static uint8_t echo    = USART_ECHO;
 //static uint8_t newline = 0;
-//
-//static void UART_PushChar(char ch);
-//
-//#ifdef __GNUC__
-//  /* With GCC/RAISONANCE, small printf (option LD Linker->Libraries->Small printf
-//     set to 'Yes') calls __io_putchar() */
-//  #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
-//#else
-//  #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
-//#endif /* __GNUC__ */
-//
-//
-///*******************************************************************************
-//* Function Name  : USART_Init
-//* Description    : Configure Open_USART
-//* Input          : None
-//* Output         : None
-//* Return         : None
-//* Attention		 : None
-//*******************************************************************************/
-////void UART_Init(void)
-////{
-////  GPIO_InitTypeDef       GPIO_InitStructure;
-////  USART_InitTypeDef      USART_InitStructure;
-////  USART_ClockInitTypeDef USART_ClockStructure;
-////  NVIC_InitTypeDef       NVIC_InitStructure;
-////
-////  //=========================================================================================
-////  // Clock des USART einschalten:
-////  //------------------------------------------------------------------------------------------
-////  RCC_APB2PeriphClockCmd(Open_USART_TX_GPIO_CLK | RCC_APB2Periph_AFIO,ENABLE);
-////  //RCC_APB2PeriphClockCmd(Open_USART_RX_GPIO_CLK,ENABLE);
-////  if ((Open_USART_CLK==RCC_APB2Periph_USART1))
-////  {
-////    RCC_APB2PeriphClockCmd(Open_USART_CLK,ENABLE);
-////    //RCC_APB2PeriphClockLPModeCmd(Open_USART_CLK,ENABLE);
-////  }
-////  else
-////  {
-////    RCC_APB1PeriphClockCmd(Open_USART_CLK,ENABLE);
-////   // RCC_APB1PeriphClockLPModeCmd(Open_USART_CLK,ENABLE);
-////  }
-////
-////  //=========================================================================================
-////  //GPIO Alternate functions configuration
-////  //------------------------------------------------------------------------------------------
-//// // GPIO_PinAFConfig(Open_USART_TX_GPIO_PORT, Open_USART_TX_SOURCE, Open_USART_TX_AF);
-////  //GPIO_PinAFConfig(Open_USART_RX_GPIO_PORT, Open_USART_RX_SOURCE, Open_USART_RX_AF);
-////
-////  //=========================================================================================
-////  // USART Pins einschalten
-////  //------------------------------------------------------------------------------------------
-////  GPIO_InitStructure.GPIO_Pin = Open_USART_TX_PIN;
-////  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-////  //------------------------------------------------------------------------------------------
-////  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-////  GPIO_Init(Open_USART_TX_GPIO_PORT, &GPIO_InitStructure);
-////  //------------------------------------------------------------------------------------------
-////  GPIO_InitStructure.GPIO_Pin = Open_USART_RX_PIN;
-////  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-////  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-////  GPIO_Init(Open_USART_RX_GPIO_PORT, &GPIO_InitStructure);
-////
-////
-////  //GPIO_PinRemapConfig(GPIO_FullRemap_USART3 , ENABLE);
-////  //=========================================================================================
-////  // USART konfigurieren & einschalten
-////  //------------------------------------------------------------------------------------------
-////  //  - BaudRate = 115200 baud
-////  //  - Word Length = 8 Bits - One Stop Bit - No parity
-////  //  - Hardware flow control disabled (RTS and CTS signals)
-////  //  - Receive and transmit
-////  //------------------------------------------------------------------------------------------
-////  USART_ClockStructInit (&USART_ClockStructure);
-////  USART_ClockInit(Open_USART, &USART_ClockStructure);
-////  USART_InitStructure.USART_BaudRate = USART_BAUD;
-////  USART_InitStructure.USART_WordLength = USART_DATA;
-////  USART_InitStructure.USART_StopBits = USART_STOP;
-////  USART_InitStructure.USART_Parity = USART_PARITY;
-////  USART_InitStructure.USART_HardwareFlowControl = USART_FLOWCTRL;
-////  USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-////  //------------------------------------------------------------------------------------------
-////  USART_Init(Open_USART, &USART_InitStructure);
-////
-////
-////  //=========================================================================================
-////  // Interrupt channel einschalten
-////  //------------------------------------------------------------------------------------------
-////  NVIC_InitStructure.NVIC_IRQChannel = Open_USART_IRQn;
-////  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;  //oder 0?
-////  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;         //oder 1?
-////  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-////  NVIC_Init(&NVIC_InitStructure);
-////
-////  //=========================================================================================
-////  // Interrupts einschalten
-////  //------------------------------------------------------------------------------------------
-////  //USART_ITConfig(Open_USART, USART_IT_TXE, ENABLE);  // TX register Empty - wir können was senden
-////  USART_ITConfig(Open_USART, USART_IT_RXNE, ENABLE); // RX register Not Empty - es wurde was empfangen
-////
-////  //=========================================================================================
-////  // Uart einschalten
-////  //------------------------------------------------------------------------------------------
-////  USART_Cmd(Open_USART, ENABLE);
-////
-////}
+
 //
 //
 //int UART_GetLine(char *str)

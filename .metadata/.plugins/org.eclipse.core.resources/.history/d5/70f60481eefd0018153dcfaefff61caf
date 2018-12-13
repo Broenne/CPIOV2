@@ -1,0 +1,5 @@
+myCanFunctions.c:12:6:PrepareCan	8	static
+myCanFunctions.c:17:9:GetGlobalCanNodeId	4	static
+myCanFunctions.c:21:6:SetGlobalCanNodeId	16	static
+myCanFunctions.c:27:6:SendCanTimeDif	24	static
+myCanFunctions.c:42:6:GetInputs	24	static

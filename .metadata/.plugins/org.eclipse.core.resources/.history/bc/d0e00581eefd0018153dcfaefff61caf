@@ -1,0 +1,4 @@
+rtosActions.c:16:6:vApplicationIdleHook	16	static
+rtosActions.c:35:6:vApplicationMallocFailedHook	4	static
+rtosActions.c:49:6:vApplicationStackOverflowHook	16	static
+rtosActions.c:63:6:vApplicationTickHook	16	static

@@ -1,0 +1,7 @@
+can.c:10:6:CAN2_init_GPIO	16	static
+can.c:36:6:init_CAN2	24	static
+can.c:70:6:FilterOnlyIdNull	24	static
+can.c:96:6:FilterOnlyMyId	24	static
+can.c:124:6:InitCanFilter	8	static
+can.c:135:6:SendCan	56	static
+can.c:167:6:CAN2_RX0_IRQHandler	40	static

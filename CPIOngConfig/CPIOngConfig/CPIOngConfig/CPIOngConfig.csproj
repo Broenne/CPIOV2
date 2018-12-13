@@ -80,6 +80,7 @@
     <Compile Include="Analog\AnalogView.xaml.cs">
       <DependentUpon>AnalogView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Analog\AnalogViewModel.cs" />
     <Compile Include="ConfigInputs\ConfigInputsAllView.xaml.cs">
       <DependentUpon>ConfigInputsAllView.xaml</DependentUpon>
     </Compile>

@@ -1,0 +1,11 @@
+core_cm3.h:1014:22:NVIC_SetPriority	16	static
+pulse.c:26:6:Init_TimerForPulsTime	24	static
+pulse.c:53:6:InitPulse	8	static
+pulse.c:66:6:SendPulsePerCanTask	32	static
+pulse.c:96:6:InitQueueForPulse	4	static
+pulse.c:106:6:InitPulseSender	24	static
+pulse.c:132:6:SendTimeInfo	32	static
+pulse.c:170:6:CheckInputsRegisterA	16	static
+pulse.c:186:6:CheckInputsRegisterB	16	static
+pulse.c:202:6:CheckInputsRegisterC	16	static
+pulse.c:225:6:TIM3_IRQHandler	16	static

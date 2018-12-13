@@ -1,0 +1,7 @@
+usart.c:79:6:UART_Init	40	static
+usart.c:167:5:UART_GetLine	24	static
+usart.c:196:6:UART_GoToNewLine	16	static
+usart.c:212:5:UART_PutChar	24	static
+usart.c:229:13:UART_PushChar	16	static
+usart.c:252:6:USART1_IRQHandler	16	static
+usart.c:337:1:__io_putchar	16	static

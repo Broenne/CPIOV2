@@ -6,7 +6,10 @@
              xmlns:local="clr-namespace:CPIOngConfig.Analog"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Red">
-            
+    <Grid>
+        <StackPanel>
+            <Button Command="{Binding OpenValueCommand}"></Button>
+            <TextBox Text="{Binding Result}"></TextBox>
+        </StackPanel>
     </Grid>
 </UserControl>

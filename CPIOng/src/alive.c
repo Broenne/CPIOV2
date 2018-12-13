@@ -27,7 +27,7 @@ void SanCanAlive(void) {
 	uint8_t p[] = { 0x01, 0, 0, 0, 0, 0, 0, 0 };
 
 	// add error frames
-	//GetApplicationStatus(&p[3]);
+	// GetApplicationStatus(&p[3]);
 
 
 	static CAN_HandleTypeDef hcan;
@@ -41,12 +41,8 @@ void SanCanAlive(void) {
 
 	// es muss sicher gestellt sein, das der worker tak schon läuft
 	if (xQueueSendFromISR(CanQueueSenderHandle, &hcan, 0) != pdTRUE) {
-			printf("allive error");
+			// printf("allive error \r\n");
 	}
-
-
-
-	//SendCan(AliveCanId, p, 8);
 }
 
 static void Init_TimerInternal() {
@@ -61,7 +57,6 @@ static void Init_TimerInternal() {
 	s_TimerInstance.Init.Period = 19460;
 	s_TimerInstance.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
 	s_TimerInstance.Init.RepetitionCounter = 0;
-	//s_TimerInstance.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;//TIM_AUTORELOAD_PRELOAD_ENABLE;//
 	if (HAL_TIM_Base_Init(&s_TimerInstance) != HAL_OK) {
 		//_Error_Handler(__FILE__, __LINE__);
 	}

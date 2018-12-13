@@ -1,0 +1,6 @@
+alive.c:10:6:SwitchMainLed	8	static
+alive.c:19:6:SanCanAlive	16	static
+alive.c:28:6:Init_Timer	24	static
+alive.c:49:6:PrepareStatusLed	16	static
+alive.c:58:6:InitAlive	8	static
+alive.c:63:6:TIM2_IRQHandler	16	static

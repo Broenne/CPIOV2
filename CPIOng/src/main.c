@@ -139,25 +139,9 @@ int main(void) {
 	FilterOnlyMyId(&hcan2); // das muss hier expliziet passierne, um den Filter nach dem setzen einer neuen can id und reset diesen zu reintiaisieren
 
 	InitReadIO();
-
 	InitPulse();
-
 	InitAlive();
-
 	InitAnalog();
-
-
-
-//https://electronics.stackexchange.com/questions/325442/stm32f1xx-hal-uart-recieve
-
-//	if(HAL_UART_Receive_IT(&huart1, (uint8_t *)text, 20) != HAL_OK){
-//		printf("error init uart receive");
-//	}
-
-
-
-
-
 
 
 	/* Start scheduler */
@@ -172,13 +156,6 @@ int main(void) {
 	/* USER CODE END 3 */
 
 }
-
-
-
-
-
-
-
 
 /**
  * @brief System Clock Configuration

@@ -12,10 +12,8 @@
 
 void InitReadIO(void);
 void ReadInputs(uint8_t* data);
-uint8_t ReadInputsFromRegisterA(void);
-uint8_t ReadInputsFromRegisterB(void);
-uint8_t ReadInputsFromRegisterC(void);
 void GetInputs(uint8_t* data);
+int ReadChannelAnalog(uint pos);
 
 
 #endif /* IO_H_ */

@@ -7,52 +7,63 @@
 
 #include "analog.h"
 
-
 extern UART_HandleTypeDef huart1;
 
-static osThreadId uartTaskHandle;;
+static osThreadId uartTaskHandle;
+;
 uint8_t text;
 
+#define ANA_CHANNEL_COMMAND "AnaCh"
 
 
-void ReadUartTask(void){
+
+
+void SendAnalogValue(char* data, int len) {
+	for (int i = 15; 0 != i; --i) {
+		char cmp[sizeof(ANA_CHANNEL_COMMAND) + 2];
+		strcpy(cmp, ANA_CHANNEL_COMMAND);
+		char str[2];
+		sprintf(str, "%d", i);
+		strcat(cmp, str);
+
+		if (0 == strncmp(data, cmp, len)) {
+			int res = ReadChannelAnalog((uint)i);
+			printf("%d  \r\n", res);
+			// printf("AnaCh result %d \r\n", i);
+			// printf("AnaCh result \r\n");
+			break;
+		}
+	}
+}
+
+void ReadUartTask(void) {
 	char inputData[50];
 	int pos = 0;
 	//std::string cmd;
 
-	while(1){
-			if(HAL_UART_Receive(&huart1, &text, sizeof(text), 0) == HAL_OK){
+	while (1) {
+		if (HAL_UART_Receive(&huart1, &text, sizeof(text), 0) == HAL_OK) {
 
+			if (text == 0x00) {
+				// clear all, NULL-terminierter String
 
-				if(text == 0x00 ){
-					// clear all, NULL-terminierter String
+				SendAnalogValue(inputData, pos);
+				pos = 0;
+				continue;
 
-
-					if(strncmp(resCutted, "AnaCh1", 6)){
-						printf("AnaCh1 result \r\n");
-					}
-
-					pos = 0;
-
-				}else{
-					inputData[pos] = text;
-				}
-
-				++pos;
-
-			}
-			else{
-				// printf("no data \r\n");
+			} else {
+				inputData[pos] = text;
 			}
 
+			++pos;
 
+		} else {
+			// printf("no data \r\n");
 		}
-
-
+	}
 }
 
-
-void InitAnalog(void){
+void InitAnalog(void) {
 	// ghört das uart hier rein? am besten nochmal abstrahieren
 	osThreadDef(UartTask, ReadUartTask, osPriorityNormal, 0, 128);
 	uartTaskHandle = osThreadCreate(osThread(UartTask), NULL);
