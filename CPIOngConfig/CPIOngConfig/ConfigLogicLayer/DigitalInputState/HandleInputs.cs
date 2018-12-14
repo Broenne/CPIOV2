@@ -61,8 +61,15 @@
                 
                 if (id >= copIdPulseMinimum && id < copIdPulseMaximum)
                 {
-                    var channel = copIdPulseMinimum - id;
-                    var pulseData = BitConverter.ToUInt32(data, 0);
+                    var channel = id - copIdPulseMinimum;
+
+                    var shiftData = new byte[4];
+                    shiftData[0] = data[3]; // todo mb: beser unter schon ander rein?
+                    shiftData[1] = data[2];
+                    shiftData[2] = data[1];
+                    shiftData[3] = data[0];
+
+                    var pulseData = BitConverter.ToUInt32(shiftData, 0);
                     this.PulseEventHandler.OnReached(new PulseEventArgs(channel, pulseData));
                 }
             }

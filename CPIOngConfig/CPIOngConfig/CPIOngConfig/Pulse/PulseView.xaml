@@ -37,7 +37,7 @@
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Vertical">
-                                                <TextBox Width="30" Text="{Binding Tim}" />
+                                                <TextBox Width="60" Text="{Binding Tim}" />
                                             </StackPanel>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>

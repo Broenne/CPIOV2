@@ -14,6 +14,7 @@
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <ContentPresenter Grid.Row="0" Content="{Binding ConfigCanId}"></ContentPresenter>
                     <ContentPresenter Grid.Row="1" Content="{Binding SelectAdapterView}"></ContentPresenter>
@@ -25,6 +26,9 @@
             </TabItem>
             <TabItem Header="Analog" >
                 <ContentPresenter Content="{Binding AnalogView}"></ContentPresenter>
+            </TabItem>
+            <TabItem Header="Pulse" >
+                <ContentPresenter Content="{Binding PulseView}"></ContentPresenter>
             </TabItem>
         </TabControl>
     </Grid>
