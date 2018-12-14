@@ -19,6 +19,10 @@
     {
         public List<PulseDataForView> pulseDataForViewList;
 
+        private readonly Dispatcher dispatcher = RootDispatcherFetcher.RootDispatcher;
+
+        private Timer TimerTest;
+
         #region Constructor
 
         /// <summary>
@@ -32,29 +36,12 @@
 
             for (var i = 0; i < 16; i++)
             {
-                this.PulseDataForViewList.Add(new PulseDataForView($"{i}"));
+                var pulseDataForView = new PulseDataForView($"{i}", 100);
+                pulseDataForView.AddTime(0);
+                this.PulseDataForViewList.Add(pulseDataForView);
             }
 
-            pulseEventHandler.EventIsReached += PulseEventHandler_EventIsReached;
-            //TimerTest = new Timer(Test, null, 0, 250);
-        }
-
-        private void PulseEventHandler_EventIsReached(object sender, PulseEventArgs e)
-        {
-            try
-            {
-
-                this.dispatcher.Invoke(
-                    () =>
-                        {
-                            this.PulseDataForViewList[e.Channel].AddTime(e.Stamp);
-                        });
-            }
-            catch (Exception ex)
-            {
-                this.Logger.LogError(ex);
-                throw;
-            }
+            pulseEventHandler.EventIsReached += this.PulseEventHandler_EventIsReached;
         }
 
         #endregion
@@ -69,11 +56,24 @@
 
         private ILogger Logger { get; }
 
+        #endregion
 
-        private Timer TimerTest;
+        #region Private Methods
 
+        private void PulseEventHandler_EventIsReached(object sender, PulseEventArgs e)
+        {
+            try
+            {
+                this.dispatcher.Invoke(() => { this.PulseDataForViewList[e.Channel].AddTime(e.Stamp); });
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                throw;
+            }
+        }
 
-        private readonly Dispatcher dispatcher = RootDispatcherFetcher.RootDispatcher;
+        #endregion
 
         //void Test(object state)
         //{
@@ -84,10 +84,7 @@
         //        dispatcher.Invoke(() => { this.PulseDataForViewList[i].AddTime((uint)(rand.Next(0, 100))); });
 
         //    }
-           
+
         //}
-
-
-        #endregion
     }
 }

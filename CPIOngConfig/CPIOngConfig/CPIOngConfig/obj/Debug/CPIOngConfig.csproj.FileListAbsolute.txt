@@ -152,3 +152,4 @@ C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\ConfigInputs\Con
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\Analog\AnalogView.baml
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\ConfigInputs\ConfigInputsAllView.baml
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\ConfigInputs\ConfigureInputsView.baml
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\GeneratedInternalTypeHelper.g.cs

@@ -7,8 +7,11 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-       
-</UserControl.Resources>
+        <Style x:Key="ListBoxItemContainerStyle" TargetType="{x:Type ListBoxItem}"
+               BasedOn="{StaticResource {x:Type ListBoxItem}}">
+            <Setter Property="local:ListBoxItemBehavior.IsBroughtIntoViewWhenSelected" Value="true"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <ListView ItemsSource="{Binding PulseDataForViewList}">
             <ListView.View>
@@ -28,7 +31,10 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <!--<ListBox Margin="20" ItemsSource="{Binding Converter={StaticResource TimeListConverter}}">-->
-                                <ListBox Margin="3" ItemsSource="{Binding Times}" Width="400" >
+                                <ListBox Margin="1" ItemsSource="{Binding Times}" Width="400" 
+                                         SelectedItem="{Binding SelectedTimeItem}" 
+                                         ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}"
+                                         >
                                     <ListBox.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <WrapPanel IsItemsHost="True" />
