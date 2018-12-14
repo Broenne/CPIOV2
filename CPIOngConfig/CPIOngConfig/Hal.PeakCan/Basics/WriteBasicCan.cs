@@ -7,7 +7,6 @@
     using Hal.PeakCan.Contracts.Basics;
     using Hal.PeakCan.PCANDll;
 
-    using HardwareAbstaction.PCAN.Basics;
     using HardwareAbstaction.PCAN.Init;
     using HardwareAbstaction.PCAN.PCANDll;
 

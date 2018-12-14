@@ -4,6 +4,8 @@
 
     using Autofac;
 
+    using CPIOngConfig.Pulse;
+
     using Module = Autofac.Module;
 
     /// <summary>
@@ -22,6 +24,8 @@
         {
             var dataAccess = Assembly.GetExecutingAssembly();
             builder.RegisterAssemblyTypes(dataAccess).AsImplementedInterfaces();
+
+            builder.RegisterType<PulseEventHandler>().As<IPulseEventHandler>().SingleInstance();
         }
 
         #endregion

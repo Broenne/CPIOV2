@@ -1,16 +1,10 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Hal.PeakCan.Contracts.Basics;
-
-namespace HardwareAbstaction.PCAN.Basics
+﻿namespace Hal.PeakCan.Basics
 {
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
 
-
+    using Hal.PeakCan.Contracts.Basics;
     using Hal.PeakCan.PCANDll;
 
     using HardwareAbstaction.PCAN.Init;
@@ -24,20 +18,19 @@ namespace HardwareAbstaction.PCAN.Basics
     ///     Read the CAN message.
     /// </summary>
     /// <seealso cref="IReadCanMessage" />
-    public class ReadCanMessage : IReadCanMessage //: IReadCanMessage
+    public class ReadCanMessage : IReadCanMessage
     {
-        private static readonly object LockRead = new object();
-
         #region Constructor
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ReadCanMessage" /> class.
+        /// Initializes a new instance of the <see cref="ReadCanMessage" /> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="preparePeakCan">The prepare peak can.</param>
+        /// <param name="readCanMessageEvent">The read can message event.</param>
         public ReadCanMessage(ILogger logger, IPreparePeakCan preparePeakCan, IReadCanMessageEvent readCanMessageEvent)
         {
-            ReadCanMessageEvent = readCanMessageEvent;
+            this.ReadCanMessageEvent = readCanMessageEvent;
             try
             {
                 logger.LogEnd(this.GetType());
@@ -60,8 +53,8 @@ namespace HardwareAbstaction.PCAN.Basics
 
         #endregion
 
-        //#region Properties
-
+        #region Properties
+        
         /// <summary>
         ///     Gets the logger.
         /// </summary>
@@ -80,27 +73,35 @@ namespace HardwareAbstaction.PCAN.Basics
 
         private IPreparePeakCan PreparePeakCan { get; }
 
+        private IReadCanMessageEvent ReadCanMessageEvent { get; }
 
-        public void Start()
+        #endregion
+
+        #region Public Methods
+
+        /// <summary>
+        /// Starts this instance.
+        /// </summary>
+        /// <returns>
+        /// The message event handler.
+        /// </returns>
+        public IReadCanMessageEvent Start()
         {
             try
             {
-                Task.Run(() =>
-                {
-                    this.ReadRaw();
-
-                });
+                Task.Run(() => { this.ReadRaw(); });
+                return this.ReadCanMessageEvent;
             }
             catch (Exception ex)
             {
+                this.Logger.LogError(ex);
                 throw;
             }
-        }        
+        }
 
+        #endregion
 
-        private IReadCanMessageEvent ReadCanMessageEvent { get; }
-
-        //#region Private Methods
+        #region Private Methods
 
         private void ReadRaw()
         {
@@ -108,16 +109,13 @@ namespace HardwareAbstaction.PCAN.Basics
             {
                 TPCANStatus result;
 
-                
                 do
                 {
                     TpcanMsg readCanMsg;
-                    //PcanBasicDllWrapper.FilterMessages(this.MPcanHandle, id, id, TpcanMode.PCAN_MODE_STANDARD);
                     result = PcanBasicDllWrapper.Read(this.MPcanHandle, out readCanMsg, out _);
                     if (result == TPCANStatus.PCAN_ERROR_OK)
                     {
                         this.ReadCanMessageEvent.OnReached(new ReadCanMessageEventArgs(readCanMsg.Id, readCanMsg.Data));
-                       // send event
                     }
                     else
                     {
@@ -125,14 +123,14 @@ namespace HardwareAbstaction.PCAN.Basics
                     }
                 }
                 while (true);
-
-                ;
             }
             catch (Exception ex)
             {
+                this.Logger.LogError(ex);
                 throw;
             }
-        }     
+        }
 
+        #endregion
     }
 }

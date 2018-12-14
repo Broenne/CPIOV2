@@ -25,7 +25,7 @@
         ///     Initializes a new instance of the <see cref="PulseViewModel" /> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
-        public PulseViewModel(ILogger logger)
+        public PulseViewModel(ILogger logger, IPulseEventHandler pulseEventHandler)
         {
             this.Logger = logger;
             this.PulseDataForViewList = new List<PulseDataForView>();
@@ -35,7 +35,26 @@
                 this.PulseDataForViewList.Add(new PulseDataForView($"{i}"));
             }
 
-            TimerTest = new Timer(Test, null, 0, 250);
+            pulseEventHandler.EventIsReached += PulseEventHandler_EventIsReached;
+            //TimerTest = new Timer(Test, null, 0, 250);
+        }
+
+        private void PulseEventHandler_EventIsReached(object sender, PulseEventArgs e)
+        {
+            try
+            {
+
+                this.dispatcher.Invoke(
+                    () =>
+                        {
+                            this.PulseDataForViewList[e.Channel].AddTime(e.Stamp);
+                        });
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                throw;
+            }
         }
 
         #endregion
@@ -56,17 +75,17 @@
 
         private readonly Dispatcher dispatcher = RootDispatcherFetcher.RootDispatcher;
 
-        void Test(object state)
-        {
-            var rand = new Random();
-            for (int i = 0; i < 16; i++)
-            {
+        //void Test(object state)
+        //{
+        //    var rand = new Random();
+        //    for (int i = 0; i < 16; i++)
+        //    {
 
-                dispatcher.Invoke(() => { this.PulseDataForViewList[i].AddTime((uint)(rand.Next(0, 100))); });
+        //        dispatcher.Invoke(() => { this.PulseDataForViewList[i].AddTime((uint)(rand.Next(0, 100))); });
 
-            }
+        //    }
            
-        }
+        //}
 
 
         #endregion

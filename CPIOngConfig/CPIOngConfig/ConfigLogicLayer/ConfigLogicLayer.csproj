@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ConfigLogicLayer.Contracts\ConfigLogicLayer.Contracts.csproj" />
+    <ProjectReference Include="..\CPIOngConfig.Contracts\CPIOngConfig.Contracts.csproj" />
     <ProjectReference Include="..\Hal.PeakCan.Contracts\Hal.PeakCan.Contracts.csproj" />
     <ProjectReference Include="..\Helper.Contracts\Helper.Contracts.csproj" />
   </ItemGroup>

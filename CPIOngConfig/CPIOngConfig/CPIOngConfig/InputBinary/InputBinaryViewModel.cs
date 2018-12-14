@@ -9,6 +9,7 @@ namespace CPIOngConfig.InputBinary
     using System.Windows.Input;
     using System.Windows.Media;
 
+    using ConfigLogicLayer.Contracts.DigitalInputState;
     using ConfigLogicLayer.DigitalInputState;
 
     using Global.UiHelper;
@@ -24,10 +25,10 @@ namespace CPIOngConfig.InputBinary
         private SolidColorBrush gray;
 
 
-        public InputBinaryViewModel(ILogger logger, IGetDigitalInputs getDigitalInputs)
+        public InputBinaryViewModel(ILogger logger, IHandleInputs handleInputs)
         {
             this.Logger = logger;
-            this.GetDigitalInputs = getDigitalInputs;
+            this.HandleInputs = handleInputs;
             this.GetCommand = new RelayCommand(this.GetCommandAction);
 
             this.gray = new SolidColorBrush(Colors.Gray);
@@ -52,13 +53,13 @@ namespace CPIOngConfig.InputBinary
         {
             try
             {
-                var res = this.GetDigitalInputs.Get(4);
+                //var res = this.HandleInputs.Get(4);
 
-                for (int i=0;i< res.Count; i++)
-                {
-                    this.Input[i].Color = res[i] ? this.green:this.gray;
+                //for (int i=0;i< res.Count; i++)
+                //{
+                //    this.Input[i].Color = res[i] ? this.green:this.gray;
 
-                }
+                //}
 
 
 
@@ -74,7 +75,7 @@ namespace CPIOngConfig.InputBinary
 
         public ICommand GetCommand { get; }
 
-        private IGetDigitalInputs GetDigitalInputs { get; }
+        private IHandleInputs HandleInputs { get; }
 
     }
 }
