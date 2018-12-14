@@ -13,7 +13,7 @@
     using Helper.Contracts.Logger;
 
     /// <summary>
-    /// Handle the darware inputs.
+    ///     Handle the hardware inputs.
     /// </summary>
     /// <seealso cref="ConfigLogicLayer.Contracts.DigitalInputState.IHandleInputs" />
     public class HandleInputs : IHandleInputs
@@ -21,7 +21,7 @@
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HandleInputs"/> class.
+        ///     Initializes a new instance of the <see cref="HandleInputs" /> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="pulseEventHandler">The pulse event handler.</param>
@@ -30,8 +30,7 @@
         {
             this.Logger = logger;
             this.PulseEventHandler = pulseEventHandler;
-            var canEventHandler = readCanMessage.Start();
-            canEventHandler.EventIsReached += this.CanEventHandler_EventIsReached;
+            this.ReadCanMessage = readCanMessage;
         }
 
         #endregion
@@ -41,6 +40,30 @@
         private ILogger Logger { get; }
 
         private IPulseEventHandler PulseEventHandler { get; }
+
+        private IReadCanMessage ReadCanMessage { get; }
+
+        #endregion
+
+        #region Public Methods
+
+        /// <summary>
+        ///     Starts this instance.
+        /// </summary>
+        public void Start()
+        {
+            try
+            {
+                // todo mb: mehrfach start verhindern?
+                var canEventHandler = this.ReadCanMessage.Start();
+                canEventHandler.EventIsReached += this.CanEventHandler_EventIsReached;
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                throw;
+            }
+        }
 
         #endregion
 
@@ -58,7 +81,7 @@
                 uint node = 4;
                 var copIdPulseMinimum = node + canPulseOffsset;
                 var copIdPulseMaximum = node + canPulseOffsset + 16;
-                
+
                 if (id >= copIdPulseMinimum && id < copIdPulseMaximum)
                 {
                     var channel = id - copIdPulseMinimum;

@@ -1,5 +1,10 @@
 ﻿namespace CPIOngConfig
 {
+    using System;
+    using System.Windows.Input;
+
+    using Autofac;
+
     using CPIOngConfig.ConfigInputs;
     using CPIOngConfig.Contracts.Adapter;
     using CPIOngConfig.Contracts.Analog;
@@ -7,37 +12,155 @@
     using CPIOngConfig.InputBinary;
     using CPIOngConfig.Pulse;
 
+    using Global.UiHelper;
+
+    using Helper.Contracts.Logger;
+
     using Prism.Mvvm;
 
+    /// <summary>
+    ///     The main window view model.
+    /// </summary>
+    /// <seealso cref="Prism.Mvvm.BindableBase" />
     public class MainWindowViewModel : BindableBase
     {
+        private IAnalogView analogView;
+
+        private IConfigCanId configCanId;
+
+        private IConfigInputsAllView configInputsAllView;
+
+        private IInputBinaryView inputBinaryView;
+
+        private IPulseView pulseView;
+
+        private ISelectAdapterView selectAdapterView;
+
         #region Constructor
 
-        public MainWindowViewModel(IConfigCanId configCanId, ISelectAdapterView selectAdapterView, IInputBinaryView inputBinaryView, IConfigInputsAllView configInputsAllView, IAnalogView analogView, IPulseView pulseView)
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="MainWindowViewModel" /> class.
+        /// </summary>
+        /// <param name="logger">The logger.</param>
+        /// <param name="scope">The scope.</param>
+        public MainWindowViewModel(ILogger logger, ILifetimeScope scope)
         {
-            this.ConfigCanId = configCanId;
-            this.SelectAdapterView = selectAdapterView;
-            this.InputBinaryView = inputBinaryView;
-            this.ConfigInputsAllView = configInputsAllView;
-            this.AnalogView = analogView;
-            this.PulseView = pulseView;
+            this.Logger = logger;
+            this.Scope = scope;
+
+            this.WindowLoadCommand = new RelayCommand(this.WindowLoadCommandAction);
         }
 
         #endregion
 
         #region Properties
 
-        public IAnalogView AnalogView { get; }
+        /// <summary>
+        ///     Gets the analog view.
+        /// </summary>
+        /// <value>
+        ///     The analog view.
+        /// </value>
+        public IAnalogView AnalogView
+        {
+            get => this.analogView;
+            private set => this.SetProperty(ref this.analogView, value);
+        }
 
-        public IConfigCanId ConfigCanId { get; }
+        /// <summary>
+        ///     Gets the configuration can identifier.
+        /// </summary>
+        /// <value>
+        ///     The configuration can identifier.
+        /// </value>
+        public IConfigCanId ConfigCanId
+        {
+            get => this.configCanId;
+            private set => this.SetProperty(ref this.configCanId, value);
+        }
 
-        public IConfigInputsAllView ConfigInputsAllView { get; }
+        /// <summary>
+        ///     Gets the configuration inputs all view.
+        /// </summary>
+        /// <value>
+        ///     The configuration inputs all view.
+        /// </value>
+        public IConfigInputsAllView ConfigInputsAllView
+        {
+            get => this.configInputsAllView;
+            private set => this.SetProperty(ref this.configInputsAllView, value);
+        }
 
-        public IInputBinaryView InputBinaryView { get; }
+        /// <summary>
+        ///     Gets the input binary view.
+        /// </summary>
+        /// <value>
+        ///     The input binary view.
+        /// </value>
+        public IInputBinaryView InputBinaryView
+        {
+            get => this.inputBinaryView;
+            private set => this.SetProperty(ref this.inputBinaryView, value);
+        }
 
-        public IPulseView PulseView { get; }
+        /// <summary>
+        ///     Gets the pulse view.
+        /// </summary>
+        /// <value>
+        ///     The pulse view.
+        /// </value>
+        public IPulseView PulseView
+        {
+            get => this.pulseView;
+            private set => this.SetProperty(ref this.pulseView, value);
+        }
 
-        public ISelectAdapterView SelectAdapterView { get; }
+        /// <summary>
+        ///     Gets the select adapter view.
+        /// </summary>
+        /// <value>
+        ///     The select adapter view.
+        /// </value>
+        public ISelectAdapterView SelectAdapterView
+        {
+            get => this.selectAdapterView;
+            private set => this.SetProperty(ref this.selectAdapterView, value);
+        }
+
+        /// <summary>
+        ///     Gets or sets the window load command.
+        /// </summary>
+        /// <value>
+        ///     The window load command.
+        /// </value>
+        public ICommand WindowLoadCommand { get; set; }
+
+        private ILogger Logger { get; }
+
+        private ILifetimeScope Scope { get; }
+
+        #endregion
+
+        #region Private Methods
+
+        private void WindowLoadCommandAction(object obj)
+        {
+            try
+            {
+                this.ConfigCanId = this.Scope.Resolve<IConfigCanId>();
+
+                this.SelectAdapterView = this.Scope.Resolve<ISelectAdapterView>();
+                this.InputBinaryView = this.Scope.Resolve<IInputBinaryView>();
+                this.ConfigInputsAllView = this.Scope.Resolve<IConfigInputsAllView>();
+                this.AnalogView = this.Scope.Resolve<IAnalogView>();
+                this.PulseView = this.Scope.Resolve<IPulseView>();
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                throw;
+            }
+        }
 
         #endregion
     }

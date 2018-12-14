@@ -25,10 +25,10 @@ namespace CPIOngConfig.InputBinary
         private SolidColorBrush gray;
 
 
-        public InputBinaryViewModel(ILogger logger, IHandleInputs handleInputs)
+        public InputBinaryViewModel(ILogger logger/*, IHandleInputs handleInputs*/)
         {
             this.Logger = logger;
-            this.HandleInputs = handleInputs;
+            //this.HandleInputs = handleInputs;
             this.GetCommand = new RelayCommand(this.GetCommandAction);
 
             this.gray = new SolidColorBrush(Colors.Gray);
@@ -75,7 +75,7 @@ namespace CPIOngConfig.InputBinary
 
         public ICommand GetCommand { get; }
 
-        private IHandleInputs HandleInputs { get; }
+        //private IHandleInputs HandleInputs { get; }
 
     }
 }

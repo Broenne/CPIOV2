@@ -1,9 +1,9 @@
-﻿namespace CPIOngConfig.Adapter
+﻿namespace CPIOngConfig.Contracts.Adapter
 {
-    using CPIOngConfig.Contracts.Adapter;
-
+    /// <summary>
+    /// The select adapter view model.
+    /// </summary>
     public interface ISelectAdapterViewModel
     {
-        CanAdapter CAnAdapter { get; set; }
     }
 }

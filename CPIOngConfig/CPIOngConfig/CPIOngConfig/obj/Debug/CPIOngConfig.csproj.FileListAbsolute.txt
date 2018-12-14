@@ -153,3 +153,10 @@ C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\Analog\AnalogVie
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\ConfigInputs\ConfigInputsAllView.baml
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\ConfigInputs\ConfigureInputsView.baml
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\bin\Debug\MahApps.Metro.dll
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\bin\Debug\MahApps.Metro.pdb
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\bin\Debug\MahApps.Metro.xml
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\bin\Debug\MahApps.Metro.IconPacks.dll
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\bin\Debug\MahApps.Metro.IconPacks.pdb
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\bin\Debug\MahApps.Metro.IconPacks.xml
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\styles\MyStyleDictionary.baml

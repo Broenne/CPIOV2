@@ -1,7 +1,6 @@
 ﻿namespace CPIOngConfig.Contracts.Pulse
 {
     using System.Collections.ObjectModel;
-    using System.Runtime.CompilerServices;
 
     using Prism.Mvvm;
 
@@ -13,10 +12,12 @@
     {
         private readonly uint listCnt;
 
+        private TimePulse selectedTimeItem;
+
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PulseDataForView" /> class.
+        ///     Initializes a new instance of the <see cref="PulseDataForView" /> class.
         /// </summary>
         /// <param name="name">The name info.</param>
         /// <param name="listCntArg">The list count argument.</param>
@@ -38,47 +39,45 @@
         #region Properties
 
         /// <summary>
-        /// Gets the name.
+        ///     Gets the name.
         /// </summary>
         /// <value>
-        /// The name info.
+        ///     The name info.
         /// </value>
         public string Name { get; }
-        
+
         /// <summary>
-        /// Gets the times.
+        /// Gets or sets the selected time item.
         /// </summary>
         /// <value>
-        /// The times.
+        /// The selected time item.
         /// </value>
-        public ObservableCollection<TimePulse> Times { get; }
-
-        private TimePulse selectedTimeItem;
         public TimePulse SelectedTimeItem
         {
-            get
-            {
-                return this.selectedTimeItem;
-            }
-            set
-            {
-                this.SetProperty(ref this.selectedTimeItem, value);
-            }
-
+            get => this.selectedTimeItem;
+            set => this.SetProperty(ref this.selectedTimeItem, value);
         }
+
+        /// <summary>
+        ///     Gets the times.
+        /// </summary>
+        /// <value>
+        ///     The times.
+        /// </value>
+        public ObservableCollection<TimePulse> Times { get; }
 
         #endregion
 
         #region Public Methods
 
         /// <summary>
-        /// Adds the time.
+        ///     Adds the time.
         /// </summary>
         /// <param name="dif">The difference.</param>
         public void AddTime(uint dif)
         {
             var timePulseToAdd = new TimePulse(dif.ToString());
-            this.Times.Add(timePulseToAdd);
+            this.Times.Add(timePulseToAdd); // das wird gesetz, um den sdcroll balken nach hinten zu setzen
             this.SelectedTimeItem = timePulseToAdd;
             if (this.Times.Count > this.listCnt)
             {

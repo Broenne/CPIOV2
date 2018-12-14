@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:CPIOngConfig.ConfigID"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Red">
-            
+    <Grid Background="Aqua">
+            <Button>Set new can Id</Button>
     </Grid>
 </UserControl>

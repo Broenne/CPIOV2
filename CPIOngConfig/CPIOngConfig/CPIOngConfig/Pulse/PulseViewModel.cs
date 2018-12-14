@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Threading;
     using System.Windows.Threading;
 
     using CPIOngConfig.Contracts.Pulse;
@@ -12,23 +11,24 @@
     using Prism.Mvvm;
 
     /// <summary>
+    /// The pulse view model.
     /// </summary>
+    /// <seealso cref="CPIOngConfig.Contracts.Pulse.IPulseViewModel" />
     /// <seealso cref="Prism.Mvvm.BindableBase" />
     /// <seealso cref="IPulseViewModel" />
     public class PulseViewModel : BindableBase, IPulseViewModel
     {
-        public List<PulseDataForView> pulseDataForViewList;
-
         private readonly Dispatcher dispatcher = RootDispatcherFetcher.RootDispatcher;
 
-        private Timer TimerTest;
+        private List<PulseDataForView> pulseDataForViewList;
 
         #region Constructor
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PulseViewModel" /> class.
+        /// Initializes a new instance of the <see cref="PulseViewModel" /> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
+        /// <param name="pulseEventHandler">The pulse event handler.</param>
         public PulseViewModel(ILogger logger, IPulseEventHandler pulseEventHandler)
         {
             this.Logger = logger;
@@ -48,6 +48,12 @@
 
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the pulse data for view list.
+        /// </summary>
+        /// <value>
+        /// The pulse data for view list.
+        /// </value>
         public List<PulseDataForView> PulseDataForViewList
         {
             get => this.pulseDataForViewList;
@@ -74,17 +80,5 @@
         }
 
         #endregion
-
-        //void Test(object state)
-        //{
-        //    var rand = new Random();
-        //    for (int i = 0; i < 16; i++)
-        //    {
-
-        //        dispatcher.Invoke(() => { this.PulseDataForViewList[i].AddTime((uint)(rand.Next(0, 100))); });
-
-        //    }
-
-        //}
     }
 }

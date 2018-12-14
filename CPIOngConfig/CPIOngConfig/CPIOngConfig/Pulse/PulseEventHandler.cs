@@ -9,7 +9,7 @@
     /// <summary>
     ///     The pulse event handler.
     /// </summary>
-    /// <seealso cref="CPIOngConfig.Pulse.IPulseEventHandler" />
+    /// <seealso cref="IPulseEventHandler" />
     public class PulseEventHandler : IPulseEventHandler
     {
         #region Constructor

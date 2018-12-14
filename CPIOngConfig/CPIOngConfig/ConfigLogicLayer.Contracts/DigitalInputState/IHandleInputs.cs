@@ -5,5 +5,9 @@
     /// </summary>
     public interface IHandleInputs
     {
+        /// <summary>
+        /// Starts this instance.
+        /// </summary>
+        void Start();
     }
 }

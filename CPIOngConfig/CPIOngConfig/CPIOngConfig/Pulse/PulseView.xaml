@@ -31,7 +31,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <!--<ListBox Margin="20" ItemsSource="{Binding Converter={StaticResource TimeListConverter}}">-->
-                                <ListBox Margin="1" ItemsSource="{Binding Times}" Width="400" 
+                                <ListBox Margin="1" ItemsSource="{Binding Times}" Width="600" 
                                          SelectedItem="{Binding SelectedTimeItem}" 
                                          ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}"
                                          >

@@ -27,7 +27,7 @@ namespace Hal.PeakCan.Basics
         /// <summary>
         ///     Raises the <see cref="E:NodeReached" /> event.
         /// </summary>
-        /// <param name="e">The <see cref="NodeEventArgs" /> instance containing the event data.</param>
+        /// <param name="e">The <see cref="ReadCanMessageEventArgs" /> instance containing the event data.</param>
         public virtual void OnReached(ReadCanMessageEventArgs e)
         {
             try
@@ -35,7 +35,8 @@ namespace Hal.PeakCan.Basics
                 this.Logger.LogBegin(this.GetType());
                 if (this.EventIsReached == null)
                 {
-                    throw new Exception("Event for google is null");
+                    return;
+                    //throw new Exception("Event for read can is null");
                 }
 
                 this.EventIsReached.Invoke(this, e);

@@ -4,6 +4,7 @@
 
     using Autofac;
 
+    using CPIOngConfig.Contracts.Pulse;
     using CPIOngConfig.Pulse;
 
     using Module = Autofac.Module;
