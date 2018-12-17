@@ -96,6 +96,7 @@
     </Compile>
     <Compile Include="ConfigInputs\ConfigureInputsViewModel.cs" />
     <Compile Include="CPIOngConfigContainerModule.cs" />
+    <Compile Include="InputBinary\InputBinaryEventHandler.cs" />
     <Compile Include="Pulse\ListBoxItemBehavior.cs" />
     <Compile Include="Pulse\PulseEventHandler.cs" />
     <Compile Include="Pulse\PulseView.xaml.cs">

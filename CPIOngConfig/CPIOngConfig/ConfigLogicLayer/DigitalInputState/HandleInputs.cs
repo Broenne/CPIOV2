@@ -7,7 +7,6 @@
 
     using CPIOngConfig.Contracts.InputBinary;
     using CPIOngConfig.Contracts.Pulse;
-    using CPIOngConfig.InputBinary;
 
     using Hal.PeakCan.Contracts.Basics;
 
@@ -103,11 +102,12 @@
                 {
                     var inputBinbaryArgs = new InputBinaryEventArgs();
 
-                    for (uint i = 0; i < 16; i++)
+                    for (byte i = 0; i < 16; i++)
                     {
-                        inputBinbaryArgs.Add(i, true);
+                        var res = ((data[i / 8] >> (i % 8)) & 0x01) == 1;
+                        inputBinbaryArgs.Add(i, res);
                     }
-
+                    
                     this.InputBinaryEventHandler.OnReached(inputBinbaryArgs);
                 }
             }

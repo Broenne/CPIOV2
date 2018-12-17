@@ -1,17 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ConfigLogicLayer.DigitalInputState
+﻿namespace ConfigLogicLayer.DigitalInputState
 {
+    using System;
+
     using Hal.PeakCan.Contracts.Basics;
 
     using Helper.Contracts.Logger;
 
+    /// <summary>
+    /// The service for stimulate.
+    /// </summary>
+    /// <seealso cref="ConfigLogicLayer.DigitalInputState.IStimulate" />
     public class Stimulate : IStimulate
     {
+        #region Constructor
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="Stimulate"/> class.
+        ///     Initializes a new instance of the <see cref="Stimulate" /> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="writeBasicCan">The write basic can.</param>
@@ -21,12 +25,20 @@ namespace ConfigLogicLayer.DigitalInputState
             this.WriteBasicCan = writeBasicCan;
         }
 
+        #endregion
+
+        #region Properties
+
         private ILogger Logger { get; }
 
         private IWriteBasicCan WriteBasicCan { get; }
 
+        #endregion
+
+        #region Public Methods
+
         /// <summary>
-        /// Requests the by identifier.
+        ///     Requests the by identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
         public void RequestById(uint id)
@@ -48,5 +60,6 @@ namespace ConfigLogicLayer.DigitalInputState
             }
         }
 
+        #endregion
     }
 }

@@ -349,3 +349,4 @@ Generate listing file done
 Generate build reports done
 arm-atollic-eabi-objcopy.exe -O ihex CPIOng.elf CPIOng.hex 
 Info: Nothing to build for CPIOng
+Info: Nothing to build for CPIOng
