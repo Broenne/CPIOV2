@@ -1,7 +1,14 @@
-﻿namespace CPIOngConfig.ConfigInputs
+﻿namespace CPIOngConfig.Contracts.ConfigInputs
 {
+    /// <summary>
+    /// The interface for configure input view model.
+    /// </summary>
     public interface IConfigureInputsViewModel
     {
-        string Channel { get; set; }
+        /// <summary>
+        /// Sets the channel.
+        /// </summary>
+        /// <param name="channel">The channel.</param>
+        void SetChannel(uint channel);
     }
 }

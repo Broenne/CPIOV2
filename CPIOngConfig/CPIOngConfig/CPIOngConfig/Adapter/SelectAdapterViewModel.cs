@@ -28,9 +28,10 @@
         #region Constructor
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SelectAdapterViewModel" /> class.
+        /// Initializes a new instance of the <see cref="SelectAdapterViewModel" /> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
+        /// <param name="scope">The scope.</param>
         public SelectAdapterViewModel(ILogger logger, ILifetimeScope scope)
         {
             this.Logger = logger;
@@ -74,10 +75,6 @@
         {
             try
             {
-
-                // todo mb: can adapter factory
-
-                // 
                 switch (this.CanAdapter)
                 {
                     case CanAdapter.PeakUsb:
@@ -85,7 +82,6 @@
                         handleInputs.Start();
                         break;
                 }
-
             }
             catch (Exception ex)
             {

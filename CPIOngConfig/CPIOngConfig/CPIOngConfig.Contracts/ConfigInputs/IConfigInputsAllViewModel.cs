@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-
-namespace CPIOngConfig.ConfigInputs
+﻿namespace CPIOngConfig.Contracts.ConfigInputs
 {
+    /// <summary>
+    ///     The configure all inputs view list.
+    /// </summary>
     public interface IConfigInputsAllViewModel
     {
-        List<IConfigureInputsView> ConfigureInputsViewList { get; }
-        IConfigureInputsView Test { get; }
     }
 }

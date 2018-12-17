@@ -1,40 +1,61 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Prism.Mvvm;
-
-namespace CPIOngConfig.ConfigInputs
+﻿namespace CPIOngConfig.ConfigInputs
 {
+    using System.Collections.Generic;
 
+    using CPIOngConfig.Contracts.ConfigInputs;
 
+    using Prism.Mvvm;
 
+    /// <summary>
+    ///     The configure inputs view model.
+    /// </summary>
+    /// <seealso cref="Prism.Mvvm.BindableBase" />
+    /// <seealso cref="IConfigureInputsViewModel" />
     public class ConfigureInputsViewModel : BindableBase, IConfigureInputsViewModel
     {
+        private uint channel;
+
+        /// <summary>
+        ///     The modus
+        /// </summary>
+        private List<string> modus;
+
+        #region Constructor
+
         public ConfigureInputsViewModel()
         {
-            this.Modus = new List<string>()
-            {
-                "None",
-                "Namur",
-                "Read",
-                "Licht"
-            };
+            this.Modus = new List<string> { "None", "Namur", "Read", "Licht" };
         }
 
-        // tdo mb: modus in eins umschalten
+        #endregion
 
-        private string channel;
-        public string Channel
+        #region Properties
+
+        public void SetChannel(uint channelArg)
+        {
+            this.Channel = channelArg;
+        }
+
+        /// <summary>
+        ///     Gets or sets the channel.
+        /// </summary>
+        /// <value>
+        ///     The channel.
+        /// </value>
+        public uint Channel
         {
             get => this.channel;
-            set => this.SetProperty(ref channel, value);
+            set => this.SetProperty(ref this.channel, value);
         }
 
-        private List<string> modus;
+        /// <summary>
+        ///     Gets the modus.
+        /// </summary>
+        /// <value>
+        ///     The modus.
+        /// </value>
         public List<string> Modus { get; }
 
-
+        #endregion
     }
 }

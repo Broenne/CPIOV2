@@ -1,29 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-namespace CPIOngConfig.ConfigInputs
+﻿namespace CPIOngConfig.ConfigInputs
 {
+    using CPIOngConfig.Contracts.ConfigInputs;
+
     /// <summary>
-    /// Interaction logic for ConfigureInputsView.xaml
+    ///     Interaction logic for ConfigureInputsView.
     /// </summary>
-    public partial class ConfigureInputsView : UserControl, IConfigureInputsView
+    public partial class ConfigureInputsView : IConfigureInputsView
     {
+        #region Constructor
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConfigureInputsView"/> class.
+        /// </summary>
+        /// <param name="vm">The view model.</param>
         public ConfigureInputsView(IConfigureInputsViewModel vm)
         {
-            InitializeComponent();
-            this.DataContext = vm;
+            this.InitializeComponent();
+            this.ConfigureInputsViewModel = vm;
+            this.DataContext = this.ConfigureInputsViewModel;
+        }
+
+        private IConfigureInputsViewModel ConfigureInputsViewModel { get; }
+
+        #endregion
+
+        /// <summary>
+        /// Gets the data context.
+        /// </summary>
+        /// <returns>Return the view mdoel.</returns>
+        public IConfigureInputsViewModel GetDataContext()
+        {
+            return this.ConfigureInputsViewModel;
         }
     }
 }

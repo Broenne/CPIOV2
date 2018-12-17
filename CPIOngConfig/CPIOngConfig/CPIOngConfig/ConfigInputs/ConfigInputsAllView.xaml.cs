@@ -1,29 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-namespace CPIOngConfig.ConfigInputs
+﻿namespace CPIOngConfig.ConfigInputs
 {
+
+    using CPIOngConfig.Contracts.ConfigInputs;
+
     /// <summary>
-    /// Interaction logic for ConfigInputsAllView.xaml
+    ///     Interaction logic for ConfigInputsAllView.
     /// </summary>
-    public partial class ConfigInputsAllView : UserControl, IConfigInputsAllView
+    public partial class ConfigInputsAllView : IConfigInputsAllView
     {
+        #region Constructor
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConfigInputsAllView"/> class.
+        /// </summary>
+        /// <param name="vm">The view model.</param>
         public ConfigInputsAllView(IConfigInputsAllViewModel vm)
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.DataContext = vm;
         }
+
+        #endregion
     }
 }
