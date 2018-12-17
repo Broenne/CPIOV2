@@ -41,7 +41,6 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 
 	hcan2.pTxMsg = &canMessage;
 
-	//printf("Send can end\r\n");
 	if (HAL_CAN_Transmit(&hcan2, 10) != HAL_OK) {
 		SetCanSendError();
 	}

@@ -1,6 +1,8 @@
-﻿namespace HardwareAbstraction.Contracts.PCanDll
+﻿namespace Hal.PeakCan.PCANDll
 {
     using System.Runtime.InteropServices;
+
+    using HardwareAbstraction.Contracts.PCanDll;
 
     /// <summary>
     /// Represents a PCAN message.

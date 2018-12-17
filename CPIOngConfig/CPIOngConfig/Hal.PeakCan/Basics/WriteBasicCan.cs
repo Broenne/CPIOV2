@@ -154,10 +154,20 @@
                 {
                     this.Logger.LogBegin(this.GetType());
 
+                    if (data.Count > 8)
+                    {
+                        throw new Exception("Could not write more then 8 bytes.");
+                    }
+
                     TpcanMsg canMsg = new TpcanMsg();
                     canMsg.Id = id;
-                    canMsg.Data = data.ToArray();
+                    canMsg.Data = new byte[8];
                     canMsg.Len = (byte)data.Count;
+                    for (int i = 0; i < canMsg.Len; i++)
+                    {
+                        canMsg.Data[i] = data[i];
+                    }
+                   
                     canMsg.Msgtype = TpcanMessageType.PCAN_MESSAGE_STANDARD;
 
                     var result = PcanBasicDllWrapper.Write(this.MPcanHandle, ref canMsg);

@@ -11,13 +11,26 @@ extern fn_ptr;
 
 static uint8_t globalCanId = 2;
 
-#define QUEUE_SIZE_FOR_CAN		( ( unsigned short ) 1 )
+#define QUEUE_SIZE_FOR_CAN		( ( unsigned short ) 32 )
 
 //extern CAN_HandleTypeDef hcan2;
 osThreadId canInputTaskHandle;
 
 xQueueHandle CanQueueHandle = NULL;
 xQueueHandle CanQueueSenderHandle = NULL;
+
+
+/*
+ * Created on: 17.12.18
+ * Author: MB
+ * Set the difffernt modi for the cahnnel from outside by can. *
+ * */
+void SetChannelModiFromExternal(uint8_t* data){
+	uint8_t channel = data[0];
+	uint8_t mode = data[1];
+	ChannelModiType channelModiType = (ChannelModiType)mode;
+	ChangeChannelModi(channel, channelModiType);
+}
 
 /*
  * Created on: 30.11.18
@@ -48,6 +61,10 @@ void CanWorkerTask(void * pvParameters) {
 						break;
 					case 0x02:
 						ActivateDebug(hcan->pRxMsg->Data[1]);
+						break;
+					case 0x03:
+						SetChannelModiFromExternal(&hcan->pRxMsg->Data[1]);
+						break;
 					default:
 						break;
 					}
@@ -85,7 +102,7 @@ void CanWorkerTask(void * pvParameters) {
 void InitCanInputTask(void) {
 
 	CanQueueHandle = xQueueCreate(QUEUE_SIZE_FOR_CAN, sizeof(CAN_HandleTypeDef));
-	CanQueueSenderHandle = xQueueCreate(1, sizeof(CAN_HandleTypeDef));
+	CanQueueSenderHandle = xQueueCreate(6, sizeof(CAN_HandleTypeDef));
 
 	osThreadDef(canInputTask, CanWorkerTask, osPriorityNormal, 0, 256);
 	canInputTaskHandle = osThreadCreate(osThread(canInputTask), NULL);

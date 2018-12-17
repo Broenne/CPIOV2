@@ -97,61 +97,36 @@ ChannelModiType GetActiveChannelModiType(void){
 	return ActivatedChannelModi;
 }
 
+void ChangeChannelModi(uint8_t channel, ChannelModiType channelModiType){
+	ChannelModiStorage[channel].channelModiType = channelModiType; // todo mb: das ist scheiße. hier kommt die Gefahr das man was durcheinader wirft
+}
+
+void InitChannelModi(void){
+	// todo mb: von außen initialisieren und in eeprom abspeichern
+		// der channel wird extra abgespeichert und nicht über die Position im Array behandelt. Überscihtlicher!
+		ChannelModiStorage[0].channelModiType = None;
+		ChannelModiStorage[1].channelModiType = None;
+		ChannelModiStorage[2].channelModiType = None;
+		ChannelModiStorage[3].channelModiType = None;
+		ChannelModiStorage[4].channelModiType = None;
+		ChannelModiStorage[5].channelModiType = None;
+		ChannelModiStorage[6].channelModiType = None;
+		ChannelModiStorage[7].channelModiType = None;
+		ChannelModiStorage[8].channelModiType = None;
+		ChannelModiStorage[9].channelModiType = None;
+		ChannelModiStorage[10].channelModiType = None;
+		ChannelModiStorage[11].channelModiType = None;
+		ChannelModiStorage[12].channelModiType = None;
+		ChannelModiStorage[13].channelModiType = Licht;
+		ChannelModiStorage[14].channelModiType = None;
+		ChannelModiStorage[15].channelModiType = Licht;
+}
 
 void InitPulse(void) {
 	InitQueueForPulse();
 	InitPulseSender();
 	Init_TimerForPulsTime();
-
-	// todo mb: von außen initialisieren und in eeprom abspeichern
-	// der channel wird extra abgespeichert und nicht über die Position im Array behandelt. Überscihtlicher!
-	ChannelModiStorage[0].channel = 0;
-	ChannelModiStorage[0].channelModiType = None;
-
-	ChannelModiStorage[1].channel = 1;
-	ChannelModiStorage[1].channelModiType = None;
-
-	ChannelModiStorage[2].channel = 2;
-	ChannelModiStorage[2].channelModiType = None;
-
-	ChannelModiStorage[3].channel = 3;
-	ChannelModiStorage[3].channelModiType = None;
-
-	ChannelModiStorage[4].channel = 4;
-	ChannelModiStorage[4].channelModiType = None;
-
-	ChannelModiStorage[5].channel = 5;
-	ChannelModiStorage[5].channelModiType = None;
-
-	ChannelModiStorage[6].channel = 6;
-	ChannelModiStorage[6].channelModiType = None;
-
-	ChannelModiStorage[7].channel = 7;
-	ChannelModiStorage[7].channelModiType = None;
-
-	ChannelModiStorage[8].channel = 8;
-	ChannelModiStorage[8].channelModiType = None;
-
-	ChannelModiStorage[9].channel = 9;
-	ChannelModiStorage[9].channelModiType = None;
-
-	ChannelModiStorage[10].channel = 10;
-	ChannelModiStorage[10].channelModiType = None;
-
-	ChannelModiStorage[11].channel = 11;
-	ChannelModiStorage[11].channelModiType = None;
-
-	ChannelModiStorage[12].channel = 12;
-	ChannelModiStorage[12].channelModiType = None;
-
-	ChannelModiStorage[13].channel = 13;
-	ChannelModiStorage[13].channelModiType = Licht;
-
-	ChannelModiStorage[14].channel = 14;
-	ChannelModiStorage[14].channelModiType = None;
-
-	ChannelModiStorage[15].channel = 15;
-	ChannelModiStorage[15].channelModiType = Licht;
+	InitChannelModi();
 }
 
 /*
@@ -170,11 +145,12 @@ void SendPulsePerCanTask(void * pvParameters) {
 		if (xQueueReceive(PulsQueue, &currentMessage, 100) == pdTRUE) {
 
 			for(int i=0; i < CHANNEL_COUNT; ++i){
-				static uint channel;
-				channel = ChannelModiStorage[i].channel;
-				static uint channelModi;
+
+				// voraussetzung, channel muss dem eingang entsprechen!!
+				static ChannelModiType channelModi;
 				channelModi = ChannelModiStorage[i].channelModiType;
-				if(channel == currentMessage.channel && channelModi == GetActiveChannelModiType()){
+
+				if(i == currentMessage.channel && channelModi == GetActiveChannelModiType()){
 					SendCanTimeDif(currentMessage.channel, currentMessage.res);
 					break; // schleife kan dann beendet werden
 				}
