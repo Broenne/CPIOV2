@@ -18,8 +18,8 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Button>
-            <iconPacks:PackIconMaterial MaxWidth="100" Kind="ContentSave"/>
+        <Button Width="100" HorizontalAlignment="Left" Command="{Binding SaveCommand}" Margin="3">
+            <iconPacks:PackIconMaterial  Kind="ContentSave"/>
         </Button>
         <ListView Grid.Row="1" ItemsSource="{Binding ConfigureInputsViewList}">
             <ListView.View>

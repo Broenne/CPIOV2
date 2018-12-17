@@ -1,7 +1,5 @@
 ﻿namespace CPIOngConfig.ConfigInputs
 {
-    using System.Collections.Generic;
-
     using CPIOngConfig.Contracts.ConfigInputs;
 
     using Prism.Mvvm;
@@ -15,26 +13,13 @@
     {
         private uint channel;
 
-        /// <summary>
-        ///     The modus
-        /// </summary>
-        private List<string> modus;
+        private Modi seletedModi;
 
         #region Constructor
-
-        public ConfigureInputsViewModel()
-        {
-            this.Modus = new List<string> { "None", "Namur", "Read", "Licht" };
-        }
 
         #endregion
 
         #region Properties
-
-        public void SetChannel(uint channelArg)
-        {
-            this.Channel = channelArg;
-        }
 
         /// <summary>
         ///     Gets or sets the channel.
@@ -49,12 +34,29 @@
         }
 
         /// <summary>
-        ///     Gets the modus.
+        ///     Gets or sets the selected modi.
         /// </summary>
         /// <value>
-        ///     The modus.
+        ///     The selected modi.
         /// </value>
-        public List<string> Modus { get; }
+        public Modi SelectedModi
+        {
+            get => this.seletedModi;
+            set => this.SetProperty(ref this.seletedModi, value);
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        /// <summary>
+        ///     Sets the channel.
+        /// </summary>
+        /// <param name="channelArg">The channel argument.</param>
+        public void SetChannel(uint channelArg)
+        {
+            this.Channel = channelArg;
+        }
 
         #endregion
     }

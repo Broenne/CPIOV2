@@ -4,17 +4,28 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CPIOngConfig.ConfigInputs"
+             xmlns:cpiOngConfig="clr-namespace:CPIOngConfig"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:configInputs="clr-namespace:CPIOngConfig.Contracts.ConfigInputs;assembly=CPIOngConfig.Contracts"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues"
+                            ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="configInputs:Modi"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="40"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="300"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Column="0" Text="{Binding Channel}"></TextBlock>
-        <StackPanel Margin="10" Grid.Column="1">
-            <ComboBox ItemsSource="{Binding Modus}">
-            </ComboBox>
+        <StackPanel Grid.Column="1">
+            <ComboBox 
+                ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedItem="{Binding SelectedModi}"/>
         </StackPanel>
     </Grid>
 </UserControl>

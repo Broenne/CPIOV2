@@ -3,9 +3,13 @@
   &lt;Assembly Path="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
 	<s:Boolean x:Key="/Default/Housekeeping/Bookmarks/NumberedBookmarks/=Bookmark7/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/Housekeeping/Bookmarks/NumberedBookmarks/=Bookmark7/Coords/@EntryValue">(Doc Ln 39 Col 13)</s:String>
-	<s:String x:Key="/Default/Housekeeping/Bookmarks/NumberedBookmarks/=Bookmark7/FileId/@EntryValue">359E1958-8493-4F5F-84BE-6BA477F43AB9/d:ConfigInputs/f:ConfigInputsAllViewModel.cs</s:String>
+	<s:String x:Key="/Default/Housekeeping/Bookmarks/NumberedBookmarks/=Bookmark7/Coords/@EntryValue">(Doc Ln 56 Col 44)</s:String>
+	<s:String x:Key="/Default/Housekeeping/Bookmarks/NumberedBookmarks/=Bookmark7/FileId/@EntryValue">359E1958-8493-4F5F-84BE-6BA477F43AB9/d:ConfigInputs/f:ConfigureInputsViewModel.cs</s:String>
 	<s:String x:Key="/Default/Housekeeping/Bookmarks/NumberedBookmarks/=Bookmark7/Owner/@EntryValue">NumberedBookmarkManager</s:String>
+	
+	
+	
+	
 	
 	
 	
