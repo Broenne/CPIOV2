@@ -17,4 +17,11 @@ void SetTimerPulseCorrecturFactor(uint16_t value);
 void InitPulse(void);
 void InitPulseSender(void);
 
+typedef enum  { None, Read, Namur, Licht, FlipFlop } ChannelModiType;
+
+typedef struct {
+	uint8_t channel;
+	ChannelModiType channelModiType;
+} ChannelModi;
+
 #endif /* PULSE_H_ */

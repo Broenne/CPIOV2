@@ -8,11 +8,14 @@
 #include "pulse.h"
 
 #define QUEUE_SIZE_FOR_PULSE_INFO		( ( unsigned short ) 80 ) // 16 * 5
+#define CHANNEL_COUNT 					( ( unsigned short ) 16 )
 
 typedef struct {
 	uint8_t channel;
 	uint32_t res;
 } MessageForSend;
+
+
 
 static TIM_HandleTypeDef pulseTimerInstance; // = { .Instance = TIM2 };
 
@@ -24,17 +27,17 @@ osThreadId myTask03Handle;
 
 static uint32_t TimerCorrectureFactor = 0;
 
-void InitTimerPulseCorrecturFactor(){
+void InitTimerPulseCorrecturFactor() {
 	TimerCorrectureFactor = 0; // todo mb: load from eeprom
 }
 
-void SetTimerPulseCorrecturFactor(uint16_t value){
+void SetTimerPulseCorrecturFactor(uint16_t value) {
 	// Info, hier nur int 16 erlaubt, korrektur sonst viel zu groß. Sollen wir den Bereich noch einschränken?
-	TimerCorrectureFactor = (uint16_t)value;
+	TimerCorrectureFactor = (uint16_t) value;
 	Reset();
 }
 
-uint32_t GetTimerPulseCorrecturFactor(){
+uint32_t GetTimerPulseCorrecturFactor() {
 	return TimerCorrectureFactor;
 }
 
@@ -51,12 +54,13 @@ void Init_TimerForPulsTime(void) {
 	// f / fclock / Perios*(Pre+1))
 	InitTimerPulseCorrecturFactor();
 
-	__HAL_RCC_TIM3_CLK_ENABLE()	;
+	__HAL_RCC_TIM3_CLK_ENABLE()
+	;
 	pulseTimerInstance.Instance = TIM3;
 	pulseTimerInstance.Init.CounterMode = TIM_COUNTERMODE_UP;
 
-	pulseTimerInstance.Init.Prescaler = 8;//9;
-	pulseTimerInstance.Init.Period = 800;//801;// + GetTimerPulseCorrecturFactor();
+	pulseTimerInstance.Init.Prescaler = 8;	//9;
+	pulseTimerInstance.Init.Period = 800;	//801;// + GetTimerPulseCorrecturFactor();
 
 	pulseTimerInstance.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
 	pulseTimerInstance.Init.RepetitionCounter = 0;
@@ -78,10 +82,63 @@ void InitQueueForPulse(void) {
 	PulsQueue = xQueueCreate(QUEUE_SIZE_FOR_PULSE_INFO, sizeof(MessageForSend));
 }
 
+static ChannelModiType ActivatedChannelModi = Licht;
+static ChannelModi ChannelModiStorage[CHANNEL_COUNT];
+
 void InitPulse(void) {
 	InitQueueForPulse();
 	InitPulseSender();
 	Init_TimerForPulsTime();
+
+	// todo mb: von außen initialisieren und in eeprom abspeichern
+	// der channel wird extra abgespeichert und nicht über die Position im Array behandelt. Überscihtlicher!
+	ChannelModiStorage[0].channel = 0;
+	ChannelModiStorage[0].channelModiType = None;
+
+	ChannelModiStorage[1].channel = 1;
+	ChannelModiStorage[1].channelModiType = None;
+
+	ChannelModiStorage[2].channel = 2;
+	ChannelModiStorage[2].channelModiType = None;
+
+	ChannelModiStorage[3].channel = 3;
+	ChannelModiStorage[3].channelModiType = None;
+
+	ChannelModiStorage[4].channel = 4;
+	ChannelModiStorage[4].channelModiType = None;
+
+	ChannelModiStorage[5].channel = 5;
+	ChannelModiStorage[5].channelModiType = None;
+
+	ChannelModiStorage[6].channel = 6;
+	ChannelModiStorage[6].channelModiType = None;
+
+	ChannelModiStorage[7].channel = 7;
+	ChannelModiStorage[7].channelModiType = None;
+
+	ChannelModiStorage[8].channel = 8;
+	ChannelModiStorage[8].channelModiType = None;
+
+	ChannelModiStorage[9].channel = 9;
+	ChannelModiStorage[9].channelModiType = None;
+
+	ChannelModiStorage[10].channel = 10;
+	ChannelModiStorage[10].channelModiType = None;
+
+	ChannelModiStorage[11].channel = 11;
+	ChannelModiStorage[11].channelModiType = None;
+
+	ChannelModiStorage[12].channel = 12;
+	ChannelModiStorage[12].channelModiType = None;
+
+	ChannelModiStorage[13].channel = 13;
+	ChannelModiStorage[13].channelModiType = Licht;
+
+	ChannelModiStorage[14].channel = 14;
+	ChannelModiStorage[14].channelModiType = None;
+
+	ChannelModiStorage[15].channel = 15;
+	ChannelModiStorage[15].channelModiType = Licht;
 }
 
 /*
@@ -98,7 +155,19 @@ void SendPulsePerCanTask(void * pvParameters) {
 		currentMessage.res = 1;
 
 		if (xQueueReceive(PulsQueue, &currentMessage, 100) == pdTRUE) {
-			SendCanTimeDif(currentMessage.channel, currentMessage.res);
+
+			for(int i=0;i<15;++i){
+				static uint channel;
+				channel = ChannelModiStorage[i].channel;
+				static uint channelModi;
+				channelModi = ChannelModiStorage[i].channelModiType;
+				if(channel == currentMessage.channel && channelModi == ActivatedChannelModi){
+					SendCanTimeDif(currentMessage.channel, currentMessage.res);
+					break; // schleife kan dann beendet werden
+				}
+			}
+
+			// todo mb: flip flop einzeln behandeln
 		}
 	}
 
@@ -148,8 +217,7 @@ void SendTimeInfo(uint8_t channel) {
 	lastTimeValue[channel] = actualTimeValue;
 }
 
-
-void CheckPulseInputs(void){
+void CheckPulseInputs(void) {
 	static uint16_t oldValue = 0;
 	static uint8_t data[2];
 	static uint16_t value = 0;
@@ -167,7 +235,6 @@ void CheckPulseInputs(void){
 
 	oldValue = value;
 }
-
 
 /*
  * Created on: 30.11.18
