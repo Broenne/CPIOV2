@@ -95,14 +95,29 @@ static void MX_WWDG_Init(void);
 //void StartTask03(void const * argument);
 //void Callback01(void const * argument);
 
-/* USER CODE BEGIN PFP */
-/* Private function prototypes -----------------------------------------------*/
+void FilterOnlyMyId(CAN_HandleTypeDef* hcan) {
 
-/* USER CODE END PFP */
+	int globalCanId = GetGlobalCanNodeId();
+	CAN_FilterConfTypeDef sFilterConfig;
+	sFilterConfig.FilterNumber = 15;
+	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
+	sFilterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
+	sFilterConfig.FilterMaskIdHigh = 0xFFFF;
+	sFilterConfig.FilterMaskIdLow = 0x07FF << 5;
+	sFilterConfig.FilterIdHigh = 0x0000;
+	sFilterConfig.FilterIdLow = globalCanId << 5;
+	sFilterConfig.FilterFIFOAssignment = CAN_FIFO0;
+	sFilterConfig.FilterActivation = ENABLE;
 
-/* USER CODE BEGIN 0 */
+	// info mb: der filter muss auf can 1 gesetzt werden, auch wenn nur can 2 genutzt wird (warum auch immer)
+	hcan->Instance = CAN1;
+	if (HAL_CAN_ConfigFilter(hcan, &sFilterConfig) != HAL_OK) {
+		/* Filter configuration Error */
+		//Error_Handler();
+	}
 
-/* USER CODE END 0 */
+	hcan->Instance = CAN2;
+}
 
 /**
  * @brief  The application entry point.
@@ -110,18 +125,11 @@ static void MX_WWDG_Init(void);
  * @retval None
  */
 int main(void) {
-	/* USER CODE BEGIN 1 */
 
-	/* USER CODE END 1 */
-
-	/* MCU Configuration----------------------------------------------------------*/
 
 	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
  	HAL_Init();
 
-	/* USER CODE BEGIN Init */
-
-	/* USER CODE END Init */
 
 	/* Configure the system clock */
 	SystemClock_Config();
@@ -143,18 +151,10 @@ int main(void) {
 	InitAlive();
 	InitAnalog();
 
-
-	/* Start scheduler */
 	osKernelStart();
 
-	/* We should never get here as control is now taken by the scheduler */
-
-	/* Infinite loop */
-	/* USER CODE BEGIN WHILE */
 	while (1) {
 	}
-	/* USER CODE END 3 */
-
 }
 
 /**
@@ -422,31 +422,6 @@ static void MX_CAN2_Init(void) {
 
 }
 
-
-void FilterOnlyMyId(CAN_HandleTypeDef* hcan) {
-
-	int globalCanId = GetGlobalCanNodeId();
-	CAN_FilterConfTypeDef sFilterConfig;
-	sFilterConfig.FilterNumber = 15;
-	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
-	sFilterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
-	sFilterConfig.FilterMaskIdHigh = 0xFFFF;
-	sFilterConfig.FilterMaskIdLow = 0x07FF << 5;
-	sFilterConfig.FilterIdHigh = 0x0000;
-	sFilterConfig.FilterIdLow = globalCanId << 5;
-	sFilterConfig.FilterFIFOAssignment = CAN_FIFO0;
-	sFilterConfig.FilterActivation = ENABLE;
-
-	// info mb: der filter muss auf can 1 gesetzt werden, auch wenn nur can 2 genutzt wird (warum auch immer)
-	hcan->Instance = CAN1;
-	if (HAL_CAN_ConfigFilter(hcan, &sFilterConfig) != HAL_OK) {
-		/* Filter configuration Error */
-		//Error_Handler();
-	}
-
-	hcan->Instance = CAN2;
-}
-
 /* USART1 init function */
 static void MX_USART1_UART_Init(void) {
 
@@ -576,79 +551,7 @@ static void MX_GPIO_Init(void) {
 
 }
 
-/* USER CODE BEGIN 4 */
 
-/* USER CODE END 4 */
-
-///* USER CODE BEGIN Header_StartDefaultTask */
-///**
-// * @brief  Function implementing the defaultTask thread.
-// * @param  argument: Not used
-// * @retval None
-// */
-///* USER CODE END Header_StartDefaultTask */
-//void StartDefaultTask(void const * argument) {
-//
-//	/* USER CODE BEGIN 5 */
-//	/* Infinite loop */
-//	for (;;) {
-//		osDelay(1);
-//	}
-//	/* USER CODE END 5 */
-//}
-//
-///* USER CODE BEGIN Header_StartIdle_Task */
-///**
-// * @brief Function implementing the Idle_Task thread.
-// * @param argument: Not used
-// * @retval None
-// */
-///* USER CODE END Header_StartIdle_Task */
-//void StartIdle_Task(void const * argument) {
-//	/* USER CODE BEGIN StartIdle_Task */
-//	/* Infinite loop */
-//	for (;;) {
-//		osDelay(1);
-//	}
-//	/* USER CODE END StartIdle_Task */
-//}
-//
-///* USER CODE BEGIN Header_StartTask03 */
-///**
-// * @brief Function implementing the myTask03 thread.
-// * @param argument: Not used
-// * @retval None
-// */
-///* USER CODE END Header_StartTask03 */
-//void StartTask03(void const * argument) {
-//	/* USER CODE BEGIN StartTask03 */
-//	/* Infinite loop */
-//	for (;;) {
-//		osDelay(1);
-//	}
-//	/* USER CODE END StartTask03 */
-//}
-//
-///* Callback01 function */
-//void Callback01(void const * argument) {
-//	/* USER CODE BEGIN Callback01 */
-//
-//	/* USER CODE END Callback01 */
-//}
-//
-///**
-// * @brief  This function is executed in case of error occurrence.
-// * @param  file: The file name as string.
-// * @param  line: The line in file as a number.
-// * @retval None
-// */
-//void _Error_Handler(char *file, int line) {
-//	/* USER CODE BEGIN Error_Handler_Debug */
-//	/* User can add his own implementation to report the HAL error return state */
-//	while (1) {
-//	}
-//	/* USER CODE END Error_Handler_Debug */
-//}
 #ifdef  USE_FULL_ASSERT
 /**
  * @brief  Reports the name of the source file and the source line number

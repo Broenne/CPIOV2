@@ -82,8 +82,21 @@ void InitQueueForPulse(void) {
 	PulsQueue = xQueueCreate(QUEUE_SIZE_FOR_PULSE_INFO, sizeof(MessageForSend));
 }
 
-static ChannelModiType ActivatedChannelModi = Licht;
+
 static ChannelModi ChannelModiStorage[CHANNEL_COUNT];
+
+
+static ChannelModiType ActivatedChannelModi = Licht;
+void SetActiveChannelModiType(ChannelModiType val){
+	ActivatedChannelModi = val;
+	// ins eeprom speichern, wenn egändert
+}
+
+ChannelModiType GetActiveChannelModiType(void){
+	// todo mb: aus eeprom laden bei initialisierung?
+	return ActivatedChannelModi;
+}
+
 
 void InitPulse(void) {
 	InitQueueForPulse();
@@ -146,9 +159,9 @@ void InitPulse(void) {
  * Author: MB
  * Diese Funktion arbeitet die queue ab.
  * Es besteht keine Priorität und es ist darauf zu achten, das de Prozessor ausreichend Zeit hat, die Information los zu werden.
+ * Es werden nur die eingesellten und passend konfigurierten Infos weg gesendet.
  * */
 void SendPulsePerCanTask(void * pvParameters) {
-
 	while (1) {
 		static MessageForSend currentMessage;
 		currentMessage.channel = 0;
@@ -156,12 +169,12 @@ void SendPulsePerCanTask(void * pvParameters) {
 
 		if (xQueueReceive(PulsQueue, &currentMessage, 100) == pdTRUE) {
 
-			for(int i=0;i<15;++i){
+			for(int i=0; i < CHANNEL_COUNT; ++i){
 				static uint channel;
 				channel = ChannelModiStorage[i].channel;
 				static uint channelModi;
 				channelModi = ChannelModiStorage[i].channelModiType;
-				if(channel == currentMessage.channel && channelModi == ActivatedChannelModi){
+				if(channel == currentMessage.channel && channelModi == GetActiveChannelModiType()){
 					SendCanTimeDif(currentMessage.channel, currentMessage.res);
 					break; // schleife kan dann beendet werden
 				}

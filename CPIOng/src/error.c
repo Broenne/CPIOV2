@@ -38,7 +38,7 @@ void SetErrorFlag(int pos){
  * Setzen des errors aus dem counter befehl.
  * */
 void SetCounterError(void){
-	// todo mb: Fehler merken
+	// todo mb: Fehler merken KEIN!!!!!! printf nutzen. Eigene Funktion myprinft (noch zu schreiben)
 	printf("ERROR die Infos können nicht mehr weggeschickt werden \r\n");
 	SetErrorFlag(COUNTER_ERROR_POSITION);
 	// Reset();
