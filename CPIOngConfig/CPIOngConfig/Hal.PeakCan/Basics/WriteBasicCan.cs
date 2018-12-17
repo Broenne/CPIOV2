@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
 
     using Hal.PeakCan.Contracts.Basics;
     using Hal.PeakCan.PCANDll;
@@ -18,7 +19,7 @@
     ///     The write basic CAN class.
     /// </summary>
     /// <seealso cref="HardwareAbstraction.Contracts.Basics.IWriteBasicCan" />
-    public class WriteBasicCan : IWriteBasicCan //: IWriteBasicCan
+    public class WriteBasicCan : IWriteBasicCan
     {
         private static readonly object LockWrite = new object();
 
@@ -51,12 +52,6 @@
                 this.Logger.LogError(ex);
                 throw;
             }
-
-            //locksWrite = new Dictionary<uint, object>();
-            //for (uint i=0;i<(256);i++)
-            //{
-            //    locksWrite.Add(i, new object());
-            //}
         }
 
         /// <summary>
@@ -82,45 +77,6 @@
 
         #region Public Methods
 
-        ///// <summary>
-        /////     Creates the SDO request.
-        ///// </summary>
-        ///// <param name="node">The node info.</param>
-        ///// <param name="data">The data field.</param>
-        //public void CreateSdoRequest(uint node, byte[] data)
-        //{
-        //    this.SendWithData(node, data, TpcanMessageType.PCAN_MESSAGE_STANDARD);
-        //}
-
-        ///// <summary>
-        /////     Remotes the request for channel value.
-        ///// </summary>
-        ///// <param name="node">The node value.</param>
-        //public void RemoteRequestExtended(uint node)
-        //{
-        //    try
-        //    {
-        //        var canMsg = new TpcanMsg
-        //                         {
-        //                             Id = node,
-        //                             Msgtype = TpcanMessageType.PCAN_MESSAGE_RTR
-        //                                       | TpcanMessageType.PCAN_MESSAGE_EXTENDED
-        //                         };
-
-        //        // Console.WriteLine("canMsg.ID: RemoteRequest" + canMsg.ID);
-        //        var result = PcanBasicDllWrapper.Write(this.MPcanHandle, ref canMsg);
-
-        //        if (result != TPCANStatus.PCAN_ERROR_OK)
-        //        {
-        //            throw new Exception("TpCanStatus");
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        this.Logger.LogError(e);
-        //    }
-        //}
-
         /// <summary>
         ///     Remotes the request for channel value.
         /// </summary>
@@ -131,7 +87,7 @@
             {
 
 
-                ClearMessageBuffer(node);
+                //ClearMessageBuffer(node);
 
                 var canMsg = new TpcanMsg
                                  {
@@ -158,74 +114,70 @@
 
 
 
+        ///// <summary>
+        /////     Clears the message buffer.
+        ///// </summary>
+        ///// <param name="type">The type of message.</param>
+        //public void ClearMessageBuffer(uint id, TpcanMessageType type = TpcanMessageType.PCAN_MESSAGE_STANDARD)
+        //{
+        //    TpcanMsg readCanMsg;
+        //    readCanMsg.Id = 0x1B;
+        //    readCanMsg.Len = 8;
+
+        //    readCanMsg.Msgtype = type;
+
+        //    while (TPCANStatus.PCAN_ERROR_QRCVEMPTY
+        //           != PcanBasicDllWrapper.Read(this.MPcanHandle, out readCanMsg, out _))
+        //    {
+        //        // Console.WriteLine($"clear {readCanMsg.Id}");
+        //        this.Logger.LogTrace("read empty" + readCanMsg.Id);
+        //    }
+        //}
+
+
+
+
+
+
+
         /// <summary>
-        ///     Clears the message buffer.
+        /// Writes the can.
         /// </summary>
-        /// <param name="type">The type of message.</param>
-        public void ClearMessageBuffer(uint id, TpcanMessageType type = TpcanMessageType.PCAN_MESSAGE_STANDARD)
+        /// <param name="id">The identifier.</param>
+        /// <param name="data">The data.</param>
+        /// <exception cref="Exception">TpCanStatus</exception>
+        public void WriteCan(uint id, IReadOnlyList<byte> data)
         {
-            TpcanMsg readCanMsg;
-            readCanMsg.Id = 0x1B;
-            readCanMsg.Len = 8;
-
-            readCanMsg.Msgtype = type;
-
-            while (TPCANStatus.PCAN_ERROR_QRCVEMPTY
-                   != PcanBasicDllWrapper.Read(this.MPcanHandle, out readCanMsg, out _))
+            try
             {
-                // Console.WriteLine($"clear {readCanMsg.Id}");
-                this.Logger.LogTrace("read empty" + readCanMsg.Id);
+                lock (LockWrite)
+                {
+                    this.Logger.LogBegin(this.GetType());
+
+                    TpcanMsg canMsg = new TpcanMsg();
+                    canMsg.Id = id;
+                    canMsg.Data = data.ToArray();
+                    canMsg.Len = (byte)data.Count;
+                    canMsg.Msgtype = TpcanMessageType.PCAN_MESSAGE_STANDARD;
+
+                    var result = PcanBasicDllWrapper.Write(this.MPcanHandle, ref canMsg);
+
+
+                    if (result == TPCANStatus.PCAN_ERROR_BUSOFF)
+                    {
+                        this.PreparePeakCan.Reset();
+                    }
+
+                    if (result != TPCANStatus.PCAN_ERROR_OK)
+                    {
+                        throw new Exception("TpCanStatus");
+                    }
+                }
             }
-        }
-
-
-
-
-
-        /// <summary>
-        ///     Sends the extended message.
-        /// </summary>
-        /// <param name="node">The node info.</param>
-        /// <param name="data">The data field.</param>
-        public void SendExtendedMessage(uint node, byte[] data)
-        {
-            this.SendWithData(node, data, TpcanMessageType.PCAN_MESSAGE_EXTENDED);
-        }
-
-        /// <summary>
-        ///     Writes the can and check.
-        /// </summary>
-        /// <param name="canMsg">The can MSG.</param>
-        /// <exception cref="System.Exception">TP Can Status.</exception>
-        public void WriteCanAndCheck(TpcanMsg canMsg)
-        {
-            lock (LockWrite)
-                
+            catch (Exception ex)
             {
-                this.Logger.LogBegin(this.GetType());
-
-                
-                var result = PcanBasicDllWrapper.Write(this.MPcanHandle, ref canMsg);
-
-                //Console.WriteLine("b" + ByteArrayToHexString(canMsg.Data));
-                //Thread.Sleep(1);
-                //PcanBasicDllWrapper.SetValue(this.MPcanHandle, TpcanParameter..PCAN_INTERFRAME_DELAY)
-
-                if (result == TPCANStatus.PCAN_ERROR_BUSOFF)
-                {
-                    this.PreparePeakCan.Reset();
-                }
-
-                if (result != TPCANStatus.PCAN_ERROR_OK)
-                {
-                    //PcanBasicDllWrapper.Uninitialize(this.MPcanHandle);
-
-                    //this.PreparePeakCan.Reset();
-                    //this.WriteCanAndCheck(canMsg);
-                    //Thread.Sleep(50);
-                    //this.Logger.LogDebug($"{DateTime.Now.ToString(HelperStrings.TimeString)} {result.ToString()}");
-                    //throw new Exception("TpCanStatus");
-                }
+                this.Logger.LogError(ex);
+                throw;
             }
         }
 
@@ -244,31 +196,7 @@
             return msg;
         }
 
-        [SuppressMessage(
-            "StyleCop.CSharp.NamingRules",
-            "SA1305:FieldNamesMustNotUseHungarianNotation",
-            Justification = "Reviewed. Suppression is OK here.")]
-        private void SendWithData(uint node, byte[] data, TpcanMessageType tPcanMessageType)
-        {
-            var canMsg = new TpcanMsg();
-
-            canMsg.Msgtype = tPcanMessageType;
-            canMsg.Id = node;
-            canMsg.Data = new byte[8];
-
-            if (data != null)
-            {
-                for (var i = 0; i < data.Length; i++)
-                {
-                    canMsg.Data[i] = data[i];
-                }
-            }
-
-            canMsg.Len = 8;
-
-            // this.Logger.LogDebug("canMsg.ID: RemoteRequest" + canMsg.Id);
-            this.WriteCanAndCheck(canMsg);
-        }
+       
 
         #endregion
     }

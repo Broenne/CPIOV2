@@ -12,10 +12,19 @@
         /// </summary>
         Read = 1,
 
+        /// <summary>
+        /// The namur
+        /// </summary>
         Namur = 2,
 
+        /// <summary>
+        /// The licht
+        /// </summary>
         Licht = 3,
 
+        /// <summary>
+        /// The flip flop
+        /// </summary>
         FlipFlop = 4
     }
 }

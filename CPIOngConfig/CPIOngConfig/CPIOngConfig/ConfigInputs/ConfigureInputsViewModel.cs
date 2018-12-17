@@ -58,6 +58,26 @@
             this.Channel = channelArg;
         }
 
+        /// <summary>
+        /// Gets the channel.
+        /// </summary>
+        /// <returns>
+        /// Return the channel.
+        /// </returns>
+        public uint GetChannel()
+        {
+            return this.Channel;
+        }
+
+        /// <summary>
+        /// Gets the selected modi.
+        /// </summary>
+        /// <returns>Return the modus.</returns>
+        public Modi GetSelectedModi()
+        {
+            return this.SelectedModi;
+        }
+
         #endregion
     }
 }

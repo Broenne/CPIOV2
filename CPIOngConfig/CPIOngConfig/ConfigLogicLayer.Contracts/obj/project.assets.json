@@ -25,6 +25,28 @@
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
+      },
+      "Prism.Core/6.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Prism.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Prism.dll": {}
+        }
+      },
+      "CPIOngConfig.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Prism.Core": "6.2.0"
+        },
+        "compile": {
+          "bin/placeholder/CPIOngConfig.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CPIOngConfig.Contracts.dll": {}
+        }
       }
     }
   },
@@ -169,10 +191,42 @@
         "netstandard.library.2.0.1.nupkg.sha512",
         "netstandard.library.nuspec"
       ]
+    },
+    "Prism.Core/6.2.0": {
+      "sha512": "cyopXLP2EIR/SPD8+leaTakhnUck+X6ICtEfBjgZQ93gJXZ+fncn5ydsYfG4jieoMNTMtb1YBmKQ9iLmYUkrJQ==",
+      "type": "package",
+      "path": "prism.core/6.2.0",
+      "files": [
+        ".signature.p7s",
+        "lib/MonoAndroid10/Prism.dll",
+        "lib/MonoAndroid10/Prism.xml",
+        "lib/MonoTouch10/Prism.dll",
+        "lib/MonoTouch10/Prism.xml",
+        "lib/Xamarin.iOS10/Prism.dll",
+        "lib/Xamarin.iOS10/Prism.xml",
+        "lib/net45/Prism.dll",
+        "lib/net45/Prism.xml",
+        "lib/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/Prism.dll",
+        "lib/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/Prism.xml",
+        "lib/wp8/Prism.dll",
+        "lib/wp8/Prism.xml",
+        "lib/wp81/Prism.dll",
+        "lib/wp81/Prism.xml",
+        "lib/wpa81/Prism.dll",
+        "lib/wpa81/Prism.xml",
+        "prism.core.6.2.0.nupkg.sha512",
+        "prism.core.nuspec"
+      ]
+    },
+    "CPIOngConfig.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../CPIOngConfig.Contracts/CPIOngConfig.Contracts.csproj",
+      "msbuildProject": "../CPIOngConfig.Contracts/CPIOngConfig.Contracts.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
+      "CPIOngConfig.Contracts >= 1.0.0",
       "NETStandard.Library >= 2.0.1"
     ]
   },
@@ -205,7 +259,11 @@
       },
       "frameworks": {
         "netstandard2.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\apps\\CPIOV2\\CPIOngConfig\\CPIOngConfig\\CPIOngConfig.Contracts\\CPIOngConfig.Contracts.csproj": {
+              "projectPath": "C:\\apps\\CPIOV2\\CPIOngConfig\\CPIOngConfig\\CPIOngConfig.Contracts\\CPIOngConfig.Contracts.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -231,5 +289,17 @@
         "warn": true
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Prism.Core 6.2.0' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETStandard,Version=v2.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Prism.Core",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.0"
+      ]
+    }
+  ]
 }

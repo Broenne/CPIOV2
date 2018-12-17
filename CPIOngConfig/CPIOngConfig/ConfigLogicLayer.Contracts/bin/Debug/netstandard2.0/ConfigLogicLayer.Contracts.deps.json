@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v2.0/",
-    "signature": "2468f8819b4e290b1a8667020137de51bd83af19"
+    "signature": "8f9447949c741626b9d69fc66ad7220459801c01"
   },
   "compilationOptions": {},
   "targets": {
@@ -9,6 +9,7 @@
     ".NETStandard,Version=v2.0/": {
       "ConfigLogicLayer.Contracts/1.0.0": {
         "dependencies": {
+          "CPIOngConfig.Contracts": "1.0.0",
           "NETStandard.Library": "2.0.1"
         },
         "runtime": {
@@ -19,6 +20,19 @@
       "NETStandard.Library/2.0.1": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0"
+        }
+      },
+      "Prism.Core/6.2.0": {
+        "runtime": {
+          "lib/net45/Prism.dll": {}
+        }
+      },
+      "CPIOngConfig.Contracts/1.0.0": {
+        "dependencies": {
+          "Prism.Core": "6.2.0"
+        },
+        "runtime": {
+          "CPIOngConfig.Contracts.dll": {}
         }
       }
     }
@@ -42,6 +56,18 @@
       "sha512": "sha512-oA6nwv9MhEKYvLpjZ0ggSpb1g4CQViDVQjLUcDWg598jtvJbpfeP2reqwI1GLW2TbxC/Ml7xL6BBR1HmKPXlTg==",
       "path": "netstandard.library/2.0.1",
       "hashPath": "netstandard.library.2.0.1.nupkg.sha512"
+    },
+    "Prism.Core/6.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cyopXLP2EIR/SPD8+leaTakhnUck+X6ICtEfBjgZQ93gJXZ+fncn5ydsYfG4jieoMNTMtb1YBmKQ9iLmYUkrJQ==",
+      "path": "prism.core/6.2.0",
+      "hashPath": "prism.core.6.2.0.nupkg.sha512"
+    },
+    "CPIOngConfig.Contracts/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

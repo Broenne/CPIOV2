@@ -4,4 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CPIOngConfig.Contracts\CPIOngConfig.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>
