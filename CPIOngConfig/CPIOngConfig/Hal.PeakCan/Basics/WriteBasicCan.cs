@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
 
     using Hal.PeakCan.Contracts.Basics;
     using Hal.PeakCan.PCANDll;
@@ -34,11 +33,8 @@
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="preparePeakCan">The prepare peak can.</param>
-        [SuppressMessage(
-            "StyleCop.CSharp.NamingRules",
-            "SA1305:FieldNamesMustNotUseHungarianNotation",
-            Justification = "Reviewed. Suppression is OK here.")]
-        public WriteBasicCan( IPreparePeakCan preparePeakCan, ILogger logger)
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation", Justification = "Reviewed. Suppression is OK here.")]
+        public WriteBasicCan(IPreparePeakCan preparePeakCan, ILogger logger)
         {
             this.PreparePeakCan = preparePeakCan;
             this.Logger = logger;
@@ -52,15 +48,6 @@
                 this.Logger.LogError(ex);
                 throw;
             }
-        }
-
-        /// <summary>
-        ///     Gets the actual handle.
-        /// </summary>
-        /// <returns>Return the actual handle.</returns>
-        public string GetActualHandle()
-        {
-            return this.MPcanHandle.ToString("X"); // todo mb: hier namen rein bauen?!
         }
 
         #endregion
@@ -78,6 +65,15 @@
         #region Public Methods
 
         /// <summary>
+        ///     Gets the actual handle.
+        /// </summary>
+        /// <returns>Return the actual handle.</returns>
+        public string GetActualHandle()
+        {
+            return this.MPcanHandle.ToString("X"); // todo mb: hier namen rein bauen?!
+        }
+
+        /// <summary>
         ///     Remotes the request for channel value.
         /// </summary>
         /// <param name="node">The node value.</param>
@@ -85,8 +81,6 @@
         {
             try
             {
-
-
                 //ClearMessageBuffer(node);
 
                 var canMsg = new TpcanMsg
@@ -94,8 +88,7 @@
                                      Id = node,
                                      Msgtype = TpcanMessageType.PCAN_MESSAGE_RTR,
                                      Data = new byte[8],
-                                     Len =
-                                         2 // todo mb: die längenangabe ist aufgrund eines Fehlverhaltens im alten Knoten notwendig
+                                     Len = 2 // todo mb: die längenangabe ist aufgrund eines Fehlverhaltens im alten Knoten notwendig
                                  };
 
                 // Console.WriteLine("canMsg.ID: RemoteRequest" + canMsg.ID);
@@ -111,8 +104,6 @@
                 this.Logger.LogError(e);
             }
         }
-
-
 
         ///// <summary>
         /////     Clears the message buffer.
@@ -134,18 +125,12 @@
         //    }
         //}
 
-
-
-
-
-
-
         /// <summary>
-        /// Writes the can.
+        ///     Writes the can.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <param name="data">The data.</param>
-        /// <exception cref="Exception">TpCanStatus</exception>
+        /// <param name="data">The data info.</param>
+        /// <exception cref="Exception">TPCANSTATUS not ok.</exception>
         public void WriteCan(uint id, IReadOnlyList<byte> data)
         {
             try
@@ -159,19 +144,18 @@
                         throw new Exception("Could not write more then 8 bytes.");
                     }
 
-                    TpcanMsg canMsg = new TpcanMsg();
+                    var canMsg = new TpcanMsg();
                     canMsg.Id = id;
                     canMsg.Data = new byte[8];
                     canMsg.Len = (byte)data.Count;
-                    for (int i = 0; i < canMsg.Len; i++)
+                    for (var i = 0; i < canMsg.Len; i++)
                     {
                         canMsg.Data[i] = data[i];
                     }
-                   
+
                     canMsg.Msgtype = TpcanMessageType.PCAN_MESSAGE_STANDARD;
 
                     var result = PcanBasicDllWrapper.Write(this.MPcanHandle, ref canMsg);
-
 
                     if (result == TPCANStatus.PCAN_ERROR_BUSOFF)
                     {
@@ -180,7 +164,7 @@
 
                     if (result != TPCANStatus.PCAN_ERROR_OK)
                     {
-                        throw new Exception("TpCanStatus");
+                        throw new Exception("TpCanStatus.");
                     }
                 }
             }
@@ -205,8 +189,6 @@
 
             return msg;
         }
-
-       
 
         #endregion
     }

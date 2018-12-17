@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace CPIOngConfig.InputBinary
 {
+    using System.Windows;
     using System.Windows.Input;
     using System.Windows.Media;
 
     using ConfigLogicLayer.Contracts.DigitalInputState;
     using ConfigLogicLayer.DigitalInputState;
+
+    using CPIOngConfig.Contracts.InputBinary;
 
     using Global.UiHelper;
 
@@ -25,7 +28,7 @@ namespace CPIOngConfig.InputBinary
         private SolidColorBrush gray;
 
 
-        public InputBinaryViewModel(ILogger logger/*, IHandleInputs handleInputs*/)
+        public InputBinaryViewModel(ILogger logger, IInputBinaryEventHandler inputBinaryEventHandler)
         {
             this.Logger = logger;
             //this.HandleInputs = handleInputs;
@@ -40,11 +43,27 @@ namespace CPIOngConfig.InputBinary
                 this.Input.Add(new InOutState(0, this.gray));
             }
 
-
+            inputBinaryEventHandler.EventIsReached += this.InputBinaryEventHandler_EventIsReached;
         }
 
-
-
+        private void InputBinaryEventHandler_EventIsReached(object sender, InputBinaryEventArgs e)
+        {
+            try
+            {
+                int i = 0;
+                foreach (var item in e.Store)
+                {
+                    this.Input[i].Color = item.Value ? this.green : this.gray;
+                    ++i;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                MessageBox.Show(ex.Message);
+            }
+        }
 
         public List<InOutState> Input { get; set; }
 
@@ -57,7 +76,7 @@ namespace CPIOngConfig.InputBinary
 
                 //for (int i=0;i< res.Count; i++)
                 //{
-                //    this.Input[i].Color = res[i] ? this.green:this.gray;
+                //    
 
                 //}
 
@@ -66,7 +85,8 @@ namespace CPIOngConfig.InputBinary
             }
             catch (Exception ex)
             {
-                ;
+                MessageBox.Show(ex.Message);
+                throw;
             }
 
         }
@@ -75,7 +95,6 @@ namespace CPIOngConfig.InputBinary
 
         public ICommand GetCommand { get; }
 
-        //private IHandleInputs HandleInputs { get; }
 
     }
 }

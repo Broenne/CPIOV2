@@ -5,8 +5,9 @@
 
     using ConfigLogicLayer.Contracts.DigitalInputState;
 
+    using CPIOngConfig.Contracts.InputBinary;
     using CPIOngConfig.Contracts.Pulse;
-    using CPIOngConfig.Pulse;
+    using CPIOngConfig.InputBinary;
 
     using Hal.PeakCan.Contracts.Basics;
 
@@ -26,16 +27,23 @@
         /// <param name="logger">The logger.</param>
         /// <param name="pulseEventHandler">The pulse event handler.</param>
         /// <param name="readCanMessage">The read can message.</param>
-        public HandleInputs(ILogger logger, IPulseEventHandler pulseEventHandler, IReadCanMessage readCanMessage)
+        /// <param name="inputBinaryEventHandler">The input binary event handler.</param>
+        public HandleInputs(ILogger logger, IPulseEventHandler pulseEventHandler, IReadCanMessage readCanMessage, IInputBinaryEventHandler inputBinaryEventHandler)
         {
             this.Logger = logger;
+            this.CanNodeIdToListen = 4;
             this.PulseEventHandler = pulseEventHandler;
             this.ReadCanMessage = readCanMessage;
+            this.InputBinaryEventHandler = inputBinaryEventHandler;
         }
 
         #endregion
 
         #region Properties
+
+        private uint CanNodeIdToListen { get; }
+
+        private IInputBinaryEventHandler InputBinaryEventHandler { get; }
 
         private ILogger Logger { get; }
 
@@ -76,9 +84,47 @@
                 var id = e.Id;
                 var data = e.Data.ToArray();
 
+                // die könnte man auslagern und dynamisch reinladen anhand eineer interface deklaration
+                this.HandlePulseEvent(id, data);
+                this.HandleBinaryInputState(id, data);
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                throw;
+            }
+        }
+
+        private void HandleBinaryInputState(uint id, byte[] data)
+        {
+            try
+            {
+                if (this.CanNodeIdToListen == id)
+                {
+                    var inputBinbaryArgs = new InputBinaryEventArgs();
+
+                    for (uint i = 0; i < 16; i++)
+                    {
+                        inputBinbaryArgs.Add(i, true);
+                    }
+
+                    this.InputBinaryEventHandler.OnReached(inputBinbaryArgs);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                throw;
+            }
+        }
+
+        private void HandlePulseEvent(uint id, byte[] data)
+        {
+            try
+            {
                 // todo mb das nicht jedes mal im handler machen
                 uint canPulseOffsset = 0x180;
-                uint node = 4;
+                var node = this.CanNodeIdToListen;
                 var copIdPulseMinimum = node + canPulseOffsset;
                 var copIdPulseMaximum = node + canPulseOffsset + 16;
 
