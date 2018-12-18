@@ -1,10 +1,12 @@
 ﻿namespace CPIOngConfig.Analog
 {
     using System;
+    using System.Collections.Generic;
     using System.IO.Ports;
-    using System.Text;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using System.Windows;
     using System.Windows.Input;
 
     using Global.UiHelper;
@@ -15,66 +17,208 @@
 
     public class AnalogViewModel : BindableBase, IAnalogViewModel
     {
+        private bool analogValuePolling;
+
+        private List<string> comPorts;
+
+        private string console;
+
         private string result;
 
         #region Constructor
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="AnalogViewModel" /> class.
+        /// </summary>
+        /// <param name="logegr">The logegr.</param>
         public AnalogViewModel(ILogger logegr)
         {
-            this.Logegr = logegr;
+            this.Logger = logegr;
+            this.RefreshCommand = new RelayCommand(this.RefreshCommandAction);
             this.OpenValueCommand = new RelayCommand(this.OpenValueCommandAction);
+            this.DisconnectCommand = new RelayCommand(this.DisconnectCommandAction);
+
+            this.LoadComports();
         }
 
         #endregion
 
         #region Properties
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether [analog value polling].
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if [analog value polling]; otherwise, <c>false</c>.
+        /// </value>
+        public bool AnalogValuePolling
+        {
+            get => this.analogValuePolling;
+            set
+            {
+                if (value)
+                {
+                    this.StartPollingTask();
+                }
+
+                this.SetProperty(ref this.analogValuePolling, value);
+            }
+        }
+
+        /// <summary>
+        ///     Gets or sets the COM ports.
+        /// </summary>
+        /// <value>
+        ///     The COM ports.
+        /// </value>
+        public List<string> ComPorts
+        {
+            get => this.comPorts;
+            set => this.SetProperty(ref this.comPorts, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the console.
+        /// </summary>
+        /// <value>
+        /// The console.
+        /// </value>
+        public string Console
+        {
+            get => this.result;
+            set => this.SetProperty(ref this.console, value);
+        }
+
+        /// <summary>
+        ///     Gets the disconnect command.
+        /// </summary>
+        /// <value>
+        ///     The disconnect command.
+        /// </value>
+        public ICommand DisconnectCommand { get; }
+
+        /// <summary>
+        ///     Gets the open value command.
+        /// </summary>
+        /// <value>
+        ///     The open value command.
+        /// </value>
         public ICommand OpenValueCommand { get; }
 
+        /// <summary>
+        ///     Gets the refresh command.
+        /// </summary>
+        /// <value>
+        ///     The refresh command.
+        /// </value>
+        public ICommand RefreshCommand { get; }
+
+        /// <summary>
+        ///     Gets or sets the result.
+        /// </summary>
+        /// <value>
+        ///     The result.
+        /// </value>
         public string Result
         {
             get => this.result;
             set => this.SetProperty(ref this.result, value);
         }
 
-        private ILogger Logegr { get; }
+        private ILogger Logger { get; }
 
         private SerialPort SerialPort { get; set; }
-
 
         #endregion
 
         #region Private Methods
 
-        private void OpenValueCommandAction(object obj)
+        private void LoadComports()
         {
-            this.SerialPort = new SerialPort();
-            this.SerialPort.BaudRate = 57600;
-            this.SerialPort.PortName = "COM19";
-            this.SerialPort.Close();
-            this.SerialPort.Open();
-            this.SerialPort.ReadTimeout = 200;
+            this.ComPorts = new List<string>();
+            this.ComPorts = SerialPort.GetPortNames().ToList();
+        }
+
+        private void RefreshCommandAction(object obj)
+        {
+            try
+            {
+                this.LoadComports();
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void DisconnectCommandAction(object obj)
+        {
+            try
+            {
+                this.SerialPort.Close();
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                MessageBox.Show(ex.Message);
+            }
+        }
 
 
-            
-           // this.SerialPort.WriteLine("AnaCh15\0");
-            //this.SerialPort.Write(Encoding.ASCII.GetBytes("AnaCh15\0"), 0, 8);//"AnaCh15\0"
+        static object LockSerialWrite = new object();
 
+        private void StartPollingTask()
+        {
             Task.Run(
                 () =>
                     {
-
-                        while(true)
+                        var i = 0;
+                        while (true)
                         {
-                            this.SerialPort.DiscardInBuffer();
-                            this.SerialPort.WriteLine("AnaCh15");
+                            lock (LockSerialWrite)
+                            {
+                                if (!this.SerialPort.IsOpen)
+                                {
+                                    break; // ma besten den task abbrechen und dings zurück setzen
+                                }
+
+                                this.SerialPort.DiscardInBuffer();
+
+                                if (this.AnalogValuePolling)
+                                {
+                                    this.SerialPort.WriteLine($"AnaCh{i}");
+                                }
+                            }
+                           
+
+                            var res = string.Empty;
+                            Thread.Sleep(50);
+
+                            ++i;
+
+                            if (i > 15)
+                            {
+                                i = 0;
+                            }
+                        }
+                    });
+        }
+
+
+        private void ListenTask()
+        {
+            Task.Run(
+                () =>
+                    {
+                        while (true)
+                        {
                             string res = string.Empty;
                             Thread.Sleep(50);
-                            // achtung endloss abbruch
-                            //do
-                            //{
+
                             try
                             {
+                                // todo mb: im read line muss mitgegebnen werden, was es ist
                                 res = this.SerialPort.ReadLine();
                             }
                             catch (TimeoutException ex)
@@ -82,61 +226,40 @@
                                 ; // ignore
                             }
 
-                            //}
-                            //while (string.IsNullOrEmpty(res));
+                            this.Console += res;
 
-                            this.Result = res;
+                            // todo mb: analog werte antwort aufteilen
                         }
-                      
-
-
                     });
-
-            //this.SerialPort.Close();
-
-
-            //this.Timer = new Timer(this.RequestCallback, null, 0, 100);
         }
 
 
+        private void OpenValueCommandAction(object obj)
+        {
+            try
+            {
+                var comPort = (string)obj;
 
+                if (string.IsNullOrEmpty(comPort))
+                {
+                    MessageBox.Show("Please select com port");
+                    return;
+                }
 
-
-        //private void RequestCallback(object obj)
-        //{
-        //    try
-        //    {
-
-
-
-
-        //        this.SerialPort.WriteLine("AnaCh15");
-
-        //        string res = string.Empty;
-        //        //Thread.Sleep(100);
-        //        Thread.Sleep(10);
-        //        // achtung endloss abbruch
-        //        //do
-        //        //{
-        //        try
-        //        {
-        //            res = this.SerialPort.ReadLine();
-        //        }
-        //        catch (TimeoutException ex)
-        //        {
-        //            ; // ignore
-        //        }
-
-        //        //}
-        //        //while (string.IsNullOrEmpty(res));
-
-        //        this.Result = res;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw;
-        //    }
-        //}
+                this.SerialPort = new SerialPort();
+                this.SerialPort.BaudRate = 57600;
+                this.SerialPort.PortName = comPort;
+                this.SerialPort.Close();
+                this.SerialPort.Open();
+                this.SerialPort.ReadTimeout = 200;
+                this.ListenTask();
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                MessageBox.Show(ex.Message);
+            }
+        }
 
         #endregion
     }
