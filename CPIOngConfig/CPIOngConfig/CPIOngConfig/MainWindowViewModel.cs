@@ -6,6 +6,7 @@
     using Autofac;
 
     using CPIOngConfig.ConfigInputs;
+    using CPIOngConfig.Contracts.ActiveSensor;
     using CPIOngConfig.Contracts.Adapter;
     using CPIOngConfig.Contracts.Analog;
     using CPIOngConfig.Contracts.ConfigId;
@@ -35,6 +36,8 @@
         private IPulseView pulseView;
 
         private ISelectAdapterView selectAdapterView;
+
+        private IActiveSensorView activeSensorView;
 
         #region Constructor
 
@@ -128,6 +131,18 @@
         }
 
         /// <summary>
+        /// Gets the active sensor view.
+        /// </summary>
+        /// <value>
+        /// The active sensor view.
+        /// </value>
+        public IActiveSensorView ActiveSensorView
+        {
+            get => this.activeSensorView;
+            private set => this.SetProperty(ref this.activeSensorView, value);
+        }
+
+        /// <summary>
         ///     Gets or sets the window load command.
         /// </summary>
         /// <value>
@@ -154,6 +169,7 @@
                 this.ConfigInputsAllView = this.Scope.Resolve<IConfigInputsAllView>();
                 this.AnalogView = this.Scope.Resolve<IAnalogView>();
                 this.PulseView = this.Scope.Resolve<IPulseView>();
+                this.ActiveSensorView = this.Scope.Resolve<IActiveSensorView>();
             }
             catch (Exception ex)
             {

@@ -160,3 +160,5 @@ C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\bin\Debug\MahApps.Metro.Ic
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\bin\Debug\MahApps.Metro.IconPacks.pdb
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\bin\Debug\MahApps.Metro.IconPacks.xml
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\styles\MyStyleDictionary.baml
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\ActiveSensor\ActiveSensorView.g.cs
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\ActiveSensor\ActiveSensorView.baml

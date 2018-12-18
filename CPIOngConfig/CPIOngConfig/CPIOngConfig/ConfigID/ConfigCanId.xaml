@@ -10,8 +10,10 @@
     <Grid Height="100">
         <Border BorderThickness="1" BorderBrush="Black">
             <StackPanel Orientation="Horizontal">
-                <Button MaxHeight="40" Width="80">Set new can Id</Button>
-                <controls:NumericUpDown Minimum="0" Maximum="255" Width="200" MaxHeight="50"></controls:NumericUpDown>
+                <Button MaxHeight="40" Width="80" 
+                        Command="{Binding SaveIdCommand}" 
+                        CommandParameter="{Binding ElementName=NumericUpDown,Path=Value}">Set new can Id</Button>
+                <controls:NumericUpDown Name="NumericUpDown" Minimum="0" Maximum="255" Width="200" MaxHeight="50" ></controls:NumericUpDown>
             </StackPanel>
         </Border>
     </Grid>

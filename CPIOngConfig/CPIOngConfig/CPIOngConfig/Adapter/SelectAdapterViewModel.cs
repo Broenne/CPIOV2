@@ -81,6 +81,9 @@
                         var handleInputs = this.Scope.Resolve<IHandleInputs>();
                         handleInputs.Start();
                         break;
+                    case CanAdapter.Esd:
+                        MessageBox.Show("Noch nicht implemtiert");
+                        break;
                 }
             }
             catch (Exception ex)

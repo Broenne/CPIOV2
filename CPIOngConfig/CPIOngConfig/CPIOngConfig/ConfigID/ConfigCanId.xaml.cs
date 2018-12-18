@@ -1,30 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-namespace CPIOngConfig.ConfigID
+﻿namespace CPIOngConfig.ConfigID
 {
-    using global::CPIOngConfig.Contracts.ConfigId;
+    using CPIOngConfig.Contracts.ConfigId;
 
     /// <summary>
-    /// Interaction logic for ConfigCanId.xaml
+    ///     Interaction logic for ConfigCanId.
     /// </summary>
-    public partial class ConfigCanId : UserControl, IConfigCanId
+    public partial class ConfigCanId : IConfigCanId
     {
-        public ConfigCanId()
+        #region Constructor
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ConfigCanId" /> class.
+        /// </summary>
+        /// <param name="vm">The view model.</param>
+        public ConfigCanId(IConfigCanIdViewModel vm)
         {
-            InitializeComponent();
+            this.InitializeComponent();
+            this.DataContext = vm;
         }
+
+        #endregion
     }
 }

@@ -9,21 +9,22 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <Style TargetType="Ellipse">
-                <Setter Property="Height" Value="12"></Setter>
-                <Setter Property="Width" Value="12"></Setter>
+                <Setter Property="Height" Value="18"></Setter>
+                <Setter Property="Width" Value="18"></Setter>
                 <Setter Property="Stroke" Value="Black"></Setter>
+                <Setter Property="Margin" Value="5"></Setter>
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
-            <Button Content="Get" Command="{Binding GetCommand}"></Button>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Button Width="60" Height="40" HorizontalAlignment="Left" Content="Get" Command="{Binding GetCommand}"></Button>
         </Grid>
-        <Grid  Grid.Column="1">
+        <Grid  Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -33,16 +34,11 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
-
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
             <Grid Grid.Column="0">
                 <Ellipse Fill="{Binding Input[0].Color}"></Ellipse>
             </Grid>
@@ -67,28 +63,28 @@
             <Grid Grid.Column="7">
                 <Ellipse Fill="{Binding Input[7].Color}"></Ellipse>
             </Grid>
-            <Grid Grid.Column="8">
+            <Grid Grid.Column="0" Grid.Row="1">
                 <Ellipse Fill="{Binding Input[8].Color}"></Ellipse>
             </Grid>
-            <Grid Grid.Column="9">
+            <Grid Grid.Column="1" Grid.Row="1">
                 <Ellipse Fill="{Binding Input[9].Color}"></Ellipse>
             </Grid>
-            <Grid Grid.Column="10">
+            <Grid Grid.Column="2" Grid.Row="1">
                 <Ellipse Fill="{Binding Input[10].Color}"></Ellipse>
             </Grid>
-            <Grid Grid.Column="11">
+            <Grid Grid.Column="3" Grid.Row="1">
                 <Ellipse Fill="{Binding Input[11].Color}"></Ellipse>
             </Grid>
-            <Grid Grid.Column="12">
+            <Grid Grid.Column="4" Grid.Row="1">
                 <Ellipse Fill="{Binding Input[12].Color}"></Ellipse>
             </Grid>
-            <Grid Grid.Column="13">
+            <Grid Grid.Column="5" Grid.Row="1">
                 <Ellipse Fill="{Binding Input[13].Color}"></Ellipse>
             </Grid>
-            <Grid Grid.Column="14">
+            <Grid Grid.Column="6" Grid.Row="1">
                 <Ellipse Fill="{Binding Input[14].Color}"></Ellipse>
             </Grid>
-            <Grid Grid.Column="15">
+            <Grid Grid.Column="7" Grid.Row="1">
                 <Ellipse Fill="{Binding Input[15].Color}"></Ellipse>
             </Grid>
         </Grid>

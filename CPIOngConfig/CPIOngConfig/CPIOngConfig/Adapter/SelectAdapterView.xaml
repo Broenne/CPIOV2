@@ -23,6 +23,7 @@
                 <iconPacks:PackIconMaterial Width="100" Kind="RayStartArrow" VerticalAlignment="Center" HorizontalAlignment="Center"  />
             </Button>
             <RadioButton GroupName="Adapter" Content="Peak" IsChecked="{Binding Path=SelectedAdapterType, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=PeakUsb}" />
+            <RadioButton GroupName="Adapter" Content="ESD" IsChecked="{Binding Path=SelectedAdapterType, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=Esd}" />
         </StackPanel>
     </Grid>
 </UserControl>

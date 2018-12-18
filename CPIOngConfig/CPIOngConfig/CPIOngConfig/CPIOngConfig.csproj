@@ -79,6 +79,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ActiveSensor\ActiveSensorView.xaml.cs">
+      <DependentUpon>ActiveSensorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Adapter\SelectAdapterView.xaml.cs">
       <DependentUpon>SelectAdapterView.xaml</DependentUpon>
     </Compile>
@@ -87,6 +90,7 @@
       <DependentUpon>AnalogView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Analog\AnalogViewModel.cs" />
+    <Compile Include="ConfigID\ConfigCanIdViewModel.cs" />
     <Compile Include="ConfigInputs\ConfigInputsAllView.xaml.cs">
       <DependentUpon>ConfigInputsAllView.xaml</DependentUpon>
     </Compile>
@@ -104,6 +108,10 @@
     </Compile>
     <Compile Include="Pulse\PulseViewModel.cs" />
     <Compile Include="RootDispatcherFetcher.cs" />
+    <Page Include="ActiveSensor\ActiveSensorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Adapter\SelectAdapterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -212,8 +220,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ConfigureID\" />
-    <Folder Include="InputAnalog\" />
     <Folder Include="TimeCalibration\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

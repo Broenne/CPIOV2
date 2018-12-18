@@ -14,6 +14,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/CPIOngConfig;component/styles/MyStyleDictionary.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="ContentPresenter">
+                <Setter Property="Margin" Value="5"></Setter>
+            </Style>
         </ResourceDictionary>
     </Window.Resources>
     <i:Interaction.Triggers>
@@ -23,7 +26,7 @@
     </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <ContentPresenter Grid.Row="0" Content="{Binding SelectAdapterView}"></ContentPresenter>
@@ -31,15 +34,18 @@
             <TabItem Header="General">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <ContentPresenter Grid.Row="0" Content="{Binding ConfigCanId}"></ContentPresenter>
-                    <ContentPresenter Grid.Row="1" Content="{Binding InputBinaryView}"></ContentPresenter>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <ContentPresenter Grid.Row="0" Grid.Column="0" Content="{Binding ConfigCanId}"></ContentPresenter>
+                    <ContentPresenter Grid.Row="1" Grid.Column="0" Content="{Binding InputBinaryView}"></ContentPresenter>
+                    <ContentPresenter Grid.Row="0" Grid.Column="1" Content="{Binding  ActiveSensorView}"></ContentPresenter>
+                    <ContentPresenter Grid.Row="1" Grid.Column="1" Content="{Binding ConfigInputsAllView}"></ContentPresenter>
                 </Grid>
-            </TabItem>
-            <TabItem Header="ConfigInputs" >
-                <ContentPresenter Content="{Binding ConfigInputsAllView}"></ContentPresenter>
             </TabItem>
             <TabItem Header="Analog" >
                 <ContentPresenter Content="{Binding AnalogView}"></ContentPresenter>
