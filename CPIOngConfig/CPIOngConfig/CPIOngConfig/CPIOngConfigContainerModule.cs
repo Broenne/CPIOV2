@@ -4,6 +4,8 @@
 
     using Autofac;
 
+    using CPIOngConfig.Alive;
+    using CPIOngConfig.Contracts.Alive;
     using CPIOngConfig.Contracts.InputBinary;
     using CPIOngConfig.Contracts.Pulse;
     using CPIOngConfig.InputBinary;
@@ -30,6 +32,7 @@
 
             builder.RegisterType<PulseEventHandler>().As<IPulseEventHandler>().SingleInstance();
             builder.RegisterType<InputBinaryEventHandler>().As<IInputBinaryEventHandler>().SingleInstance();
+            builder.RegisterType<AliveEventHandler>().As<IAliveEventHandler>().SingleInstance();
         }
 
         #endregion

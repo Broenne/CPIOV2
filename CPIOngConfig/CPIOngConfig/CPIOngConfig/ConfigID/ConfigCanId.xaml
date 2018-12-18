@@ -7,13 +7,16 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Height="100">
+    <Grid MaxHeight="80">
         <Border BorderThickness="1" BorderBrush="Black">
-            <StackPanel Orientation="Horizontal">
-                <Button MaxHeight="40" Width="80" 
-                        Command="{Binding SaveIdCommand}" 
-                        CommandParameter="{Binding ElementName=NumericUpDown,Path=Value}">Set new can Id</Button>
-                <controls:NumericUpDown Name="NumericUpDown" Minimum="0" Maximum="255" Width="200" MaxHeight="50" ></controls:NumericUpDown>
+            <StackPanel>
+                <Label>Set can id for node.</Label>
+                <StackPanel Orientation="Horizontal">
+                    <Button Width="80" 
+                            Command="{Binding SaveIdCommand}" 
+                            CommandParameter="{Binding ElementName=NumericUpDown,Path=Value}">Set new can Id</Button>
+                    <controls:NumericUpDown Name="NumericUpDown" Minimum="0" Maximum="255" Width="200" ></controls:NumericUpDown>
+                </StackPanel>
             </StackPanel>
         </Border>
     </Grid>

@@ -3,15 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CPIOngConfig.Alive"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Gray">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width = "100"></ColumnDefinition>
-            <ColumnDefinition Width = "100"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="0" Text="{Binding LastUpdateTime}"></TextBox>
-            <Ellipse Grid.Column="1" Fill="{Binding Color}"></Ellipse>
-    </Grid>
+    <StackPanel>
+        <Label>Alive handling</Label>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width = "140"></ColumnDefinition>
+                <ColumnDefinition Width = "40"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" Text="{Binding LastUpdateTime}" Margin="2"></TextBox>
+                <Ellipse Grid.Column="1" Fill="{Binding Color}" Margin="2" Height="25" Width="25"></Ellipse>
+        </Grid>
+    </StackPanel>
 </UserControl>

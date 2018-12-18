@@ -91,6 +91,7 @@
       <DependentUpon>AliveView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Alive\AliveViewModel.cs" />
+    <Compile Include="Alive\AliveEventHandler.cs" />
     <Compile Include="Analog\AnalogView.xaml.cs">
       <DependentUpon>AnalogView.xaml</DependentUpon>
     </Compile>

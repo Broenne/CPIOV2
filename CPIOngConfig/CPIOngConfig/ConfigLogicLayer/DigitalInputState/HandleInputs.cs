@@ -3,8 +3,10 @@
     using System;
     using System.Linq;
 
+    using ConfigLogicLayer.Contracts.ActualId;
     using ConfigLogicLayer.Contracts.DigitalInputState;
 
+    using CPIOngConfig.Contracts.Alive;
     using CPIOngConfig.Contracts.InputBinary;
     using CPIOngConfig.Contracts.Pulse;
 
@@ -21,34 +23,40 @@
         #region Constructor
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="HandleInputs" /> class.
+        /// Initializes a new instance of the <see cref="HandleInputs" /> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="pulseEventHandler">The pulse event handler.</param>
         /// <param name="readCanMessage">The read can message.</param>
         /// <param name="inputBinaryEventHandler">The input binary event handler.</param>
-        public HandleInputs(ILogger logger, IPulseEventHandler pulseEventHandler, IReadCanMessage readCanMessage, IInputBinaryEventHandler inputBinaryEventHandler)
+        /// <param name="aliveEventHandler">The alive event handler.</param>
+        /// <param name="getActualNodeId">The get actual node identifier.</param>
+        public HandleInputs(ILogger logger, IPulseEventHandler pulseEventHandler, IReadCanMessage readCanMessage, IInputBinaryEventHandler inputBinaryEventHandler, IAliveEventHandler aliveEventHandler, IGetActualNodeId getActualNodeId)
         {
             this.Logger = logger;
-            this.CanNodeIdToListen = 4;
+            
             this.PulseEventHandler = pulseEventHandler;
             this.ReadCanMessage = readCanMessage;
             this.InputBinaryEventHandler = inputBinaryEventHandler;
+            this.AliveEventHandler = aliveEventHandler;
+            this.GetActualNodeId = getActualNodeId;
         }
 
         #endregion
 
         #region Properties
-
-        private uint CanNodeIdToListen { get; }
-
+        
         private IInputBinaryEventHandler InputBinaryEventHandler { get; }
 
         private ILogger Logger { get; }
 
         private IPulseEventHandler PulseEventHandler { get; }
 
+        private IAliveEventHandler AliveEventHandler { get; }
+
         private IReadCanMessage ReadCanMessage { get; }
+
+        private IGetActualNodeId GetActualNodeId { get; }
 
         #endregion
 
@@ -86,6 +94,7 @@
                 // die könnte man auslagern und dynamisch reinladen anhand eineer interface deklaration
                 this.HandlePulseEvent(id, data);
                 this.HandleBinaryInputState(id, data);
+                this.HandleAlive(id, data);
             }
             catch (Exception ex)
             {
@@ -94,11 +103,33 @@
             }
         }
 
+        private void HandleAlive(uint id, byte[] data)
+        {
+            try
+            {
+                this.Logger.LogBegin(this.GetType());
+
+                if (id == 0x200 + this.GetActualNodeId.Get())
+                {
+                    this.AliveEventHandler.OnReached(new AliveEventArgs());
+                }
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                throw;
+            }
+            finally
+            {
+                this.Logger.LogEnd(this.GetType());
+            }
+        }
+
         private void HandleBinaryInputState(uint id, byte[] data)
         {
             try
             {
-                if (this.CanNodeIdToListen == id)
+                if (this.GetActualNodeId.Get() == id)
                 {
                     var inputBinbaryArgs = new InputBinaryEventArgs();
 
@@ -124,7 +155,7 @@
             {
                 // todo mb das nicht jedes mal im handler machen
                 uint canPulseOffsset = 0x180;
-                var node = this.CanNodeIdToListen;
+                var node = this.GetActualNodeId.Get();
                 var copIdPulseMinimum = node + canPulseOffsset;
                 var copIdPulseMaximum = node + canPulseOffsset + 16;
 
