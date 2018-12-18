@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Windows.Input;
-
-namespace CPIOngConfig.InputBinary
+﻿namespace CPIOngConfig.Contracts.InputBinary
 {
+    /// <summary>
+    ///     The input binary view model.
+    /// </summary>
     public interface IInputBinaryViewModel
     {
-        ICommand GetCommand { get; }
-        List<InOutState> Input { get; set; }
     }
 }

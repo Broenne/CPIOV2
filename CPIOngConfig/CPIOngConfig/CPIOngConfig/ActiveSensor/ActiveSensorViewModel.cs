@@ -4,7 +4,10 @@
     using System.Windows;
     using System.Windows.Input;
 
+    using ConfigLogicLayer.Contracts.DigitalInputState;
+
     using CPIOngConfig.Contracts.ActiveSensor;
+    using CPIOngConfig.Contracts.ConfigInputs;
 
     using Global.UiHelper;
 
@@ -22,12 +25,14 @@
         #region Constructor
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ActiveSensorViewModel" /> class.
+        /// Initializes a new instance of the <see cref="ActiveSensorViewModel" /> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
-        public ActiveSensorViewModel(ILogger logger)
+        /// <param name="setActiveSensorToDetect">The set active sensor to detect.</param>
+        public ActiveSensorViewModel(ILogger logger, ISetActiveSensorToDetect setActiveSensorToDetect)
         {
             this.Logger = logger;
+            this.SetActiveSensorToDetect = setActiveSensorToDetect;
             this.SetSensorCommand = new RelayCommand(this.SetSensorCommandAction);
         }
 
@@ -45,6 +50,8 @@
 
         private ILogger Logger { get; }
 
+        private ISetActiveSensorToDetect SetActiveSensorToDetect { get; }
+
         #endregion
 
         #region Private Methods
@@ -54,6 +61,9 @@
             try
             {
                 this.Logger.LogBegin(this.GetType());
+
+                Modi modi = (Modi)obj;
+                this.SetActiveSensorToDetect.Do(modi);
             }
             catch (Exception ex)
             {

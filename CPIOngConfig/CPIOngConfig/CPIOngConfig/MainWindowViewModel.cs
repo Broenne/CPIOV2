@@ -8,6 +8,7 @@
     using CPIOngConfig.ConfigInputs;
     using CPIOngConfig.Contracts.ActiveSensor;
     using CPIOngConfig.Contracts.Adapter;
+    using CPIOngConfig.Contracts.Alive;
     using CPIOngConfig.Contracts.Analog;
     using CPIOngConfig.Contracts.ConfigId;
     using CPIOngConfig.InputBinary;
@@ -38,6 +39,8 @@
         private ISelectAdapterView selectAdapterView;
 
         private IActiveSensorView activeSensorView;
+
+        private IAliveView aliveView;
 
         #region Constructor
 
@@ -143,6 +146,18 @@
         }
 
         /// <summary>
+        /// Gets the alive view.
+        /// </summary>
+        /// <value>
+        /// The alive view.
+        /// </value>
+        public IAliveView AliveView
+        {
+            get => this.aliveView;
+            private set => this.SetProperty(ref this.aliveView, value);
+        }
+
+        /// <summary>
         ///     Gets or sets the window load command.
         /// </summary>
         /// <value>
@@ -170,6 +185,7 @@
                 this.AnalogView = this.Scope.Resolve<IAnalogView>();
                 this.PulseView = this.Scope.Resolve<IPulseView>();
                 this.ActiveSensorView = this.Scope.Resolve<IActiveSensorView>();
+                this.AliveView = this.Scope.Resolve<IAliveView>();
             }
             catch (Exception ex)
             {

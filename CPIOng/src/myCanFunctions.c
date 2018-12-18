@@ -7,8 +7,6 @@
 
 #include "myCanFunctions.h"
 
-extern fn_ptr;
-
 static uint8_t globalCanId = 2;
 
 #define QUEUE_SIZE_FOR_CAN		( ( unsigned short ) 32 )
@@ -76,10 +74,10 @@ void CanWorkerTask(void * pvParameters) {
 						GetInputs(&data);
 						SendCan(GetGlobalCanNodeId(), data, 8); // ab in ide ander queu un einfach weg
 					}
+				}
 
-					if (SET_TIMER_CALIBRATION_CMD == hcan->pRxMsg->Data[0]) {
-						SetTimerPulseCorrecturFactor(0); // todo mb: datnfed in int 16 wandeln
-					}
+				if((GetGlobalCanNodeId() + 512) == hcan->pRxMsg->StdId){
+					// set impuls eingänge
 				}
 			}
 		}

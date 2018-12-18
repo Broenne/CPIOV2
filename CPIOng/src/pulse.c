@@ -25,22 +25,6 @@ uint32_t SubPriorityPulseTimer = 0;
 
 osThreadId myTask03Handle;
 
-static uint32_t TimerCorrectureFactor = 0;
-
-void InitTimerPulseCorrecturFactor() {
-	TimerCorrectureFactor = 0; // todo mb: load from eeprom
-}
-
-void SetTimerPulseCorrecturFactor(uint16_t value) {
-	// Info, hier nur int 16 erlaubt, korrektur sonst viel zu groﬂ. Sollen wir den Bereich noch einschr‰nken?
-	TimerCorrectureFactor = (uint16_t) value;
-	Reset();
-}
-
-uint32_t GetTimerPulseCorrecturFactor() {
-	return TimerCorrectureFactor;
-}
-
 /*
  * Created on: 30.11.18
  * Author: MB
@@ -52,15 +36,14 @@ void Init_TimerForPulsTime(void) {
 
 	// calculate:
 	// f / fclock / Perios*(Pre+1))
-	InitTimerPulseCorrecturFactor();
 
 	__HAL_RCC_TIM3_CLK_ENABLE()
 	;
 	pulseTimerInstance.Instance = TIM3;
 	pulseTimerInstance.Init.CounterMode = TIM_COUNTERMODE_UP;
 
-	pulseTimerInstance.Init.Prescaler = 8;	//9;
-	pulseTimerInstance.Init.Period = 800;	//801;// + GetTimerPulseCorrecturFactor();
+	pulseTimerInstance.Init.Prescaler = 8;
+	pulseTimerInstance.Init.Period = 800;
 
 	pulseTimerInstance.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
 	pulseTimerInstance.Init.RepetitionCounter = 0;

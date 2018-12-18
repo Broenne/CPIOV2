@@ -21,7 +21,7 @@
     /// The input binary view.
     /// </summary>
     /// <seealso cref="Prism.Mvvm.BindableBase" />
-    /// <seealso cref="CPIOngConfig.InputBinary.IInputBinaryViewModel" />
+    /// <seealso cref="IInputBinaryViewModel" />
     public class InputBinaryViewModel : BindableBase, IInputBinaryViewModel
     {
         private readonly SolidColorBrush gray;

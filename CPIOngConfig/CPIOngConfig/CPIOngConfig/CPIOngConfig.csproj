@@ -82,10 +82,15 @@
     <Compile Include="ActiveSensor\ActiveSensorView.xaml.cs">
       <DependentUpon>ActiveSensorView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ActiveSensor\ActiveSensorViewModel.cs" />
     <Compile Include="Adapter\SelectAdapterView.xaml.cs">
       <DependentUpon>SelectAdapterView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Adapter\SelectAdapterViewModel.cs" />
+    <Compile Include="Alive\AliveView.xaml.cs">
+      <DependentUpon>AliveView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Alive\AliveViewModel.cs" />
     <Compile Include="Analog\AnalogView.xaml.cs">
       <DependentUpon>AnalogView.xaml</DependentUpon>
     </Compile>
@@ -113,6 +118,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Adapter\SelectAdapterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Alive\AliveView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
