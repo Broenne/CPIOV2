@@ -7,24 +7,25 @@
 
 #include "helper.h"
 
-//void delay_us(unsigned int d) {
-//	unsigned int count = d * COUNTS_PER_MICROSECOND - 2;
-//	__asm volatile(" mov r0, %[count]  \n\t"
-//			"1: subs r0, #1            \n\t"
-//			"   bhi 1b                 \n\t"
-//			:
-//			: [count] "r" (count)
-//			: "r0");
-//
-//}
-//
-////--------------------------------------------
-//// for 168 MHz @ Optimization-Level -OS
-////--------------------------------------------
-//void delay_ms(unsigned int d) {
-//	while (d--)
-//		delay_us(999);
-//}
+extern UART_HandleTypeDef huart1;
+
+void myPrintf(char* resString){
+
+	// länger ermitteln, maximal 200 zeichen. string endet mit /n
+	char* remberCharAddress = resString;
+	int size=0;
+	for(size=0;size<200;++size){
+		if((*resString) == '\n'){
+			break;
+		}
+
+		++(resString);
+	}
+
+	resString = remberCharAddress;
+
+	HAL_UART_Transmit(&huart1, (uint8_t*) resString, size, 100);
+}
 
 volatile static int printMode = 1; // todo mb: während der entwicklung an
 /*

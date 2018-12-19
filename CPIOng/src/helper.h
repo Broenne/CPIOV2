@@ -10,11 +10,8 @@
 
 #include "include.h"
 
-//#define COUNTS_PER_MICROSECOND 12 //für die 12 MHz STM32F1
-//
-//void delay_ms(unsigned int d);
-//void delay_us(unsigned int d);
 void ActivateDebug(uint activate);
 void Reset(void);
+void myPrintf(char* resString);
 
 #endif /* HELPER_H_ */

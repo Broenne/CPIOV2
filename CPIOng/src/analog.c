@@ -10,10 +10,12 @@
 extern UART_HandleTypeDef huart1;
 
 static osThreadId uartTaskHandle;
-;
+
 uint8_t text;
 
 #define ANA_CHANNEL_COMMAND "AnaCh"
+
+
 
 
 
@@ -32,10 +34,7 @@ void SendAnalogValue(char* data, int len) {
 			int res = ReadChannelAnalog((uint)i);
 			sprintf(resString, "Ana%i:%d\r\n",i , res);
 
-			HAL_UART_Transmit(&huart1, (uint8_t*) &resString, 8, 100);
-			// vTaskDelay(20);
-			//printf(resString);
-			//printf("hallo123 \r\n");
+			myPrintf(resString);
 			break;
 		}
 	}
