@@ -8,6 +8,11 @@
 #ifndef INCLUDE_H_
 #define INCLUDE_H_
 
+
+#define CHANNEL_COUNT 					( ( unsigned short ) 16 )
+
+
+
 #include "main.h"
 //#include "stm32f1xx_hal_gpio.h"
 #include "stm32f1xx_hal.h"
@@ -21,13 +26,14 @@
 #include "eeprom/eepromConfig.h"
 
 #include "helper.h"
+#include "pulseConfig.h"
+#include "pulse.h"
 #include "storages.h"
 #include "error.h"
 #include "IO.h"
 #include "alive.h"
 #include "can.h"
 #include "myCanFunctions.h"
-#include "pulse.h"
 #include "usart/usart.h"
 #include "analog.h"
 

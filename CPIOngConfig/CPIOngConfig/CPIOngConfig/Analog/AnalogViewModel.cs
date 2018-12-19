@@ -15,6 +15,11 @@
 
     using Prism.Mvvm;
 
+    /// <summary>
+    /// The service for analog view model.
+    /// </summary>
+    /// <seealso cref="Prism.Mvvm.BindableBase" />
+    /// <seealso cref="CPIOngConfig.Analog.IAnalogViewModel" />
     public class AnalogViewModel : BindableBase, IAnalogViewModel
     {
         private bool analogValuePolling;
@@ -22,17 +27,17 @@
         private List<string> comPorts;
 
         private string console;
-
-        private string result;
-
+        
         #region Constructor
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="AnalogViewModel" /> class.
         /// </summary>
-        /// <param name="logegr">The logegr.</param>
+        /// <param name="logegr">The logger.</param>
         public AnalogViewModel(ILogger logegr)
         {
+            // todo mb: das ganze ding umbennen
+
             this.Logger = logegr;
             this.RefreshCommand = new RelayCommand(this.RefreshCommandAction);
             this.OpenValueCommand = new RelayCommand(this.OpenValueCommandAction);
@@ -112,19 +117,7 @@
         ///     The refresh command.
         /// </value>
         public ICommand RefreshCommand { get; }
-
-        /// <summary>
-        ///     Gets or sets the result.
-        /// </summary>
-        /// <value>
-        ///     The result.
-        /// </value>
-        public string Result
-        {
-            get => this.result;
-            set => this.SetProperty(ref this.result, value);
-        }
-
+        
         private ILogger Logger { get; }
 
         private SerialPort SerialPort { get; set; }

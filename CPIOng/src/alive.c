@@ -41,7 +41,7 @@ void SanCanAlive(void) {
 
 	// es muss sicher gestellt sein, das der worker tak schon läuft
 	if (xQueueSendFromISR(CanQueueSenderHandle, &hcan, 0) != pdTRUE) {
-			// printf("allive error \r\n");
+		SetSendAliveError();
 	}
 }
 

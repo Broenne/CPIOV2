@@ -14,7 +14,7 @@ static uint8_t globalCanId = 2;
 //extern CAN_HandleTypeDef hcan2;
 osThreadId canInputTaskHandle;
 
-xQueueHandle CanQueueHandle = NULL;
+xQueueHandle CanRxQueueHandle = NULL;
 xQueueHandle CanQueueSenderHandle = NULL;
 
 
@@ -47,7 +47,7 @@ void CanWorkerTask(void * pvParameters) {
 		hcan->pRxMsg = &RxMessage;
 
 		// mepfänger
-		if (xQueueReceive(CanQueueHandle, hcan, 100) == pdTRUE) {
+		if (xQueueReceive(CanRxQueueHandle, hcan, 10) == pdTRUE) {
 			if (hcan->Instance == CAN2) {
 
 				// default id 0
@@ -77,15 +77,16 @@ void CanWorkerTask(void * pvParameters) {
 				}
 
 				if((GetGlobalCanNodeId() + 512) == hcan->pRxMsg->StdId){
-					// set impuls eingänge
+					ChannelModiType channelModiType = (ChannelModiType)hcan->pRxMsg->Data[0];
+					SetActiveChannelModiType(channelModiType);
 				}
 			}
 		}
 
-		// zum senden
-		if (xQueueReceive(CanQueueSenderHandle, hcan, 100) == pdTRUE) {
-			SendCan(hcan->pTxMsg->StdId, hcan->pTxMsg->Data, 8);
-		}
+//		// zum senden
+//		if (xQueueReceive(CanQueueSenderHandle, hcan, 100) == pdTRUE) {
+//			SendCan(hcan->pTxMsg->StdId, hcan->pTxMsg->Data, 8);
+//		}
 	}
 
 	printf("Sender task error \r\n");
@@ -99,7 +100,8 @@ void CanWorkerTask(void * pvParameters) {
  * */
 void InitCanInputTask(void) {
 
-	CanQueueHandle = xQueueCreate(QUEUE_SIZE_FOR_CAN, sizeof(CAN_HandleTypeDef));
+	CanRxQueueHandle = xQueueCreate(QUEUE_SIZE_FOR_CAN, sizeof(CAN_HandleTypeDef));
+
 	CanQueueSenderHandle = xQueueCreate(6, sizeof(CAN_HandleTypeDef));
 
 	osThreadDef(canInputTask, CanWorkerTask, osPriorityNormal, 0, 256);

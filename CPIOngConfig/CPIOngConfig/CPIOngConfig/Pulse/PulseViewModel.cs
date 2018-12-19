@@ -34,6 +34,7 @@
             this.Logger = logger;
             this.PulseDataForViewList = new List<PulseDataForView>();
 
+            // todo mb: parallel for
             for (var i = 0; i < 16; i++)
             {
                 var pulseDataForView = new PulseDataForView($"{i}", 100);

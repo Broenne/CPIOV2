@@ -9,6 +9,12 @@
 
 extern UART_HandleTypeDef huart1;
 
+/*
+ *  Created on: 29.11.2018
+ *      Author: MB
+ *      Funktion zum schreiben auf die UART console.
+ *      Printf überschreiben führt zu Problemne, daher diese Funktion nutzen
+ */
 void myPrintf(char* resString){
 
 	// länger ermitteln, maximal 200 zeichen. string endet mit /n
@@ -48,8 +54,8 @@ int _write(int file, char *ptr, int len) {
 	if (GetDebugStatusInfo()) {
 		int i = 0;
 		for (i = 0; i < len; i++)
-		//	ITM_SendChar((*ptr++));
-		__io_putchar((*ptr++));
+		ITM_SendChar((*ptr++));
+		//__io_putchar((*ptr++));
 		return len;
 	}
 
@@ -57,7 +63,7 @@ int _write(int file, char *ptr, int len) {
 }
 
 void Reset(void) {
-	printf("Reboot...\n");
+	myPrintf("Reboot...\r\n");
 
 	vTaskDelay(100);
 	NVIC_SystemReset();

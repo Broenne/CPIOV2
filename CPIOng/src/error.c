@@ -39,33 +39,37 @@ void SetErrorFlag(int pos){
  * */
 void SetCounterError(void){
 	// todo mb: Fehler merken KEIN!!!!!! printf nutzen. Eigene Funktion myprinft (noch zu schreiben)
-	printf("ERROR die Infos können nicht mehr weggeschickt werden \r\n");
+	myPrintf("ERROR die Infos können nicht mehr weggeschickt werden \r\n");
 	SetErrorFlag(COUNTER_ERROR_POSITION);
 	// Reset();
 }
 
 void SetApplicationEndError(void){
-	printf("This should never reached! \r\n");
+	myPrintf("This should never reached! \r\n");
 	SetErrorFlag(APPLICATION_END_ERROR);
 }
 
 void SetCouldNotSafeGlobalCanIdError(){
-	printf("Could not write eeprom \r\n");
+	myPrintf("Could not write eeprom \r\n");
 	SetErrorFlag(Could_NOT_SAFE_GLOBAL_CAN_ID_ERROR);
 }
 
 void SetCouldNotReadGlobalCanIdError(void){
-	printf("Variable can id in eeprom not found \n");
+	myPrintf("Variable can id in eeprom not found \n");
 }
 
 void SetPossiblePulseSendQueueFullError(void){
-	printf("Error in pulse queue send. Possible overflow. \r\n");
+	myPrintf("Error in pulse queue send. Possible overflow. \r\n");
 }
 
 void SetPulseSenderCreateTaskError(void){
-	printf("Error in create task for send can pulse information. \r\n");
+	myPrintf("Error in create task for send can pulse information. \r\n");
 }
 
 void SetCanSendError(void){
-	printf("Error in can send \r\n");
+	myPrintf("Error in can send \r\n");
+}
+
+void SetSendAliveError(void){
+	myPrintf("Set send alive error. \r\n");
 }

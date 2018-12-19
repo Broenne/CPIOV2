@@ -19,11 +19,15 @@ void GetApplicationStatus(uint8_t*);
 
 void SetCounterError(void);
 void SetApplicationEndError(void);
+
 void SetCouldNotSafeGlobalCanIdError(void);
 void SetCouldNotReadGlobalCanIdError(void);
+
 void SetPossiblePulseSendQueueFullError(void);
 void SetPulseSenderCreateTaskError(void);
+
 void SetCanSendError(void);
+void SetSendAliveError(void);
 
 
 #endif /* ERROR_H_ */

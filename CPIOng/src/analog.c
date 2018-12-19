@@ -15,11 +15,6 @@ uint8_t text;
 
 #define ANA_CHANNEL_COMMAND "AnaCh"
 
-
-
-
-
-
 void SendAnalogValue(char* data, int len) {
 
 	for (int i = 15; 0 != i; --i) {
@@ -31,8 +26,8 @@ void SendAnalogValue(char* data, int len) {
 
 		char resString[20];
 		if (0 == strncmp(data, cmp, len)) {
-			int res = ReadChannelAnalog((uint)i);
-			sprintf(resString, "Ana%i:%d\r\n",i , res);
+			int res = ReadChannelAnalog((uint) i);
+			sprintf(resString, "Ana%i:%d\r\n", i, res);
 
 			myPrintf(resString);
 			break;

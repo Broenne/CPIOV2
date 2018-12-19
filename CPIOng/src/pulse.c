@@ -8,7 +8,7 @@
 #include "pulse.h"
 
 #define QUEUE_SIZE_FOR_PULSE_INFO		( ( unsigned short ) 80 ) // 16 * 5
-#define CHANNEL_COUNT 					( ( unsigned short ) 16 )
+
 
 typedef struct {
 	uint8_t channel;
@@ -66,44 +66,7 @@ void InitQueueForPulse(void) {
 }
 
 
-static ChannelModi ChannelModiStorage[CHANNEL_COUNT];
 
-
-static ChannelModiType ActivatedChannelModi = Licht;
-void SetActiveChannelModiType(ChannelModiType val){
-	ActivatedChannelModi = val;
-	// ins eeprom speichern, wenn egändert
-}
-
-ChannelModiType GetActiveChannelModiType(void){
-	// todo mb: aus eeprom laden bei initialisierung?
-	return ActivatedChannelModi;
-}
-
-void ChangeChannelModi(uint8_t channel, ChannelModiType channelModiType){
-	ChannelModiStorage[channel].channelModiType = channelModiType; // todo mb: das ist scheiße. hier kommt die Gefahr das man was durcheinader wirft
-}
-
-void InitChannelModi(void){
-	// todo mb: von außen initialisieren und in eeprom abspeichern
-		// der channel wird extra abgespeichert und nicht über die Position im Array behandelt. Überscihtlicher!
-		ChannelModiStorage[0].channelModiType = None;
-		ChannelModiStorage[1].channelModiType = None;
-		ChannelModiStorage[2].channelModiType = None;
-		ChannelModiStorage[3].channelModiType = None;
-		ChannelModiStorage[4].channelModiType = None;
-		ChannelModiStorage[5].channelModiType = None;
-		ChannelModiStorage[6].channelModiType = None;
-		ChannelModiStorage[7].channelModiType = None;
-		ChannelModiStorage[8].channelModiType = None;
-		ChannelModiStorage[9].channelModiType = None;
-		ChannelModiStorage[10].channelModiType = None;
-		ChannelModiStorage[11].channelModiType = None;
-		ChannelModiStorage[12].channelModiType = None;
-		ChannelModiStorage[13].channelModiType = Licht;
-		ChannelModiStorage[14].channelModiType = None;
-		ChannelModiStorage[15].channelModiType = Licht;
-}
 
 void InitPulse(void) {
 	InitQueueForPulse();
@@ -131,7 +94,8 @@ void SendPulsePerCanTask(void * pvParameters) {
 
 				// voraussetzung, channel muss dem eingang entsprechen!!
 				static ChannelModiType channelModi;
-				channelModi = ChannelModiStorage[i].channelModiType;
+				//channelModi = ChannelModiStorage[i].channelModiType;
+				channelModi = GetChannelModiByChannel(i);
 
 				if(i == currentMessage.channel && channelModi == GetActiveChannelModiType()){
 					SendCanTimeDif(currentMessage.channel, currentMessage.res);

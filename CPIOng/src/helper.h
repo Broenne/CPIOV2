@@ -2,7 +2,7 @@
  * helper.h
  *
  *  Created on: 29.11.2018
- *      Author: tbe241
+ *      Author: MB
  */
 
 #ifndef HELPER_H_

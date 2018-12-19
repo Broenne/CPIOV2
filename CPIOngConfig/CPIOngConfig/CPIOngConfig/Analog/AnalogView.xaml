@@ -32,11 +32,7 @@
                 <CheckBox IsChecked="{Binding AnalogValuePolling}">Activate analog polling</CheckBox>
             </StackPanel>
             <StackPanel>
-                <Label>Analog-Werte</Label>
-                <TextBox Text="{Binding Result}"></TextBox>
-            </StackPanel>
-            <StackPanel>
-                <TextBox Height="450" Text="{Binding Console}"></TextBox>
+                <TextBox Height="450" Text="{Binding Console}" VerticalScrollBarVisibility="Auto" ></TextBox>
             </StackPanel>
         </StackPanel>
     </Grid>

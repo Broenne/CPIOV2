@@ -8,7 +8,7 @@
 #include "can.h"
 
 extern CAN_HandleTypeDef hcan2;
-extern xQueueHandle CanQueueHandle;
+extern xQueueHandle CanRxQueueHandle;
 
 /*
  * Created on: 30.11.18
@@ -50,8 +50,17 @@ void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* hcan) {
 
 	portDISABLE_INTERRUPTS();
 
-	if (xQueueSendFromISR(CanQueueHandle, hcan, 0) != pdTRUE) {
+	BaseType_t xHigherPriorityTaskWoken;
+	/* We have not woken a task at the start of the ISR. */
+	xHigherPriorityTaskWoken = pdFALSE;
+
+	printf("id:%d  d1:%d  d2:%d   d3:%d \r\n", hcan->pRxMsg->StdId, hcan->pRxMsg->Data[0], hcan->pRxMsg->Data[1], hcan->pRxMsg->Data[2]);
+	if (xQueueSendFromISR(CanRxQueueHandle, hcan, xHigherPriorityTaskWoken) != pdTRUE) {
 		SetPossiblePulseSendQueueFullError();
+	}
+
+	if (xHigherPriorityTaskWoken) {
+		printf("was nun?");
 	}
 
 	__HAL_CAN_ENABLE_IT(&hcan2, CAN_IT_EWG | CAN_IT_EPV | CAN_IT_BOF | CAN_IT_LEC | CAN_IT_ERR | CAN_IT_TME);

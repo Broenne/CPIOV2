@@ -61,7 +61,7 @@
 
                     this.WriteBasicCan.WriteCan(0x00, data);
 
-                    Thread.Sleep(10);
+                    Thread.Sleep(50);
                 }
             }
             catch (Exception ex)

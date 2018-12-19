@@ -36,8 +36,7 @@
         /// <param name="logger">The logger.</param>
         /// <param name="inputBinaryEventHandler">The input binary event handler.</param>
         /// <param name="stimulate">The stimulate.</param>
-        /// <param name="handleInputs">The handle inputs.</param>
-        public InputBinaryViewModel(ILogger logger, IInputBinaryEventHandler inputBinaryEventHandler, IStimulate stimulate, IHandleInputs handleInputs)
+        public InputBinaryViewModel(ILogger logger, IInputBinaryEventHandler inputBinaryEventHandler, IStimulate stimulate)
         {
             this.Logger = logger;
             this.Stimulate = stimulate;
@@ -53,7 +52,6 @@
             }
 
             inputBinaryEventHandler.EventIsReached += this.InputBinaryEventHandler_EventIsReached;
-            handleInputs.Start();
         }
 
         #endregion
