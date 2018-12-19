@@ -8,6 +8,9 @@ using System.Windows;
 
 namespace CPIOngConfig
 {
+    using System.Globalization;
+    using System.Threading;
+
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
@@ -32,7 +35,8 @@ namespace CPIOngConfig
         {
             try
             {
-                // Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+                Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
                 this.ConfigBootstrapper = new ConfigBootstrapper();
                 this.ConfigBootstrapper.Run();
                 

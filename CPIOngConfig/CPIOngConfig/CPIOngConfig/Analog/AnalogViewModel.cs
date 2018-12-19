@@ -85,7 +85,7 @@
         /// </value>
         public string Console
         {
-            get => this.result;
+            get => this.console;
             set => this.SetProperty(ref this.console, value);
         }
 
@@ -216,17 +216,20 @@
                             string res = string.Empty;
                             Thread.Sleep(50);
 
-                            try
+                            lock (LockSerialWrite)
                             {
-                                // todo mb: im read line muss mitgegebnen werden, was es ist
-                                res = this.SerialPort.ReadLine();
-                            }
-                            catch (TimeoutException ex)
-                            {
-                                ; // ignore
-                            }
+                                try
+                                {
+                                    // todo mb: im read line muss mitgegebnen werden, was es ist
+                                    res = this.SerialPort.ReadExisting();//.ReadLine();
+                                }
+                                catch (TimeoutException ex)
+                                {
+                                    ; // ignore
+                                }
 
-                            this.Console += res;
+                                this.Console += res;
+                            }
 
                             // todo mb: analog werte antwort aufteilen
                         }
