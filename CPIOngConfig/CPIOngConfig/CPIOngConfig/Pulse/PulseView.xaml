@@ -11,6 +11,9 @@
                BasedOn="{StaticResource {x:Type ListBoxItem}}">
             <Setter Property="local:ListBoxItemBehavior.IsBroughtIntoViewWhenSelected" Value="true"/>
         </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="FontSize" Value="8"/>
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>

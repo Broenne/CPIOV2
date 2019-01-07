@@ -22,6 +22,8 @@
     /// <seealso cref="CPIOngConfig.Contracts.Pulse.IPulseStorageViewModel" />
     public class PulseStorageViewModel : BindableBase, IPulseStorageViewModel
     {
+        private readonly List<string> storageList = new List<string>();
+
         private string selectedFile;
 
         #region Constructor
@@ -45,6 +47,12 @@
 
         #region Properties
 
+        /// <summary>
+        ///     Gets or sets the selected file.
+        /// </summary>
+        /// <value>
+        ///     The selected file.
+        /// </value>
         public string SelectedFile
         {
             get => this.selectedFile;
@@ -52,26 +60,26 @@
         }
 
         /// <summary>
-        /// Gets or sets the select file command.
+        ///     Gets or sets the select file command.
         /// </summary>
         /// <value>
-        /// The select file command.
+        ///     The select file command.
         /// </value>
         public ICommand SelectFileCommand { get; set; }
 
         /// <summary>
-        /// Gets or sets the start command.
+        ///     Gets or sets the start command.
         /// </summary>
         /// <value>
-        /// The start command.
+        ///     The start command.
         /// </value>
         public ICommand StartCommand { get; set; }
 
         /// <summary>
-        /// Gets or sets the stop command.
+        ///     Gets or sets the stop command.
         /// </summary>
         /// <value>
-        /// The stop command.
+        ///     The stop command.
         /// </value>
         public ICommand StopCommand { get; set; }
 
@@ -82,7 +90,6 @@
         #endregion
 
         #region Private Methods
-
 
         private void StartCommandAction(object obj)
         {
@@ -95,7 +102,7 @@
                         this.PulseEventHandler.EventIsReached += this.PulseEventHandler_EventIsReached;
                     }
 
-                    for (int i = 0; i < 16; i++)
+                    for (var i = 0; i < 16; i++)
                     {
                         this.storageList.Add(string.Empty);
                     }
@@ -111,9 +118,6 @@
                 MessageBox.Show(ex.Message);
             }
         }
-
-
-        private List<string> storageList = new List<string>();
 
         private void PulseEventHandler_EventIsReached(object sender, PulseEventArgs e)
         {
@@ -137,12 +141,12 @@
                     this.PulseEventHandler.EventIsReached -= this.PulseEventHandler_EventIsReached;
 
                     // todo mb: das könnte man auch zwichendurch machen
-                    StreamWriter file = new System.IO.StreamWriter(this.SelectedFile);
-                    foreach (string line in this.storageList)
+                    var file = new StreamWriter(this.SelectedFile);
+                    foreach (var line in this.storageList)
                     {
                         file.WriteLine(line);
                     }
-                        
+
                     file.Close();
                 }
             }
