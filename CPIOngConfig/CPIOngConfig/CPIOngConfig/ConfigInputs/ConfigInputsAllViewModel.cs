@@ -9,6 +9,7 @@
 
     using ConfigLogicLayer.Contracts.Configurations;
 
+    using CPIOngConfig.Contracts.Adapter;
     using CPIOngConfig.Contracts.ConfigInputs;
 
     using Helper;
@@ -25,18 +26,22 @@
     {
         private List<IConfigureInputsView> configureInputsViewList;
 
+        private bool isEnabled;
+
         #region Constructor
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ConfigInputsAllViewModel" /> class.
+        /// Initializes a new instance of the <see cref="ConfigInputsAllViewModel" /> class.
         /// </summary>
         /// <param name="scope">The scope.</param>
         /// <param name="logger">The logger.</param>
         /// <param name="channelConfiguration">The channel configuration.</param>
-        public ConfigInputsAllViewModel(ILifetimeScope scope, ILogger logger, IChannelConfiguration channelConfiguration)
+        /// <param name="canIsConnectedEventHandler">The can is connected event handler.</param>
+        public ConfigInputsAllViewModel(ILifetimeScope scope, ILogger logger, IChannelConfiguration channelConfiguration, ICanIsConnectedEventHandler canIsConnectedEventHandler)
         {
             this.Logger = logger;
             this.ChannelConfiguration = channelConfiguration;
+            canIsConnectedEventHandler.EventIsReached += this.CanIsConnectedEventHandler_EventIsReached;
             this.ConfigureInputsViewList = new List<IConfigureInputsView>();
 
             for (uint i = 0; i < 16; i++)
@@ -56,10 +61,10 @@
         #region Properties
 
         /// <summary>
-        /// Gets or sets the configure inputs view list.
+        ///     Gets or sets the configure inputs view list.
         /// </summary>
         /// <value>
-        /// The configure inputs view list.
+        ///     The configure inputs view list.
         /// </value>
         public List<IConfigureInputsView> ConfigureInputsViewList
         {
@@ -67,20 +72,33 @@
 
             set => this.SetProperty(ref this.configureInputsViewList, value);
         }
-
+        
         /// <summary>
-        /// Gets the save command.
+        /// Gets or sets a value indicating whether this instance is enabled.
         /// </summary>
         /// <value>
-        /// The save command.
+        ///   <c>true</c>If this instance is enabled; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsEnabled
+        {
+            get => this.isEnabled;
+
+            set => this.SetProperty(ref this.isEnabled, value);
+        }
+
+        /// <summary>
+        ///     Gets the save command.
+        /// </summary>
+        /// <value>
+        ///     The save command.
         /// </value>
         public ICommand SaveCommand { get; }
 
         /// <summary>
-        /// Gets the window load command.
+        ///     Gets the window load command.
         /// </summary>
         /// <value>
-        /// The window load command.
+        ///     The window load command.
         /// </value>
         public ICommand WindowLoadCommand { get; }
 
@@ -91,6 +109,25 @@
         #endregion
 
         #region Private Methods
+
+        private void CanIsConnectedEventHandler_EventIsReached(object sender, bool e)
+        {
+            try
+            {
+                this.Logger.LogBegin(this.GetType());
+
+                this.IsEnabled = e;
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                this.Logger.LogEnd(this.GetType());
+            }
+        }
 
         private void WindowLoadCommandAction(object obj)
         {

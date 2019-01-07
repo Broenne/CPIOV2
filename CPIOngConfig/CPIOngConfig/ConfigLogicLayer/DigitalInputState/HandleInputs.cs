@@ -7,6 +7,7 @@
     using ConfigLogicLayer.Contracts.Configurations;
     using ConfigLogicLayer.Contracts.DigitalInputState;
 
+    using CPIOngConfig.Contracts.Adapter;
     using CPIOngConfig.Contracts.Alive;
     using CPIOngConfig.Contracts.InputBinary;
     using CPIOngConfig.Contracts.Pulse;
@@ -33,7 +34,8 @@
         /// <param name="aliveEventHandler">The alive event handler.</param>
         /// <param name="getActualNodeId">The get actual node identifier.</param>
         /// <param name="channelConfigurationResponseEventHandler">The channel configuration response event handler.</param>
-        public HandleInputs(ILogger logger, IPulseEventHandler pulseEventHandler, IReadCanMessage readCanMessage, IInputBinaryEventHandler inputBinaryEventHandler, IAliveEventHandler aliveEventHandler, IGetActualNodeId getActualNodeId, IChannelConfigurationResponseEventHandler channelConfigurationResponseEventHandler)
+        /// <param name="canIsConnectedEventHandler">The can is connected event handler.</param>
+        public HandleInputs(ILogger logger, IPulseEventHandler pulseEventHandler, IReadCanMessage readCanMessage, IInputBinaryEventHandler inputBinaryEventHandler, IAliveEventHandler aliveEventHandler, IGetActualNodeId getActualNodeId, IChannelConfigurationResponseEventHandler channelConfigurationResponseEventHandler, ICanIsConnectedEventHandler canIsConnectedEventHandler)
         {
             this.Logger = logger;
 
@@ -43,6 +45,7 @@
             this.AliveEventHandler = aliveEventHandler;
             this.GetActualNodeId = getActualNodeId;
             this.ChannelConfigurationResponseEventHandler = channelConfigurationResponseEventHandler;
+            this.CanIsConnectedEventHandler = canIsConnectedEventHandler;
         }
 
         #endregion
@@ -63,6 +66,8 @@
 
         private IReadCanMessage ReadCanMessage { get; }
 
+        private ICanIsConnectedEventHandler CanIsConnectedEventHandler { get; }
+
         #endregion
 
         #region Public Methods
@@ -77,6 +82,7 @@
                 // todo mb: mehrfach start verhindern?
                 var canEventHandler = this.ReadCanMessage.Start();
                 canEventHandler.EventIsReached += this.CanEventHandler_EventIsReached;
+                this.CanIsConnectedEventHandler.OnReached(true); // todo mb: was ist wenn es schief geht
             }
             catch (Exception ex)
             {
