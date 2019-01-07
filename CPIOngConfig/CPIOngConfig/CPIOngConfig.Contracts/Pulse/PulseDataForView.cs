@@ -1,6 +1,10 @@
 ﻿namespace CPIOngConfig.Contracts.Pulse
 {
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.IO;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     using Prism.Mvvm;
 
@@ -25,13 +29,23 @@
         {
             this.Name = name;
             this.listCnt = listCntArg;
-            this.Times = new ObservableCollection<TimePulse>();
 
-            // fill with leading 0
+
+            var helper = new List<TimePulse>();
+
             for (var i = 0; i < listCntArg; i++)
             {
-                this.Times.Add(new TimePulse("0"));
+                helper.Add(new TimePulse("0"));
             }
+
+            this.Times = new ObservableCollection<TimePulse>(helper);
+
+
+            //// fill with leading 0
+            //for (var i = 0; i < listCntArg; i++)
+            //{
+            //    this.Times.Add(new TimePulse("0"));
+            //}
         }
 
         #endregion

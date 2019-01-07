@@ -1,6 +1,7 @@
 ﻿namespace CPIOngConfig.Pulse
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Windows;
     using System.Windows.Input;
@@ -35,6 +36,9 @@
             this.Logger = logger;
             this.PulseEventHandler = pulseEventHandler;
             this.SelectFileCommand = new RelayCommand(this.SelectFileCommandAction);
+            this.StartCommand = new RelayCommand(this.StartCommandAction);
+            this.StopCommand = new RelayCommand(this.StopCommandAction);
+            this.SelectedFile = @"C:\Users\tbe241.OSMA-AUFZUEGE\Desktop\savepulse.txt";
         }
 
         #endregion
@@ -47,10 +51,28 @@
             set => this.SetProperty(ref this.selectedFile, value);
         }
 
+        /// <summary>
+        /// Gets or sets the select file command.
+        /// </summary>
+        /// <value>
+        /// The select file command.
+        /// </value>
         public ICommand SelectFileCommand { get; set; }
 
+        /// <summary>
+        /// Gets or sets the start command.
+        /// </summary>
+        /// <value>
+        /// The start command.
+        /// </value>
         public ICommand StartCommand { get; set; }
 
+        /// <summary>
+        /// Gets or sets the stop command.
+        /// </summary>
+        /// <value>
+        /// The stop command.
+        /// </value>
         public ICommand StopCommand { get; set; }
 
         private ILogger Logger { get; }
@@ -60,6 +82,76 @@
         #endregion
 
         #region Private Methods
+
+
+        private void StartCommandAction(object obj)
+        {
+            try
+            {
+                if (File.Exists(this.SelectedFile))
+                {
+                    if (this.PulseEventHandler != null)
+                    {
+                        this.PulseEventHandler.EventIsReached += this.PulseEventHandler_EventIsReached;
+                    }
+
+                    for (int i = 0; i < 16; i++)
+                    {
+                        this.storageList.Add(string.Empty);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Bitte Datei wählen");
+                }
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+        private List<string> storageList = new List<string>();
+
+        private void PulseEventHandler_EventIsReached(object sender, PulseEventArgs e)
+        {
+            try
+            {
+                this.storageList[e.Channel] += e.Stamp + ";";
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void StopCommandAction(object obj)
+        {
+            try
+            {
+                if (this.PulseEventHandler != null)
+                {
+                    this.PulseEventHandler.EventIsReached -= this.PulseEventHandler_EventIsReached;
+
+                    // todo mb: das könnte man auch zwichendurch machen
+                    StreamWriter file = new System.IO.StreamWriter(this.SelectedFile);
+                    foreach (string line in this.storageList)
+                    {
+                        file.WriteLine(line);
+                    }
+                        
+                    file.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                MessageBox.Show(ex.Message);
+            }
+        }
 
         private void SelectFileCommandAction(object obj)
         {

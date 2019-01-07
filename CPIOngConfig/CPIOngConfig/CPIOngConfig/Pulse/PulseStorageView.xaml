@@ -12,6 +12,7 @@
             <Button Margin="5" Command="{Binding StopCommand}">Stop write file</Button>
             <Button Margin="5" Command="{Binding SelectFileCommand}">Select File</Button>
             <TextBox Text="{Binding SelectedFile}"></TextBox>
+            <Label>Achtung, doppeltes öffnen usw ist nicht abgefangen \r\n Datei wird bei close geschlossen und gespeichert</Label>
         </StackPanel>
     </Grid>
 </UserControl>

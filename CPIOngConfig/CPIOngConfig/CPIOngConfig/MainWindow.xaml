@@ -33,7 +33,7 @@
             <ContentPresenter Content="{Binding SelectAdapterView}"></ContentPresenter>
             <ContentPresenter Content="{Binding AliveView}"></ContentPresenter>
         </StackPanel>
-        <TabControl Grid.Row="1">
+        <TabControl Grid.Row="1" SelectedItem="Pulse">
             <TabItem Header="General">
                 <Grid>
                     <Grid.RowDefinitions>
