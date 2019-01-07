@@ -83,10 +83,10 @@ void CanWorkerTask(void * pvParameters) {
 			}
 		}
 
-//		// zum senden
-//		if (xQueueReceive(CanQueueSenderHandle, hcan, 100) == pdTRUE) {
-//			SendCan(hcan->pTxMsg->StdId, hcan->pTxMsg->Data, 8);
-//		}
+		// zum senden
+		if (xQueueReceive(CanQueueSenderHandle, hcan, 100) == pdTRUE) {
+			SendCan(hcan->pTxMsg->StdId, hcan->pTxMsg->Data, 8);
+		}
 	}
 
 	printf("Sender task error \r\n");
