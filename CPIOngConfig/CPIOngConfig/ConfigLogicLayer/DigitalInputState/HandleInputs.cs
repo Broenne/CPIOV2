@@ -95,6 +95,7 @@
                 this.HandlePulseEvent(id, data);
                 this.HandleBinaryInputState(id, data);
                 this.HandleAlive(id, data);
+                this.HandleChannelConfigResponse(id, data);
             }
             catch (Exception ex)
             {
@@ -102,6 +103,27 @@
                 throw;
             }
         }
+
+
+
+        private void HandleChannelConfigResponse(uint id, byte[] data)
+        {
+            try
+            {
+                this.Logger.LogBegin(this.GetType());
+
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                throw;
+            }
+            finally
+            {
+                this.Logger.LogEnd(this.GetType());
+            }
+        }
+
 
         private void HandleAlive(uint id, byte[] data)
         {

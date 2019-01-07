@@ -26,9 +26,9 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn>
-                        <GridViewColumn.Header>
+                        <!--<GridViewColumn.Header>
                             <GridViewColumnHeader Content="Name" />
-                        </GridViewColumn.Header>
+                        </GridViewColumn.Header>-->
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBox Text="{Binding Name, Mode=OneWay}" IsReadOnly="True" />
@@ -40,7 +40,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <!--<ListBox Margin="20" ItemsSource="{Binding Converter={StaticResource TimeListConverter}}">-->
-                                <ListBox Margin="1" ItemsSource="{Binding Times}" Width="600" 
+                                <ListBox Margin="1" ItemsSource="{Binding Times}" Width="700" 
                                          SelectedItem="{Binding SelectedTimeItem}" 
                                          ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}"
                                          >

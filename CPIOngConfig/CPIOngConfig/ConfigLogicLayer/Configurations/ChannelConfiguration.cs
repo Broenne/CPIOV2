@@ -61,7 +61,8 @@
 
                     this.WriteBasicCan.WriteCan(0x00, data);
 
-                    Thread.Sleep(50);
+                    // todo mb: auf antwort warten
+                    //Thread.Sleep(50);
                 }
             }
             catch (Exception ex)
