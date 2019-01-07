@@ -4,6 +4,7 @@
     using System.Linq;
 
     using ConfigLogicLayer.Contracts.ActualId;
+    using ConfigLogicLayer.Contracts.Configurations;
     using ConfigLogicLayer.Contracts.DigitalInputState;
 
     using CPIOngConfig.Contracts.Alive;
@@ -31,32 +32,36 @@
         /// <param name="inputBinaryEventHandler">The input binary event handler.</param>
         /// <param name="aliveEventHandler">The alive event handler.</param>
         /// <param name="getActualNodeId">The get actual node identifier.</param>
-        public HandleInputs(ILogger logger, IPulseEventHandler pulseEventHandler, IReadCanMessage readCanMessage, IInputBinaryEventHandler inputBinaryEventHandler, IAliveEventHandler aliveEventHandler, IGetActualNodeId getActualNodeId)
+        /// <param name="channelConfigurationResponseEventHandler">The channel configuration response event handler.</param>
+        public HandleInputs(ILogger logger, IPulseEventHandler pulseEventHandler, IReadCanMessage readCanMessage, IInputBinaryEventHandler inputBinaryEventHandler, IAliveEventHandler aliveEventHandler, IGetActualNodeId getActualNodeId, IChannelConfigurationResponseEventHandler channelConfigurationResponseEventHandler)
         {
             this.Logger = logger;
-            
+
             this.PulseEventHandler = pulseEventHandler;
             this.ReadCanMessage = readCanMessage;
             this.InputBinaryEventHandler = inputBinaryEventHandler;
             this.AliveEventHandler = aliveEventHandler;
             this.GetActualNodeId = getActualNodeId;
+            this.ChannelConfigurationResponseEventHandler = channelConfigurationResponseEventHandler;
         }
 
         #endregion
 
         #region Properties
-        
+
+        private IAliveEventHandler AliveEventHandler { get; }
+
+        private IChannelConfigurationResponseEventHandler ChannelConfigurationResponseEventHandler { get; }
+
+        private IGetActualNodeId GetActualNodeId { get; }
+
         private IInputBinaryEventHandler InputBinaryEventHandler { get; }
 
         private ILogger Logger { get; }
 
         private IPulseEventHandler PulseEventHandler { get; }
 
-        private IAliveEventHandler AliveEventHandler { get; }
-
         private IReadCanMessage ReadCanMessage { get; }
-
-        private IGetActualNodeId GetActualNodeId { get; }
 
         #endregion
 
@@ -104,14 +109,16 @@
             }
         }
 
-
-
         private void HandleChannelConfigResponse(uint id, byte[] data)
         {
             try
             {
                 this.Logger.LogBegin(this.GetType());
 
+                if (id == 0x00 && data[0] == 0x03)
+                {
+                    this.ChannelConfigurationResponseEventHandler.OnReached(new ChannelConfigurationResponseEventArgs(data[1]));
+                }
             }
             catch (Exception ex)
             {
@@ -123,7 +130,6 @@
                 this.Logger.LogEnd(this.GetType());
             }
         }
-
 
         private void HandleAlive(uint id, byte[] data)
         {
@@ -160,7 +166,7 @@
                         var res = ((data[i / 8] >> (i % 8)) & 0x01) == 1;
                         inputBinbaryArgs.Add(i, res);
                     }
-                    
+
                     this.InputBinaryEventHandler.OnReached(inputBinbaryArgs);
                 }
             }

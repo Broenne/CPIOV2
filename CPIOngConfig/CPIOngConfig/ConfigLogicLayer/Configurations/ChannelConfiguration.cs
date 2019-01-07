@@ -19,14 +19,36 @@
         #region Constructor
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ChannelConfiguration" /> class.
+        /// Initializes a new instance of the <see cref="ChannelConfiguration" /> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="writeBasicCan">The write basic can.</param>
-        public ChannelConfiguration(ILogger logger, IWriteBasicCan writeBasicCan)
+        /// <param name="channelConfigurationResponseEventHandler">The channel configuration response event handler.</param>
+        public ChannelConfiguration(ILogger logger, IWriteBasicCan writeBasicCan, IChannelConfigurationResponseEventHandler channelConfigurationResponseEventHandler)
         {
             this.Logger = logger;
             this.WriteBasicCan = writeBasicCan;
+            this.ChannelConfigurationResponseEventHandler = channelConfigurationResponseEventHandler;
+            this.ChannelConfigurationResponseEventHandler.EventIsReached += this.ChannelConfigurationResponseEventHandler_EventIsReached;
+        }
+
+        private int waitForResponse; 
+        private void ChannelConfigurationResponseEventHandler_EventIsReached(object sender, ChannelConfigurationResponseEventArgs e)
+        {
+            try
+            {
+                this.Logger.LogBegin(this.GetType());
+                this.waitForResponse = (int)e.Channel;
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                throw;
+            }
+            finally
+            {
+                this.Logger.LogEnd(this.GetType());
+            }
         }
 
         #endregion
@@ -36,6 +58,8 @@
         private ILogger Logger { get; }
 
         private IWriteBasicCan WriteBasicCan { get; }
+
+        private IChannelConfigurationResponseEventHandler ChannelConfigurationResponseEventHandler { get; }
 
         #endregion
 
@@ -53,6 +77,7 @@
 
                 foreach (var item in channelConfigurationDto)
                 {
+                    this.waitForResponse = -1;
                     const byte WriteConfigByte = 0x03;
                     var data = new List<byte>();
                     data.Add(WriteConfigByte);
@@ -61,6 +86,11 @@
 
                     this.WriteBasicCan.WriteCan(0x00, data);
 
+                    while (this.waitForResponse != item.Channel)
+                    {
+                        // todo mb: timeoput
+                        Thread.Sleep(10);
+                    }
                     // todo mb: auf antwort warten
                     //Thread.Sleep(50);
                 }

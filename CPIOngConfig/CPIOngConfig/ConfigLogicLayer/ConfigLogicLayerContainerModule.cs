@@ -4,6 +4,9 @@
 
     using Autofac;
 
+    using ConfigLogicLayer.Configurations;
+    using ConfigLogicLayer.Contracts.Configurations;
+
     using Module = Autofac.Module;
 
     /// <summary>
@@ -22,6 +25,8 @@
         {
             var dataAccess = Assembly.GetExecutingAssembly();
             builder.RegisterAssemblyTypes(dataAccess).AsImplementedInterfaces();
+
+            builder.RegisterType<ChannelConfigurationResponseEventHandler>().As<IChannelConfigurationResponseEventHandler>().SingleInstance();
         }
 
         #endregion
