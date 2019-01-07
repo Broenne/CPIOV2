@@ -6,7 +6,6 @@ C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\obj\Debug\netstandard2
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\bin\Debug\netstandard2.0\ConfigLogicLayer.pdb
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\obj\Debug\netstandard2.0\ConfigLogicLayer.dll
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\obj\Debug\netstandard2.0\ConfigLogicLayer.pdb
-C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\obj\Debug\netstandard2.0\ConfigLogicLayer.csprojResolveAssemblyReference.cache
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\bin\Debug\netstandard2.0\Hal.PeakCan.Contracts.dll
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\bin\Debug\netstandard2.0\Helper.Contracts.dll
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\bin\Debug\netstandard2.0\Hal.PeakCan.Contracts.pdb
@@ -40,3 +39,4 @@ C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\bin\Debug\netstandard2
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\bin\Debug\netstandard2.0\System.Security.xml
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\bin\Debug\netstandard2.0\System.Windows.Forms.xml
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\bin\Debug\netstandard2.0\System.Runtime.Serialization.Formatters.Soap.xml
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer\obj\Debug\netstandard2.0\ConfigLogicLayer.csprojAssemblyReference.cache

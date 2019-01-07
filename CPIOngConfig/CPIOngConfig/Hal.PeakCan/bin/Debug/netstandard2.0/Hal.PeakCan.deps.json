@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v2.0/",
-    "signature": "c1942605de247b618ce3be080f88b3aa955c5303"
+    "signature": "d89cc0340210e88faf0b7160560aa24fd04328d7"
   },
   "compilationOptions": {},
   "targets": {
@@ -12,7 +12,7 @@
           "Autofac": "3.5.2",
           "Hal.PeakCan.Contracts": "1.0.0",
           "Helper.Contracts": "1.0.0",
-          "NETStandard.Library": "2.0.1"
+          "NETStandard.Library": "2.0.3"
         },
         "runtime": {
           "Hal.PeakCan.dll": {}
@@ -20,11 +20,14 @@
       },
       "Autofac/3.5.2": {
         "runtime": {
-          "lib/net40/Autofac.dll": {}
+          "lib/net40/Autofac.dll": {
+            "assemblyVersion": "3.5.0.0",
+            "fileVersion": "3.5.2.0"
+          }
         }
       },
       "Microsoft.NETCore.Platforms/1.1.0": {},
-      "NETStandard.Library/2.0.1": {
+      "NETStandard.Library/2.0.3": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0"
         }
@@ -50,7 +53,7 @@
     "Autofac/3.5.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-S9fTYQ9F/ZZUgu1teHBGrt17YNDkwJVjGmK4GpqTm51Yafk22E6zZ8X7S8866eqdGatQFPa6wMvBkQst/KHykQ==",
+      "sha512": "sha512-pGR5LjY8T/16x6SkJNd7u6EjQnE4C7JS0BZJ7Yl7pt313gIUZ/2ZnPSOIM5eaIA7ArxaudlyyLvAT4ayX5UJ/A==",
       "path": "autofac/3.5.2",
       "hashPath": "autofac.3.5.2.nupkg.sha512"
     },
@@ -61,12 +64,12 @@
       "path": "microsoft.netcore.platforms/1.1.0",
       "hashPath": "microsoft.netcore.platforms.1.1.0.nupkg.sha512"
     },
-    "NETStandard.Library/2.0.1": {
+    "NETStandard.Library/2.0.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-oA6nwv9MhEKYvLpjZ0ggSpb1g4CQViDVQjLUcDWg598jtvJbpfeP2reqwI1GLW2TbxC/Ml7xL6BBR1HmKPXlTg==",
-      "path": "netstandard.library/2.0.1",
-      "hashPath": "netstandard.library.2.0.1.nupkg.sha512"
+      "sha512": "sha512-st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
+      "path": "netstandard.library/2.0.3",
+      "hashPath": "netstandard.library.2.0.3.nupkg.sha512"
     },
     "Hal.PeakCan.Contracts/1.0.0": {
       "type": "project",

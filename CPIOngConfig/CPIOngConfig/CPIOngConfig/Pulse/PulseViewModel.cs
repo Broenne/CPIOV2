@@ -22,6 +22,8 @@
 
         private List<PulseDataForView> pulseDataForViewList;
 
+        private IPulseStorageView pulseStorageView;
+
         #region Constructor
 
         /// <summary>
@@ -29,10 +31,12 @@
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="pulseEventHandler">The pulse event handler.</param>
-        public PulseViewModel(ILogger logger, IPulseEventHandler pulseEventHandler)
+        /// <param name="pulseStorageView">The pulse storage view.</param>
+        public PulseViewModel(ILogger logger, IPulseEventHandler pulseEventHandler, IPulseStorageView pulseStorageView)
         {
             this.Logger = logger;
             this.PulseDataForViewList = new List<PulseDataForView>();
+            this.PulseStorageView = pulseStorageView;
 
             // todo mb: parallel for
             for (var i = 0; i < 16; i++)
@@ -48,6 +52,18 @@
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Gets or sets the pulse data for view list.
+        /// </summary>
+        /// <value>
+        /// The pulse data for view list.
+        /// </value>
+        public IPulseStorageView PulseStorageView
+        {
+            get => this.pulseStorageView;
+            set => this.SetProperty(ref this.pulseStorageView, value);
+        }
 
         /// <summary>
         /// Gets or sets the pulse data for view list.

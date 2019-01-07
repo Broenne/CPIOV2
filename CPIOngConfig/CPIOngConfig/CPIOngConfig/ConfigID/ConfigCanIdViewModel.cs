@@ -8,8 +8,7 @@
 
     using CPIOngConfig.Contracts.ConfigId;
 
-    using Global.UiHelper;
-
+    using Helper;
     using Helper.Contracts.Logger;
 
     /// <summary>

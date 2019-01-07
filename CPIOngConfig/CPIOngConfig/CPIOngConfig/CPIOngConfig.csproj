@@ -109,6 +109,10 @@
     <Compile Include="InputBinary\InputBinaryEventHandler.cs" />
     <Compile Include="Pulse\ListBoxItemBehavior.cs" />
     <Compile Include="Pulse\PulseEventHandler.cs" />
+    <Compile Include="Pulse\PulseStorageView.xaml.cs">
+      <DependentUpon>PulseStorageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pulse\PulseStorageViewModel.cs" />
     <Compile Include="Pulse\PulseView.xaml.cs">
       <DependentUpon>PulseView.xaml</DependentUpon>
     </Compile>
@@ -165,6 +169,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pulse\PulseStorageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pulse\PulseView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

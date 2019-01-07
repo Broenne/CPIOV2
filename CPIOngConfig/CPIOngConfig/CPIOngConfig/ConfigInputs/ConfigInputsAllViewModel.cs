@@ -11,8 +11,7 @@
 
     using CPIOngConfig.Contracts.ConfigInputs;
 
-    using Global.UiHelper;
-
+    using Helper;
     using Helper.Contracts.Logger;
 
     using Prism.Mvvm;

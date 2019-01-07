@@ -6,7 +6,6 @@ C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper\bin\Debug\netstandard2.0\Helper.
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper\bin\Debug\netstandard2.0\Helper.dll
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper\bin\Debug\netstandard2.0\Helper.pdb
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper\bin\Debug\netstandard2.0\Helper.Contracts.pdb
-C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper\obj\Debug\netstandard2.0\Helper.csprojResolveAssemblyReference.cache
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper\obj\Debug\netstandard2.0\Helper.csproj.CopyComplete
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper\obj\Debug\netstandard2.0\Helper.dll
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper\obj\Debug\netstandard2.0\Helper.pdb
@@ -40,3 +39,4 @@ C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper\bin\Debug\netstandard2.0\System.
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper\bin\Debug\netstandard2.0\System.Windows.Input.Manipulations.xml
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper\bin\Debug\netstandard2.0\System.Windows.Forms.xml
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper\bin\Debug\netstandard2.0\System.Runtime.Serialization.Formatters.Soap.xml
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper\obj\Debug\netstandard2.0\Helper.csprojAssemblyReference.cache

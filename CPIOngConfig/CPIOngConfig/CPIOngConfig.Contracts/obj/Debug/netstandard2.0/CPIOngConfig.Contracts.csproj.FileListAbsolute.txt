@@ -6,7 +6,6 @@ C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig.Contracts\obj\Debug\netsta
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig.Contracts\obj\Debug\netstandard2.0\CPIOngConfig.Contracts.AssemblyInfo.cs
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig.Contracts\obj\Debug\netstandard2.0\CPIOngConfig.Contracts.dll
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig.Contracts\obj\Debug\netstandard2.0\CPIOngConfig.Contracts.pdb
-C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig.Contracts\obj\Debug\netstandard2.0\CPIOngConfig.Contracts.csprojResolveAssemblyReference.cache
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig.Contracts\obj\Debug\netstandard2.0\CPIOngConfig.Contracts.csproj.CopyComplete
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig.Contracts\bin\Debug\netstandard2.0\PresentationCore.dll
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig.Contracts\bin\Debug\netstandard2.0\WindowsBase.dll
@@ -32,3 +31,4 @@ C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig.Contracts\bin\Debug\netsta
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig.Contracts\bin\Debug\netstandard2.0\System.Security.xml
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig.Contracts\bin\Debug\netstandard2.0\System.Windows.Forms.xml
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig.Contracts\bin\Debug\netstandard2.0\System.Runtime.Serialization.Formatters.Soap.xml
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig.Contracts\obj\Debug\netstandard2.0\CPIOngConfig.Contracts.csprojAssemblyReference.cache

@@ -1,4 +1,4 @@
-﻿namespace Global.UiHelper
+﻿namespace Helper
 {
     using System;
     using System.Windows.Input;

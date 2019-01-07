@@ -6,7 +6,6 @@ C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer.Contracts\obj\Debug\ne
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer.Contracts\obj\Debug\netstandard2.0\ConfigLogicLayer.Contracts.AssemblyInfo.cs
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer.Contracts\obj\Debug\netstandard2.0\ConfigLogicLayer.Contracts.dll
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer.Contracts\obj\Debug\netstandard2.0\ConfigLogicLayer.Contracts.pdb
-C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer.Contracts\obj\Debug\netstandard2.0\ConfigLogicLayer.Contracts.csprojResolveAssemblyReference.cache
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer.Contracts\bin\Debug\netstandard2.0\CPIOngConfig.Contracts.dll
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer.Contracts\bin\Debug\netstandard2.0\PresentationCore.dll
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer.Contracts\bin\Debug\netstandard2.0\WindowsBase.dll
@@ -34,3 +33,4 @@ C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer.Contracts\bin\Debug\ne
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer.Contracts\bin\Debug\netstandard2.0\System.Windows.Forms.xml
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer.Contracts\bin\Debug\netstandard2.0\System.Runtime.Serialization.Formatters.Soap.xml
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer.Contracts\obj\Debug\netstandard2.0\ConfigLogicLayer.Contracts.csproj.CopyComplete
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\ConfigLogicLayer.Contracts\obj\Debug\netstandard2.0\ConfigLogicLayer.Contracts.csprojAssemblyReference.cache

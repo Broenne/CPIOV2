@@ -13,7 +13,13 @@
         </Style>
     </UserControl.Resources>
     <Grid>
-        <ListView ItemsSource="{Binding PulseDataForViewList}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+       <ContentPresenter Content="{Binding PulseStorageView}"></ContentPresenter>
+
+        <ListView Grid.Row="1" ItemsSource="{Binding PulseDataForViewList}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn>
