@@ -17,9 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfigLogicLayer.Contracts"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hal.PeakCan.Contracts", "Hal.PeakCan.Contracts\Hal.PeakCan.Contracts.csproj", "{322C0FFF-8E04-4FE5-B441-12E16AC465B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helper", "Helper\Helper.csproj", "{46C30283-6BC6-4F9D-B4A9-B05E5D83EC16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helper", "Helper\Helper.csproj", "{46C30283-6BC6-4F9D-B4A9-B05E5D83EC16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helper.Contracts", "Helper.Contracts\Helper.Contracts.csproj", "{6D139AE5-A46B-4EC3-8C46-89704CE60CD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helper.Contracts", "Helper.Contracts\Helper.Contracts.csproj", "{6D139AE5-A46B-4EC3-8C46-89704CE60CD5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramTest", "TelegramTest\TelegramTest.csproj", "{73B25BA2-0FEF-4FB4-83BA-756AD7BA49A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{6D139AE5-A46B-4EC3-8C46-89704CE60CD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D139AE5-A46B-4EC3-8C46-89704CE60CD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D139AE5-A46B-4EC3-8C46-89704CE60CD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73B25BA2-0FEF-4FB4-83BA-756AD7BA49A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73B25BA2-0FEF-4FB4-83BA-756AD7BA49A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73B25BA2-0FEF-4FB4-83BA-756AD7BA49A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73B25BA2-0FEF-4FB4-83BA-756AD7BA49A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
