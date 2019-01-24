@@ -7,6 +7,8 @@
     using System.Windows.Input;
     using System.Windows.Threading;
 
+    using ConfigLogicLayer.DigitalInputState;
+
     using CPIOngConfig.Contracts.FlipFlop;
 
     using Helper;
@@ -16,17 +18,17 @@
 
     public class FlipFlopViewModel : BindableBase, IFlipFlopViewModel
     {
-
         private readonly Dispatcher dispatcher = RootDispatcherFetcher.RootDispatcher;
 
         private ObservableCollection<bool> flipFlopState;
 
         #region Constructor
 
-        public FlipFlopViewModel(IFlipFlopEventHandler flipFlopEventHandler, ILogger logger)
+        public FlipFlopViewModel(IFlipFlopEventHandler flipFlopEventHandler, ILogger logger, IResetFlipFlop resetFlipFlop)
         {
             this.FlipFlopEventHandler = flipFlopEventHandler;
             this.Logger = logger;
+            this.ResetFlipFlop = resetFlipFlop;
 
             var defaultList = new List<bool>();
             for (var i = 0; i < 16; i++)
@@ -38,26 +40,42 @@
 
             this.FlipFlopEventHandler.EventIsReached += this.FlipFlopEventHandler_EventIsReached;
 
-            ResetAllCommand = new RelayCommand(this.ResetAllCommandAction);
+            this.ResetAllCommand = new RelayCommand(this.ResetAllCommandAction);
         }
 
         #endregion
 
         #region Properties
 
+        public ObservableCollection<bool> FlipFlopState
+        {
+            get => this.flipFlopState;
+            set => this.SetProperty(ref this.flipFlopState, value);
+        }
+
         /// <summary>
-        /// Gets or sets the reset all command.
+        ///     Gets or sets the reset all command.
         /// </summary>
         /// <value>
-        /// The reset all command.
+        ///     The reset all command.
         /// </value>
         public ICommand ResetAllCommand { get; set; }
+
+        private IFlipFlopEventHandler FlipFlopEventHandler { get; }
+
+        private ILogger Logger { get; }
+
+        private IResetFlipFlop ResetFlipFlop { get; }
+
+        #endregion
+
+        #region Private Methods
 
         private void ResetAllCommandAction(object obj)
         {
             try
             {
-                ;
+                this.ResetFlipFlop.ResetAll();
             }
             catch (Exception ex)
             {
@@ -66,39 +84,24 @@
             }
         }
 
-
-        public ObservableCollection<bool> FlipFlopState
-        {
-            get => this.flipFlopState;
-            set => this.SetProperty(ref this.flipFlopState, value);
-        }
-
-        private IFlipFlopEventHandler FlipFlopEventHandler { get; }
-
-        private ILogger Logger { get; }
-
-        #endregion
-
-        #region Private Methods
-
         private void FlipFlopEventHandler_EventIsReached(object sender, FlipFlopEventArgs e)
         {
             try
             {
-
-                this.dispatcher.Invoke(() =>
-                    {
-                        for (int i = 0; i < 16; ++i)
+                this.dispatcher.Invoke(
+                    () =>
                         {
-                            this.FlipFlopState[i] = false;
-                            var mask = 1 << (i % 8);
-                            var actBit = e.RawData[i / 8] & mask;
-                            if (actBit > 0)
+                            for (var i = 0; i < 16; ++i)
                             {
-                                this.FlipFlopState[i] = true;
+                                this.FlipFlopState[i] = false;
+                                var mask = 1 << (i % 8);
+                                var actBit = e.RawData[i / 8] & mask;
+                                if (actBit > 0)
+                                {
+                                    this.FlipFlopState[i] = true;
+                                }
                             }
-                        }
-                    });
+                        });
             }
             catch (Exception ex)
             {
