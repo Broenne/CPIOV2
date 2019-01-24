@@ -31,4 +31,12 @@ uint8_t GetGlobalCanNodeId();
 void SendCanTimeDif(uint8_t channel, uint32_t res);
 
 
+/*
+ * 24.01.19
+ * MB
+* Funktion zum senden der flipflopstates per can. Ein mapping findet in der Funktion statt.
+  * */
+void SendFlipFlopStateViaCan(uint16_t flipFlopState);
+
+
 #endif /* MYCANFUNCTIONS_H_ */

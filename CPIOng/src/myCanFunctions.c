@@ -10,6 +10,9 @@
 static uint8_t globalCanId = 2;
 
 #define QUEUE_SIZE_FOR_CAN		( ( unsigned short ) 32 )
+#define PULSE_OPENCAN_OFFSET 		( ( unsigned short ) 0x180 )
+#define FLIPFLOP_OPENCAN_OFFSET 		( ( unsigned short ) 0x170 )
+#define FLIPFLOP_OPENCAN_OFFSET_RESET 		( ( unsigned short ) 0x172 )
 
 //extern CAN_HandleTypeDef hcan2;
 osThreadId canInputTaskHandle;
@@ -55,25 +58,28 @@ void CanWorkerTask(void * pvParameters) {
 		if (xQueueReceive(CanRxQueueHandle, hcan, 10) == pdTRUE) {
 			if (hcan->Instance == CAN2) {
 
+				uint32_t stdid = hcan->pRxMsg->StdId;
+				uint8_t* pData = &hcan->pRxMsg->Data[0];
 				// default id 0
-				if (0x00 == hcan->pRxMsg->StdId) {
+				if (0x00 == stdid) {
 					switch (hcan->pRxMsg->Data[0]) {
-					case 0x01:
-						SetGlobalCanNodeId(hcan->pRxMsg->Data[1]);
-						printf("Incoming id 0x00 %d", GetGlobalCanNodeId());
-						break;
-					case 0x02:
-						ActivateDebug(hcan->pRxMsg->Data[1]);
-						break;
-					case 0x03:
-						SetChannelModiFromExternal(&hcan->pRxMsg->Data[0]);
-						break;
-					default:
-						break;
+						case 0x01:
+							SetGlobalCanNodeId(hcan->pRxMsg->Data[1]);
+							printf("Incoming id 0x00 %d", GetGlobalCanNodeId());
+							break;
+						case 0x02:
+							ActivateDebug(hcan->pRxMsg->Data[1]);
+							break;
+						case 0x03:
+							SetChannelModiFromExternal(pData);
+							break;
+						default:
+							break;
 					}
 				}
-				// eigene can id
-				if (GetGlobalCanNodeId() == hcan->pRxMsg->StdId) {
+
+				// Funktion zum abfragen der Einganszustände
+				if (GetGlobalCanNodeId() == stdid) {
 					if (0x02 == hcan->pRxMsg->RTR) {
 						uint8_t data[8];
 						GetInputs(&data);
@@ -81,10 +87,16 @@ void CanWorkerTask(void * pvParameters) {
 					}
 				}
 
-				if((GetGlobalCanNodeId() + 512) == hcan->pRxMsg->StdId){
+				// funktion zum setzen des aktuellen channel modi
+				if((GetGlobalCanNodeId() + 512) == stdid){
 					ChannelModiType channelModiType = (ChannelModiType)hcan->pRxMsg->Data[0];
 					SetActiveChannelModiType(channelModiType);
 				}
+
+				if((GetGlobalCanNodeId() + FLIPFLOP_OPENCAN_OFFSET_RESET) == stdid){
+					ResetFlipFlop(pData);
+				}
+
 			}
 		}
 
@@ -137,7 +149,7 @@ void SendCanTimeDif(uint8_t channel, uint32_t res) {
 	p[2] = (res >> 8) & 0xFF;
 	p[3] = res & 0xFF;
 
-	uint32_t canId = 0x180 + GetGlobalCanNodeId() + channel;
+	uint32_t canId = PULSE_OPENCAN_OFFSET + GetGlobalCanNodeId() + channel;
 	SendCan(canId, p, 4);
 }
 
@@ -146,3 +158,15 @@ void GetInputs(uint8_t* data) {
 	ReadInputs(&val[0]);
 	memcpy(data, &val, sizeof(val));
 }
+
+
+void SendFlipFlopStateViaCan(uint16_t flipFlopState){
+		uint8_t p[] = { 0, 0 };
+
+		p[0] = (flipFlopState >> 8) & 0xFF;
+		p[1] = flipFlopState & 0xFF;
+
+		uint32_t canId = FLIPFLOP_OPENCAN_OFFSET + GetGlobalCanNodeId();
+		SendCan(canId, p, 2);
+}
+

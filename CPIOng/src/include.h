@@ -36,6 +36,7 @@
 #include "myCanFunctions.h"
 #include "usart/usart.h"
 #include "analog.h"
+#include "FlipFlop/FlipFlop.h"
 
 
 #endif /* INCLUDE_H_ */

@@ -96,6 +96,7 @@ void SendPulsePerCanTask(void * pvParameters) {
 				static ChannelModiType channelModi;
 				//channelModi = ChannelModiStorage[i].channelModiType;
 				channelModi = GetChannelModiByChannel(i);
+				//uint channel = ;
 
 				if(i == currentMessage.channel && channelModi == GetActiveChannelModiType()){
 					SendCanTimeDif(currentMessage.channel, currentMessage.res);
@@ -103,7 +104,15 @@ void SendPulsePerCanTask(void * pvParameters) {
 				}
 			}
 
-			// todo mb: flip flop einzeln behandeln
+			// Besonderheit FlipFlop (Zweite Schleife, da die obere ggf gebreakt wird)
+			for(int i=0; i < CHANNEL_COUNT; ++i){
+				//channelModi = GetChannelModiByChannel(i);
+				//uint channel = currentMessage.channel;
+				if(GetChannelModiByChannel(i) == FlipFlop){
+					SetFlipFlop(i);
+				}
+			}
+
 		}
 	}
 
