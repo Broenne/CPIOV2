@@ -11,6 +11,7 @@
     using CPIOngConfig.Contracts.Alive;
     using CPIOngConfig.Contracts.Analog;
     using CPIOngConfig.Contracts.ConfigId;
+    using CPIOngConfig.Contracts.FlipFlop;
     using CPIOngConfig.InputBinary;
     using CPIOngConfig.Pulse;
 
@@ -25,21 +26,23 @@
     /// <seealso cref="Prism.Mvvm.BindableBase" />
     public class MainWindowViewModel : BindableBase
     {
+        private IActiveSensorView activeSensorView;
+
+        private IAliveView aliveView;
+
         private IAnalogView analogView;
 
         private IConfigCanId configCanId;
 
         private IConfigInputsAllView configInputsAllView;
 
+        private IFlipFlopView flipFlopView;
+
         private IInputBinaryView inputBinaryView;
 
         private IPulseView pulseView;
 
         private ISelectAdapterView selectAdapterView;
-
-        private IActiveSensorView activeSensorView;
-
-        private IAliveView aliveView;
 
         #region Constructor
 
@@ -59,6 +62,30 @@
         #endregion
 
         #region Properties
+
+        /// <summary>
+        ///     Gets the active sensor view.
+        /// </summary>
+        /// <value>
+        ///     The active sensor view.
+        /// </value>
+        public IActiveSensorView ActiveSensorView
+        {
+            get => this.activeSensorView;
+            private set => this.SetProperty(ref this.activeSensorView, value);
+        }
+
+        /// <summary>
+        ///     Gets the alive view.
+        /// </summary>
+        /// <value>
+        ///     The alive view.
+        /// </value>
+        public IAliveView AliveView
+        {
+            get => this.aliveView;
+            private set => this.SetProperty(ref this.aliveView, value);
+        }
 
         /// <summary>
         ///     Gets the analog view.
@@ -94,6 +121,18 @@
         {
             get => this.configInputsAllView;
             private set => this.SetProperty(ref this.configInputsAllView, value);
+        }
+
+        /// <summary>
+        ///     Gets the flip flop view.
+        /// </summary>
+        /// <value>
+        ///     The flip flop view.
+        /// </value>
+        public IFlipFlopView FlipFlopView
+        {
+            get => this.flipFlopView;
+            private set => this.SetProperty(ref this.flipFlopView, value);
         }
 
         /// <summary>
@@ -133,30 +172,6 @@
         }
 
         /// <summary>
-        /// Gets the active sensor view.
-        /// </summary>
-        /// <value>
-        /// The active sensor view.
-        /// </value>
-        public IActiveSensorView ActiveSensorView
-        {
-            get => this.activeSensorView;
-            private set => this.SetProperty(ref this.activeSensorView, value);
-        }
-
-        /// <summary>
-        /// Gets the alive view.
-        /// </summary>
-        /// <value>
-        /// The alive view.
-        /// </value>
-        public IAliveView AliveView
-        {
-            get => this.aliveView;
-            private set => this.SetProperty(ref this.aliveView, value);
-        }
-
-        /// <summary>
         ///     Gets or sets the window load command.
         /// </summary>
         /// <value>
@@ -185,6 +200,7 @@
                 this.PulseView = this.Scope.Resolve<IPulseView>();
                 this.ActiveSensorView = this.Scope.Resolve<IActiveSensorView>();
                 this.AliveView = this.Scope.Resolve<IAliveView>();
+                this.FlipFlopView = this.Scope.Resolve<IFlipFlopView>();
             }
             catch (Exception ex)
             {

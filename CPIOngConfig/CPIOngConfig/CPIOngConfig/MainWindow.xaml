@@ -33,7 +33,7 @@
             <ContentPresenter Content="{Binding SelectAdapterView}"></ContentPresenter>
             <ContentPresenter Content="{Binding AliveView}"></ContentPresenter>
         </StackPanel>
-        <TabControl Grid.Row="1" SelectedIndex="2">
+        <TabControl Grid.Row="1" SelectedIndex="0">
             <TabItem Header="General">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -45,7 +45,10 @@
                         <ColumnDefinition Width="1.5*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <ContentPresenter Grid.Row="0" Grid.Column="0" Content="{Binding ConfigCanId}"></ContentPresenter>
-                    <ContentPresenter Grid.Row="1" Grid.Column="0" Content="{Binding InputBinaryView}"></ContentPresenter>
+                    <StackPanel Grid.Row="1" Grid.Column="0">
+                        <ContentPresenter  Content="{Binding InputBinaryView}"></ContentPresenter>
+                        <ContentPresenter  Content="{Binding FlipFlopView}"></ContentPresenter>
+                    </StackPanel>
                     <ContentPresenter Grid.Row="0" Grid.Column="1" Content="{Binding  ActiveSensorView}"></ContentPresenter>
                     <ContentPresenter Grid.Row="1" Grid.Column="1" Content="{Binding ConfigInputsAllView}"></ContentPresenter>
                 </Grid>

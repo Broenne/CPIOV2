@@ -166,3 +166,5 @@ C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\Alive\AliveView.
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\CPIOngConfig.csprojAssemblyReference.cache
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\Pulse\PulseStorageView.g.cs
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\Pulse\PulseStorageView.baml
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\FlipFlop\FlipFlopView.g.cs
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\CPIOngConfig\obj\Debug\FlipFlop\FlipFlopView.baml
