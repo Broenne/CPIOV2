@@ -24,10 +24,15 @@ xQueueHandle CanQueueSenderHandle = NULL;
  * Set the difffernt modi for the cahnnel from outside by can. *
  * */
 void SetChannelModiFromExternal(uint8_t* data){
-	uint8_t channel = data[0];
-	uint8_t mode = data[1];
+	uint8_t channel = data[1];
+	uint8_t mode = data[2];
 	ChannelModiType channelModiType = (ChannelModiType)mode;
 	ChangeChannelModi(channel, channelModiType);
+
+	// als bestätigung wegsenden
+	uint8_t canId = 0x00; // sende auch auf can 0 die response
+	data[3] = 0xFF;
+	SendCan(canId, data, 8);
 }
 
 /*
@@ -46,7 +51,7 @@ void CanWorkerTask(void * pvParameters) {
 		hcan->pTxMsg = &TxMessage;
 		hcan->pRxMsg = &RxMessage;
 
-		// mepfänger
+		// Empfänger
 		if (xQueueReceive(CanRxQueueHandle, hcan, 10) == pdTRUE) {
 			if (hcan->Instance == CAN2) {
 
@@ -61,7 +66,7 @@ void CanWorkerTask(void * pvParameters) {
 						ActivateDebug(hcan->pRxMsg->Data[1]);
 						break;
 					case 0x03:
-						SetChannelModiFromExternal(&hcan->pRxMsg->Data[1]);
+						SetChannelModiFromExternal(&hcan->pRxMsg->Data[0]);
 						break;
 					default:
 						break;
@@ -141,4 +146,3 @@ void GetInputs(uint8_t* data) {
 	ReadInputs(&val[0]);
 	memcpy(data, &val, sizeof(val));
 }
-

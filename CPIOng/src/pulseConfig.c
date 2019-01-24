@@ -14,8 +14,6 @@ static ChannelModi ChannelModiStorage[CHANNEL_COUNT];
 
 static ChannelModiType ActivatedChannelModi = Licht;
 
-
-
 void SetActiveChannelModiType(ChannelModiType val){
 	ActivatedChannelModi = val;
 	SafeUsedActiveSensorType((uint8_t)ActivatedChannelModi);

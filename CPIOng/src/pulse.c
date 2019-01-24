@@ -35,7 +35,7 @@ osThreadId myTask03Handle;
 void Init_TimerForPulsTime(void) {
 
 	// calculate:
-	// f / fclock / Perios*(Pre+1))
+	// f / fclock / Period*(Pre+1))
 
 	__HAL_RCC_TIM3_CLK_ENABLE()
 	;
