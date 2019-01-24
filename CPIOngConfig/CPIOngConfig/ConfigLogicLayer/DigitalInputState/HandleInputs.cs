@@ -9,6 +9,7 @@
 
     using CPIOngConfig.Contracts.Adapter;
     using CPIOngConfig.Contracts.Alive;
+    using CPIOngConfig.Contracts.FlipFlop;
     using CPIOngConfig.Contracts.InputBinary;
     using CPIOngConfig.Contracts.Pulse;
 
@@ -35,7 +36,7 @@
         /// <param name="getActualNodeId">The get actual node identifier.</param>
         /// <param name="channelConfigurationResponseEventHandler">The channel configuration response event handler.</param>
         /// <param name="canIsConnectedEventHandler">The can is connected event handler.</param>
-        public HandleInputs(ILogger logger, IPulseEventHandler pulseEventHandler, IReadCanMessage readCanMessage, IInputBinaryEventHandler inputBinaryEventHandler, IAliveEventHandler aliveEventHandler, IGetActualNodeId getActualNodeId, IChannelConfigurationResponseEventHandler channelConfigurationResponseEventHandler, ICanIsConnectedEventHandler canIsConnectedEventHandler)
+        public HandleInputs(ILogger logger, IPulseEventHandler pulseEventHandler, IReadCanMessage readCanMessage, IInputBinaryEventHandler inputBinaryEventHandler, IAliveEventHandler aliveEventHandler, IGetActualNodeId getActualNodeId, IChannelConfigurationResponseEventHandler channelConfigurationResponseEventHandler, ICanIsConnectedEventHandler canIsConnectedEventHandler, IFlipFlopEventHandler flipFlopEventHandler)
         {
             this.Logger = logger;
 
@@ -46,6 +47,7 @@
             this.GetActualNodeId = getActualNodeId;
             this.ChannelConfigurationResponseEventHandler = channelConfigurationResponseEventHandler;
             this.CanIsConnectedEventHandler = canIsConnectedEventHandler;
+            this.FlipFlopEventHandler = flipFlopEventHandler;
         }
 
         #endregion
@@ -67,6 +69,8 @@
         private IReadCanMessage ReadCanMessage { get; }
 
         private ICanIsConnectedEventHandler CanIsConnectedEventHandler { get; }
+
+        private IFlipFlopEventHandler FlipFlopEventHandler { get; }
 
         #endregion
 
@@ -107,6 +111,7 @@
                 this.HandleBinaryInputState(id, data);
                 this.HandleAlive(id, data);
                 this.HandleChannelConfigResponse(id, data);
+                this.HandleFlipFlopEvent(id, data);
             }
             catch (Exception ex)
             {
@@ -114,6 +119,31 @@
                 throw;
             }
         }
+
+        private void HandleFlipFlopEvent(uint id, byte[] data)
+        {
+            try
+            {
+                this.Logger.LogBegin(this.GetType());
+
+                if (id == 0x170 + this.GetActualNodeId.Get())
+                {
+                    this.FlipFlopEventHandler.OnReached(new FlipFlopEventArgs(data));
+                }
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                throw;
+            }
+            finally
+            {
+                this.Logger.LogEnd(this.GetType());
+            }
+        }
+
+
+
 
         private void HandleChannelConfigResponse(uint id, byte[] data)
         {

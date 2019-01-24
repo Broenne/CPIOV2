@@ -107,6 +107,7 @@
     </Compile>
     <Compile Include="ConfigInputs\ConfigureInputsViewModel.cs" />
     <Compile Include="CPIOngConfigContainerModule.cs" />
+    <Compile Include="FlipFlop\FlipFlopEventHandler.cs" />
     <Compile Include="FlipFlop\FlipFlopView.xaml.cs">
       <DependentUpon>FlipFlopView.xaml</DependentUpon>
     </Compile>

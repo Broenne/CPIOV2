@@ -8,8 +8,10 @@
     using CPIOngConfig.Alive;
     using CPIOngConfig.Contracts.Adapter;
     using CPIOngConfig.Contracts.Alive;
+    using CPIOngConfig.Contracts.FlipFlop;
     using CPIOngConfig.Contracts.InputBinary;
     using CPIOngConfig.Contracts.Pulse;
+    using CPIOngConfig.FlipFlop;
     using CPIOngConfig.InputBinary;
     using CPIOngConfig.Pulse;
 
@@ -38,6 +40,7 @@
             builder.RegisterType<InputBinaryEventHandler>().As<IInputBinaryEventHandler>().SingleInstance();
             builder.RegisterType<AliveEventHandler>().As<IAliveEventHandler>().SingleInstance();
             builder.RegisterType<CanIsConnectedEventHandler>().As<ICanIsConnectedEventHandler>().SingleInstance();
+            builder.RegisterType<FlipFlopEventHandler>().As<IFlipFlopEventHandler>().SingleInstance();
         }
 
         #endregion

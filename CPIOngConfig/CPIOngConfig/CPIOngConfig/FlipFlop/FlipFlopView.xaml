@@ -8,7 +8,12 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
 
-        <ListBox Margin="20" ItemsSource="{Binding FlipFlopState}">
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBox FontSize="20" HorizontalContentAlignment="Center" VerticalAlignment="Center">       FlipFlop        </TextBox>
+                <Button Margin="5" Height="50" Width="80" Command="{Binding ResetAllCommand}">Reset All</Button>
+            </StackPanel>
+            <ListBox ItemsSource="{Binding FlipFlopState}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -18,5 +23,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        </StackPanel>
     </Grid>
 </UserControl>
