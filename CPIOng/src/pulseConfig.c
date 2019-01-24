@@ -53,8 +53,8 @@ void InitChannelModi(void){
 		ChannelModiStorage[10].channelModiType = Licht;
 		ChannelModiStorage[11].channelModiType = Licht;
 		ChannelModiStorage[12].channelModiType = Licht;
-		ChannelModiStorage[13].channelModiType = Licht;
-		ChannelModiStorage[14].channelModiType = Licht;
-		ChannelModiStorage[15].channelModiType = Licht;
+		ChannelModiStorage[13].channelModiType = FlipFlop;
+		ChannelModiStorage[14].channelModiType = FlipFlop;
+		ChannelModiStorage[15].channelModiType = FlipFlop;
 }
 

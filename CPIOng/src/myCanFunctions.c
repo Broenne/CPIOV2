@@ -163,8 +163,9 @@ void GetInputs(uint8_t* data) {
 void SendFlipFlopStateViaCan(uint16_t flipFlopState){
 		uint8_t p[] = { 0, 0 };
 
-		p[0] = (flipFlopState >> 8) & 0xFF;
-		p[1] = flipFlopState & 0xFF;
+		p[0] = flipFlopState & 0xFF;
+		p[1] = (flipFlopState >> 8) & 0xFF;
+
 
 		uint32_t canId = FLIPFLOP_OPENCAN_OFFSET + GetGlobalCanNodeId();
 		SendCan(canId, p, 2);
