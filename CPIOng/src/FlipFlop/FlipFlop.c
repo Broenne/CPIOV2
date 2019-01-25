@@ -7,7 +7,7 @@
 
 #include "FlipFlop.h"
 
-static uint16_t StorageFlipFlopState = 0;
+static volatile uint16_t StorageFlipFlopState = 0;
 
 /*
  *  Created on: 24.01.2019
@@ -39,7 +39,7 @@ void ResetFlipFlop(uint8_t* resetChannelsBitmask) {
 	resetMask |= (resetChannelsBitmask[1] << 8);
 
 	for(int i = 0; i < 16; ++i){
-		if((resetMask << i) & 0x01){
+		if((resetMask >> i) & 0x01){
 			// wenn das entsprechende bit in der maske gesetz ist, dann zurück setzen
 			uint16_t singleMaskForThisChannel = 1 << i;
 			singleMaskForThisChannel = ~singleMaskForThisChannel; // invertiert
@@ -49,7 +49,7 @@ void ResetFlipFlop(uint8_t* resetChannelsBitmask) {
 
 	// Bit 0-1
 	// Bitmaske, welcher KAnäle resetet werden
-	StorageFlipFlopState = 0x00;
+	//StorageFlipFlopState = 0x00;
 
 	// zur Bestätigung wieder wegsenden
 	uint16_t data = StorageFlipFlopState;
