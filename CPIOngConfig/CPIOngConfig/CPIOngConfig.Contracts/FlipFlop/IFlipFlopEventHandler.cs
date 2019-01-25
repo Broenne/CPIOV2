@@ -13,6 +13,10 @@
         /// </summary>
         event EventHandler<FlipFlopEventArgs> EventIsReached;
 
+        /// <summary>
+        /// Raises the <see cref="E:Reached" /> event.
+        /// </summary>
+        /// <param name="e">The <see cref="FlipFlopEventArgs"/> instance containing the event data.</param>
         void OnReached(FlipFlopEventArgs e);
     }
 }

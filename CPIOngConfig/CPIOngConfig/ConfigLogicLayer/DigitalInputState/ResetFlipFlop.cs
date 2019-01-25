@@ -69,7 +69,7 @@
                 var data = new List<byte>();
 
                 var mask = 1 << (int)channel;
-                byte[] intBytes = BitConverter.GetBytes(mask);
+                var intBytes = BitConverter.GetBytes(mask);
 
                 data.Add(intBytes[0]);
                 data.Add(intBytes[1]);
