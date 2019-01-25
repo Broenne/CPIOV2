@@ -4,9 +4,11 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Input;
     using System.Windows.Threading;
 
+    using ConfigLogicLayer.Contracts.DigitalInputState;
     using ConfigLogicLayer.DigitalInputState;
 
     using CPIOngConfig.Contracts.FlipFlop;
@@ -41,6 +43,7 @@
             this.FlipFlopEventHandler.EventIsReached += this.FlipFlopEventHandler_EventIsReached;
 
             this.ResetAllCommand = new RelayCommand(this.ResetAllCommandAction);
+            this.ResetSingleCommand = new RelayCommand(this.ResetSingleCommandAction);
         }
 
         #endregion
@@ -61,6 +64,8 @@
         /// </value>
         public ICommand ResetAllCommand { get; set; }
 
+        public ICommand ResetSingleCommand { get; set; }
+
         private IFlipFlopEventHandler FlipFlopEventHandler { get; }
 
         private ILogger Logger { get; }
@@ -76,6 +81,24 @@
             try
             {
                 this.ResetFlipFlop.ResetAll();
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ResetSingleCommandAction(object obj)
+        {
+            try
+            {
+                uint channel = Convert.ToUInt32(obj);
+                this.ResetFlipFlop.ResetChannel(channel);
+                ;
+                //var comboBoxItem = (ComboBoxItem)obj;
+                //comboBoxItem.
+                //this.ResetFlipFlop.ResetAll();
             }
             catch (Exception ex)
             {

@@ -2,6 +2,10 @@
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
+	<s:Boolean x:Key="/Default/Housekeeping/Bookmarks/NumberedBookmarks/=Bookmark7/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/Housekeeping/Bookmarks/NumberedBookmarks/=Bookmark7/Coords/@EntryValue">(Doc Ln 74 Col 38)</s:String>
+	<s:String x:Key="/Default/Housekeeping/Bookmarks/NumberedBookmarks/=Bookmark7/FileId/@EntryValue">64E393DE-3DD6-49A9-B023-433F75F34290/d:DigitalInputState/f:ResetFlipFlop.cs</s:String>
+	<s:String x:Key="/Default/Housekeeping/Bookmarks/NumberedBookmarks/=Bookmark7/Owner/@EntryValue">NumberedBookmarkManager</s:String>
 	
 	
 	

@@ -11,7 +11,26 @@
         <StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBox FontSize="20" HorizontalContentAlignment="Center" VerticalAlignment="Center">       FlipFlop        </TextBox>
-                <Button Margin="5" Height="50" Width="80" Command="{Binding ResetAllCommand}">Reset All</Button>
+                <Button Margin="5" Height="50" Width="80" Command="{Binding ResetAllCommand}" >Reset All</Button>
+                <ComboBox Name="ComboBox"  Margin="5" Width="80" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30">
+                    <ComboBoxItem>0</ComboBoxItem>
+                    <ComboBoxItem>1</ComboBoxItem>
+                    <ComboBoxItem>2</ComboBoxItem>
+                    <ComboBoxItem>3</ComboBoxItem>
+                    <ComboBoxItem>4</ComboBoxItem>
+                    <ComboBoxItem>5</ComboBoxItem>
+                    <ComboBoxItem>6</ComboBoxItem>
+                    <ComboBoxItem>7</ComboBoxItem>
+                    <ComboBoxItem>8</ComboBoxItem>
+                    <ComboBoxItem>9</ComboBoxItem>
+                    <ComboBoxItem>10</ComboBoxItem>
+                    <ComboBoxItem>11</ComboBoxItem>
+                    <ComboBoxItem>12</ComboBoxItem>
+                    <ComboBoxItem>13</ComboBoxItem>
+                    <ComboBoxItem>14</ComboBoxItem>
+                    <ComboBoxItem   IsSelected="True">15</ComboBoxItem>
+                </ComboBox>
+                <Button Margin="5" Height="50" Width="80" Command="{Binding ResetSingleCommand}" CommandParameter="{Binding Path=Text, ElementName=ComboBox}">Reset Selected</Button>
             </StackPanel>
             <ListBox ItemsSource="{Binding FlipFlopState}">
             <ListBox.ItemTemplate>
