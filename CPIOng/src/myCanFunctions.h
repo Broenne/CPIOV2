@@ -8,20 +8,11 @@
 #ifndef MYCANFUNCTIONS_H_
 #define MYCANFUNCTIONS_H_
 
-
 #include "include.h"
 
 void PrepareCan(void);
 void SetGlobalCanNodeId(uint8_t canId);
 uint8_t GetGlobalCanNodeId();
-
-/*
- * 8.12.18
- * MB
-* Funktion um den Filter auf die aktuelle ID zu setzen
-  * */
-//void FilterOnlyMyId(CAN_HandleTypeDef* hcan);
-
 
 /*
  * 30.11.18
@@ -30,13 +21,11 @@ uint8_t GetGlobalCanNodeId();
   * */
 void SendCanTimeDif(uint8_t channel, uint32_t res);
 
-
 /*
  * 24.01.19
  * MB
 * Funktion zum senden der flipflopstates per can. Ein mapping findet in der Funktion statt.
   * */
 void SendFlipFlopStateViaCan(uint16_t flipFlopState);
-
 
 #endif /* MYCANFUNCTIONS_H_ */

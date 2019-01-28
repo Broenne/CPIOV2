@@ -7,8 +7,6 @@
 
 #include "alive.h"
 
-
-
 #define AliveOffset ((uint32_t)0x200)
 
 static TIM_HandleTypeDef s_TimerInstance;
@@ -24,7 +22,7 @@ void SwitchMainLed(void) {
 static uint32_t AliveCanId = 0;
 
 void SanCanAlive(void) {
-	uint8_t p[] = { 0x01, 0, 0, 0, 0, 0, 0, 0 };
+	uint8_t p[] = { Major, Minor, Bugfix, 0, 0, 0, 0, 0 };
 
 	// add error frames
 	// GetApplicationStatus(&p[3]);

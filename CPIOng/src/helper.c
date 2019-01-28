@@ -49,7 +49,6 @@ int GetDebugStatusInfo() {
 	return printMode;
 }
 
-
 int _write(int file, char *ptr, int len) {
 	if (GetDebugStatusInfo()) {
 		int i = 0;
