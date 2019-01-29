@@ -54,6 +54,7 @@
 
             this.WindowLoadCommand = new RelayCommand(this.WindowLoadCommandAction);
             this.SaveCommand = new RelayCommand(this.SaveCommandAction);
+            this.LoadFromDeviceCommand = new RelayCommand(this.LoadFromDeviceCommandAction);
         }
 
         #endregion
@@ -94,6 +95,8 @@
         /// </value>
         public ICommand SaveCommand { get; }
 
+        public ICommand LoadFromDeviceCommand { get; }
+
         /// <summary>
         ///     Gets the window load command.
         /// </summary>
@@ -117,6 +120,22 @@
                 this.Logger.LogBegin(this.GetType());
 
                 this.IsEnabled = e;
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                this.Logger.LogEnd(this.GetType());
+            }
+        }
+
+        private void LoadFromDeviceCommandAction(object obj)
+        {
+            try
+            {
             }
             catch (Exception ex)
             {

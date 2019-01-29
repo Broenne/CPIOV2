@@ -13,18 +13,28 @@
             <i:InvokeCommandAction Command="{Binding WindowLoadCommand}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button" >
+                <Setter Property="Margin" Value="10"></Setter>
+                <Setter Property="Width" Value="100"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid IsEnabled="{Binding IsEnabled}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Button Width="100" HorizontalAlignment="Left" Command="{Binding SaveCommand}" Margin="3">
-            <iconPacks:PackIconMaterial  Kind="ContentSave"/>
-        </Button>
+        <StackPanel>
+            <Button HorizontalAlignment="Left" Command="{Binding SaveCommand}">
+                <iconPacks:PackIconMaterial  Kind="ContentSave"/>
+            </Button>
+            <Button Command="{Binding LoadFromDeviceCommand}">Load From Device</Button>
+        </StackPanel>
         <ListView Grid.Row="1" ItemsSource="{Binding ConfigureInputsViewList}">
             <ListView.View>
                 <GridView>
-                   
                     <GridViewColumn>
                         <GridViewColumn.Header>
                             <GridViewColumnHeader Content="Channels" />
@@ -35,7 +45,6 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-
                 </GridView>
             </ListView.View>
         </ListView>
