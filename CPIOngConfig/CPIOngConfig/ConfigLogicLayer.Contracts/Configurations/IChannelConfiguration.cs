@@ -12,5 +12,10 @@
         /// </summary>
         /// <param name="channelConfigurationDto">The channel configuration DTO.</param>
         void Set(IReadOnlyList<ChannelConfigurationDto> channelConfigurationDto);
+
+        /// <summary>
+        /// Triggers the state of to get.
+        /// </summary>
+        void TriggerToGetState();
     }
 }

@@ -3,7 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Threading;
-
+    using ConfigLogicLayer.Contracts;
+    using ConfigLogicLayer.Contracts.ActualId;
     using ConfigLogicLayer.Contracts.Configurations;
 
     using Hal.PeakCan.Contracts.Basics;
@@ -24,15 +25,26 @@
         /// <param name="logger">The logger.</param>
         /// <param name="writeBasicCan">The write basic can.</param>
         /// <param name="channelConfigurationResponseEventHandler">The channel configuration response event handler.</param>
-        public ChannelConfiguration(ILogger logger, IWriteBasicCan writeBasicCan, IChannelConfigurationResponseEventHandler channelConfigurationResponseEventHandler)
+        public ChannelConfiguration(
+            ILogger logger, 
+            IWriteBasicCan writeBasicCan, 
+            IChannelConfigurationResponseEventHandler channelConfigurationResponseEventHandler,
+            IGetActualNodeId getActualNodeId)
         {
             this.Logger = logger;
             this.WriteBasicCan = writeBasicCan;
             this.ChannelConfigurationResponseEventHandler = channelConfigurationResponseEventHandler;
+            this.GetActualNodeId = getActualNodeId;
             this.ChannelConfigurationResponseEventHandler.EventIsReached += this.ChannelConfigurationResponseEventHandler_EventIsReached;
         }
 
-        private int waitForResponse; 
+        private int waitForResponse;
+
+        /// <summary>
+        /// Handles the EventIsReached event of the ChannelConfigurationResponseEventHandler control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ChannelConfigurationResponseEventArgs"/> instance containing the event data.</param>
         private void ChannelConfigurationResponseEventHandler_EventIsReached(object sender, ChannelConfigurationResponseEventArgs e)
         {
             try
@@ -61,9 +73,42 @@
 
         private IChannelConfigurationResponseEventHandler ChannelConfigurationResponseEventHandler { get; }
 
+        private IGetActualNodeId GetActualNodeId { get; }
+
         #endregion
 
         #region Public Methods
+
+        public void TriggerToGetState()
+        {
+            try
+            {
+                this.Logger.LogBegin(this.GetType());
+
+                for (int i = 0; i < 16; i++)
+                {
+                    // todo mb: wait for response
+
+                    const byte WriteConfigByte = 0x03;
+                    var data = new List<byte>();
+                    data.Add(0x01);
+                    data.Add(Convert.ToByte(i));
+           
+                    this.WriteBasicCan.WriteCan(this.GetActualNodeId.Get() + CanCommandConsts.TriggerGetInputConfigurationOffset, data);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                throw;
+            }
+            finally
+            {
+                this.Logger.LogEnd(this.GetType());
+            }
+}
+
 
         /// <summary>
         ///     Sets the specified channel configuration DTO.

@@ -1,3 +1,0 @@
-storages.c:13:6:InitVirtualEeprom	8	static
-storages.c:22:6:SafeGlobalCanId	16	static
-storages.c:37:9:GetGloablCanIdFromEeeprom	24	static

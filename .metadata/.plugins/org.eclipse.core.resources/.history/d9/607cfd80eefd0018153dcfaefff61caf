@@ -1,5 +1,0 @@
-IO.c:109:6:InitInputs	16	static
-IO.c:142:9:CalculateAnalogToHighOrLow	16	static
-IO.c:153:9:ReadInputsFromRegisterA	4	static
-IO.c:158:9:ReadInputsFromRegisterB	8	static
-IO.c:170:9:ReadInputsFromRegisterC	8	static

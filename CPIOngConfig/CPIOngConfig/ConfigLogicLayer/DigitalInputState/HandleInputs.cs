@@ -112,6 +112,7 @@
                 this.HandleAlive(id, data);
                 this.HandleChannelConfigResponse(id, data);
                 this.HandleFlipFlopEvent(id, data);
+                this.HandleInputConfigStateReturn(id, data);
             }
             catch (Exception ex)
             {
@@ -119,6 +120,30 @@
                 throw;
             }
         }
+
+        private void HandleInputConfigStateReturn(uint id, byte[] data)
+        {
+            try
+            {
+                this.Logger.LogBegin(this.GetType());
+
+                if (id == 0x179 + this.GetActualNodeId.Get())
+                {
+                    // toido mb: es gibt da schon ne abfrage für
+                    ; // todo mb:
+                }
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                throw;
+            }
+            finally
+            {
+                this.Logger.LogEnd(this.GetType());
+            }
+        }
+
 
         private void HandleFlipFlopEvent(uint id, byte[] data)
         {

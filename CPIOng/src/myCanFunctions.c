@@ -10,9 +10,7 @@
 static uint8_t globalCanId = 2;
 
 #define QUEUE_SIZE_FOR_CAN		( ( unsigned short ) 32 )
-#define PULSE_OPENCAN_OFFSET 		( ( unsigned short ) 0x180 )
-#define FLIPFLOP_OPENCAN_OFFSET 		( ( unsigned short ) 0x170 )
-#define FLIPFLOP_OPENCAN_OFFSET_RESET 		( ( unsigned short ) 0x172 )
+
 
 //extern CAN_HandleTypeDef hcan2;
 osThreadId canInputTaskHandle;
@@ -20,16 +18,15 @@ osThreadId canInputTaskHandle;
 xQueueHandle CanRxQueueHandle = NULL;
 xQueueHandle CanQueueSenderHandle = NULL;
 
-
 /*
  * Created on: 17.12.18
  * Author: MB
  * Set the difffernt modi for the cahnnel from outside by can. *
  * */
-void SetChannelModiFromExternal(uint8_t* data){
+void SetChannelModiFromExternal(uint8_t* data) {
 	uint8_t channel = data[1];
 	uint8_t mode = data[2];
-	ChannelModiType channelModiType = (ChannelModiType)mode;
+	ChannelModiType channelModiType = (ChannelModiType) mode;
 	ChangeChannelModi(channel, channelModiType);
 
 	// als bestätigung wegsenden
@@ -63,18 +60,18 @@ void CanWorkerTask(void * pvParameters) {
 				// default id 0
 				if (0x00 == stdid) {
 					switch (hcan->pRxMsg->Data[0]) {
-						case 0x01:
-							SetGlobalCanNodeId(hcan->pRxMsg->Data[1]);
-							printf("Incoming id 0x00 %d", GetGlobalCanNodeId());
-							break;
-						case 0x02:
-							ActivateDebug(hcan->pRxMsg->Data[1]);
-							break;
-						case 0x03:
-							SetChannelModiFromExternal(pData);
-							break;
-						default:
-							break;
+					case 0x01:
+						SetGlobalCanNodeId(hcan->pRxMsg->Data[1]);
+						printf("Incoming id 0x00 %d", GetGlobalCanNodeId());
+						break;
+					case 0x02:
+						ActivateDebug(hcan->pRxMsg->Data[1]);
+						break;
+					case 0x03:
+						SetChannelModiFromExternal(pData);
+						break;
+					default:
+						break;
 					}
 				}
 
@@ -87,13 +84,37 @@ void CanWorkerTask(void * pvParameters) {
 					}
 				}
 
+				// todo mb: in Funktion verschieben
+				// Funktion zum Abfrage der Einstellung der aktuellen Eingänge
+				if ((GetGlobalCanNodeId() + RequestInputConfig) == stdid) {
+					uint8_t* data = hcan->pRxMsg->Data[0];
+					uint8_t inputChannelNumber = data[1];
+					switch (data[0]) {
+					case 0x01:
+
+						// todo mb: Antwort auif 0x179
+						//data[0] = 0x01; // zeit es kommt die konfiguration der Eingänge
+						//data[1] = Eingangsnummer
+						// data[2] = Eingangsmodus
+						//sendCan(GetGlobalCanNodeId() + 0x179, data, 8); // Funktion nur einmal aufrufen
+
+						break;
+					case 0x02:
+						// einstellung, welcher Sensor grade am Knoten aktiv ist
+						// data[0] = 0x02;
+						// data[1] = AktiverKanal;
+					default:
+						break;
+					}
+				}
+
 				// funktion zum setzen des aktuellen channel modi
-				if((GetGlobalCanNodeId() + 512) == stdid){
-					ChannelModiType channelModiType = (ChannelModiType)hcan->pRxMsg->Data[0];
+				if ((GetGlobalCanNodeId() + 512) == stdid) {
+					ChannelModiType channelModiType = (ChannelModiType) hcan->pRxMsg->Data[0];
 					SetActiveChannelModiType(channelModiType);
 				}
 
-				if((GetGlobalCanNodeId() + FLIPFLOP_OPENCAN_OFFSET_RESET) == stdid){
+				if ((GetGlobalCanNodeId() + FLIPFLOP_OPENCAN_OFFSET_RESET) == stdid) {
 					ResetFlipFlop(pData);
 				}
 
@@ -135,7 +156,7 @@ uint8_t GetGlobalCanNodeId() {
 }
 
 void SetGlobalCanNodeId(uint8_t canId) {
-	// todo mb: einschränken
+// todo mb: einschränken
 	SafeGlobalCanId(canId);
 	Reset();
 }
@@ -143,7 +164,7 @@ void SetGlobalCanNodeId(uint8_t canId) {
 void SendCanTimeDif(uint8_t channel, uint32_t res) {
 	uint8_t p[] = { 0, 0, 0, 0 };
 
-	// cast timestamp to can info
+// cast timestamp to can info
 	p[0] = (res >> 24) & 0xFF;
 	p[1] = (res >> 16) & 0xFF;
 	p[2] = (res >> 8) & 0xFF;
@@ -159,15 +180,13 @@ void GetInputs(uint8_t* data) {
 	memcpy(data, &val, sizeof(val));
 }
 
+void SendFlipFlopStateViaCan(uint16_t flipFlopState) {
+	uint8_t p[] = { 0, 0 };
 
-void SendFlipFlopStateViaCan(uint16_t flipFlopState){
-		uint8_t p[] = { 0, 0 };
+	p[0] = flipFlopState & 0xFF;
+	p[1] = (flipFlopState >> 8) & 0xFF;
 
-		p[0] = flipFlopState & 0xFF;
-		p[1] = (flipFlopState >> 8) & 0xFF;
-
-
-		uint32_t canId = FLIPFLOP_OPENCAN_OFFSET + GetGlobalCanNodeId();
-		SendCan(canId, p, 2);
+	uint32_t canId = FLIPFLOP_OPENCAN_OFFSET + GetGlobalCanNodeId();
+	SendCan(canId, p, 2);
 }
 

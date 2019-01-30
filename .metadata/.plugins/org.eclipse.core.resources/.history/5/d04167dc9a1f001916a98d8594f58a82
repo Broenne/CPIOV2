@@ -1,0 +1,44 @@
+/*
+ * FlipFlop.c
+ *
+ *  Created on: 24.01.2019
+ *      Author: MB
+ */
+
+
+static uint16_t StorageFlipFlopState = 0xFF;
+
+
+/*
+ *  Created on: 24.01.2019
+ *      Author: MB
+ *
+ *      Die Funktion setzt den FlipFlop Zustand des Kanals, wenn es eine Änderung gab.
+ *      Es wird eine Nachricht auf den CAN-BUS mit der Info gelegt.
+ */
+void SetFlipFlop(uint8_t channel){
+
+	// Änderung in variable speichern speichern
+
+	// bitshift um Kanal um an passende Stelle in Variable zu kommen
+	// dann verodern
+
+	// immer alle FlipFlop Zustände senden, datenfeld reicht ja locker aus
+	SendFlipFlopStateViaCan(StorageFlipFlopState); // todo mb: muss hier ne kopie angelgt werden, oder was passiert, wenn sich der state grade in dem Moment ändert?
+}
+
+/*
+ *  Created on: 24.01.2019
+ *      Author: MB
+ *
+ *      Es wird der Kanal, oder die Kanäle zurück gesetzt
+ */
+void ResetFlipFlop(uint8_t* resetChannelsBitmask){
+
+	// Bit 0-1
+	// Bitmaske, welcher KAnäle resetet werden
+
+	// zur Bestätigung wieder wegsenden
+	SendFlipFlopStateViaCan(StorageFlipFlopState);
+}
+

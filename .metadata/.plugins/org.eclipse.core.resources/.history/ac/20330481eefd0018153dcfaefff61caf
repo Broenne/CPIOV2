@@ -1,6 +1,0 @@
-core_cm3.h:1177:26:ITM_SendChar	16	static
-helper.c:10:6:delay_us	24	static
-helper.c:24:6:delay_ms	16	static
-helper.c:37:6:ActivateDebug	16	static
-helper.c:41:5:GetDebugStatusInfo	4	static
-helper.c:45:5:_write	32	static

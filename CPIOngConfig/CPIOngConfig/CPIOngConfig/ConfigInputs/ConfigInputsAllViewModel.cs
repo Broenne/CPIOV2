@@ -136,6 +136,7 @@
         {
             try
             {
+                this.ChannelConfiguration.TriggerToGetState();
             }
             catch (Exception ex)
             {

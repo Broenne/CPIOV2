@@ -10,9 +10,7 @@
 
 #include "include.h"
 
-#define Major ((uint8_t)0x00)
-#define Minor ((uint8_t)0x00)
-#define Bugfix ((uint8_t)0x00)
+
 
 
 

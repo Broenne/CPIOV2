@@ -39,4 +39,17 @@
 #include "FlipFlop/FlipFlop.h"
 
 
+#define Major ((uint8_t)0x00)
+#define Minor ((uint8_t)0x00)
+#define Bugfix ((uint8_t)0x01)
+
+
+
+
+#define FLIPFLOP_OPENCAN_OFFSET 		(( unsigned short ) 0x170 )
+#define FLIPFLOP_OPENCAN_OFFSET_RESET 	(( unsigned short ) 0x172 )
+#define RequestInputConfig 				((uint8_t)0x178)
+#define PULSE_OPENCAN_OFFSET 			( ( unsigned short ) 0x180 )
+
+
 #endif /* INCLUDE_H_ */
