@@ -11,7 +11,6 @@ static uint8_t globalCanId = 2;
 
 #define QUEUE_SIZE_FOR_CAN		( ( unsigned short ) 32 )
 
-
 //extern CAN_HandleTypeDef hcan2;
 osThreadId canInputTaskHandle;
 
@@ -86,8 +85,8 @@ void CanWorkerTask(void * pvParameters) {
 
 				// todo mb: in Funktion verschieben
 				// Funktion zum Abfrage der Einstellung der aktuellen Eingänge
-				if ((GetGlobalCanNodeId() + RequestInputConfig) == stdid) {
-					uint8_t* data = hcan->pRxMsg->Data[0];
+				if ((GetGlobalCanNodeId() + REQUEST_INPUT_CONFIG) == stdid) {
+					uint8_t* data = &hcan->pRxMsg->Data[0];
 					uint8_t inputChannelNumber = data[1];
 					switch (data[0]) {
 					case 0x01:

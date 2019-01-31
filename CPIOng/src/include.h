@@ -48,7 +48,7 @@
 
 #define FLIPFLOP_OPENCAN_OFFSET 		(( unsigned short ) 0x170 )
 #define FLIPFLOP_OPENCAN_OFFSET_RESET 	(( unsigned short ) 0x172 )
-#define RequestInputConfig 				((uint8_t)0x178)
+#define REQUEST_INPUT_CONFIG			(( unsigned short ) 0x178)
 #define PULSE_OPENCAN_OFFSET 			( ( unsigned short ) 0x180 )
 
 

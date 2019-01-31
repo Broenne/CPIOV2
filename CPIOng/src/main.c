@@ -85,10 +85,9 @@ static void MX_WWDG_Init(void);
 //void Callback01(void const * argument);
 
 void FilterCanIdResetFlipFlop(CAN_HandleTypeDef* hcan) {
-
 	int globalCanId = GetGlobalCanNodeId();
 	CAN_FilterConfTypeDef sFilterConfig;
-	sFilterConfig.FilterNumber = 16;
+	sFilterConfig.FilterNumber = 17;
 	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
 	sFilterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
 	sFilterConfig.FilterMaskIdHigh = 0xFFFF;
@@ -110,16 +109,15 @@ void FilterCanIdResetFlipFlop(CAN_HandleTypeDef* hcan) {
 
 
 void FilterCanIdGetInputConfig(CAN_HandleTypeDef* hcan) {
-
 	int globalCanId = GetGlobalCanNodeId();
 	CAN_FilterConfTypeDef sFilterConfig;
-	sFilterConfig.FilterNumber = 12;
+	sFilterConfig.FilterNumber = 18;
 	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
 	sFilterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
 	sFilterConfig.FilterMaskIdHigh = 0xFFFF;
 	sFilterConfig.FilterMaskIdLow = 0x07FF << 5;
 	sFilterConfig.FilterIdHigh = 0x0000;
-	sFilterConfig.FilterIdLow = (globalCanId + RequestInputConfig) << 5;
+	sFilterConfig.FilterIdLow = (globalCanId + REQUEST_INPUT_CONFIG) << 5;
 	sFilterConfig.FilterFIFOAssignment = CAN_FIFO0;
 	sFilterConfig.FilterActivation = ENABLE;
 
@@ -134,12 +132,10 @@ void FilterCanIdGetInputConfig(CAN_HandleTypeDef* hcan) {
 }
 
 
-
 void FilterCanIdActiveSensor(CAN_HandleTypeDef* hcan) {
-
 	int globalCanId = GetGlobalCanNodeId();
 	CAN_FilterConfTypeDef sFilterConfig;
-	sFilterConfig.FilterNumber = 14;
+	sFilterConfig.FilterNumber = 16;
 	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
 	sFilterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
 	sFilterConfig.FilterMaskIdHigh = 0xFFFF;
@@ -160,10 +156,9 @@ void FilterCanIdActiveSensor(CAN_HandleTypeDef* hcan) {
 }
 
 void FilterOnlyMyId(CAN_HandleTypeDef* hcan) {
-
 	int globalCanId = GetGlobalCanNodeId();
 	CAN_FilterConfTypeDef sFilterConfig;
-	sFilterConfig.FilterNumber = 15;
+	sFilterConfig.FilterNumber = 16;
 	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
 	sFilterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
 	sFilterConfig.FilterMaskIdHigh = 0xFFFF;
