@@ -17,6 +17,12 @@ osThreadId canInputTaskHandle;
 xQueueHandle CanRxQueueHandle = NULL;
 xQueueHandle CanQueueSenderHandle = NULL;
 
+void SendActualChannelModi(uint8_t* data) {
+	data[3] = 0xFF;
+	uint32_t canId = GetGlobalCanNodeId() + SEND_INPUT_CONFIG;
+	SendCan(canId, data, 8);
+}
+
 /*
  * Created on: 17.12.18
  * Author: MB
@@ -29,10 +35,11 @@ void SetChannelModiFromExternal(uint8_t* data) {
 	ChangeChannelModi(channel, channelModiType);
 
 	// als bestätigung wegsenden
-	uint8_t canId = 0x00; // sende auch auf can 0 die response
-	data[3] = 0xFF;
-	SendCan(canId, data, 8);
+	//uint8_t canId = 0x00; // sende auch auf can 0 die response
+	SendActualChannelModi(data);
 }
+
+
 
 /*
  * Created on: 30.11.18
@@ -91,11 +98,12 @@ void CanWorkerTask(void * pvParameters) {
 					switch (data[0]) {
 					case 0x01:
 
-						// todo mb: Antwort auif 0x179
-						//data[0] = 0x01; // zeit es kommt die konfiguration der Eingänge
-						//data[1] = Eingangsnummer
-						// data[2] = Eingangsmodus
-						//sendCan(GetGlobalCanNodeId() + 0x179, data, 8); // Funktion nur einmal aufrufen
+//						// todo mb: Antwort auif 0x179
+						data[0] = 0x01; // zeit es kommt die konfiguration der Eingänge
+						data[1] = inputChannelNumber; //Eingangsnummer
+						data[2] = 0x06; //Eingangsmodus
+						SendActualChannelModi(data);
+//						SendCan(GetGlobalCanNodeId() + 0x179, data, 8); // Funktion nur einmal aufrufen
 
 						break;
 					case 0x02:

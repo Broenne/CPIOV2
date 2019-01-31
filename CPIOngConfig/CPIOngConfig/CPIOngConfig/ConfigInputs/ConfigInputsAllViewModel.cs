@@ -95,6 +95,12 @@
         /// </value>
         public ICommand SaveCommand { get; }
 
+        /// <summary>
+        /// Gets the load from device command.
+        /// </summary>
+        /// <value>
+        /// The load from device command.
+        /// </value>
         public ICommand LoadFromDeviceCommand { get; }
 
         /// <summary>

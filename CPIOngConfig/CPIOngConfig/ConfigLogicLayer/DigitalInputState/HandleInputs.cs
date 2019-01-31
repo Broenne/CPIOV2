@@ -112,7 +112,7 @@
                 this.HandleAlive(id, data);
                 this.HandleChannelConfigResponse(id, data);
                 this.HandleFlipFlopEvent(id, data);
-                this.HandleInputConfigStateReturn(id, data);
+                //this.HandleInputConfigStateReturn(id, data);
             }
             catch (Exception ex)
             {
@@ -121,28 +121,28 @@
             }
         }
 
-        private void HandleInputConfigStateReturn(uint id, byte[] data)
-        {
-            try
-            {
-                this.Logger.LogBegin(this.GetType());
+        //private void HandleInputConfigStateReturn(uint id, byte[] data)
+        //{
+        //    try
+        //    {
+        //        this.Logger.LogBegin(this.GetType());
 
-                if (id == 0x179 + this.GetActualNodeId.Get())
-                {
-                    // toido mb: es gibt da schon ne abfrage für
-                    ; // todo mb:
-                }
-            }
-            catch (Exception ex)
-            {
-                this.Logger.LogError(ex);
-                throw;
-            }
-            finally
-            {
-                this.Logger.LogEnd(this.GetType());
-            }
-        }
+        //        if (id == 0x179 + this.GetActualNodeId.Get())
+        //        {
+        //            // toido mb: es gibt da schon ne abfrage für
+        //            ; // todo mb:
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        this.Logger.LogError(ex);
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        this.Logger.LogEnd(this.GetType());
+        //    }
+        //}
 
 
         private void HandleFlipFlopEvent(uint id, byte[] data)
@@ -176,7 +176,7 @@
             {
                 this.Logger.LogBegin(this.GetType());
 
-                if (id == 0x00 && data[0] == 0x03)
+                if (id == (0x179 + this.GetActualNodeId.Get()) )//&& data[0] == 0x03)
                 {
                     this.ChannelConfigurationResponseEventHandler.OnReached(new ChannelConfigurationResponseEventArgs(data[1]));
                 }
