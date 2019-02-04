@@ -20,6 +20,8 @@
     {
         private int waitForResponse;
 
+        private int waitForResponseRequest;
+
         #region Constructor
 
         /// <summary>
@@ -115,8 +117,12 @@
 
                     this.WriteBasicCan.WriteCan(this.GetActualNodeId.Get() + CanCommandConsts.TriggerGetInputConfigurationOffset, data);
 
-                    // todo mb: auf dings warten
-                    // Thread.Sleep(200);
+                    while (this.waitForResponse != i)
+                    {
+                        // todo mb: timeoput
+                        Thread.Sleep(10);
+                        Console.WriteLine($"Kanal zur Anfrages  {i}");
+                    }
                 }
             }
             catch (Exception ex)

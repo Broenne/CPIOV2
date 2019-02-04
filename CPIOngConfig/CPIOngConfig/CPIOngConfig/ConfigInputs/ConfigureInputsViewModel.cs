@@ -1,6 +1,12 @@
 ﻿namespace CPIOngConfig.ConfigInputs
 {
+    using System;
+
+    using ConfigLogicLayer.Contracts.Configurations;
+
     using CPIOngConfig.Contracts.ConfigInputs;
+
+    using Helper.Contracts.Logger;
 
     using Prism.Mvvm;
 
@@ -16,6 +22,18 @@
         private Modi seletedModi;
 
         #region Constructor
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConfigureInputsViewModel"/> class.
+        /// </summary>
+        /// <param name="logger">The logger.</param>
+        /// <param name="channelConfigurationResponseEventHandler">The channel configuration response event handler.</param>
+        public ConfigureInputsViewModel(ILogger logger, IChannelConfigurationResponseEventHandler channelConfigurationResponseEventHandler)
+        {
+            this.Logger = logger;
+            this.ChannelConfigurationResponseEventHandler = channelConfigurationResponseEventHandler;
+            this.ChannelConfigurationResponseEventHandler.EventIsReached += this.ChannelConfigurationResponseEventHandler_EventIsReached;
+        }
 
         #endregion
 
@@ -45,9 +63,33 @@
             set => this.SetProperty(ref this.seletedModi, value);
         }
 
+        private IChannelConfigurationResponseEventHandler ChannelConfigurationResponseEventHandler { get; }
+
+        private ILogger Logger { get; }
+
         #endregion
 
         #region Public Methods
+
+        /// <summary>
+        ///     Gets the channel.
+        /// </summary>
+        /// <returns>
+        ///     Return the channel.
+        /// </returns>
+        public uint GetChannel()
+        {
+            return this.Channel;
+        }
+
+        /// <summary>
+        ///     Gets the selected modi.
+        /// </summary>
+        /// <returns>Return the modus.</returns>
+        public Modi GetSelectedModi()
+        {
+            return this.SelectedModi;
+        }
 
         /// <summary>
         ///     Sets the channel.
@@ -58,24 +100,26 @@
             this.Channel = channelArg;
         }
 
-        /// <summary>
-        /// Gets the channel.
-        /// </summary>
-        /// <returns>
-        /// Return the channel.
-        /// </returns>
-        public uint GetChannel()
-        {
-            return this.Channel;
-        }
+        #endregion
 
-        /// <summary>
-        /// Gets the selected modi.
-        /// </summary>
-        /// <returns>Return the modus.</returns>
-        public Modi GetSelectedModi()
+        #region Private Methods
+
+        private void ChannelConfigurationResponseEventHandler_EventIsReached(object sender, ChannelConfigurationResponseEventArgs e)
         {
-            return this.SelectedModi;
+            try
+            {
+                this.Logger.LogBegin(this.GetType());
+
+                if (e.Channel.Equals(this.channel))
+                {
+                    this.SelectedModi = e.Modi;
+                }
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                throw;
+            }
         }
 
         #endregion

@@ -101,7 +101,7 @@ void CanWorkerTask(void * pvParameters) {
 //						// todo mb: Antwort auif 0x179
 						data[0] = 0x01; // zeit es kommt die konfiguration der Eingänge
 						data[1] = inputChannelNumber; //Eingangsnummer
-						data[2] = 0x06; //Eingangsmodus
+						data[2] = 0x03; //Eingangsmodus
 						SendActualChannelModi(data);
 //						SendCan(GetGlobalCanNodeId() + 0x179, data, 8); // Funktion nur einmal aufrufen
 

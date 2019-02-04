@@ -9,6 +9,7 @@
 
     using CPIOngConfig.Contracts.Adapter;
     using CPIOngConfig.Contracts.Alive;
+    using CPIOngConfig.Contracts.ConfigInputs;
     using CPIOngConfig.Contracts.FlipFlop;
     using CPIOngConfig.Contracts.InputBinary;
     using CPIOngConfig.Contracts.Pulse;
@@ -178,7 +179,7 @@
 
                 if (id == (0x179 + this.GetActualNodeId.Get()) )//&& data[0] == 0x03)
                 {
-                    this.ChannelConfigurationResponseEventHandler.OnReached(new ChannelConfigurationResponseEventArgs(data[1]));
+                    this.ChannelConfigurationResponseEventHandler.OnReached(new ChannelConfigurationResponseEventArgs(data[1], (Modi)data[2]));
                 }
             }
             catch (Exception ex)
