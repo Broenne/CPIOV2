@@ -32,7 +32,11 @@
 
         #endregion
 
+        private DestinationTimeBase destinationTimeBase = DestinationTimeBase.Raw;
+
         private uint pulsPerRevolution;
+
+        private string selectedTimeBase;
 
         private double volumePerRevolution;
 
@@ -48,30 +52,13 @@
             this.Logger = logger;
             this.FactorPulseEventHandler = factorPulseEventHandler;
             this.CheckBoxChangeCommand = new RelayCommand(this.CheckBoxChangeCommandAction);
-            this.UnitChangeCommand = new RelayCommand(this.UnitChangeCommandAction);
 
             this.TimeBase = new ObservableCollection<string>(new List<string> { Millisecond, Second, Minute, Hour });
-
         }
 
         #endregion
 
         #region Properties
-
-        public ICommand UnitChangeCommand { get; set; }
-
-        private void UnitChangeCommandAction(object obj)
-        {
-            try
-            {
-                ;
-            }
-            catch (Exception ex)
-            {
-                this.Logger.LogError(ex);
-                MessageBox.Show(ex.Message);
-            }
-        }
 
         /// <summary>
         ///     Gets or sets the CheckBox change command.
@@ -93,7 +80,47 @@
             set => this.SetProperty(ref this.pulsPerRevolution, value);
         }
 
+        public string SelectedTimeBase
+        {
+            get => this.selectedTimeBase;
+            set
+            {
+                var unit = value;
+
+                this.destinationTimeBase = DestinationTimeBase.Raw;
+                if (unit.Equals(Hour))
+                {
+                    this.destinationTimeBase = DestinationTimeBase.Hour;
+                }
+
+                if (unit.Equals(Minute))
+                {
+                    this.destinationTimeBase = DestinationTimeBase.Minute;
+                }
+
+                if (unit.Equals(Second))
+                {
+                    this.destinationTimeBase = DestinationTimeBase.Second;
+                }
+
+                if (unit.Equals(Millisecond))
+                {
+                    this.destinationTimeBase = DestinationTimeBase.Millisecond;
+                }
+
+                this.SetProperty(ref this.selectedTimeBase, value);
+            }
+        }
+
         public ObservableCollection<string> TimeBase { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the unit change command.
+        /// </summary>
+        /// <value>
+        ///     The unit change command.
+        /// </value>
+        public ICommand UnitChangeCommand { get; set; }
 
         /// <summary>
         ///     Gets or sets the volume per revolution.
@@ -122,13 +149,15 @@
                 var isChecked = (bool)obj;
 
                 double volumePerTimeSlot = 1;
-
+                var destinationTimeBaseInternal = DestinationTimeBase.Raw;
                 if (isChecked)
                 {
                     volumePerTimeSlot = this.VolumePerRevolution / this.PulsPerRevolution;
+                    destinationTimeBaseInternal = this.destinationTimeBase;
                 }
 
-                this.FactorPulseEventHandler.OnReached(volumePerTimeSlot);
+                var factorPulseEventArgs = new FactorPulseEventArgs(destinationTimeBaseInternal, volumePerTimeSlot);
+                this.FactorPulseEventHandler.OnReached(factorPulseEventArgs);
             }
             catch (Exception ex)
             {

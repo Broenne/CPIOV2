@@ -22,7 +22,7 @@
     {
         private readonly Dispatcher dispatcher = RootDispatcherFetcher.RootDispatcher;
 
-        private double factor = 1;
+        private double timefactor = 1;
 
         private List<PulseDataForView> pulseDataForViewList;
 
@@ -38,8 +38,8 @@
         /// <param name="logger">The logger.</param>
         /// <param name="pulseEventHandler">The pulse event handler.</param>
         /// <param name="pulseStorageView">The pulse storage view.</param>
-        /// <param name="factorPulseViewArg">The factor pulse view argument.</param>
-        /// <param name="factorPulseEventHandler">The factor pulse event handler.</param>
+        /// <param name="factorPulseViewArg">The timefactor pulse view argument.</param>
+        /// <param name="factorPulseEventHandler">The timefactor pulse event handler.</param>
         public PulseViewModel(ILogger logger, IPulseEventHandler pulseEventHandler, IPulseStorageView pulseStorageView, IFactorPulseView factorPulseViewArg, IFactorPulseEventHandler factorPulseEventHandler)
         {
             this.Logger = logger;
@@ -77,10 +77,10 @@
         }
 
         /// <summary>
-        ///     Gets or sets the pulse factor view.
+        ///     Gets or sets the pulse timefactor view.
         /// </summary>
         /// <value>
-        ///     The pulse factor view.
+        ///     The pulse timefactor view.
         /// </value>
         public IFactorPulseView PulseFactorView
         {
@@ -106,11 +106,11 @@
 
         #region Private Methods
 
-        private void FactorPulseEventHandler_EventIsReached(object sender, double e)
+        private void FactorPulseEventHandler_EventIsReached(object sender, FactorPulseEventArgs e)
         {
             try
             {
-                this.factor = e;
+                this.timefactor = e.GetFactor();
             }
             catch (Exception ex)
             {
@@ -123,16 +123,9 @@
         {
             try
             {
-                // aktuell t in 0,1 ms
-                var timDifin0D1Ms = e.Stamp;
-
-                var timDifInMs = timDifin0D1Ms / 10.0;
-                var timeInSecond = timDifInMs / 1000.0;
-                var tinmeInMinutes = timeInSecond / 60;
-
 
                 // Q = V / t
-                double valueToList = this.factor * /*timDifin0D1Ms*/timeInSecond;
+                double valueToList = this.timefactor * e.Stamp;
 
 
                 this.dispatcher.Invoke(() => { this.PulseDataForViewList[e.Channel].AddTime(valueToList); });

@@ -21,7 +21,7 @@
         /// <summary>
         /// Called when [reached].
         /// </summary>
-        /// <param name="volumePerTimeSlot">The volume per time slot.</param>
+        /// <param name="args">The <see cref="FactorPulseEventArgs"/> instance containing the event data.</param>
         void OnReached(FactorPulseEventArgs args);
 
         #endregion
