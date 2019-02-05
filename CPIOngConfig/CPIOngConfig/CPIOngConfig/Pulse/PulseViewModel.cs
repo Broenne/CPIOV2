@@ -124,16 +124,15 @@
             try
             {
                 // aktuell t in 0,1 ms
-
                 var timDifin0D1Ms = e.Stamp;
 
                 var timDifInMs = timDifin0D1Ms / 10.0;
                 var timeInSecond = timDifInMs / 1000.0;
+                var tinmeInMinutes = timeInSecond / 60;
+
+
                 // Q = V / t
-
                 double valueToList = this.factor * /*timDifin0D1Ms*/timeInSecond;
-
-
 
 
                 this.dispatcher.Invoke(() => { this.PulseDataForViewList[e.Channel].AddTime(valueToList); });

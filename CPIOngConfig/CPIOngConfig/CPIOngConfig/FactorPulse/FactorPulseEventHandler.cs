@@ -30,7 +30,7 @@
         /// <summary>
         ///     Occurs when [event is reached].
         /// </summary>
-        public event EventHandler<double> EventIsReached;
+        public event EventHandler<FactorPulseEventArgs> EventIsReached;
 
         #endregion
 
@@ -46,7 +46,7 @@
         ///     Called when [reached].
         /// </summary>
         /// <param name="e">The event argument.</param>
-        public void OnReached(double e)
+        public void OnReached(FactorPulseEventArgs e)
         {
             try
             {

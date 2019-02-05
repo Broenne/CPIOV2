@@ -16,6 +16,21 @@
                 <Label>Pulse/Umdrehung</Label>
                 <controls:NumericUpDown Minimum = "0" Maximum = "100" Interval = "0.01" Height="40" Width="100" Margin="5,5,0,5"></controls:NumericUpDown>
                 <Label>Volume/Umdrehung</Label>
+                <controls:SplitButton
+                    Name="UnitSelect"
+                    Margin="20"
+                    VerticalContentAlignment="Center"
+                    Width="120"
+                    ItemsSource="{Binding TimeBase}">
+                </controls:SplitButton>
+                <Button  
+                    Margin="5"
+                    Width="60"
+                    Height="20"
+                    Command="{Binding UnitChangeCommand}"
+                    CommandParameter="{Binding ElementName=UnitSelect, Path=SelectedValue}">
+                    Change Unit
+                </Button>
             </StackPanel>
         </Grid>
     </Border>

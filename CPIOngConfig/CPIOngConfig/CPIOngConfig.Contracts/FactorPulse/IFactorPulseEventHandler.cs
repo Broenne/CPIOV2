@@ -12,7 +12,7 @@
         /// <summary>
         ///     Occurs when [event is reached].
         /// </summary>
-        event EventHandler<double> EventIsReached;
+        event EventHandler<FactorPulseEventArgs> EventIsReached;
 
         #endregion
 
@@ -22,7 +22,7 @@
         /// Called when [reached].
         /// </summary>
         /// <param name="volumePerTimeSlot">The volume per time slot.</param>
-        void OnReached(double volumePerTimeSlot);
+        void OnReached(FactorPulseEventArgs args);
 
         #endregion
     }
