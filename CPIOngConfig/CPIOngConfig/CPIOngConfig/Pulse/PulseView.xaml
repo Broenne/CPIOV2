@@ -17,11 +17,13 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="120"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-       <ContentPresenter Content="{Binding PulseStorageView}"></ContentPresenter>
-
+        <StackPanel Orientation="Vertical">
+            <ContentPresenter Content="{Binding PulseStorageView}"></ContentPresenter>
+            <ContentPresenter Content="{Binding PulseFactorView}"></ContentPresenter>
+        </StackPanel>
         <ListView Grid.Row="1" ItemsSource="{Binding PulseDataForViewList}">
             <ListView.View>
                 <GridView>
