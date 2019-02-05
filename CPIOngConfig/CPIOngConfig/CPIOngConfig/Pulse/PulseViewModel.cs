@@ -129,7 +129,7 @@
                 var time = this.timefactor * e.Stamp;
                 var valueToList = this.volumePerTimeSlot / time;
 
-                this.dispatcher.Invoke(() => { this.PulseDataForViewList[e.Channel].AddTime(time, valueToList); });
+                this.dispatcher.Invoke(() => { this.PulseDataForViewList[e.Channel].AddTime(e.Stamp, valueToList); });
             }
             catch (Exception ex)
             {
