@@ -10,15 +10,19 @@
     {
         private string tim;
 
+        private string volume;
+
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TimePulse"/> class.
+        /// Initializes a new instance of the <see cref="TimePulse" /> class.
         /// </summary>
         /// <param name="tim">The time info.</param>
-        public TimePulse(string tim)
+        /// <param name="volume">The volume.</param>
+        public TimePulse(string tim, string volume)
         {
             this.Tim = tim;
+            this.Volume = volume;
         }
 
         #endregion
@@ -35,6 +39,18 @@
         {
             get => this.tim;
             set => this.SetProperty(ref this.tim, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the tim.
+        /// </summary>
+        /// <value>
+        /// The time info.
+        /// </value>
+        public string Volume
+        {
+            get => this.volume;
+            set => this.SetProperty(ref this.volume, value);
         }
 
         #endregion

@@ -32,7 +32,7 @@
 
             for (var i = 0; i < listCntArg; i++)
             {
-                helper.Add(new TimePulse("0"));
+                helper.Add(new TimePulse("0", "0"));
             }
 
             this.Times = new ObservableCollection<TimePulse>(helper);
@@ -75,13 +75,14 @@
         #region Public Methods
 
         /// <summary>
-        ///     Adds the time.
+        /// Adds the time.
         /// </summary>
         /// <param name="dif">The difference.</param>
-        public void AddTime(double dif)
+        /// <param name="volume">The volume.</param>
+        public void AddTime(double dif, double volume)
         {
             var difAsString  = dif.ToString(CultureInfo.InvariantCulture);
-            var timePulseToAdd = new TimePulse(difAsString);
+            var timePulseToAdd = new TimePulse(difAsString, volume.ToString(CultureInfo.InvariantCulture));
 
             this.Times.Add(timePulseToAdd); // das wird gesetz, um den sdcroll balken nach hinten zu setzen
             this.SelectedTimeItem = timePulseToAdd;

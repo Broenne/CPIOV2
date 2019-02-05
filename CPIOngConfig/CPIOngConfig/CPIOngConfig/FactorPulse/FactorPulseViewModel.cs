@@ -80,6 +80,12 @@
             set => this.SetProperty(ref this.pulsPerRevolution, value);
         }
 
+        /// <summary>
+        /// Gets or sets the selected time base.
+        /// </summary>
+        /// <value>
+        /// The selected time base.
+        /// </value>
         public string SelectedTimeBase
         {
             get => this.selectedTimeBase;
@@ -112,6 +118,12 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the time base.
+        /// </summary>
+        /// <value>
+        /// The time base.
+        /// </value>
         public ObservableCollection<string> TimeBase { get; set; }
 
         /// <summary>

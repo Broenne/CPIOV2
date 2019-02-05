@@ -22,18 +22,20 @@
     {
         private readonly Dispatcher dispatcher = RootDispatcherFetcher.RootDispatcher;
 
-        private double timefactor = 1;
-
         private List<PulseDataForView> pulseDataForViewList;
 
         private IFactorPulseView pulseFactorView;
 
         private IPulseStorageView pulseStorageView;
 
+        private double timefactor = 1;
+
+        private double volumePerTimeSlot = 1;
+
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PulseViewModel" /> class.
+        ///     Initializes a new instance of the <see cref="PulseViewModel" /> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="pulseEventHandler">The pulse event handler.</param>
@@ -47,13 +49,12 @@
             this.PulseStorageView = pulseStorageView;
             this.PulseFactorView = factorPulseViewArg;
             factorPulseEventHandler.EventIsReached += this.FactorPulseEventHandler_EventIsReached;
-            
 
             // todo mb: parallel for
             for (var i = 0; i < 16; i++)
             {
                 var pulseDataForView = new PulseDataForView($"{i}", 100);
-                pulseDataForView.AddTime(0);
+                pulseDataForView.AddTime(0, 0);
                 this.PulseDataForViewList.Add(pulseDataForView);
             }
 
@@ -111,6 +112,7 @@
             try
             {
                 this.timefactor = e.GetFactor();
+                this.volumePerTimeSlot = e.VolumePerTimeSlot;
             }
             catch (Exception ex)
             {
@@ -123,12 +125,11 @@
         {
             try
             {
-
                 // Q = V / t
-                double valueToList = this.timefactor * e.Stamp;
+                var time = this.timefactor * e.Stamp;
+                var valueToList = this.volumePerTimeSlot / time;
 
-
-                this.dispatcher.Invoke(() => { this.PulseDataForViewList[e.Channel].AddTime(valueToList); });
+                this.dispatcher.Invoke(() => { this.PulseDataForViewList[e.Channel].AddTime(time, valueToList); });
             }
             catch (Exception ex)
             {

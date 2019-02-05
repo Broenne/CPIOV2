@@ -55,6 +55,7 @@
                                         <DataTemplate>
                                             <StackPanel Orientation="Vertical">
                                                 <TextBox Width="60" Text="{Binding Tim}" />
+                                                <TextBox Width="60" Text="{Binding Volume}" />
                                             </StackPanel>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>

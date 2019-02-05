@@ -22,7 +22,7 @@
     /// <seealso cref="CPIOngConfig.Contracts.Pulse.IPulseStorageViewModel" />
     public class PulseStorageViewModel : BindableBase, IPulseStorageViewModel
     {
-        private readonly List<string> storageList = new List<string>();
+        private IList<string> storageList;
 
         private string selectedFile;
 
@@ -102,6 +102,7 @@
                         this.PulseEventHandler.EventIsReached += this.PulseEventHandler_EventIsReached;
                     }
 
+                    this.storageList = new List<string>();
                     for (var i = 0; i < 16; i++)
                     {
                         this.storageList.Add(string.Empty);

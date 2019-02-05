@@ -13,11 +13,11 @@
                 <Label>Achtung, übernahme der Werte passiert immer erst nach dem erneuten aktiviern der checkbox</Label>
                 <StackPanel Orientation="Horizontal">
                     <CheckBox Margin="10" Width="20" Height="40" Command="{Binding CheckBoxChangeCommand}" CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}">Use factor</CheckBox>
-                    <Label>Activate checkbox for use.</Label>
+                    <Label Margin="0,5,5,5">Activate checkbox for use.</Label>
                     <controls:NumericUpDown Minimum = "1" Maximum = "100" Interval = "1" Height="40" Width="100" Margin="5,5,0,5" Value="{Binding PulsPerRevolution}"></controls:NumericUpDown>
-                    <Label>Pulse/Umdrehung</Label>
-                    <controls:NumericUpDown Minimum = "0" Maximum = "100" Interval = "0.01" Height="40" Width="100" Margin="5,5,0,5"></controls:NumericUpDown>
-                    <Label>Volume/Umdrehung</Label>
+                    <Label Margin="0,5,5,5">Pulse/Umdrehung</Label>
+                    <controls:NumericUpDown Minimum = "0" Maximum = "100" Interval = "0.01" Height="40" Width="100" Margin="5,5,0,5" Value="{Binding VolumePerRevolution}"></controls:NumericUpDown>
+                    <Label Margin="0,5,5,5">Volume/Umdrehung</Label>
                     <controls:SplitButton
                         Name="UnitSelect"
                         Margin="20"
@@ -26,14 +26,6 @@
                         SelectedValue="{Binding SelectedTimeBase}"
                         ItemsSource="{Binding TimeBase}">
                     </controls:SplitButton>
-                    <!--<Button  
-                        Margin="5"
-                        Width="60"
-                        Height="20"
-                        Command="{Binding UnitChangeCommand}"
-                        CommandParameter="{Binding ElementName=UnitSelect, Path=SelectedValue}">
-                        Change Unit
-                    </Button>-->
                 </StackPanel>
             </StackPanel>
         </Grid>
