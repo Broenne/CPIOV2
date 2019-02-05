@@ -107,6 +107,7 @@
     </Compile>
     <Compile Include="ConfigInputs\ConfigureInputsViewModel.cs" />
     <Compile Include="CPIOngConfigContainerModule.cs" />
+    <Compile Include="FactorPulse\FactorPulseEventHandler.cs" />
     <Compile Include="FactorPulse\FactorPulseView.xaml.cs">
       <DependentUpon>FactorPulseView.xaml</DependentUpon>
     </Compile>

@@ -2,9 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.IO;
-    using System.Threading;
-    using System.Threading.Tasks;
+    using System.Globalization;
 
     using Prism.Mvvm;
 
@@ -30,7 +28,6 @@
             this.Name = name;
             this.listCnt = listCntArg;
 
-
             var helper = new List<TimePulse>();
 
             for (var i = 0; i < listCntArg; i++)
@@ -39,13 +36,6 @@
             }
 
             this.Times = new ObservableCollection<TimePulse>(helper);
-
-
-            //// fill with leading 0
-            //for (var i = 0; i < listCntArg; i++)
-            //{
-            //    this.Times.Add(new TimePulse("0"));
-            //}
         }
 
         #endregion
@@ -61,10 +51,10 @@
         public string Name { get; }
 
         /// <summary>
-        /// Gets or sets the selected time item.
+        ///     Gets or sets the selected time item.
         /// </summary>
         /// <value>
-        /// The selected time item.
+        ///     The selected time item.
         /// </value>
         public TimePulse SelectedTimeItem
         {
@@ -88,9 +78,11 @@
         ///     Adds the time.
         /// </summary>
         /// <param name="dif">The difference.</param>
-        public void AddTime(uint dif)
+        public void AddTime(double dif)
         {
-            var timePulseToAdd = new TimePulse(dif.ToString());
+            var difAsString  = dif.ToString(CultureInfo.InvariantCulture);
+            var timePulseToAdd = new TimePulse(difAsString);
+
             this.Times.Add(timePulseToAdd); // das wird gesetz, um den sdcroll balken nach hinten zu setzen
             this.SelectedTimeItem = timePulseToAdd;
             if (this.Times.Count > this.listCnt)

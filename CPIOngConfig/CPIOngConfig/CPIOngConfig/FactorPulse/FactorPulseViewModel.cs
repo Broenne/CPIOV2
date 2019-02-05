@@ -20,15 +20,19 @@
     {
         private uint pulsPerRevolution;
 
+        private double volumePerRevolution;
+
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FactorPulseViewModel"/> class.
+        ///     Initializes a new instance of the <see cref="FactorPulseViewModel" /> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
-        public FactorPulseViewModel(ILogger logger)
+        /// <param name="factorPulseEventHandler">The factor pulse event handler.</param>
+        public FactorPulseViewModel(ILogger logger, IFactorPulseEventHandler factorPulseEventHandler)
         {
             this.Logger = logger;
+            this.FactorPulseEventHandler = factorPulseEventHandler;
             this.CheckBoxChangeCommand = new RelayCommand(this.CheckBoxChangeCommandAction);
         }
 
@@ -37,10 +41,10 @@
         #region Properties
 
         /// <summary>
-        /// Gets or sets the CheckBox change command.
+        ///     Gets or sets the CheckBox change command.
         /// </summary>
         /// <value>
-        /// The CheckBox change command.
+        ///     The CheckBox change command.
         /// </value>
         public ICommand CheckBoxChangeCommand { get; set; }
 
@@ -56,6 +60,20 @@
             set => this.SetProperty(ref this.pulsPerRevolution, value);
         }
 
+        /// <summary>
+        ///     Gets or sets the volume per revolution.
+        /// </summary>
+        /// <value>
+        ///     The volume per revolution.
+        /// </value>
+        public double VolumePerRevolution
+        {
+            get => this.volumePerRevolution;
+            set => this.SetProperty(ref this.volumePerRevolution, value);
+        }
+
+        private IFactorPulseEventHandler FactorPulseEventHandler { get; }
+
         private ILogger Logger { get; }
 
         #endregion
@@ -67,6 +85,15 @@
             try
             {
                 var isChecked = (bool)obj;
+
+                double volumePerTimeSlot = 1;
+
+                if (isChecked)
+                {
+                    volumePerTimeSlot = this.VolumePerRevolution / this.PulsPerRevolution;
+                }
+
+                this.FactorPulseEventHandler.OnReached(volumePerTimeSlot);
             }
             catch (Exception ex)
             {
