@@ -3,10 +3,12 @@
     using System;
     using System.Linq;
 
+    using ConfigLogicLayer.Contracts;
     using ConfigLogicLayer.Contracts.ActualId;
     using ConfigLogicLayer.Contracts.Configurations;
     using ConfigLogicLayer.Contracts.DigitalInputState;
 
+    using CPIOngConfig.ActiveSensor;
     using CPIOngConfig.Contracts.Adapter;
     using CPIOngConfig.Contracts.Alive;
     using CPIOngConfig.Contracts.ConfigInputs;
@@ -37,7 +39,9 @@
         /// <param name="getActualNodeId">The get actual node identifier.</param>
         /// <param name="channelConfigurationResponseEventHandler">The channel configuration response event handler.</param>
         /// <param name="canIsConnectedEventHandler">The can is connected event handler.</param>
-        public HandleInputs(ILogger logger, IPulseEventHandler pulseEventHandler, IReadCanMessage readCanMessage, IInputBinaryEventHandler inputBinaryEventHandler, IAliveEventHandler aliveEventHandler, IGetActualNodeId getActualNodeId, IChannelConfigurationResponseEventHandler channelConfigurationResponseEventHandler, ICanIsConnectedEventHandler canIsConnectedEventHandler, IFlipFlopEventHandler flipFlopEventHandler)
+        /// <param name="flipFlopEventHandler">The flip flop event handler.</param>
+        /// <param name="activeSensorEventHandler">The active sensor event handler.</param>
+        public HandleInputs(ILogger logger, IPulseEventHandler pulseEventHandler, IReadCanMessage readCanMessage, IInputBinaryEventHandler inputBinaryEventHandler, IAliveEventHandler aliveEventHandler, IGetActualNodeId getActualNodeId, IChannelConfigurationResponseEventHandler channelConfigurationResponseEventHandler, ICanIsConnectedEventHandler canIsConnectedEventHandler, IFlipFlopEventHandler flipFlopEventHandler, IActiveSensorEventHandler activeSensorEventHandler)
         {
             this.Logger = logger;
 
@@ -49,6 +53,7 @@
             this.ChannelConfigurationResponseEventHandler = channelConfigurationResponseEventHandler;
             this.CanIsConnectedEventHandler = canIsConnectedEventHandler;
             this.FlipFlopEventHandler = flipFlopEventHandler;
+            this.ActiveSensorEventHandler = activeSensorEventHandler;
         }
 
         #endregion
@@ -72,6 +77,8 @@
         private ICanIsConnectedEventHandler CanIsConnectedEventHandler { get; }
 
         private IFlipFlopEventHandler FlipFlopEventHandler { get; }
+
+        private IActiveSensorEventHandler ActiveSensorEventHandler { get; }
 
         #endregion
 
@@ -113,7 +120,7 @@
                 this.HandleAlive(id, data);
                 this.HandleChannelConfigResponse(id, data);
                 this.HandleFlipFlopEvent(id, data);
-                //this.HandleInputConfigStateReturn(id, data);
+                this.ActiveSensorResponse(id, data);
             }
             catch (Exception ex)
             {
@@ -122,30 +129,29 @@
             }
         }
 
-        //private void HandleInputConfigStateReturn(uint id, byte[] data)
-        //{
-        //    try
-        //    {
-        //        this.Logger.LogBegin(this.GetType());
+        private void ActiveSensorResponse(uint id, byte[] data)
+        {
+            try
+            {
+                this.Logger.LogBegin(this.GetType());
 
-        //        if (id == 0x179 + this.GetActualNodeId.Get())
-        //        {
-        //            // toido mb: es gibt da schon ne abfrage für
-        //            ; // todo mb:
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        this.Logger.LogError(ex);
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        this.Logger.LogEnd(this.GetType());
-        //    }
-        //}
-
-
+                if (id == (CanCommandConsts.SensorModiResponse + this.GetActualNodeId.Get()) && data[0] == 0x02)
+                {
+                    Modi modi = (Modi)data[1];
+                    this.ActiveSensorEventHandler.OnReached(modi);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                throw;
+            }
+            finally
+            {
+                this.Logger.LogEnd(this.GetType());
+            }
+        }
+        
         private void HandleFlipFlopEvent(uint id, byte[] data)
         {
             try
@@ -167,17 +173,14 @@
                 this.Logger.LogEnd(this.GetType());
             }
         }
-
-
-
-
+        
         private void HandleChannelConfigResponse(uint id, byte[] data)
         {
             try
             {
                 this.Logger.LogBegin(this.GetType());
-
-                if (id == (0x179 + this.GetActualNodeId.Get()) )//&& data[0] == 0x03)
+                
+                if (id == (CanCommandConsts.SensorModiResponse + this.GetActualNodeId.Get()) && data[0] == 0x01)
                 {
                     this.ChannelConfigurationResponseEventHandler.OnReached(new ChannelConfigurationResponseEventArgs(data[1], (Modi)data[2]));
                 }

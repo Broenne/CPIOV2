@@ -37,6 +37,7 @@
             <ComboBox Grid.Column="1" Margin="5" 
                       MinWidth="120"
                       Name="ComboBox"
+                      SelectedValue="{Binding SelctedValue}"
                       ItemsSource="{Binding Source={StaticResource DataFromEnum}}" />
 
             <Button Grid.Column="2" Margin="5" Command="{Binding LoadActiveSensorCommand}">Load active</Button>

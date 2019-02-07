@@ -61,7 +61,6 @@ void CreateResponseForRequestChannelModi(uint8_t* data) {
 void CreateResponseActiveSensor(uint8_t* data){
 	// in data[0] steht die Kennung 0x02 für die Anfrage
 	data[1] = GetActiveChannelModiType();
-
 	SendActualChannelModi(data);
 }
 

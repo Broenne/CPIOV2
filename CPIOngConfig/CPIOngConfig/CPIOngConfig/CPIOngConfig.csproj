@@ -83,6 +83,7 @@
       <DependentUpon>ActiveSensorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ActiveSensor\ActiveSensorViewModel.cs" />
+    <Compile Include="ActiveSensor\ActiveSensorEventHandler.cs" />
     <Compile Include="Adapter\CanIsConnectedEventHandler.cs" />
     <Compile Include="Adapter\SelectAdapterView.xaml.cs">
       <DependentUpon>SelectAdapterView.xaml</DependentUpon>

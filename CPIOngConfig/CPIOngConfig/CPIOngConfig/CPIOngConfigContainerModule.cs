@@ -4,6 +4,7 @@
 
     using Autofac;
 
+    using CPIOngConfig.ActiveSensor;
     using CPIOngConfig.Adapter;
     using CPIOngConfig.Alive;
     using CPIOngConfig.Contracts.Adapter;
@@ -44,6 +45,7 @@
             builder.RegisterType<CanIsConnectedEventHandler>().As<ICanIsConnectedEventHandler>().SingleInstance();
             builder.RegisterType<FlipFlopEventHandler>().As<IFlipFlopEventHandler>().SingleInstance();
             builder.RegisterType<FactorPulseEventHandler>().As<IFactorPulseEventHandler>().SingleInstance();
+            builder.RegisterType<ActiveSensorEventHandler>().As<IActiveSensorEventHandler>().SingleInstance();
         }
 
         #endregion

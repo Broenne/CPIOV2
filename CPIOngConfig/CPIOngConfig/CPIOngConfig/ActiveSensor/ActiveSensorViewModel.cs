@@ -21,17 +21,23 @@
     /// <seealso cref="CPIOngConfig.Contracts.ActiveSensor.IActiveSensorViewModel" />
     public class ActiveSensorViewModel : BindableBase, IActiveSensorViewModel
     {
+        private Modi selctedValue;
+
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ActiveSensorViewModel" /> class.
+        ///     Initializes a new instance of the <see cref="ActiveSensorViewModel" /> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="setActiveSensorToDetect">The set active sensor to detect.</param>
-        public ActiveSensorViewModel(ILogger logger, ISetActiveSensorToDetect setActiveSensorToDetect)
+        /// <param name="activeSensorEventHandler">The active sensor event handler.</param>
+        public ActiveSensorViewModel(ILogger logger, ISetActiveSensorToDetect setActiveSensorToDetect, IActiveSensorEventHandler activeSensorEventHandler)
         {
             this.Logger = logger;
             this.SetActiveSensorToDetect = setActiveSensorToDetect;
+            this.ActiveSensorEventHandler = activeSensorEventHandler;
+
+            this.ActiveSensorEventHandler.EventIsReached += this.ActiveSensorEventHandler_EventIsReached;
             this.SetSensorCommand = new RelayCommand(this.SetSensorCommandAction);
             this.LoadActiveSensorCommand = new RelayCommand(this.LoadActiveSensorCommandAction);
         }
@@ -41,14 +47,35 @@
         #region Properties
 
         /// <summary>
-        /// Gets the set sensor command.
+        ///     Gets the load active sensor command.
         /// </summary>
         /// <value>
-        /// The set sensor command.
+        ///     The load active sensor command.
+        /// </value>
+        public ICommand LoadActiveSensorCommand { get; }
+
+        /// <summary>
+        /// Gets or sets the selcted value.
+        /// </summary>
+        /// <value>
+        /// The selcted value.
+        /// </value>
+        public Modi SelctedValue
+        {
+            get => this.selctedValue;
+
+            set => this.SetProperty(ref this.selctedValue, value);
+        }
+
+        /// <summary>
+        ///     Gets the set sensor command.
+        /// </summary>
+        /// <value>
+        ///     The set sensor command.
         /// </value>
         public ICommand SetSensorCommand { get; }
 
-        public ICommand LoadActiveSensorCommand { get; }
+        private IActiveSensorEventHandler ActiveSensorEventHandler { get; }
 
         private ILogger Logger { get; }
 
@@ -57,6 +84,19 @@
         #endregion
 
         #region Private Methods
+
+        private void ActiveSensorEventHandler_EventIsReached(object sender, Modi e)
+        {
+            try
+            {
+                this.SelctedValue = e;
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                MessageBox.Show(ex.Message);
+            }
+        }
 
         private void LoadActiveSensorCommandAction(object obj)
         {
@@ -84,7 +124,7 @@
             {
                 this.Logger.LogBegin(this.GetType());
 
-                Modi modi = (Modi)obj;
+                var modi = (Modi)obj;
                 this.SetActiveSensorToDetect.Do(modi);
             }
             catch (Exception ex)
