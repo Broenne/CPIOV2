@@ -46,6 +46,7 @@ void SetChannelModiFromExternal(uint8_t* data) {
  * Function build the answer for channel modi response
  * */
 void CreateResponseForRequestChannelModi(uint8_t* data) {
+	uint8_t inputChannelNumber = data[1];
 	data[0] = 0x01; // zeit es kommt die konfiguration der Eingänge
 	data[1] = inputChannelNumber; //Eingangsnummer
 	data[2] = GetChannelModiByChannel(inputChannelNumber); //0x03;
@@ -105,17 +106,17 @@ void CanWorkerTask(void * pvParameters) {
 				// Funktion zum Abfrage der Einstellung der aktuellen Eingänge
 				if ((GetGlobalCanNodeId() + REQUEST_INPUT_CONFIG) == stdid) {
 					uint8_t* data = &hcan->pRxMsg->Data[0];
-					uint8_t inputChannelNumber = data[1];
+					//uint8_t inputChannelNumber = data[1];
 					switch (data[0]) {
-					case 0x01:
-						CreateResponseForRequestChannelModi(data);
-						break;
-					case 0x02:
-						// einstellung, welcher Sensor grade am Knoten aktiv ist
-						// data[0] = 0x02;
-						// data[1] = AktiverKanal;
-					default:
-						break;
+						case 0x01:
+							CreateResponseForRequestChannelModi(data);
+							break;
+						case 0x02:
+							// einstellung, welcher Sensor grade am Knoten aktiv ist
+							 data[0] = 0x02;
+							// data[1] = AktiverKanal;
+						default:
+							break;
 					}
 				}
 

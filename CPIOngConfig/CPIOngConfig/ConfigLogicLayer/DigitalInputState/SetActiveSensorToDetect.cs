@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
 
+    using ConfigLogicLayer.Contracts;
     using ConfigLogicLayer.Contracts.ActualId;
     using ConfigLogicLayer.Contracts.DigitalInputState;
 
@@ -54,12 +55,39 @@
         {
             try
             {
-                const uint SelectPulseInput = 512;
+                const uint SelectPulseInput = CanCommandConsts.SetActiveSensor;
                 var id = this.GetActualNodeId.Get();
                 var data = new List<byte>();
                 data.Add((byte)modi);
 
                 var cobid = SelectPulseInput + id;
+                this.WriteBasicCan.WriteCan(cobid, data);
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                throw;
+            }
+            finally
+            {
+                this.Logger.LogEnd(this.GetType());
+            }
+        }
+
+        /// <summary>
+        /// Triggers the state of the active sensor.
+        /// </summary>
+        public void TriggerActiveSensorState()
+        {
+            try
+            {
+                uint requestActiveSensorInput = CanCommandConsts.TriggerGetInputConfigurationOffset;
+                var id = this.GetActualNodeId.Get();
+                var cobid = requestActiveSensorInput + id;
+
+                var data = new List<byte>();
+                data.Add(0x02);
+                
                 this.WriteBasicCan.WriteCan(cobid, data);
             }
             catch (Exception ex)

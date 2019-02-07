@@ -27,6 +27,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" Margin="5"  Width="80" 
                     Command="{Binding SetSensorCommand}"
@@ -38,6 +39,7 @@
                       Name="ComboBox"
                       ItemsSource="{Binding Source={StaticResource DataFromEnum}}" />
 
+            <Button Grid.Column="2" Margin="5" Command="{Binding LoadActiveSensorCommand}">Load active</Button>
         </Grid>
     </StackPanel>
 </UserControl>

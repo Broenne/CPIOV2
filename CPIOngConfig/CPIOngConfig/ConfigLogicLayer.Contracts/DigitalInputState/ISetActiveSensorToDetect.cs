@@ -12,5 +12,10 @@
         /// </summary>
         /// <param name="modi">The modi info.</param>
         void Do(Modi modi);
+
+        /// <summary>
+        /// Triggers the state of the active sensor.
+        /// </summary>
+        void TriggerActiveSensorState();
     }
 }

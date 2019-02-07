@@ -8,5 +8,6 @@ namespace ConfigLogicLayer.Contracts
     {
         public static readonly uint TriggerGetInputConfigurationOffset = 0x0178;
 
+        public const uint SetActiveSensor = 0x200;
     }
 }

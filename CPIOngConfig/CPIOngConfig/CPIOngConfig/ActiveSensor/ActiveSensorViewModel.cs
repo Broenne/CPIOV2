@@ -33,6 +33,7 @@
             this.Logger = logger;
             this.SetActiveSensorToDetect = setActiveSensorToDetect;
             this.SetSensorCommand = new RelayCommand(this.SetSensorCommandAction);
+            this.LoadActiveSensorCommand = new RelayCommand(this.LoadActiveSensorCommandAction);
         }
 
         #endregion
@@ -47,6 +48,8 @@
         /// </value>
         public ICommand SetSensorCommand { get; }
 
+        public ICommand LoadActiveSensorCommand { get; }
+
         private ILogger Logger { get; }
 
         private ISetActiveSensorToDetect SetActiveSensorToDetect { get; }
@@ -54,6 +57,26 @@
         #endregion
 
         #region Private Methods
+
+        private void LoadActiveSensorCommandAction(object obj)
+        {
+            try
+            {
+                this.Logger.LogBegin(this.GetType());
+
+                // trigger command
+                this.SetActiveSensorToDetect.TriggerActiveSensorState();
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                this.Logger.LogEnd(this.GetType());
+            }
+        }
 
         private void SetSensorCommandAction(object obj)
         {
