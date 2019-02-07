@@ -87,7 +87,7 @@
 
                 var data = new List<byte>();
                 data.Add(0x02);
-                
+
                 this.WriteBasicCan.WriteCan(cobid, data);
             }
             catch (Exception ex)

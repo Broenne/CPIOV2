@@ -53,6 +53,19 @@ void CreateResponseForRequestChannelModi(uint8_t* data) {
 	SendActualChannelModi(data);
 }
 
+/*
+ * Created on: 07.02.19
+ * Author: MB
+ * function for build answer to inform about active selected sensor modi
+ * */
+void CreateResponseActiveSensor(uint8_t* data){
+	// in data[0] steht die Kennung 0x02 für die Anfrage
+	data[1] = GetActiveChannelModiType();
+
+	SendActualChannelModi(data);
+}
+
+
 
 /*
  * Created on: 30.11.18
@@ -113,7 +126,8 @@ void CanWorkerTask(void * pvParameters) {
 							break;
 						case 0x02:
 							// einstellung, welcher Sensor grade am Knoten aktiv ist
-							 data[0] = 0x02;
+							 //data[0] = 0x02;
+							CreateResponseActiveSensor(data);
 							// data[1] = AktiverKanal;
 						default:
 							break;
