@@ -11,6 +11,7 @@
     using CPIOngConfig.Contracts.Alive;
     using CPIOngConfig.Contracts.Analog;
     using CPIOngConfig.Contracts.ConfigId;
+    using CPIOngConfig.Contracts.Error;
     using CPIOngConfig.Contracts.FlipFlop;
     using CPIOngConfig.InputBinary;
     using CPIOngConfig.Pulse;
@@ -35,6 +36,8 @@
         private IConfigCanId configCanId;
 
         private IConfigInputsAllView configInputsAllView;
+
+        private IErrorHardwareView errorHardwareView;
 
         private IFlipFlopView flipFlopView;
 
@@ -124,6 +127,18 @@
         }
 
         /// <summary>
+        /// Gets the error hardware view.
+        /// </summary>
+        /// <value>
+        /// The error hardware view.
+        /// </value>
+        public IErrorHardwareView ErrorHardwareView
+        {
+            get => this.errorHardwareView;
+            private set => this.SetProperty(ref this.errorHardwareView, value);
+        }
+
+        /// <summary>
         ///     Gets the flip flop view.
         /// </summary>
         /// <value>
@@ -201,6 +216,7 @@
                 this.ActiveSensorView = this.Scope.Resolve<IActiveSensorView>();
                 this.AliveView = this.Scope.Resolve<IAliveView>();
                 this.FlipFlopView = this.Scope.Resolve<IFlipFlopView>();
+                this.ErrorHardwareView = this.Scope.Resolve<IErrorHardwareView>();
             }
             catch (Exception ex)
             {

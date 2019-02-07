@@ -7,25 +7,22 @@
 
 #include "alive.h"
 
-
-
 static TIM_HandleTypeDef s_TimerInstance;
-
 extern xQueueHandle CanQueueSenderHandle;
-
+static uint32_t AliveCanId = 0;
 
 void SwitchMainLed(void) {
 	HAL_GPIO_TogglePin(LED_S_GPIO_Port, LED_S_Pin);
-
 }
 
-static uint32_t AliveCanId = 0;
+
 
 void SanCanAlive(void) {
 	uint8_t p[] = { Major, Minor, Bugfix, 0, 0, 0, 0, 0 };
 
+
 	// add error frames
-	// GetApplicationStatus(&p[3]);
+	GetApplicationStatus(&p[3]);
 
 
 	static CAN_HandleTypeDef hcan;
@@ -44,9 +41,9 @@ void SanCanAlive(void) {
 }
 
 static void Init_TimerInternal() {
-	TIM_ClockConfigTypeDef sClockSourceConfig;
-	TIM_SlaveConfigTypeDef sSlaveConfig;
-	TIM_MasterConfigTypeDef sMasterConfig;
+//	TIM_ClockConfigTypeDef sClockSourceConfig;
+//	TIM_SlaveConfigTypeDef sSlaveConfig;
+//	TIM_MasterConfigTypeDef sMasterConfig;
 
 	__HAL_RCC_TIM2_CLK_ENABLE()	;
 	s_TimerInstance.Instance = TIM2;

@@ -29,7 +29,7 @@
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HandleInputs" /> class.
+        ///     Initializes a new instance of the <see cref="HandleInputs" /> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="pulseEventHandler">The pulse event handler.</param>
@@ -60,9 +60,15 @@
 
         #region Properties
 
+        private IActiveSensorEventHandler ActiveSensorEventHandler { get; }
+
         private IAliveEventHandler AliveEventHandler { get; }
 
+        private ICanIsConnectedEventHandler CanIsConnectedEventHandler { get; }
+
         private IChannelConfigurationResponseEventHandler ChannelConfigurationResponseEventHandler { get; }
+
+        private IFlipFlopEventHandler FlipFlopEventHandler { get; }
 
         private IGetActualNodeId GetActualNodeId { get; }
 
@@ -73,12 +79,6 @@
         private IPulseEventHandler PulseEventHandler { get; }
 
         private IReadCanMessage ReadCanMessage { get; }
-
-        private ICanIsConnectedEventHandler CanIsConnectedEventHandler { get; }
-
-        private IFlipFlopEventHandler FlipFlopEventHandler { get; }
-
-        private IActiveSensorEventHandler ActiveSensorEventHandler { get; }
 
         #endregion
 
@@ -135,9 +135,9 @@
             {
                 this.Logger.LogBegin(this.GetType());
 
-                if (id == (CanCommandConsts.SensorModiResponse + this.GetActualNodeId.Get()) && data[0] == 0x02)
+                if (id == CanCommandConsts.SensorModiResponse + this.GetActualNodeId.Get() && data[0] == 0x02)
                 {
-                    Modi modi = (Modi)data[1];
+                    var modi = (Modi)data[1];
                     this.ActiveSensorEventHandler.OnReached(modi);
                 }
             }
@@ -151,7 +151,7 @@
                 this.Logger.LogEnd(this.GetType());
             }
         }
-        
+
         private void HandleFlipFlopEvent(uint id, byte[] data)
         {
             try
@@ -173,14 +173,14 @@
                 this.Logger.LogEnd(this.GetType());
             }
         }
-        
+
         private void HandleChannelConfigResponse(uint id, byte[] data)
         {
             try
             {
                 this.Logger.LogBegin(this.GetType());
-                
-                if (id == (CanCommandConsts.SensorModiResponse + this.GetActualNodeId.Get()) && data[0] == 0x01)
+
+                if (id == CanCommandConsts.SensorModiResponse + this.GetActualNodeId.Get() && data[0] == 0x01)
                 {
                     this.ChannelConfigurationResponseEventHandler.OnReached(new ChannelConfigurationResponseEventArgs(data[1], (Modi)data[2]));
                 }
@@ -205,7 +205,7 @@
                 if (id == CanCommandConsts.AliveOffset + this.GetActualNodeId.Get())
                 {
                     var version = new Version(data[0], data[1], data[2]);
-                    this.AliveEventHandler.OnReached(new AliveEventArgs(version));
+                    this.AliveEventHandler.OnReached(new AliveEventArgs(version, data[3], data[4], data[5], data[6]));
                 }
             }
             catch (Exception ex)

@@ -109,6 +109,9 @@
     </Compile>
     <Compile Include="ConfigInputs\ConfigureInputsViewModel.cs" />
     <Compile Include="CPIOngConfigContainerModule.cs" />
+    <Compile Include="Error\ErrorHardwareView.xaml.cs">
+      <DependentUpon>ErrorHardwareView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FactorPulse\FactorPulseEventHandler.cs" />
     <Compile Include="FactorPulse\FactorPulseView.xaml.cs">
       <DependentUpon>FactorPulseView.xaml</DependentUpon>
@@ -158,6 +161,10 @@
     <Page Include="ConfigInputs\ConfigureInputsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Error\ErrorHardwareView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FactorPulse\FactorPulseView.xaml">
       <SubType>Designer</SubType>

@@ -33,7 +33,7 @@
             <ContentPresenter Content="{Binding SelectAdapterView}"></ContentPresenter>
             <ContentPresenter Content="{Binding AliveView}"></ContentPresenter>
         </StackPanel>
-        <TabControl Grid.Row="1" SelectedIndex="2">
+        <TabControl Grid.Row="1" SelectedIndex="3">
             <TabItem Header="General">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -58,6 +58,9 @@
             </TabItem>
             <TabItem Header="Pulse" >
                 <ContentPresenter Content="{Binding PulseView}"></ContentPresenter>
+            </TabItem>
+            <TabItem Header="Error">
+                <ContentPresenter Content="{Binding ErrorHardwareView}"></ContentPresenter>
             </TabItem>
         </TabControl>
     </Grid>

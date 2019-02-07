@@ -11,8 +11,6 @@
 
 #define CHANNEL_COUNT 					( ( unsigned short ) 16 )
 
-
-
 #include "main.h"
 //#include "stm32f1xx_hal_gpio.h"
 #include "stm32f1xx_hal.h"
@@ -43,16 +41,13 @@
 #define Minor ((uint8_t)0x00)
 #define Bugfix ((uint8_t)0x01)
 
-
-
-
 #define FLIPFLOP_OPENCAN_OFFSET 		(( unsigned short ) 0x170 )
 #define FLIPFLOP_OPENCAN_OFFSET_RESET 	(( unsigned short ) 0x172 )
 #define SET_ACTIVE_SENSOR 				(( unsigned short ) 0x176 )
 #define REQUEST_INPUT_CONFIG			(( unsigned short ) 0x178 )
 #define SEND_INPUT_CONFIG				(( unsigned short ) 0x179 )
 #define PULSE_OPENCAN_OFFSET 			(( unsigned short ) 0x180 )
-#define AliveOffset 					(( uint32_t       )	0x200 )
+#define AliveOffset 					(( unsigned short )	0x200 )
 
 
 #endif /* INCLUDE_H_ */

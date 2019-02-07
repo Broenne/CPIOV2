@@ -1,6 +1,8 @@
 ﻿namespace CPIOngConfig.Contracts.Alive
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     ///     The alive event arguments.
@@ -12,9 +14,11 @@
         /// Initializes a new instance of the <see cref="AliveEventArgs" /> class.
         /// </summary>
         /// <param name="versionCpioNg">The version CPIO ng.</param>
-        public AliveEventArgs(Version versionCpioNg)
+        /// <param name="errors">The errors.</param>
+        public AliveEventArgs(Version versionCpioNg, params byte[] errors)
         {
             this.VersionCpioNg = versionCpioNg;
+            this.Errors = errors.ToList().AsReadOnly();
             this.DateTime = DateTime.Now;
         }
 
@@ -32,6 +36,14 @@
         /// <value>
         /// The version CPIO ng.
         /// </value>
-        public Version VersionCpioNg { get; } 
+        public Version VersionCpioNg { get; }
+
+        /// <summary>
+        /// Gets the errors.
+        /// </summary>
+        /// <value>
+        /// The errors.
+        /// </value>
+        public IReadOnlyList<byte> Errors { get; }
     }
 }

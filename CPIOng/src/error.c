@@ -16,7 +16,7 @@ static uint8_t errorFlgas[4];
  * Set the application status to paramter.
  * */
 void GetApplicationStatus(uint8_t* data){
-	memcpy(data,errorFlgas,2);
+	memcpy(data, errorFlgas, 2);
 }
 
 // max 7, dann nächstes byte
@@ -41,7 +41,6 @@ void SetCounterError(void){
 	// todo mb: Fehler merken KEIN!!!!!! printf nutzen. Eigene Funktion myprinft (noch zu schreiben)
 	myPrintf("ERROR die Infos können nicht mehr weggeschickt werden \r\n");
 	SetErrorFlag(COUNTER_ERROR_POSITION);
-	// Reset();
 }
 
 void SetApplicationEndError(void){
