@@ -7,7 +7,7 @@
 
 #include "alive.h"
 
-#define AliveOffset ((uint32_t)0x200)
+
 
 static TIM_HandleTypeDef s_TimerInstance;
 

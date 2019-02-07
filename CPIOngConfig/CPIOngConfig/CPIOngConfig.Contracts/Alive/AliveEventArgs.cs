@@ -9,10 +9,12 @@
     public class AliveEventArgs : EventArgs
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AliveEventArgs"/> class.
+        /// Initializes a new instance of the <see cref="AliveEventArgs" /> class.
         /// </summary>
-        public AliveEventArgs()
+        /// <param name="versionCpioNg">The version CPIO ng.</param>
+        public AliveEventArgs(Version versionCpioNg)
         {
+            this.VersionCpioNg = versionCpioNg;
             this.DateTime = DateTime.Now;
         }
 
@@ -23,5 +25,13 @@
         /// The date time.
         /// </value>
         public DateTime DateTime { get; }
+        
+        /// <summary>
+        /// Gets the version CPIO ng.
+        /// </summary>
+        /// <value>
+        /// The version CPIO ng.
+        /// </value>
+        public Version VersionCpioNg { get; } 
     }
 }

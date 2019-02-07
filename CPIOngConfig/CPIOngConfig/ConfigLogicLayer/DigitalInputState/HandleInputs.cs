@@ -202,9 +202,10 @@
             {
                 this.Logger.LogBegin(this.GetType());
 
-                if (id == 0x200 + this.GetActualNodeId.Get())
+                if (id == CanCommandConsts.AliveOffset + this.GetActualNodeId.Get())
                 {
-                    this.AliveEventHandler.OnReached(new AliveEventArgs());
+                    var version = new Version(data[0], data[1], data[2]);
+                    this.AliveEventHandler.OnReached(new AliveEventArgs(version));
                 }
             }
             catch (Exception ex)

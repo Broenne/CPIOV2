@@ -11,9 +11,16 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width = "140"></ColumnDefinition>
                 <ColumnDefinition Width = "40"></ColumnDefinition>
+                <ColumnDefinition Width = "*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
                 <TextBox Grid.Column="0" Text="{Binding LastUpdateTime}" Margin="2"></TextBox>
                 <Ellipse Grid.Column="1" Fill="{Binding Color}" Margin="2" Height="25" Width="25"></Ellipse>
+                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                    <Label>Version:</Label>
+                    <TextBox Text="{Binding Major}"></TextBox>
+                    <TextBox Text="{Binding Minor}"></TextBox>
+                    <TextBox Text="{Binding Bugfix}"></TextBox>
+            </StackPanel>
         </Grid>
     </StackPanel>
 </UserControl>

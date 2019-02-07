@@ -1,6 +1,7 @@
 ﻿namespace CPIOngConfig.Alive
 {
     using System;
+    using System.Globalization;
     using System.Windows;
     using System.Windows.Media;
 
@@ -15,13 +16,19 @@
     /// <seealso cref="CPIOngConfig.Contracts.Alive.IAliveViewModel" />
     public class AliveViewModel : BindableBase, IAliveViewModel
     {
-        private SolidColorBrush color;
-
         private readonly SolidColorBrush gray = new SolidColorBrush(Colors.Gray);
 
         private readonly SolidColorBrush green = new SolidColorBrush(Colors.Green);
 
+        private string bugfix;
+
+        private SolidColorBrush color;
+
         private string lastUpdateTime;
+
+        private string major;
+
+        private string minor;
 
         #region Constructor
 
@@ -37,6 +44,19 @@
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Gets or sets the bugfix.
+        /// </summary>
+        /// <value>
+        /// The bugfix.
+        /// </value>
+        public string Bugfix
+        {
+            get => this.bugfix;
+
+            set => this.SetProperty(ref this.bugfix, value);
+        }
 
         /// <summary>
         ///     Gets or sets the color.
@@ -64,6 +84,32 @@
             set => this.SetProperty(ref this.lastUpdateTime, value);
         }
 
+        /// <summary>
+        /// Gets or sets the major.
+        /// </summary>
+        /// <value>
+        /// The major.
+        /// </value>
+        public string Major
+        {
+            get => this.major;
+
+            set => this.SetProperty(ref this.major, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the minor.
+        /// </summary>
+        /// <value>
+        /// The minor.
+        /// </value>
+        public string Minor
+        {
+            get => this.minor;
+
+            set => this.SetProperty(ref this.minor, value);
+        }
+
         #endregion
 
         #region Private Methods
@@ -73,7 +119,11 @@
             try
             {
                 this.Color = this.Color == this.green ? this.gray : this.green;
-                this.LastUpdateTime = e.DateTime.ToString();
+                this.LastUpdateTime = e.DateTime.ToString(CultureInfo.InvariantCulture);
+
+                this.Major = e.VersionCpioNg.Major.ToString();
+                this.Minor = e.VersionCpioNg.Minor.ToString();
+                this.Bugfix = e.VersionCpioNg.Build.ToString();
             }
             catch (Exception ex)
             {

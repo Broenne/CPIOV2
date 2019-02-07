@@ -64,8 +64,6 @@ void CreateResponseActiveSensor(uint8_t* data){
 	SendActualChannelModi(data);
 }
 
-
-
 /*
  * Created on: 30.11.18
  * Author: MB

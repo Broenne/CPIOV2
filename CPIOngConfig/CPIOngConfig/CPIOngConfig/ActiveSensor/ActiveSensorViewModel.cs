@@ -55,10 +55,10 @@
         public ICommand LoadActiveSensorCommand { get; }
 
         /// <summary>
-        /// Gets or sets the selcted value.
+        /// Gets or sets the selected value.
         /// </summary>
         /// <value>
-        /// The selcted value.
+        /// The selected value.
         /// </value>
         public Modi SelctedValue
         {

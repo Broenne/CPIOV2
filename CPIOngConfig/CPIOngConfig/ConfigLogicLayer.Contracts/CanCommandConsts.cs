@@ -2,10 +2,16 @@
 {
     public static class CanCommandConsts
     {
-        public static readonly uint TriggerGetInputConfigurationOffset = 0x0178;
-
-        public const uint SetActiveSensor = 0x200;
+        #region Constants
 
         public const uint SensorModiResponse = 0x179;
+
+        public const uint SetActiveSensor = 0x176;
+
+        public const uint AliveOffset = 0x200;
+
+        #endregion
+
+        public static readonly uint TriggerGetInputConfigurationOffset = 0x0178;
     }
 }
