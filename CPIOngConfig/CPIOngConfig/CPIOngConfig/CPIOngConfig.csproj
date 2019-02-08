@@ -112,6 +112,7 @@
     <Compile Include="Error\ErrorHardwareView.xaml.cs">
       <DependentUpon>ErrorHardwareView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Error\ErrorHardwareViewModel.cs" />
     <Compile Include="FactorPulse\FactorPulseEventHandler.cs" />
     <Compile Include="FactorPulse\FactorPulseView.xaml.cs">
       <DependentUpon>FactorPulseView.xaml</DependentUpon>
