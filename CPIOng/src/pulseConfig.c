@@ -43,24 +43,11 @@ void SaveChannelToEeprom(void) {
 
 void InitChannelModi(void) {
 
+	// todo mb: active channel bei start laden
+
 	//ActivatedChannelModi = ChannelModiType.//(ChannelModiType)GetUsedActiveSensorType();
 
-	/*ChannelModiStorage[0].channelModiType = Licht;
-	 ChannelModiStorage[1].channelModiType = Licht;
-	 ChannelModiStorage[2].channelModiType = Licht;
-	 ChannelModiStorage[3].channelModiType = Licht;
-	 ChannelModiStorage[4].channelModiType = Licht;
-	 ChannelModiStorage[5].channelModiType = Licht;
-	 ChannelModiStorage[6].channelModiType = Licht;
-	 ChannelModiStorage[7].channelModiType = Licht;
-	 ChannelModiStorage[8].channelModiType = Licht;
-	 ChannelModiStorage[9].channelModiType = Licht;
-	 ChannelModiStorage[10].channelModiType = Licht;
-	 ChannelModiStorage[11].channelModiType = Licht;
-	 ChannelModiStorage[12].channelModiType = Licht;
-	 ChannelModiStorage[13].channelModiType = FlipFlop;
-	 ChannelModiStorage[14].channelModiType = FlipFlop;
-	 ChannelModiStorage[15].channelModiType = FlipFlop;*/
+
 	for (int i = 0; i < CHANNEL_COUNT; ++i) {
 		ChannelModiStorage[i].channelModiType = GetStoredChannelModi(i);
 	}

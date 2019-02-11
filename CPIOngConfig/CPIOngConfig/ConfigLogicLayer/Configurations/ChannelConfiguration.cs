@@ -83,7 +83,7 @@
 
                     this.WriteBasicCan.WriteCan(0x00, data);
 
-                    int i = 0;
+                    var i = 0;
                     while (this.waitForResponse != item.Channel)
                     {
                         // todo mb: timeoput
@@ -99,8 +99,7 @@
 
                 this.SafeChannelInputModi();
 
-                Finish:
-                return;
+                Finish: ;
             }
             catch (Exception ex)
             {
@@ -113,28 +112,8 @@
             }
         }
 
-
-
-        private void SafeChannelInputModi()
-        {
-            try
-            {
-                const byte WriteConfigByte = 0x04;
-                var data = new List<byte>();
-                data.Add(WriteConfigByte); // 0
-                // save to eeprom
-                this.WriteBasicCan.WriteCan(0x00, data);
-
-            }
-            catch (Exception ex)
-            {
-                this.Logger.LogError(ex);
-                throw;
-            }
-        }
-
         /// <summary>
-        /// Triggers the state of to get.
+        ///     Triggers the state of to get.
         /// </summary>
         public void TriggerToGetState()
         {
@@ -174,6 +153,24 @@
         #endregion
 
         #region Private Methods
+
+        private void SafeChannelInputModi()
+        {
+            try
+            {
+                const byte WriteConfigByte = 0x04;
+                var data = new List<byte>();
+                data.Add(WriteConfigByte); // 0
+
+                // save to eeprom
+                this.WriteBasicCan.WriteCan(0x00, data);
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                throw;
+            }
+        }
 
         /// <summary>
         ///     Handles the EventIsReached event of the ChannelConfigurationResponseEventHandler control.

@@ -21,32 +21,34 @@
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid IsEnabled="{Binding IsEnabled}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <StackPanel>
-            <Button HorizontalAlignment="Left" Command="{Binding SaveCommand}">
-                <iconPacks:PackIconMaterial  Kind="ContentSave"/>
-            </Button>
-            <Button Command="{Binding LoadFromDeviceCommand}">Load From Device</Button>
-        </StackPanel>
-        <ListView Grid.Row="1" ItemsSource="{Binding ConfigureInputsViewList}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn>
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader Content="Channels" />
-                        </GridViewColumn.Header>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                               <ContentPresenter Content="{Binding }"></ContentPresenter>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
-    </Grid>
+    <Border BorderThickness="1" BorderBrush="Black">
+        <Grid IsEnabled="{Binding IsEnabled}" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding SaveCommand}">
+                    <iconPacks:PackIconMaterial  Kind="ContentSave"/>
+                </Button>
+                <Button Command="{Binding LoadFromDeviceCommand}">Load From Device</Button>
+            </StackPanel>
+            <ListView Grid.Row="1" ItemsSource="{Binding ConfigureInputsViewList}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn>
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Content="Channels" />
+                            </GridViewColumn.Header>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ContentPresenter Content="{Binding }"></ContentPresenter>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </Border>
 </UserControl>

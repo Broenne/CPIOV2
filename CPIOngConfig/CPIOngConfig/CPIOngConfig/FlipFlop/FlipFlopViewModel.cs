@@ -4,12 +4,10 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Windows;
-    using System.Windows.Controls;
     using System.Windows.Input;
     using System.Windows.Threading;
 
     using ConfigLogicLayer.Contracts.DigitalInputState;
-    using ConfigLogicLayer.DigitalInputState;
 
     using CPIOngConfig.Contracts.FlipFlop;
 
@@ -18,6 +16,11 @@
 
     using Prism.Mvvm;
 
+    /// <summary>
+    /// The flip flop view model.
+    /// </summary>
+    /// <seealso cref="Prism.Mvvm.BindableBase" />
+    /// <seealso cref="CPIOngConfig.Contracts.FlipFlop.IFlipFlopViewModel" />
     public class FlipFlopViewModel : BindableBase, IFlipFlopViewModel
     {
         private readonly Dispatcher dispatcher = RootDispatcherFetcher.RootDispatcher;
@@ -26,6 +29,12 @@
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FlipFlopViewModel"/> class.
+        /// </summary>
+        /// <param name="flipFlopEventHandler">The flip flop event handler.</param>
+        /// <param name="logger">The logger.</param>
+        /// <param name="resetFlipFlop">The reset flip flop.</param>
         public FlipFlopViewModel(IFlipFlopEventHandler flipFlopEventHandler, ILogger logger, IResetFlipFlop resetFlipFlop)
         {
             this.FlipFlopEventHandler = flipFlopEventHandler;
@@ -35,7 +44,7 @@
             var defaultList = new List<bool>();
             for (var i = 0; i < 16; i++)
             {
-                defaultList.Add(i % 2 == 1);
+                defaultList.Add(false);
             }
 
             this.FlipFlopState = new ObservableCollection<bool>(defaultList);
@@ -50,6 +59,12 @@
 
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the state of the flip flop.
+        /// </summary>
+        /// <value>
+        /// The state of the flip flop.
+        /// </value>
         public ObservableCollection<bool> FlipFlopState
         {
             get => this.flipFlopState;
@@ -64,6 +79,12 @@
         /// </value>
         public ICommand ResetAllCommand { get; set; }
 
+        /// <summary>
+        /// Gets or sets the reset single command.
+        /// </summary>
+        /// <value>
+        /// The reset single command.
+        /// </value>
         public ICommand ResetSingleCommand { get; set; }
 
         private IFlipFlopEventHandler FlipFlopEventHandler { get; }
@@ -95,10 +116,6 @@
             {
                 uint channel = Convert.ToUInt32(obj);
                 this.ResetFlipFlop.ResetChannel(channel);
-                ;
-                //var comboBoxItem = (ComboBoxItem)obj;
-                //comboBoxItem.
-                //this.ResetFlipFlop.ResetAll();
             }
             catch (Exception ex)
             {

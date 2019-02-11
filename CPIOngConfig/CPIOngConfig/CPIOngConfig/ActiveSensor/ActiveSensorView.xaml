@@ -21,7 +21,8 @@
             </ObjectDataProvider>
         </ResourceDictionary>
     </UserControl.Resources>
-    <StackPanel>
+    <Border BorderThickness="1" BorderBrush="Black">
+        <StackPanel>
         <Label>Select active pulse sensor</Label>
         <Grid MaxHeight="40" IsEnabled="{Binding IsEnabled}">
             <Grid.ColumnDefinitions>
@@ -43,4 +44,5 @@
             <Button Grid.Column="2" Margin="5" Command="{Binding LoadActiveSensorCommand}">Load active</Button>
         </Grid>
     </StackPanel>
+    </Border>
 </UserControl>

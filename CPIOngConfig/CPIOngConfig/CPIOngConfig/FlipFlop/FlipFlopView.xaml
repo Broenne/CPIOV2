@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:CPIOngConfig.FlipFlop"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-
+    <Border BorderThickness="1" BorderBrush="Black">
+        <Grid>
         <StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBox FontSize="20" HorizontalContentAlignment="Center" VerticalAlignment="Center">       FlipFlop        </TextBox>
@@ -44,4 +44,5 @@
         </ListBox>
         </StackPanel>
     </Grid>
+    </Border>
 </UserControl>

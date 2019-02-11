@@ -10,6 +10,8 @@
 
         public const uint AliveOffset = 0x200;
 
+        public const uint CountOfErrorBytes = 0x04;
+
         #endregion
 
         public static readonly uint TriggerGetInputConfigurationOffset = 0x0178;

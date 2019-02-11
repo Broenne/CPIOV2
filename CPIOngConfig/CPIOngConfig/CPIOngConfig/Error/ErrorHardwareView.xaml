@@ -23,12 +23,74 @@
             <TextBox Margin="5">Errorview</TextBox>
             <TextBox Text="{Binding RawErrorFildData}"></TextBox>
             <StackPanel Orientation="Horizontal">
-                <Ellipse Fill="Aqua"></Ellipse>
-                <Label>Fehler 1</Label>
+                <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse Fill="{Binding Color[0]}"></Ellipse>
+                    <Label>Fehler 1</Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse Fill="{Binding Color[1]}"></Ellipse>
+                    <Label>Fehler 2</Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse Fill="{Binding Color[2]}"></Ellipse>
+                    <Label>Fehler 3</Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse Fill="{Binding Color[3]}"></Ellipse>
+                    <Label>Fehler 4</Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse Fill="{Binding Color[4]}"></Ellipse>
+                    <Label>Fehler 5</Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse Fill="{Binding Color[5]}"></Ellipse>
+                    <Label>Fehler 6</Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse Fill="{Binding Color[6]}"></Ellipse>
+                    <Label>Fehler 7</Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse Fill="{Binding Color[7]}"></Ellipse>
+                    <Label>Fehler 8</Label>
+                </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Ellipse Fill="Aqua"></Ellipse>
-                <Label>Fehler 2</Label>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Fill="{Binding Color[8]}"></Ellipse>
+                        <Label>Fehler 9</Label>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Fill="{Binding Color[9]}"></Ellipse>
+                        <Label>Fehler 10</Label>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Fill="{Binding Color[10]}"></Ellipse>
+                        <Label>Fehler 11</Label>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Fill="{Binding Color[11]}"></Ellipse>
+                        <Label>Fehler 12</Label>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Fill="{Binding Color[12]}"></Ellipse>
+                        <Label>Fehler 13</Label>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Fill="{Binding Color[13]}"></Ellipse>
+                        <Label>Fehler 14</Label>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Fill="{Binding Color[14]}"></Ellipse>
+                        <Label>Fehler 15</Label>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Fill="{Binding Color[15]}"></Ellipse>
+                        <Label>Fehler 16</Label>
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
     </Grid>
