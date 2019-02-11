@@ -5,6 +5,8 @@
     using Autofac;
     using Hal.PeakCan.Basics;
     using Hal.PeakCan.Contracts.Basics;
+    using Hal.PeakCan.Contracts.Init;
+
     using HardwareAbstaction.PCAN.Init;
 
     using Module = Autofac.Module;

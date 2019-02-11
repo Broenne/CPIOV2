@@ -5,6 +5,7 @@
     using System.Diagnostics.CodeAnalysis;
 
     using Hal.PeakCan.Contracts.Basics;
+    using Hal.PeakCan.Contracts.Init;
     using Hal.PeakCan.PCANDll;
 
     using HardwareAbstaction.PCAN.Init;
@@ -41,7 +42,7 @@
 
             try
             {
-                this.MPcanHandle = preparePeakCan.Do();
+                // this.MPcanHandle = preparePeakCan.Do();
             }
             catch (Exception ex)
             {
@@ -56,7 +57,7 @@
 
         private ILogger Logger { get; }
 
-        private ushort MPcanHandle { get; }
+        private ushort MPcanHandle { get; set; }
 
         private IPreparePeakCan PreparePeakCan { get; }
 
@@ -81,8 +82,9 @@
         {
             try
             {
-                //ClearMessageBuffer(node);
+                this.OpenCanDongle();
 
+                // ClearMessageBuffer(node);
                 var canMsg = new TpcanMsg
                                  {
                                      Id = node,
@@ -109,21 +111,21 @@
         /////     Clears the message buffer.
         ///// </summary>
         ///// <param name="type">The type of message.</param>
-        //public void ClearMessageBuffer(uint id, TpcanMessageType type = TpcanMessageType.PCAN_MESSAGE_STANDARD)
-        //{
-        //    TpcanMsg readCanMsg;
-        //    readCanMsg.Id = 0x1B;
-        //    readCanMsg.Len = 8;
+        // public void ClearMessageBuffer(uint id, TpcanMessageType type = TpcanMessageType.PCAN_MESSAGE_STANDARD)
+        // {
+        // TpcanMsg readCanMsg;
+        // readCanMsg.Id = 0x1B;
+        // readCanMsg.Len = 8;
 
-        //    readCanMsg.Msgtype = type;
+        // readCanMsg.Msgtype = type;
 
-        //    while (TPCANStatus.PCAN_ERROR_QRCVEMPTY
-        //           != PcanBasicDllWrapper.Read(this.MPcanHandle, out readCanMsg, out _))
-        //    {
-        //        // Console.WriteLine($"clear {readCanMsg.Id}");
-        //        this.Logger.LogTrace("read empty" + readCanMsg.Id);
-        //    }
-        //}
+        // while (TPCANStatus.PCAN_ERROR_QRCVEMPTY
+        // != PcanBasicDllWrapper.Read(this.MPcanHandle, out readCanMsg, out _))
+        // {
+        // // Console.WriteLine($"clear {readCanMsg.Id}");
+        // this.Logger.LogTrace("read empty" + readCanMsg.Id);
+        // }
+        // }
 
         /// <summary>
         ///     Writes the can.
@@ -138,6 +140,8 @@
                 lock (LockWrite)
                 {
                     this.Logger.LogBegin(this.GetType());
+
+                    this.OpenCanDongle();
 
                     if (data.Count > 8)
                     {
@@ -178,6 +182,21 @@
         #endregion
 
         #region Private Methods
+
+        private void OpenCanDongle()
+        {
+            try
+            {
+                if (this.MPcanHandle == 0)
+                {
+                    this.MPcanHandle = this.PreparePeakCan.Do();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
 
         private string ByteArrayToHexString(byte[] data)
         {

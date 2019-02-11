@@ -5,12 +5,10 @@
     using System.Threading.Tasks;
 
     using Hal.PeakCan.Contracts.Basics;
+    using Hal.PeakCan.Contracts.Init;
     using Hal.PeakCan.PCANDll;
 
-    using HardwareAbstaction.PCAN.Init;
     using HardwareAbstaction.PCAN.PCANDll;
-
-    using HardwareAbstraction.Contracts.PCanDll;
 
     using Helper.Contracts.Logger;
 
@@ -23,7 +21,7 @@
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ReadCanMessage" /> class.
+        ///     Initializes a new instance of the <see cref="ReadCanMessage" /> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="preparePeakCan">The prepare peak can.</param>
@@ -38,7 +36,8 @@
                 this.PreparePeakCan = preparePeakCan;
 
                 this.Logger = logger;
-                this.MPcanHandle = this.PreparePeakCan.Do();
+
+                // this.MPcanHandle = this.PreparePeakCan.Do();
             }
             catch (Exception e)
             {
@@ -55,21 +54,9 @@
 
         #region Properties
         
-        /// <summary>
-        ///     Gets the logger.
-        /// </summary>
-        /// <value>
-        ///     The logger.
-        /// </value>
         private ILogger Logger { get; }
-
-        /// <summary>
-        ///     Gets the MPCAN handle.
-        /// </summary>
-        /// <value>
-        ///     The MPCAN handle.
-        /// </value>
-        private ushort MPcanHandle { get; }
+        
+        private ushort MPcanHandle { get; set; }
 
         private IPreparePeakCan PreparePeakCan { get; }
 
@@ -80,15 +67,16 @@
         #region Public Methods
 
         /// <summary>
-        /// Starts this instance.
+        ///     Starts this instance.
         /// </summary>
         /// <returns>
-        /// The message event handler.
+        ///     The message event handler.
         /// </returns>
         public IReadCanMessageEvent Start()
         {
             try
             {
+                this.OpenCanDongle();
                 Task.Run(() => { this.ReadRaw(); });
                 return this.ReadCanMessageEvent;
             }
@@ -102,6 +90,21 @@
         #endregion
 
         #region Private Methods
+
+        private void OpenCanDongle()
+        {
+            try
+            {
+                if (this.MPcanHandle == 0)
+                {
+                    this.MPcanHandle = this.PreparePeakCan.Do();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
 
         private void ReadRaw()
         {
