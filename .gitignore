@@ -3,3 +3,6 @@
 /CPIOngConfig/CPIOngConfig/CPIOngConfig/bin
 /CPIOngConfig/CPIOngConfig/ConfigLogicLayer/bin
 /CPIOngConfig/CPIOngConfig/ConfigLogicLayer/obj
+/CPIOngConfig/CPIOngConfig/Hal.PeakCan/bin
+/CPIOngConfig/CPIOngConfig/Hal.PeakCan/obj
+/CPIOngConfig/CPIOngConfig/Hal.PeakCan/*.user

@@ -23,7 +23,7 @@
     </UserControl.Resources>
     <StackPanel>
         <Label>Select active pulse sensor</Label>
-        <Grid MaxHeight="40">
+        <Grid MaxHeight="40" IsEnabled="{Binding IsEnabled}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />

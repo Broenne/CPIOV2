@@ -7,6 +7,7 @@
     using ConfigLogicLayer.Contracts.DigitalInputState;
 
     using CPIOngConfig.Contracts.ActiveSensor;
+    using CPIOngConfig.Contracts.Adapter;
     using CPIOngConfig.Contracts.ConfigInputs;
 
     using Helper;
@@ -21,6 +22,8 @@
     /// <seealso cref="CPIOngConfig.Contracts.ActiveSensor.IActiveSensorViewModel" />
     public class ActiveSensorViewModel : BindableBase, IActiveSensorViewModel
     {
+        private bool isEnabled;
+
         private Modi selctedValue;
 
         #region Constructor
@@ -31,11 +34,13 @@
         /// <param name="logger">The logger.</param>
         /// <param name="setActiveSensorToDetect">The set active sensor to detect.</param>
         /// <param name="activeSensorEventHandler">The active sensor event handler.</param>
-        public ActiveSensorViewModel(ILogger logger, ISetActiveSensorToDetect setActiveSensorToDetect, IActiveSensorEventHandler activeSensorEventHandler)
+        /// <param name="canIsConnectedEventHandler">The can is connected event handler.</param>
+        public ActiveSensorViewModel(ILogger logger, ISetActiveSensorToDetect setActiveSensorToDetect, IActiveSensorEventHandler activeSensorEventHandler, ICanIsConnectedEventHandler canIsConnectedEventHandler)
         {
             this.Logger = logger;
             this.SetActiveSensorToDetect = setActiveSensorToDetect;
             this.ActiveSensorEventHandler = activeSensorEventHandler;
+            canIsConnectedEventHandler.EventIsReached += this.CanIsConnectedEventHandler_EventIsReached;
 
             this.ActiveSensorEventHandler.EventIsReached += this.ActiveSensorEventHandler_EventIsReached;
             this.SetSensorCommand = new RelayCommand(this.SetSensorCommandAction);
@@ -47,6 +52,19 @@
         #region Properties
 
         /// <summary>
+        ///     Gets or sets a value indicating whether this instance is enabled.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c>If this instance is enabled; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsEnabled
+        {
+            get => this.isEnabled;
+
+            set => this.SetProperty(ref this.isEnabled, value);
+        }
+
+        /// <summary>
         ///     Gets the load active sensor command.
         /// </summary>
         /// <value>
@@ -55,10 +73,10 @@
         public ICommand LoadActiveSensorCommand { get; }
 
         /// <summary>
-        /// Gets or sets the selected value.
+        ///     Gets or sets the selected value.
         /// </summary>
         /// <value>
-        /// The selected value.
+        ///     The selected value.
         /// </value>
         public Modi SelctedValue
         {
@@ -84,6 +102,25 @@
         #endregion
 
         #region Private Methods
+
+        private void CanIsConnectedEventHandler_EventIsReached(object sender, bool e)
+        {
+            try
+            {
+                this.Logger.LogBegin(this.GetType());
+
+                this.IsEnabled = e;
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                this.Logger.LogEnd(this.GetType());
+            }
+        }
 
         private void ActiveSensorEventHandler_EventIsReached(object sender, Modi e)
         {

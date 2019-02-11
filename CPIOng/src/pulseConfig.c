@@ -8,8 +8,6 @@
 
 #include "pulseConfig.h"
 
-
-
 static ChannelModi ChannelModiStorage[CHANNEL_COUNT];
 
 static ChannelModiType ActivatedChannelModi = Licht;
@@ -17,7 +15,6 @@ static ChannelModiType ActivatedChannelModi = Licht;
 void SetActiveChannelModiType(ChannelModiType val){
 	ActivatedChannelModi = val;
 	SafeUsedActiveSensorType((uint8_t)ActivatedChannelModi);
-	// ins eeprom speichern, wenn eg‰ndert
 }
 
 ChannelModiType GetChannelModiByChannel(int ch){
@@ -30,16 +27,26 @@ ChannelModiType GetActiveChannelModiType(void){
 }
 
 void ChangeChannelModi(uint8_t channel, ChannelModiType channelModiType){
-	printf("ch:%d mod:%d \r\n", channel, channelModiType);
-	ChannelModiStorage[channel].channelModiType = channelModiType; // todo mb: das ist scheiﬂe. hier kommt die Gefahr das man was durcheinader wirft
+	// printf("ch:%d mod:%d \r\n", channel, channelModiType);
+	ChannelModiStorage[channel].channelModiType = channelModiType;
 }
+
+/*
+ * Created on: 11.02.19
+ * Author: MB
+ * Function for save channel modi to eeprom
+ * */
+void SaveChannelToEeprom(void){
+	for(int i=0;i<CHANNEL_COUNT;++i){
+		SafeChannelConfig(i, ChannelModiStorage[i].channelModiType);
+	}
+}
+
 
 void InitChannelModi(void){
 
 		//ActivatedChannelModi = ChannelModiType.//(ChannelModiType)GetUsedActiveSensorType();
 
-	    // todo mb: von auﬂen initialisieren und in eeprom abspeichern
-		// der channel wird extra abgespeichert und nicht ¸ber die Position im Array behandelt. ‹berscihtlicher!
 		ChannelModiStorage[0].channelModiType = Licht;
 		ChannelModiStorage[1].channelModiType = Licht;
 		ChannelModiStorage[2].channelModiType = Licht;

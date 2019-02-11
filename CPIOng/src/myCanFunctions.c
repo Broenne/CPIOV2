@@ -24,6 +24,19 @@ void SendActualChannelModi(uint8_t* data) {
 }
 
 /*
+ * Created on: 04.02.19
+ * Author: MB
+ * Function build the answer for channel modi response
+ * */
+void CreateResponseForRequestChannelModi(uint8_t* data) {
+	uint8_t inputChannelNumber = data[1];
+	data[0] = 0x01; // zeit es kommt die konfiguration der Eingänge
+	data[1] = inputChannelNumber; //Eingangsnummer
+	data[2] = GetChannelModiByChannel(inputChannelNumber); //0x03;
+	SendActualChannelModi(data);
+}
+
+/*
  * Created on: 17.12.18
  * Author: MB
  * Set the difffernt modi for the cahnnel from outside by can. *
@@ -35,23 +48,11 @@ void SetChannelModiFromExternal(uint8_t* data) {
 	ChangeChannelModi(channel, channelModiType);
 
 	// als bestätigung wegsenden
-	//uint8_t canId = 0x00; // sende auch auf can 0 die response
-	SendActualChannelModi(data);
+	CreateResponseForRequestChannelModi(data);
 }
 
 
-/*
- * Created on: 04.02.1
- * Author: MB
- * Function build the answer for channel modi response
- * */
-void CreateResponseForRequestChannelModi(uint8_t* data) {
-	uint8_t inputChannelNumber = data[1];
-	data[0] = 0x01; // zeit es kommt die konfiguration der Eingänge
-	data[1] = inputChannelNumber; //Eingangsnummer
-	data[2] = GetChannelModiByChannel(inputChannelNumber); //0x03;
-	SendActualChannelModi(data);
-}
+
 
 /*
  * Created on: 07.02.19
@@ -116,7 +117,6 @@ void CanWorkerTask(void * pvParameters) {
 				// Funktion zum Abfrage der Einstellung der aktuellen Eingänge
 				if ((GetGlobalCanNodeId() + REQUEST_INPUT_CONFIG) == stdid) {
 					uint8_t* data = &hcan->pRxMsg->Data[0];
-					//uint8_t inputChannelNumber = data[1];
 					switch (data[0]) {
 						case 0x01:
 							CreateResponseForRequestChannelModi(data);
@@ -135,6 +135,7 @@ void CanWorkerTask(void * pvParameters) {
 				if ((GetGlobalCanNodeId() + SET_ACTIVE_SENSOR) == stdid) {
 					ChannelModiType channelModiType = (ChannelModiType) hcan->pRxMsg->Data[0];
 					SetActiveChannelModiType(channelModiType);
+					// todo mb: in eeprom schreiben
 				}
 
 				if ((GetGlobalCanNodeId() + FLIPFLOP_OPENCAN_OFFSET_RESET) == stdid) {

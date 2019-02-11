@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Threading;
+    using System.Windows;
 
     using ConfigLogicLayer.Contracts;
     using ConfigLogicLayer.Contracts.ActualId;
@@ -77,15 +78,25 @@
 
                     this.WriteBasicCan.WriteCan(0x00, data);
 
+                    int i = 0;
                     while (this.waitForResponse != item.Channel)
                     {
                         // todo mb: timeoput
                         Thread.Sleep(10);
+                        ++i;
+                        if (i > 50)
+                        {
+                            MessageBox.Show($"configuration Einfgänge fehlerhaft {item.Channel}");
+                            goto Finish;
+                        }
                     }
 
                     // todo mb: auf antwort warten
                     // Thread.Sleep(50);
                 }
+
+                Finish:
+                return;
             }
             catch (Exception ex)
             {
