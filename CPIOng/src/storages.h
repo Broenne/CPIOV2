@@ -23,5 +23,6 @@ uint8_t GetUsedActiveSensorType(void);
  * Function for save channel modi to eeprom
  * */
 void SafeChannelConfig(uint channel, uint8_t channelModiType);
+uint8_t GetStoredChannelModi(uint channel);
 
 #endif /* STORAGES_H_ */

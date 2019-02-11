@@ -51,9 +51,6 @@ void SetChannelModiFromExternal(uint8_t* data) {
 	CreateResponseForRequestChannelModi(data);
 }
 
-
-
-
 /*
  * Created on: 07.02.19
  * Author: MB
@@ -99,6 +96,9 @@ void CanWorkerTask(void * pvParameters) {
 						break;
 					case 0x03:
 						SetChannelModiFromExternal(pData);
+						break;
+					case 0x04:
+						SaveChannelToEeprom();
 						break;
 					default:
 						break;

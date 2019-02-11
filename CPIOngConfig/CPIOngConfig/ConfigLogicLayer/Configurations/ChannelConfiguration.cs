@@ -72,9 +72,14 @@
                     this.waitForResponse = -1;
                     const byte WriteConfigByte = 0x03;
                     var data = new List<byte>();
-                    data.Add(WriteConfigByte);
-                    data.Add(Convert.ToByte(item.Channel));
-                    data.Add(Convert.ToByte(item.Modi));
+                    data.Add(WriteConfigByte); // 0
+                    data.Add(Convert.ToByte(item.Channel)); // 1
+                    data.Add(Convert.ToByte(item.Modi)); // 2
+                    data.Add(0x00); // 3
+                    data.Add(Convert.ToByte(item.Modi)); // 4
+                    data.Add(0x00); // 5
+                    data.Add(0x00); // 6
+                    data.Add(0x00); // 7
 
                     this.WriteBasicCan.WriteCan(0x00, data);
 
@@ -82,7 +87,7 @@
                     while (this.waitForResponse != item.Channel)
                     {
                         // todo mb: timeoput
-                        Thread.Sleep(10);
+                        Thread.Sleep(50);
                         ++i;
                         if (i > 50)
                         {
@@ -90,10 +95,9 @@
                             goto Finish;
                         }
                     }
-
-                    // todo mb: auf antwort warten
-                    // Thread.Sleep(50);
                 }
+
+                this.SafeChannelInputModi();
 
                 Finish:
                 return;
@@ -106,6 +110,26 @@
             finally
             {
                 this.Logger.LogEnd(this.GetType());
+            }
+        }
+
+
+
+        private void SafeChannelInputModi()
+        {
+            try
+            {
+                const byte WriteConfigByte = 0x04;
+                var data = new List<byte>();
+                data.Add(WriteConfigByte); // 0
+                // save to eeprom
+                this.WriteBasicCan.WriteCan(0x00, data);
+
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                throw;
             }
         }
 

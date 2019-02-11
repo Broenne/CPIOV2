@@ -22,5 +22,6 @@ void InitChannelModi(void);
 void SetActiveChannelModiType(ChannelModiType val);
 ChannelModiType GetActiveChannelModiType(void);
 ChannelModiType GetChannelModiByChannel(int ch);
+void SaveChannelToEeprom(void);
 
 #endif /* PULSECONFIG_H_ */
