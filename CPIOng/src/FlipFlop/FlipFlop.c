@@ -44,7 +44,6 @@ void ResetFlipFlop(uint8_t* resetChannelsBitmask) {
 		}
 	}
 
-	// zur Bestätigung wieder wegsenden
 	uint16_t data = StorageFlipFlopState;
 	SendFlipFlopStateViaCan(data);
 }

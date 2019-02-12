@@ -56,10 +56,37 @@ void SetChannelModiFromExternal(uint8_t* data) {
  * Author: MB
  * function for build answer to inform about active selected sensor modi
  * */
-void CreateResponseActiveSensor(uint8_t* data){
+void CreateResponseActiveSensor(uint8_t* data) {
 	// in data[0] steht die Kennung 0x02 für die Anfrage
 	data[1] = GetActiveChannelModiType();
 	SendActualChannelModi(data);
+}
+
+void GetInputs(uint8_t* data) {
+	uint8_t val[2];
+	ReadInputs(&val[0]);
+	memcpy(data, &val, sizeof(val));
+}
+
+void WorkerCanId0(uint8_t* data) {
+	uint8_t dataByte0 = data[0];
+	switch (dataByte0) {
+	case 0x01:
+		SetGlobalCanNodeId(data[1]);
+		// printf("Incoming id 0x00 %d", GetGlobalCanNodeId());
+		break;
+	case 0x02:
+		ActivateDebug(data[1]);
+		break;
+	case 0x03:
+		SetChannelModiFromExternal(data);
+		break;
+	case 0x04:
+		SaveChannelToEeprom();
+		break;
+	default:
+		break;
+	}
 }
 
 /*
@@ -80,29 +107,13 @@ void CanWorkerTask(void * pvParameters) {
 
 		// Empfänger
 		if (xQueueReceive(CanRxQueueHandle, hcan, 10) == pdTRUE) {
-			if (hcan->Instance == CAN2) {
 
+			if (hcan->Instance == CAN2) {
 				uint32_t stdid = hcan->pRxMsg->StdId;
 				uint8_t* pData = &hcan->pRxMsg->Data[0];
 				// default id 0
 				if (0x00 == stdid) {
-					switch (hcan->pRxMsg->Data[0]) {
-					case 0x01:
-						SetGlobalCanNodeId(hcan->pRxMsg->Data[1]);
-						printf("Incoming id 0x00 %d", GetGlobalCanNodeId());
-						break;
-					case 0x02:
-						ActivateDebug(hcan->pRxMsg->Data[1]);
-						break;
-					case 0x03:
-						SetChannelModiFromExternal(pData);
-						break;
-					case 0x04:
-						SaveChannelToEeprom();
-						break;
-					default:
-						break;
-					}
+					WorkerCanId0(pData);
 				}
 
 				// Funktion zum abfragen der Einganszustände
@@ -118,16 +129,16 @@ void CanWorkerTask(void * pvParameters) {
 				if ((GetGlobalCanNodeId() + REQUEST_INPUT_CONFIG) == stdid) {
 					uint8_t* data = &hcan->pRxMsg->Data[0];
 					switch (data[0]) {
-						case 0x01:
-							CreateResponseForRequestChannelModi(data);
-							break;
-						case 0x02:
-							// einstellung, welcher Sensor grade am Knoten aktiv ist
-							 //data[0] = 0x02;
-							CreateResponseActiveSensor(data);
-							// data[1] = AktiverKanal;
-						default:
-							break;
+					case 0x01:
+						CreateResponseForRequestChannelModi(data);
+						break;
+					case 0x02:
+						// einstellung, welcher Sensor grade am Knoten aktiv ist
+						//data[0] = 0x02;
+						CreateResponseActiveSensor(data);
+						// data[1] = AktiverKanal;
+					default:
+						break;
 					}
 				}
 
@@ -151,9 +162,8 @@ void CanWorkerTask(void * pvParameters) {
 		}
 	}
 
-	printf("Sender task error \r\n");
+	SetCanWorkerTaskError();
 }
-
 
 /*
  * Created on: 30.11.18
@@ -197,12 +207,6 @@ void SendCanTimeDif(uint8_t channel, uint32_t res) {
 
 	uint32_t canId = PULSE_OPENCAN_OFFSET + GetGlobalCanNodeId() + channel;
 	SendCan(canId, p, 4);
-}
-
-void GetInputs(uint8_t* data) {
-	uint8_t val[2];
-	ReadInputs(&val[0]);
-	memcpy(data, &val, sizeof(val));
 }
 
 void SendFlipFlopStateViaCan(uint16_t flipFlopState) {

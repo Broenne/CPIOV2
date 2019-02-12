@@ -27,6 +27,7 @@ void SetPossiblePulseSendQueueFullError(void);
 void SetPulseSenderCreateTaskError(void);
 
 void SetCanSendError(void);
+void SetCanWorkerTaskError(void);
 void SetSendAliveError(void);
 
 void SetInitPulseTimerError(void);

@@ -7,6 +7,7 @@
 
 #include "analog.h"
 
+#define MAX_UART_STRING_LENGTH (( unsigned short ) 50 )
 #define ANA_CHANNEL_COMMAND "AnaCh"
 
 extern UART_HandleTypeDef huart1;
@@ -21,7 +22,7 @@ uint8_t text;
  * Service for send analog value on standardt console.
  * */
 void SendAnalogValue(char* data, int len) {
-	for (int i = 15; 0 != i; --i) {
+	for (int i = (CHANNEL_COUNT - 1); 0 != i; --i) {
 		char cmp[sizeof(ANA_CHANNEL_COMMAND) + 2];
 		strcpy(cmp, ANA_CHANNEL_COMMAND);
 		char str[2];
@@ -46,7 +47,7 @@ void SendAnalogValue(char* data, int len) {
  * 	if string terminated on \n function call analog value is called
  * */
 void ReadUartTask(void) {
-	char inputData[50];
+	char inputData[MAX_UART_STRING_LENGTH];
 	int pos = 0;
 
 	while (1) {

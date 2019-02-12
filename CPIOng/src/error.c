@@ -68,6 +68,10 @@ void SetCanSendError(void){
 	myPrintf("Error in can send \r\n");
 }
 
+void SetCanWorkerTaskError(void){
+	myPrintf("Sender task error \r\n");
+}
+
 void SetSendAliveError(void){
 	myPrintf("Set send alive error. \r\n");
 }

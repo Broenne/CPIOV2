@@ -15,5 +15,4 @@ void ReadInputs(uint8_t* data);
 void GetInputs(uint8_t* data);
 int ReadChannelAnalog(uint pos);
 
-
 #endif /* IO_H_ */
