@@ -29,5 +29,8 @@ void SetPulseSenderCreateTaskError(void);
 void SetCanSendError(void);
 void SetSendAliveError(void);
 
+void SetInitPulseTimerError(void);
+void SetPulseSenderTaskError(void);
+
 
 #endif /* ERROR_H_ */

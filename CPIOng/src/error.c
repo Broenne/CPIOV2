@@ -38,7 +38,6 @@ void SetErrorFlag(int pos){
  * Setzen des errors aus dem counter befehl.
  * */
 void SetCounterError(void){
-	// todo mb: Fehler merken KEIN!!!!!! printf nutzen. Eigene Funktion myprinft (noch zu schreiben)
 	myPrintf("ERROR die Infos können nicht mehr weggeschickt werden \r\n");
 	SetErrorFlag(COUNTER_ERROR_POSITION);
 }
@@ -71,4 +70,12 @@ void SetCanSendError(void){
 
 void SetSendAliveError(void){
 	myPrintf("Set send alive error. \r\n");
+}
+
+void SetInitPulseTimerError(void){
+	myPrintf("Error init pulse timer \r\n");
+}
+
+void SetPulseSenderTaskError(void){
+	myPrintf("Sender pulse task error \r\n");
 }

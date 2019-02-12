@@ -10,6 +10,8 @@
 extern ADC_HandleTypeDef hadc1;
 static uint16_t adcbuffer[16];
 
+#define DIGIT_LIMIT_FOR_HIGH_SIGNAL ( ( unsigned short ) 3000 )
+
 /*
  * Created on: 30.11.18
  * Author: MB
@@ -19,8 +21,18 @@ void InitReadIO(void) {
 	HAL_ADC_Start_DMA(&hadc1, &adcbuffer[0], 16);
 }
 
+
+unsigned short GetAnalogBarrier(void){
+	return DIGIT_LIMIT_FOR_HIGH_SIGNAL;
+}
+
+/*
+ * Created on: 12.02.19
+ * Author: MB
+ * Service um zwichen gih und low Signal der analogen Eingänge zu unterscheiden.
+ */
 uint8_t CalculateAnalogToHighOrLow(uint16_t value) {
-	if (value > 3000) {
+	if (value > GetAnalogBarrier()) {
 		return 1;
 	} else {
 		return 0;

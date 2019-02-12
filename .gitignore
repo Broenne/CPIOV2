@@ -8,3 +8,5 @@
 /CPIOngConfig/CPIOngConfig/Hal.PeakCan/*.user
 /CPIOngConfig/CPIOngConfig/ConfigLogicLayer.Contracts/bin
 /CPIOngConfig/CPIOngConfig/ConfigLogicLayer.Contracts/obj
+/CPIOngConfig/CPIOngConfig/CPIOngConfig.Contracts/obj
+/CPIOngConfig/CPIOngConfig/CPIOngConfig.Contracts/bin

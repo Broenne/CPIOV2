@@ -17,7 +17,7 @@ typedef struct {
 
 
 
-static TIM_HandleTypeDef pulseTimerInstance; // = { .Instance = TIM2 };
+static TIM_HandleTypeDef pulseTimerInstance;
 
 static xQueueHandle PulsQueue = NULL;
 uint32_t PreemptPriorityPulseTimer = 5;
@@ -36,9 +36,7 @@ void Init_TimerForPulsTime(void) {
 
 	// calculate:
 	// f / fclock / Period*(Pre+1))
-
-	__HAL_RCC_TIM3_CLK_ENABLE()
-	;
+	__HAL_RCC_TIM3_CLK_ENABLE()	;
 	pulseTimerInstance.Instance = TIM3;
 	pulseTimerInstance.Init.CounterMode = TIM_COUNTERMODE_UP;
 
@@ -48,9 +46,8 @@ void Init_TimerForPulsTime(void) {
 	pulseTimerInstance.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
 	pulseTimerInstance.Init.RepetitionCounter = 0;
 	pulseTimerInstance.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-	//s_TimerInstance.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;//TIM_AUTORELOAD_PRELOAD_ENABLE;//
 	if (HAL_TIM_Base_Init(&pulseTimerInstance) != HAL_OK) {
-		//_Error_Handler(__FILE__, __LINE__);
+		SetInitPulseTimerError();
 	}
 
 	HAL_TIM_Base_Start_IT(&pulseTimerInstance);
@@ -59,14 +56,14 @@ void Init_TimerForPulsTime(void) {
 	HAL_NVIC_EnableIRQ(TIM3_IRQn);
 }
 
-//osMessageQId myQueue01Handle;
-
+/*
+ * Created on: 12.02.19
+ * Author: MB
+ * Initialisierung die freertos quee für die pulse information.
+ * */
 void InitQueueForPulse(void) {
 	PulsQueue = xQueueCreate(QUEUE_SIZE_FOR_PULSE_INFO, sizeof(MessageForSend));
 }
-
-
-
 
 void InitPulse(void) {
 	InitQueueForPulse();
@@ -91,10 +88,7 @@ void SendPulsePerCanTask(void * pvParameters) {
 		if (xQueueReceive(PulsQueue, &currentMessage, 100) == pdTRUE) {
 
 			for(int i=0; i < CHANNEL_COUNT; ++i){
-
-				// voraussetzung, channel muss dem eingang entsprechen!!
-				static ChannelModiType channelModi;
-				//channelModi = ChannelModiStorage[i].channelModiType;
+				static ChannelModiType channelModi; // voraussetzung, channels muss dem eingang entsprechen!!
 				channelModi = GetChannelModiByChannel(i);
 
 				if(i == currentMessage.channel && channelModi == GetActiveChannelModiType()){
@@ -113,7 +107,7 @@ void SendPulsePerCanTask(void * pvParameters) {
 		}
 	}
 
-	printf("Sender task error \r\n");
+	SetPulseSenderTaskError();
 }
 
 /*
@@ -124,8 +118,7 @@ void SendPulsePerCanTask(void * pvParameters) {
  * */
 void InitPulseSender(void) {
 
-	//  /* Create the thread(s) */
-	//  /* definition and creation of defaultTask */
+	//  /* Create the thread(s) */	//  /* definition and creation of defaultTask */
 	osThreadDef(PulseTask, SendPulsePerCanTask, osPriorityNormal, 0, 128);
 	myTask03Handle = osThreadCreate(osThread(PulseTask), NULL);
 	// todo mb: wann und wie den task deleten?
@@ -147,7 +140,6 @@ void SendTimeInfo(uint8_t channel) {
 		res = lastTimeValue[channel] - actualTimeValue;
 	}
 
-	// printf("SendTimeInfo %d \r\n", channel);
 	static MessageForSend messageForSend;
 	messageForSend.channel = channel;
 	messageForSend.res = res;
@@ -159,11 +151,18 @@ void SendTimeInfo(uint8_t channel) {
 	lastTimeValue[channel] = actualTimeValue;
 }
 
+/*
+ * Created on: 12.02.19
+ * Author: MB
+ * Service for check if there is a rising pulse.
+ * */
 void CheckPulseInputs(void) {
 	static uint16_t oldValue = 0;
 	static uint8_t data[2];
 	static uint16_t value = 0;
+
 	ReadInputs(&data[0]);
+
 	value = data[0];
 	value = value | (data[1] << 8);
 	if (value != oldValue) {
