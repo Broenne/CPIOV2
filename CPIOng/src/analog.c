@@ -7,16 +7,20 @@
 
 #include "analog.h"
 
+#define ANA_CHANNEL_COMMAND "AnaCh"
+
 extern UART_HandleTypeDef huart1;
 
 static osThreadId uartTaskHandle;
 
 uint8_t text;
 
-#define ANA_CHANNEL_COMMAND "AnaCh"
-
+/*
+ * Created on: 12.02.19
+ * Author: MB
+ * Service for send analog value on standardt console.
+ * */
 void SendAnalogValue(char* data, int len) {
-
 	for (int i = 15; 0 != i; --i) {
 		char cmp[sizeof(ANA_CHANNEL_COMMAND) + 2];
 		strcpy(cmp, ANA_CHANNEL_COMMAND);
@@ -35,17 +39,19 @@ void SendAnalogValue(char* data, int len) {
 	}
 }
 
+/*
+ * Created on: 12.02.19
+ * Author: MB
+ * 	Service for endless read UART task.
+ * 	if string terminated on \n function call analog value is called
+ * */
 void ReadUartTask(void) {
 	char inputData[50];
 	int pos = 0;
-	//std::string cmd;
 
 	while (1) {
 		if (HAL_UART_Receive(&huart1, &text, sizeof(text), 10) == HAL_OK) {
-
 			if (text == '\n') {
-				// clear all, NULL-terminierter String
-
 				SendAnalogValue(inputData, pos);
 				pos = 0;
 				continue;
@@ -55,16 +61,11 @@ void ReadUartTask(void) {
 			}
 
 			++pos;
-
-		} else {
-
-			// printf("no data \r\n");
 		}
 	}
 }
 
 void InitAnalog(void) {
-	// ghört das uart hier rein? am besten nochmal abstrahieren
 	osThreadDef(UartTask, ReadUartTask, osPriorityNormal, 0, 128);
 	uartTaskHandle = osThreadCreate(osThread(UartTask), NULL);
 }

@@ -55,16 +55,15 @@ DMA_HandleTypeDef hdma_adc1;
 
 volatile CAN_HandleTypeDef hcan2;
 
-// todo mb: funktion übergabe
 UART_HandleTypeDef huart1;
 
 WWDG_HandleTypeDef hwwdg;
 
-osThreadId defaultTaskHandle;
-osThreadId Idle_TaskHandle;
-osThreadId myTask03Handle;
-osMessageQId myQueue01Handle;
-osTimerId myTimer01Handle;
+//osThreadId defaultTaskHandle;
+//osThreadId Idle_TaskHandle;
+//osThreadId myTask03Handle;
+//osMessageQId myQueue01Handle;
+//osTimerId myTimer01Handle;
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
@@ -380,7 +379,6 @@ static void MX_USART1_UART_Init(void) {
 
 /* WWDG init function */
 static void MX_WWDG_Init(void) {
-
 	hwwdg.Instance = WWDG;
 	hwwdg.Init.Prescaler = WWDG_PRESCALER_4;
 	hwwdg.Init.Window = 64;
@@ -389,7 +387,6 @@ static void MX_WWDG_Init(void) {
 	if (HAL_WWDG_Init(&hwwdg) != HAL_OK) {
 		SetPeriperialInitError();
 	}
-
 }
 
 /** 
