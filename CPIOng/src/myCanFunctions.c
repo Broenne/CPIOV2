@@ -62,11 +62,6 @@ void CreateResponseActiveSensor(uint8_t* data) {
 	SendActualChannelModi(data);
 }
 
-void GetInputs(uint8_t* data) {
-	uint8_t val[2];
-	ReadInputs(&val[0]);
-	memcpy(data, &val, sizeof(val));
-}
 
 void WorkerCanId0(uint8_t* data) {
 	uint8_t dataByte0 = data[0];
@@ -120,7 +115,7 @@ void CanWorkerTask(void * pvParameters) {
 				if (GetGlobalCanNodeId() == stdid) {
 					if (0x02 == hcan->pRxMsg->RTR) {
 						uint8_t data[8];
-						GetInputs(&data);
+						GetInputs(data);
 						SendCan(GetGlobalCanNodeId(), data, 8); // ab in ide ander queu un einfach weg
 					}
 				}

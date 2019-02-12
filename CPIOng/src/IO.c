@@ -60,3 +60,11 @@ void ReadInputs(uint8_t* data) {
 
 	memcpy(data, dataHelper, sizeof(dataHelper));
 }
+
+void GetInputs(uint8_t* data) {
+	uint8_t val[2];
+	ReadInputs(&val[0]);
+	memcpy(data, &val, sizeof(val));
+}
+
+
