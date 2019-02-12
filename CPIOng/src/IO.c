@@ -42,14 +42,18 @@ int ReadChannelAnalog(uint pos) {
 	return adcbuffer[pos];
 }
 
-void ReadInputs(uint8_t* data) {
-	uint16_t inputs[16];
-	uint8_t dataHelper[2] = { 0 };
 
-	memcpy(&inputs, &adcbuffer[0], 16 * sizeof(uint16_t));
+static uint8_t dataHelper[CHANNEL_COUNT / 8] = { 0 }; // static um es nur einmal anzulegen?
+
+void ReadInputs(uint8_t* data) {
+	uint16_t inputs[CHANNEL_COUNT];
+	dataHelper[0] = 0;
+	dataHelper[1] = 0;
+
+	memcpy(&inputs, &adcbuffer[0], CHANNEL_COUNT * sizeof(uint16_t));
 
 	int anaDigits;
-	for (int i = 0; i < 16; ++i) {
+	for (int i = 0; i < CHANNEL_COUNT; ++i) {
 		anaDigits = CalculateAnalogToHighOrLow(inputs[i]);
 		dataHelper[i / 8] = dataHelper[i / 8] | (anaDigits << (i % 8));
 	}

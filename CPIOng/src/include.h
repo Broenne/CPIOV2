@@ -9,7 +9,6 @@
 #define INCLUDE_H_
 
 
-#define CHANNEL_COUNT 					( ( unsigned short ) 16 )
 
 #include "main.h"
 //#include "stm32f1xx_hal_gpio.h"
@@ -37,6 +36,9 @@
 #include "FlipFlop/FlipFlop.h"
 #include "Can/CanFilter.h"
 
+
+
+#define CHANNEL_COUNT 					( ( unsigned short ) 16 )
 
 #define Major ((uint8_t)0x00)
 #define Minor ((uint8_t)0x00)
