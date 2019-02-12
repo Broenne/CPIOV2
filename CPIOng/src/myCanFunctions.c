@@ -105,8 +105,11 @@ void StatusOfActualConfiguredInputs(uint8_t* data) {
 
 void SetActiveChannel(uint8_t* data){
 	ChannelModiType channelModiType = (ChannelModiType)data[0];
-						SetActiveChannelModiType(channelModiType);
+	SetActiveChannelModiType(channelModiType);
 }
+
+
+
 
 /*
  * Created on: 30.11.18
@@ -156,7 +159,6 @@ void CanWorkerTask(void * pvParameters) {
 				if ((globalCanId + FLIPFLOP_OPENCAN_OFFSET_RESET) == stdid) {
 					ResetFlipFlop(pData);
 				}
-
 			}
 		}
 
@@ -195,7 +197,6 @@ uint8_t GetGlobalCanNodeId() {
 }
 
 void SetGlobalCanNodeId(uint8_t canId) {
-// todo mb: einschränken
 	SafeGlobalCanId(canId);
 	Reset();
 }
