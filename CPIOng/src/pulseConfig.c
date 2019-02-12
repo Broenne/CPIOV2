@@ -45,7 +45,7 @@ void InitChannelModi(void) {
 
 	// todo mb: active channel bei start laden
 
-	//ActivatedChannelModi = ChannelModiType.//(ChannelModiType)GetUsedActiveSensorType();
+	ActivatedChannelModi =(ChannelModiType)GetUsedActiveSensorType();
 
 
 	for (int i = 0; i < CHANNEL_COUNT; ++i) {

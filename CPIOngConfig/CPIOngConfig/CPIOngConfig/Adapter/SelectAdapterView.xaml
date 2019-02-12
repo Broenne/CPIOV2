@@ -17,13 +17,15 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Button Margin="5" Command="{Binding ConnectCommand}">
-                <iconPacks:PackIconMaterial Width="100" Kind="RayStartArrow" VerticalAlignment="Center" HorizontalAlignment="Center"  />
-            </Button>
-            <RadioButton GroupName="Adapter" Content="Peak" IsChecked="{Binding Path=SelectedAdapterType, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=PeakUsb}" />
-            <RadioButton GroupName="Adapter" Content="ESD" IsChecked="{Binding Path=SelectedAdapterType, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=Esd}" />
-        </StackPanel>
-    </Grid>
+    <Border BorderThickness="1" BorderBrush="Black">
+        <Grid>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <Button Margin="5" Command="{Binding ConnectCommand}">
+                    <iconPacks:PackIconMaterial Width="100" Kind="RayStartArrow" VerticalAlignment="Center" HorizontalAlignment="Center"  />
+                </Button>
+                <RadioButton GroupName="Adapter" Content="Peak" IsChecked="{Binding Path=SelectedAdapterType, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=PeakUsb}" />
+                <RadioButton GroupName="Adapter" Content="ESD" IsChecked="{Binding Path=SelectedAdapterType, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=Esd}" />
+            </StackPanel>
+        </Grid>
+    </Border>
 </UserControl>

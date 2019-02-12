@@ -6,3 +6,5 @@
 /CPIOngConfig/CPIOngConfig/Hal.PeakCan/bin
 /CPIOngConfig/CPIOngConfig/Hal.PeakCan/obj
 /CPIOngConfig/CPIOngConfig/Hal.PeakCan/*.user
+/CPIOngConfig/CPIOngConfig/ConfigLogicLayer.Contracts/bin
+/CPIOngConfig/CPIOngConfig/ConfigLogicLayer.Contracts/obj

@@ -107,7 +107,6 @@ void FilterCanIdResetFlipFlop(CAN_HandleTypeDef* hcan) {
 	hcan->Instance = CAN2;
 }
 
-
 void FilterCanIdGetInputConfig(CAN_HandleTypeDef* hcan) {
 	int globalCanId = GetGlobalCanNodeId();
 	CAN_FilterConfTypeDef sFilterConfig;
@@ -131,11 +130,10 @@ void FilterCanIdGetInputConfig(CAN_HandleTypeDef* hcan) {
 	hcan->Instance = CAN2;
 }
 
-
 void FilterCanIdActiveSensor(CAN_HandleTypeDef* hcan) {
 	int globalCanId = GetGlobalCanNodeId();
 	CAN_FilterConfTypeDef sFilterConfig;
-	sFilterConfig.FilterNumber = 16;
+	sFilterConfig.FilterNumber = 20;
 	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
 	sFilterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
 	sFilterConfig.FilterMaskIdHigh = 0xFFFF;
@@ -178,7 +176,6 @@ void FilterCanIdConfigureInputs(CAN_HandleTypeDef* hcan) {
 	hcan->Instance = CAN2;
 }
 
-
 void FilterOnlyMyId(CAN_HandleTypeDef* hcan) {
 	int globalCanId = GetGlobalCanNodeId();
 	CAN_FilterConfTypeDef sFilterConfig;
@@ -202,6 +199,14 @@ void FilterOnlyMyId(CAN_HandleTypeDef* hcan) {
 	hcan->Instance = CAN2;
 }
 
+void InitCanFilter() {
+	FilterOnlyMyId(&hcan2); // das muss hier expliziet passierne, um den Filter nach dem setzen einer neuen can id und reset diesen zu reintiaisieren
+	FilterCanIdActiveSensor(&hcan2);
+	FilterCanIdResetFlipFlop(&hcan2);
+	FilterCanIdGetInputConfig(&hcan2);
+	FilterCanIdConfigureInputs(&hcan2);
+}
+
 /**
  * @brief  The application entry point.
  *
@@ -209,10 +214,8 @@ void FilterOnlyMyId(CAN_HandleTypeDef* hcan) {
  */
 int main(void) {
 
-
 	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
- 	HAL_Init();
-
+	HAL_Init();
 
 	/* Configure the system clock */
 	SystemClock_Config();
@@ -225,11 +228,7 @@ int main(void) {
 	MX_USART1_UART_Init();
 
 	PrepareCan();
-	FilterOnlyMyId(&hcan2); // das muss hier expliziet passierne, um den Filter nach dem setzen einer neuen can id und reset diesen zu reintiaisieren
-	FilterCanIdActiveSensor(&hcan2);
-	FilterCanIdResetFlipFlop(&hcan2);
-	FilterCanIdGetInputConfig(&hcan2);
-	FilterCanIdConfigureInputs(&hcan2);
+	InitCanFilter();
 
 	InitReadIO();
 	InitPulse();
@@ -533,8 +532,6 @@ static void MX_USART1_UART_Init(void) {
 //	HAL_NVIC_EnableIRQ(USART1_IRQn);
 }
 
-
-
 /* WWDG init function */
 static void MX_WWDG_Init(void) {
 
@@ -576,10 +573,14 @@ static void MX_GPIO_Init(void) {
 	GPIO_InitTypeDef GPIO_InitStruct;
 
 	/* GPIO Ports Clock Enable */
-	__HAL_RCC_GPIOC_CLK_ENABLE();
-	__HAL_RCC_GPIOD_CLK_ENABLE();
-	__HAL_RCC_GPIOA_CLK_ENABLE();
-	__HAL_RCC_GPIOB_CLK_ENABLE();
+	__HAL_RCC_GPIOC_CLK_ENABLE()
+	;
+	__HAL_RCC_GPIOD_CLK_ENABLE()
+	;
+	__HAL_RCC_GPIOA_CLK_ENABLE()
+	;
+	__HAL_RCC_GPIOB_CLK_ENABLE()
+	;
 
 	/*Configure GPIO pin Output Level */
 	HAL_GPIO_WritePin(GPIOB,
@@ -635,7 +636,6 @@ static void MX_GPIO_Init(void) {
 	HAL_GPIO_Init(LED_S_GPIO_Port, &GPIO_InitStruct);
 
 }
-
 
 #ifdef  USE_FULL_ASSERT
 /**

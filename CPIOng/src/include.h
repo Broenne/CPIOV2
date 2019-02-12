@@ -35,6 +35,7 @@
 #include "usart/usart.h"
 #include "analog.h"
 #include "FlipFlop/FlipFlop.h"
+#include "Can/CanFilter.h"
 
 
 #define Major ((uint8_t)0x00)
