@@ -12,5 +12,4 @@
 
 void InitCanFilter(void);
 
-
 #endif /* CAN_CANFILTER_H_ */
