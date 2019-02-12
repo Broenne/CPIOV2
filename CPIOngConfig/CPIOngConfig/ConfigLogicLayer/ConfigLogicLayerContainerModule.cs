@@ -4,7 +4,9 @@
 
     using Autofac;
 
+    using ConfigLogicLayer.ActualId;
     using ConfigLogicLayer.Configurations;
+    using ConfigLogicLayer.Contracts.ActualId;
     using ConfigLogicLayer.Contracts.Configurations;
 
     using Module = Autofac.Module;
@@ -27,6 +29,7 @@
             builder.RegisterAssemblyTypes(dataAccess).AsImplementedInterfaces();
 
             builder.RegisterType<ChannelConfigurationResponseEventHandler>().As<IChannelConfigurationResponseEventHandler>().SingleInstance();
+            builder.RegisterType<ChangeActualIdToConnectedEventHandler>().As<IChangeActualIdToConnectedEventHandler>().SingleInstance();
         }
 
         #endregion
