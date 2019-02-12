@@ -112,6 +112,8 @@ int main(void) {
 
 	while (1) {
 	}
+
+
 }
 
 /**
@@ -136,7 +138,7 @@ void SystemClock_Config(void) {
 	RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
 	RCC_OscInitStruct.PLL2.PLL2State = RCC_PLL_NONE;
 	if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
-		//_Error_Handler(__FILE__, __LINE__);
+		SetPeriperialInitError();
 	}
 
 	/**Initializes the CPU, AHB and APB busses clocks
@@ -148,17 +150,16 @@ void SystemClock_Config(void) {
 	RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
 
 	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK) {
-		//_Error_Handler(__FILE__, __LINE__);
+		SetPeriperialInitError();
 	}
 
 	PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC;
 	PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV4;
 	if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK) {
-		//_Error_Handler(__FILE__, __LINE__);
+		SetPeriperialInitError();
 	}
 
-	/**Configure the Systick interrupt time
-	 */
+	/**Configure the Systick interrupt time	 */
 	HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq() / 1000);
 
 	/**Configure the Systick
@@ -189,7 +190,7 @@ static void MX_ADC1_Init(void) {
 	hadc1.Init.NbrOfConversion = 16;
 
 	if (HAL_ADC_Init(&hadc1) != HAL_OK) {
-		//_Error_Handler(__FILE__, __LINE__);
+		SetPeriperialInitError();
 	}
 
 	/**Configure Regular Channel
@@ -198,7 +199,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Rank = ADC_REGULAR_RANK_1;
 	sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		//_Error_Handler(__FILE__, __LINE__);
+		SetPeriperialInitError();
 	}
 
 	/**Configure Regular Channel
@@ -214,7 +215,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_2;
 	sConfig.Rank = ADC_REGULAR_RANK_3;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		//_Error_Handler(__FILE__, __LINE__);
+		SetPeriperialInitError();
 	}
 
 	/**Configure Regular Channel
@@ -222,7 +223,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_3;
 	sConfig.Rank = ADC_REGULAR_RANK_4;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		//_Error_Handler(__FILE__, __LINE__);
+		SetPeriperialInitError();
 	}
 
 	/**Configure Regular Channel
@@ -230,7 +231,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_4;
 	sConfig.Rank = ADC_REGULAR_RANK_5;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		//_Error_Handler(__FILE__, __LINE__);
+		SetPeriperialInitError();
 	}
 
 	/**Configure Regular Channel
@@ -238,7 +239,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_5;
 	sConfig.Rank = ADC_REGULAR_RANK_6;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		//_Error_Handler(__FILE__, __LINE__);
+		SetPeriperialInitError();
 	}
 
 	/**Configure Regular Channel
@@ -246,7 +247,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_6;
 	sConfig.Rank = ADC_REGULAR_RANK_7;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		//_Error_Handler(__FILE__, __LINE__);
+		SetPeriperialInitError();
 	}
 
 	/**Configure Regular Channel
@@ -254,7 +255,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_7;
 	sConfig.Rank = ADC_REGULAR_RANK_8;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		//_Error_Handler(__FILE__, __LINE__);
+		SetPeriperialInitError();
 	}
 
 	/**Configure Regular Channel
@@ -262,7 +263,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_8;
 	sConfig.Rank = ADC_REGULAR_RANK_9;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		//_Error_Handler(__FILE__, __LINE__);
+		SetPeriperialInitError();
 	}
 
 	/**Configure Regular Channel
@@ -270,7 +271,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_9;
 	sConfig.Rank = ADC_REGULAR_RANK_10;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		//_Error_Handler(__FILE__, __LINE__);
+		SetPeriperialInitError();
 	}
 
 	/**Configure Regular Channel
@@ -278,7 +279,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_10;
 	sConfig.Rank = ADC_REGULAR_RANK_11;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		//_Error_Handler(__FILE__, __LINE__);
+		SetPeriperialInitError();
 	}
 
 	/**Configure Regular Channel
@@ -286,7 +287,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_11;
 	sConfig.Rank = ADC_REGULAR_RANK_12;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		//_Error_Handler(__FILE__, __LINE__);
+		SetPeriperialInitError();
 	}
 
 	/**Configure Regular Channel
@@ -294,7 +295,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_12;
 	sConfig.Rank = ADC_REGULAR_RANK_13;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		//_Error_Handler(__FILE__, __LINE__);
+		SetPeriperialInitError();
 	}
 
 	/**Configure Regular Channel
@@ -302,7 +303,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_13;
 	sConfig.Rank = ADC_REGULAR_RANK_14;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		//_Error_Handler(__FILE__, __LINE__);
+		SetPeriperialInitError();
 	}
 
 	/**Configure Regular Channel
@@ -310,7 +311,7 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_14;
 	sConfig.Rank = ADC_REGULAR_RANK_15;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		//_Error_Handler(__FILE__, __LINE__);
+		SetPeriperialInitError();
 	}
 
 	/**Configure Regular Channel
@@ -318,32 +319,32 @@ static void MX_ADC1_Init(void) {
 	sConfig.Channel = ADC_CHANNEL_15;
 	sConfig.Rank = ADC_REGULAR_RANK_16;
 	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		//_Error_Handler(__FILE__, __LINE__);
+		SetPeriperialInitError();
 	}
 }
 
-void FilterIdNull(void) {
-	CAN_FilterConfTypeDef sFilterConfig;
-	sFilterConfig.FilterNumber = 14;
-	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
-	sFilterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
-	sFilterConfig.FilterIdHigh = 0x0000;
-	sFilterConfig.FilterIdLow = 0x0000 << 5;
-	sFilterConfig.FilterMaskIdHigh = 0xFFFF;
-	sFilterConfig.FilterMaskIdLow = 0x07FF << 5;
-	sFilterConfig.FilterFIFOAssignment = CAN_FIFO0;
-	sFilterConfig.FilterActivation = ENABLE;
-
-	// info mb: der filter muss auf can 1 gesetzt werden, auch wenn nur can 2 genutzt wird (warum auch immer)
-	hcan2.Instance = CAN1;
-	//      	HAL_CAN_Receive_IT(&hcan2, CAN_FIFO0);
-	if (HAL_CAN_ConfigFilter(&hcan2, &sFilterConfig) != HAL_OK) {
-		/* Filter configuration Error */
-		//Error_Handler();
-	}
-
-	hcan2.Instance = CAN2;
-}
+//void FilterIdNull(void) {
+//	CAN_FilterConfTypeDef sFilterConfig;
+//	sFilterConfig.FilterNumber = 14;
+//	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
+//	sFilterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
+//	sFilterConfig.FilterIdHigh = 0x0000;
+//	sFilterConfig.FilterIdLow = 0x0000 << 5;
+//	sFilterConfig.FilterMaskIdHigh = 0xFFFF;
+//	sFilterConfig.FilterMaskIdLow = 0x07FF << 5;
+//	sFilterConfig.FilterFIFOAssignment = CAN_FIFO0;
+//	sFilterConfig.FilterActivation = ENABLE;
+//
+//	// info mb: der filter muss auf can 1 gesetzt werden, auch wenn nur can 2 genutzt wird (warum auch immer)
+//	hcan2.Instance = CAN1;
+//	//      	HAL_CAN_Receive_IT(&hcan2, CAN_FIFO0);
+//	if (HAL_CAN_ConfigFilter(&hcan2, &sFilterConfig) != HAL_OK) {
+//		/* Filter configuration Error */
+//		//Error_Handler();
+//	}
+//
+//	hcan2.Instance = CAN2;
+//}
 
 /* CAN2 init function */
 static void MX_CAN2_Init(void) {
@@ -372,7 +373,7 @@ static void MX_CAN2_Init(void) {
 		//_Error_Handler(__FILE__, __LINE__);
 	}
 
-	FilterIdNull();
+	//FilterIdNull();
 
 	// todo mb: hier muss es noch
 	__HAL_CAN_ENABLE_IT(&hcan2, CAN_IT_FMP0);

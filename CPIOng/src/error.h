@@ -32,5 +32,6 @@ void SetSendAliveError(void);
 void SetInitPulseTimerError(void);
 void SetPulseSenderTaskError(void);
 
+void SetPeriperialInitError(void);
 
 #endif /* ERROR_H_ */

@@ -37,6 +37,30 @@ void InitFilter(volatile CAN_HandleTypeDef* hcan, uint32_t filterId, uint filter
 	hcan->Instance = CAN2;
 }
 
+void FilterIdNull(volatile CAN_HandleTypeDef* hcan) {
+	InitFilter(&hcan2, 0, 21);
+//	CAN_FilterConfTypeDef sFilterConfig;
+//	sFilterConfig.FilterNumber = 21;
+//	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
+//	sFilterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
+//	sFilterConfig.FilterIdHigh = 0x0000;
+//	sFilterConfig.FilterIdLow = 0x0000 << 5;
+//	sFilterConfig.FilterMaskIdHigh = 0xFFFF;
+//	sFilterConfig.FilterMaskIdLow = 0x07FF << 5;
+//	sFilterConfig.FilterFIFOAssignment = CAN_FIFO0;
+//	sFilterConfig.FilterActivation = ENABLE;
+//
+//	// info mb: der filter muss auf can 1 gesetzt werden, auch wenn nur can 2 genutzt wird (warum auch immer)
+//	hcan2.Instance = CAN1;
+//	//      	HAL_CAN_Receive_IT(&hcan2, CAN_FIFO0);
+//	if (HAL_CAN_ConfigFilter(&hcan2, &sFilterConfig) != HAL_OK) {
+//		/* Filter configuration Error */
+//		//Error_Handler();
+//	}
+//
+//	hcan2.Instance = CAN2;
+}
+
 void FilterCanIdResetFlipFlop(volatile CAN_HandleTypeDef* hcan) {
 	InitFilter(&hcan2, GetGlobalCanNodeId() + FLIPFLOP_OPENCAN_OFFSET_RESET, FILTER_ID_RESET_FLIPFLOP);
 }
@@ -59,6 +83,7 @@ void FilterOnlyMyId(volatile CAN_HandleTypeDef* hcan) {
 }
 
 void InitCanFilter(void) {
+	FilterIdNull(&hcan2);
 	FilterOnlyMyId(&hcan2);
 	FilterCanIdActiveSensor(&hcan2);
 	FilterCanIdResetFlipFlop(&hcan2);

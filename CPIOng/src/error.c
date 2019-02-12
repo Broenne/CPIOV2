@@ -79,3 +79,7 @@ void SetInitPulseTimerError(void){
 void SetPulseSenderTaskError(void){
 	myPrintf("Sender pulse task error \r\n");
 }
+
+void SetPeriperialInitError(void){
+	myPrintf("Perriperial init error \r\n");
+}
