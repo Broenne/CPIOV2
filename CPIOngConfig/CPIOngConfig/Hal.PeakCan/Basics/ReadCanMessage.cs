@@ -66,6 +66,8 @@
 
         #region Public Methods
 
+        CancellationTokenSource src = new CancellationTokenSource();
+
         /// <summary>
         ///     Starts this instance.
         /// </summary>
@@ -77,8 +79,24 @@
             try
             {
                 this.OpenCanDongle();
-                Task.Run(() => { this.ReadRaw(); });
+                Task.Run(() => { this.ReadRaw(); }, src.Token);
                 return this.ReadCanMessageEvent;
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                throw;
+            }
+        }
+
+        public void Stop()
+        {
+            try
+            {
+               
+                this.src.Cancel();
+                //Task.Run(() => { this.ReadRaw(); });
+               
             }
             catch (Exception ex)
             {

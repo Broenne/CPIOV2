@@ -15,7 +15,7 @@
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetActualNodeId" /> class.
+        ///     Initializes a new instance of the <see cref="GetActualNodeId" /> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="changeActualIdToConnectedEventHandler">The change actual identifier to connected event handler.</param>
@@ -30,11 +30,11 @@
 
         #region Properties
 
+        private static byte NodeId { get; set; } = 4;
+
         private IChangeActualIdToConnectedEventHandler ChangeActualIdToConnectedEventHandler { get; }
 
         private ILogger Logger { get; }
-
-        private byte NodeId { get; set; } = 4;
 
         #endregion
 
@@ -50,7 +50,7 @@
             {
                 this.Logger.LogBegin(this.GetType());
 
-                return this.NodeId;
+                return NodeId;
             }
             catch (Exception ex)
             {
@@ -71,7 +71,7 @@
         {
             try
             {
-                this.NodeId = e;
+                NodeId = e;
             }
             catch (Exception ex)
             {

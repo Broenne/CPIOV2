@@ -7,6 +7,7 @@
              xmlns:helper="clr-namespace:Helper;assembly=Helper"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
              d:DesignHeight="80" d:DesignWidth="800">
     <UserControl.Resources>
@@ -23,8 +24,14 @@
                 <Button Margin="5" Command="{Binding ConnectCommand}">
                     <iconPacks:PackIconMaterial Width="100" Kind="RayStartArrow" VerticalAlignment="Center" HorizontalAlignment="Center"  />
                 </Button>
-                <RadioButton GroupName="Adapter" Content="Peak" IsChecked="{Binding Path=SelectedAdapterType, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=PeakUsb}" />
-                <RadioButton GroupName="Adapter" Content="ESD" IsChecked="{Binding Path=SelectedAdapterType, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=Esd}" />
+                <RadioButton GroupName="Adapter" Content="None" IsChecked="{Binding Path=CanAdapter, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=None}" />
+                <RadioButton GroupName="Adapter" Content="Peak" IsChecked="{Binding Path=CanAdapter, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=PeakUsb}" />
+                <RadioButton GroupName="Adapter" Content="ESD" IsChecked="{Binding Path=CanAdapter, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=Esd}" />
+                
+                <StackPanel>
+                    <Label>knoten-Id</Label>
+                    <controls:NumericUpDown Minimum = "0" Maximum = "255" Interval = "1" Margin="5" Value="{Binding NodeIdValue}" IsEnabled="{Binding NodeIdChangeIsEnabled}" ></controls:NumericUpDown>
+                </StackPanel>
             </StackPanel>
         </Grid>
     </Border>

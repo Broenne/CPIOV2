@@ -6,6 +6,7 @@
 
     using Autofac;
 
+    using ConfigLogicLayer.Contracts.ActualId;
     using ConfigLogicLayer.Contracts.DigitalInputState;
 
     using CPIOngConfig.Contracts.Adapter;
@@ -24,6 +25,10 @@
     {
         private CanAdapter canAdapter;
 
+        private bool nodeIdChangeIsEnabled;
+
+        private byte nodeIdValue;
+
         #region Constructor
 
         /// <summary>
@@ -31,11 +36,17 @@
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="scope">The scope.</param>
-        public SelectAdapterViewModel(ILogger logger, ILifetimeScope scope)
+        /// <param name="changeActualIdToConnectedEventHandler">The change actual identifier to connected event handler.</param>
+        /// <param name="getActualNodeId">The get actual node identifier.</param>
+        public SelectAdapterViewModel(ILogger logger, ILifetimeScope scope, IChangeActualIdToConnectedEventHandler changeActualIdToConnectedEventHandler, IGetActualNodeId getActualNodeId)
         {
             this.Logger = logger;
             this.Scope = scope;
+            this.ChangeActualIdToConnectedEventHandler = changeActualIdToConnectedEventHandler;
             this.ConnectCommand = new RelayCommand(this.ConnectCommandAction);
+            this.NodeIdChangeIsEnabled = true;
+
+            this.NodeIdValue = getActualNodeId.Get();
         }
 
         #endregion
@@ -43,10 +54,10 @@
         #region Properties
 
         /// <summary>
-        /// Gets or sets the can adapter.
+        ///     Gets or sets the can adapter.
         /// </summary>
         /// <value>
-        /// The can adapter.
+        ///     The can adapter.
         /// </value>
         public CanAdapter CanAdapter
         {
@@ -62,6 +73,38 @@
         /// </value>
         public ICommand ConnectCommand { get; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether [node identifier change is enabled].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [node identifier change is enabled]; otherwise, <c>false</c>.
+        /// </value>
+        public bool NodeIdChangeIsEnabled
+        {
+            get => this.nodeIdChangeIsEnabled;
+            set => this.SetProperty(ref this.nodeIdChangeIsEnabled, value);
+        }
+
+        /// <summary>
+        ///     Gets or sets the can adapter.
+        /// </summary>
+        /// <value>
+        ///     The can adapter.
+        /// </value>
+        public byte NodeIdValue
+        {
+            get => this.nodeIdValue;
+            set
+            {
+                this.ChangeActualIdToConnectedEventHandler.OnReached(value);
+                this.SetProperty(ref this.nodeIdValue, value);
+            }
+        }
+
+        private IChangeActualIdToConnectedEventHandler ChangeActualIdToConnectedEventHandler { get; }
+
+        private IHandleInputs HandleInputs { get; set; }
+
         private ILogger Logger { get; }
 
         private ILifetimeScope Scope { get; }
@@ -76,9 +119,19 @@
             {
                 switch (this.CanAdapter)
                 {
+                    case CanAdapter.None:
+                        if (this.HandleInputs != null)
+                        {
+                            this.HandleInputs.Stop();
+                            this.HandleInputs = null;
+                            this.NodeIdChangeIsEnabled = true;
+                        }
+
+                        break;
                     case CanAdapter.PeakUsb:
-                        var handleInputs = this.Scope.Resolve<IHandleInputs>();
-                        handleInputs.Start();
+                        this.HandleInputs = this.Scope.Resolve<IHandleInputs>();
+                        this.HandleInputs.Start();
+                        this.NodeIdChangeIsEnabled = false;
                         break;
                     case CanAdapter.Esd:
                         MessageBox.Show("Noch nicht implemtiert");

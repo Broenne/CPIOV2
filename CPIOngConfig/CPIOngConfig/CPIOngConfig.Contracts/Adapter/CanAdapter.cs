@@ -6,13 +6,18 @@
     public enum CanAdapter
     {
         /// <summary>
+        /// The none info.
+        /// </summary>
+        None = 0,
+
+        /// <summary>
         /// The peak USB.
         /// </summary>
-        PeakUsb = 0,
+        PeakUsb = 1,
 
         /// <summary>
         /// The ESD adapter.
         /// </summary>
-        Esd = 1
+        Esd = 2,
     }
 }

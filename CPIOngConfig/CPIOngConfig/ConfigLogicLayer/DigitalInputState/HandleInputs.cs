@@ -64,6 +64,8 @@
 
         private IAliveEventHandler AliveEventHandler { get; }
 
+        private IReadCanMessageEvent CanEventHandler { get; set; }
+
         private ICanIsConnectedEventHandler CanIsConnectedEventHandler { get; }
 
         private IChannelConfigurationResponseEventHandler ChannelConfigurationResponseEventHandler { get; }
@@ -92,9 +94,25 @@
             try
             {
                 // todo mb: mehrfach start verhindern?
-                var canEventHandler = this.ReadCanMessage.Start();
-                canEventHandler.EventIsReached += this.CanEventHandler_EventIsReached;
+                this.CanEventHandler = this.ReadCanMessage.Start();
+                this.CanEventHandler.EventIsReached += this.CanEventHandler_EventIsReached;
                 this.CanIsConnectedEventHandler.OnReached(true); // todo mb: was ist wenn es schief geht
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                throw;
+            }
+        }
+
+        public void Stop()
+        {
+            try
+            {
+                // todo mb: mehrfach start verhindern?
+                this.ReadCanMessage.Stop();
+                this.CanEventHandler.EventIsReached -= this.CanEventHandler_EventIsReached;
+                this.CanIsConnectedEventHandler.OnReached(false); // todo mb: was ist wenn es schief geht
             }
             catch (Exception ex)
             {

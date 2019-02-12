@@ -4,12 +4,10 @@
 
     using ConfigLogicLayer.Contracts.ActualId;
 
-    using CPIOngConfig.Contracts.Alive;
-
     using Helper.Contracts.Logger;
 
     /// <summary>
-    /// The change actual connected event handler node id.
+    ///     The change actual connected event handler node id.
     /// </summary>
     /// <seealso cref="ConfigLogicLayer.Contracts.ActualId.IChangeActualIdToConnectedEventHandler" />
     public class ChangeActualIdToConnectedEventHandler : IChangeActualIdToConnectedEventHandler
@@ -45,7 +43,7 @@
         #region Public Methods
 
         /// <summary>
-        /// Raises the <see cref="E:NodeReached" /> event.
+        ///     Raises the <see cref="E:NodeReached" /> event.
         /// </summary>
         /// <param name="e">The event argument.</param>
         public virtual void OnReached(byte e)
