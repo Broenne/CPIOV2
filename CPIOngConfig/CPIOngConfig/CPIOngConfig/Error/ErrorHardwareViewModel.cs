@@ -30,6 +30,11 @@
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ErrorHardwareViewModel"/> class.
+        /// </summary>
+        /// <param name="logger">The logger.</param>
+        /// <param name="aliveEventHandler">The alive event handler.</param>
         public ErrorHardwareViewModel(ILogger logger, IAliveEventHandler aliveEventHandler)
         {
             this.Logger = logger;
@@ -63,10 +68,10 @@
         }
 
         /// <summary>
-        ///     Gets or sets the raw error fild data.
+        /// Gets or sets the raw error fill data.
         /// </summary>
         /// <value>
-        ///     The raw error fild data.
+        /// The raw error fill data.
         /// </value>
         public string RawErrorFildData
         {

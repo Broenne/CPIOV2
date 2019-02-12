@@ -17,7 +17,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition Height="160"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical">
@@ -28,9 +28,6 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn>
-                        <!--<GridViewColumn.Header>
-                            <GridViewColumnHeader Content="Name" />
-                        </GridViewColumn.Header>-->
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBox Text="{Binding Name, Mode=OneWay}" IsReadOnly="True" />
@@ -41,21 +38,21 @@
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <!--<ListBox Margin="20" ItemsSource="{Binding Converter={StaticResource TimeListConverter}}">-->
-                                <ListBox Margin="1" ItemsSource="{Binding Times}" Width="700" 
+                                <ListBox Margin="1" ItemsSource="{Binding Times}" 
+                                         Width="700" 
                                          SelectedItem="{Binding SelectedTimeItem}" 
                                          ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}"
-                                         >
-                                    <ListBox.ItemsPanel>
+                                         Background="{Binding Color}">
+                                   <ListBox.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <WrapPanel IsItemsHost="True" />
                                         </ItemsPanelTemplate>
                                     </ListBox.ItemsPanel>
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
-                                            <StackPanel Orientation="Vertical">
-                                                <TextBox Width="60" Text="{Binding Tim}" />
-                                                <TextBox Width="60" Text="{Binding Volume}" />
+                                            <StackPanel Orientation="Vertical" >
+                                                <TextBox Width="60" Text="{Binding Tim}" Background="{Binding Color}"/>
+                                                <TextBox Width="60" Text="{Binding Volume}" Background="{Binding Color}"/>
                                             </StackPanel>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>

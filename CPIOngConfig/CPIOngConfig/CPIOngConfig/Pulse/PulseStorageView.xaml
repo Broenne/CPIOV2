@@ -13,7 +13,11 @@
             <Button Margin="5" Command="{Binding SelectFileCommand}">Select File</Button>
             <TextBox Text="{Binding SelectedFile}"></TextBox>
             <Label>
-                <TextBlock>Achtung, doppeltes öffnen usw ist nicht abgefangen<LineBreak/> Datei wird bei close geschlossen und gespeichert</TextBlock></Label>
+                <TextBlock>Achtung, doppeltes öffnen usw ist nicht abgefangen<LineBreak/> 
+                    Datei wird bei close geschlossen und gespeichert<LineBreak/>
+                    Es wird der Zeitwert und nicht der umgerechnete Durchfluss gespeichert
+                </TextBlock>
+            </Label>
         </StackPanel>
     </Grid>
 </UserControl>

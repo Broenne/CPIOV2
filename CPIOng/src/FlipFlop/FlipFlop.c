@@ -11,13 +11,11 @@ static volatile uint16_t StorageFlipFlopState = 0;
 
 /*
  *  Created on: 24.01.2019
- *      Author: MB
- *
+ *      Author: MBs
  *      Die Funktion setzt den FlipFlop Zustand des Kanals, wenn es eine Änderung gab.
  *      Es wird eine Nachricht auf den CAN-BUS mit der Info gelegt.
  */
 void SetFlipFlop(uint8_t channel) {
-
 	int mask = 0;
 	mask = 1 << channel;
 	StorageFlipFlopState |= mask;
@@ -29,7 +27,7 @@ void SetFlipFlop(uint8_t channel) {
 /*
  *  Created on: 24.01.2019
  *      Author: MB *
- *      Es wird der Kanal, oder die Kanäle zurück gesetzt
+ *      Es wird der Kanal, oder die Kanäle zurück gesetzt.
  */
 void ResetFlipFlop(uint8_t* resetChannelsBitmask) {
 

@@ -40,9 +40,14 @@
         /// <param name="logger">The logger.</param>
         /// <param name="pulseEventHandler">The pulse event handler.</param>
         /// <param name="pulseStorageView">The pulse storage view.</param>
-        /// <param name="factorPulseViewArg">The timefactor pulse view argument.</param>
+        /// <param name="factorPulseViewArg">The time factor pulse view argument.</param>
         /// <param name="factorPulseEventHandler">The time factor pulse event handler.</param>
-        public PulseViewModel(ILogger logger, IPulseEventHandler pulseEventHandler, IPulseStorageView pulseStorageView, IFactorPulseView factorPulseViewArg, IFactorPulseEventHandler factorPulseEventHandler)
+        public PulseViewModel(
+            ILogger logger, 
+            IPulseEventHandler pulseEventHandler, 
+            IPulseStorageView pulseStorageView, 
+            IFactorPulseView factorPulseViewArg, 
+            IFactorPulseEventHandler factorPulseEventHandler)
         {
             this.Logger = logger;
             this.PulseDataForViewList = new List<PulseDataForView>();
@@ -53,7 +58,7 @@
             // todo mb: parallel for
             for (var i = 0; i < 16; i++)
             {
-                var pulseDataForView = new PulseDataForView($"{i}", 100);
+                var pulseDataForView = new PulseDataForView($"{i}", 100, true);
                 pulseDataForView.AddTime(0, 0);
                 this.PulseDataForViewList.Add(pulseDataForView);
             }
