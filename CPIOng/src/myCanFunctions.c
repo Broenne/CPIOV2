@@ -62,7 +62,6 @@ void CreateResponseActiveSensor(uint8_t* data) {
 	SendActualChannelModi(data);
 }
 
-
 void WorkerCanId0(uint8_t* data) {
 	uint8_t dataByte0 = data[0];
 	switch (dataByte0) {
@@ -82,6 +81,26 @@ void WorkerCanId0(uint8_t* data) {
 	default:
 		break;
 	}
+}
+
+void ReadAndSendDigitalInputStates() {
+	uint8_t data[8];
+	GetInputs(data);
+	SendCan(GetGlobalCanNodeId(), data, 8); // ab in ide ander queu un einfach weg
+}
+
+void StatusOfActualConfiguredInputs(uint8_t* data){
+	//uint8_t* data = &hcan->pRxMsg->Data[0];
+						switch (data[0]) {
+						case 0x01:
+							CreateResponseForRequestChannelModi(data);
+							break;
+						case 0x02:
+							// einstellung, welcher Sensor grade am Knoten aktiv ist
+							CreateResponseActiveSensor(data);
+						default:
+							break;
+						}
 }
 
 /*
@@ -114,27 +133,13 @@ void CanWorkerTask(void * pvParameters) {
 				// Funktion zum abfragen der Einganszustände
 				if (GetGlobalCanNodeId() == stdid) {
 					if (0x02 == hcan->pRxMsg->RTR) {
-						uint8_t data[8];
-						GetInputs(data);
-						SendCan(GetGlobalCanNodeId(), data, 8); // ab in ide ander queu un einfach weg
+						ReadAndSendDigitalInputStates();
 					}
 				}
 
 				// Funktion zum Abfrage der Einstellung der aktuellen Eingänge
 				if ((GetGlobalCanNodeId() + REQUEST_INPUT_CONFIG) == stdid) {
-					uint8_t* data = &hcan->pRxMsg->Data[0];
-					switch (data[0]) {
-					case 0x01:
-						CreateResponseForRequestChannelModi(data);
-						break;
-					case 0x02:
-						// einstellung, welcher Sensor grade am Knoten aktiv ist
-						//data[0] = 0x02;
-						CreateResponseActiveSensor(data);
-						// data[1] = AktiverKanal;
-					default:
-						break;
-					}
+					StatusOfActualConfiguredInputs(pData);
 				}
 
 				// funktion zum setzen des aktuellen channel modi

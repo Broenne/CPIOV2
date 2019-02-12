@@ -13,9 +13,10 @@
                 <Label>Set can id for node.</Label>
                 <StackPanel Orientation="Horizontal">
                     <Button Width="80" 
+                            Margin="5"
                             Command="{Binding SaveIdCommand}" 
                             CommandParameter="{Binding ElementName=NumericUpDown,Path=Value}">Set new can Id</Button>
-                    <controls:NumericUpDown Name="NumericUpDown" Minimum="0" Maximum="255" Width="200" ></controls:NumericUpDown>
+                    <controls:NumericUpDown Name="NumericUpDown" Minimum="0" Maximum="255" Width="200" Margin="5"></controls:NumericUpDown>
                 </StackPanel>
             </StackPanel>
         </Border>
