@@ -89,18 +89,23 @@ void ReadAndSendDigitalInputStates() {
 	SendCan(GetGlobalCanNodeId(), data, 8); // ab in ide ander queu un einfach weg
 }
 
-void StatusOfActualConfiguredInputs(uint8_t* data){
+void StatusOfActualConfiguredInputs(uint8_t* data) {
 	//uint8_t* data = &hcan->pRxMsg->Data[0];
-						switch (data[0]) {
-						case 0x01:
-							CreateResponseForRequestChannelModi(data);
-							break;
-						case 0x02:
-							// einstellung, welcher Sensor grade am Knoten aktiv ist
-							CreateResponseActiveSensor(data);
-						default:
-							break;
-						}
+	switch (data[0]) {
+	case 0x01:
+		CreateResponseForRequestChannelModi(data);
+		break;
+	case 0x02:
+		// einstellung, welcher Sensor grade am Knoten aktiv ist
+		CreateResponseActiveSensor(data);
+	default:
+		break;
+	}
+}
+
+void SetActiveChannel(uint8_t* data){
+	ChannelModiType channelModiType = (ChannelModiType)data[0];
+						SetActiveChannelModiType(channelModiType);
 }
 
 /*
@@ -130,26 +135,25 @@ void CanWorkerTask(void * pvParameters) {
 					WorkerCanId0(pData);
 				}
 
+				uint8_t globalCanId = GetGlobalCanNodeId();
 				// Funktion zum abfragen der Einganszustände
-				if (GetGlobalCanNodeId() == stdid) {
+				if (globalCanId == stdid) {
 					if (0x02 == hcan->pRxMsg->RTR) {
 						ReadAndSendDigitalInputStates();
 					}
 				}
 
 				// Funktion zum Abfrage der Einstellung der aktuellen Eingänge
-				if ((GetGlobalCanNodeId() + REQUEST_INPUT_CONFIG) == stdid) {
+				if ((globalCanId + REQUEST_INPUT_CONFIG) == stdid) {
 					StatusOfActualConfiguredInputs(pData);
 				}
 
 				// funktion zum setzen des aktuellen channel modi
-				if ((GetGlobalCanNodeId() + SET_ACTIVE_SENSOR) == stdid) {
-					ChannelModiType channelModiType = (ChannelModiType) hcan->pRxMsg->Data[0];
-					SetActiveChannelModiType(channelModiType);
-					// todo mb: in eeprom schreiben
+				if ((globalCanId + SET_ACTIVE_SENSOR) == stdid) {
+					SetActiveChannel(pData);
 				}
 
-				if ((GetGlobalCanNodeId() + FLIPFLOP_OPENCAN_OFFSET_RESET) == stdid) {
+				if ((globalCanId + FLIPFLOP_OPENCAN_OFFSET_RESET) == stdid) {
 					ResetFlipFlop(pData);
 				}
 
