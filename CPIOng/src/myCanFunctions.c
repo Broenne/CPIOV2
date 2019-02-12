@@ -11,12 +11,16 @@ static uint8_t globalCanId = 2;
 
 #define QUEUE_SIZE_FOR_CAN		( ( unsigned short ) 32 )
 
-//extern CAN_HandleTypeDef hcan2;
 osThreadId canInputTaskHandle;
 
 xQueueHandle CanRxQueueHandle = NULL;
 xQueueHandle CanQueueSenderHandle = NULL;
 
+/*
+ * Created on: 04.02.19
+ * Author: MB
+ * Service for send actual channel modi.
+ * */
 void SendActualChannelModi(uint8_t* data) {
 	data[3] = 0xFF;
 	uint32_t canId = GetGlobalCanNodeId() + SEND_INPUT_CONFIG;
@@ -107,9 +111,6 @@ void SetActiveChannel(uint8_t* data){
 	ChannelModiType channelModiType = (ChannelModiType)data[0];
 	SetActiveChannelModiType(channelModiType);
 }
-
-
-
 
 /*
  * Created on: 30.11.18

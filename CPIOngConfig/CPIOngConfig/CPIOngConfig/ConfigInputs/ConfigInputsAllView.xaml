@@ -32,6 +32,7 @@
                     <iconPacks:PackIconMaterial  Kind="ContentSave"/>
                 </Button>
                 <Button Command="{Binding LoadFromDeviceCommand}">Load From Device</Button>
+                <Label>Das aktuallisieren dauert ca. 2 Sek</Label>
             </StackPanel>
             <ListView Grid.Row="1" ItemsSource="{Binding ConfigureInputsViewList}">
                 <ListView.View>

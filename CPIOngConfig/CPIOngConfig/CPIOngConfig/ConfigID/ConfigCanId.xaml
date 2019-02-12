@@ -10,7 +10,7 @@
     <Grid MaxHeight="80">
         <Border BorderThickness="1" BorderBrush="Black">
             <StackPanel>
-                <Label>Set can id for node.</Label>
+                <Label>Set can id for node. (Node will reset after action)</Label>
                 <StackPanel Orientation="Horizontal">
                     <Button Width="80" 
                             Margin="5"
