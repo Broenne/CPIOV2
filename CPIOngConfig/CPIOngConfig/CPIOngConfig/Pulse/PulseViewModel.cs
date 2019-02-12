@@ -41,7 +41,7 @@
         /// <param name="pulseEventHandler">The pulse event handler.</param>
         /// <param name="pulseStorageView">The pulse storage view.</param>
         /// <param name="factorPulseViewArg">The timefactor pulse view argument.</param>
-        /// <param name="factorPulseEventHandler">The timefactor pulse event handler.</param>
+        /// <param name="factorPulseEventHandler">The time factor pulse event handler.</param>
         public PulseViewModel(ILogger logger, IPulseEventHandler pulseEventHandler, IPulseStorageView pulseStorageView, IFactorPulseView factorPulseViewArg, IFactorPulseEventHandler factorPulseEventHandler)
         {
             this.Logger = logger;

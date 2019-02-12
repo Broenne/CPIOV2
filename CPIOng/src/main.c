@@ -113,7 +113,6 @@ int main(void) {
 	while (1) {
 	}
 
-
 }
 
 /**
@@ -323,29 +322,6 @@ static void MX_ADC1_Init(void) {
 	}
 }
 
-//void FilterIdNull(void) {
-//	CAN_FilterConfTypeDef sFilterConfig;
-//	sFilterConfig.FilterNumber = 14;
-//	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
-//	sFilterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
-//	sFilterConfig.FilterIdHigh = 0x0000;
-//	sFilterConfig.FilterIdLow = 0x0000 << 5;
-//	sFilterConfig.FilterMaskIdHigh = 0xFFFF;
-//	sFilterConfig.FilterMaskIdLow = 0x07FF << 5;
-//	sFilterConfig.FilterFIFOAssignment = CAN_FIFO0;
-//	sFilterConfig.FilterActivation = ENABLE;
-//
-//	// info mb: der filter muss auf can 1 gesetzt werden, auch wenn nur can 2 genutzt wird (warum auch immer)
-//	hcan2.Instance = CAN1;
-//	//      	HAL_CAN_Receive_IT(&hcan2, CAN_FIFO0);
-//	if (HAL_CAN_ConfigFilter(&hcan2, &sFilterConfig) != HAL_OK) {
-//		/* Filter configuration Error */
-//		//Error_Handler();
-//	}
-//
-//	hcan2.Instance = CAN2;
-//}
-
 /* CAN2 init function */
 static void MX_CAN2_Init(void) {
 	// info m: die static zuweisung des Speicherbereichs für Tx und Rx wurden nicht durch cubemx zugewiesen, daher hier die Ergänzung
@@ -370,7 +346,7 @@ static void MX_CAN2_Init(void) {
 	hcan2.Init.TXFP = DISABLE;
 
 	if (HAL_CAN_Init(&hcan2) != HAL_OK) {
-		//_Error_Handler(__FILE__, __LINE__);
+		SetPeriperialInitError();
 	}
 
 	//FilterIdNull();
@@ -398,12 +374,8 @@ static void MX_USART1_UART_Init(void) {
 	HAL_UART_DeInit(&huart1);
 
 	if (HAL_UART_Init(&huart1) != HAL_OK) {
-		printf("Error uart init");
-		//_Error_Handler(__FILE__, __LINE__);
+		SetPeriperialInitError();
 	}
-//
-//	HAL_NVIC_SetPriority(USART1_IRQn, 12, 0);
-//	HAL_NVIC_EnableIRQ(USART1_IRQn);
 }
 
 /* WWDG init function */
@@ -415,7 +387,7 @@ static void MX_WWDG_Init(void) {
 	hwwdg.Init.Counter = 64;
 	hwwdg.Init.EWIMode = WWDG_EWI_DISABLE;
 	if (HAL_WWDG_Init(&hwwdg) != HAL_OK) {
-		_Error_Handler(__FILE__, __LINE__);
+		SetPeriperialInitError();
 	}
 
 }
@@ -495,12 +467,6 @@ static void MX_GPIO_Init(void) {
 	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
 	HAL_GPIO_Init(PRINT_3_GPIO_Port, &GPIO_InitStruct);
-
-//	/*Configure GPIO pin : PA10 */
-//	GPIO_InitStruct.Pin = GPIO_PIN_10;
-//	GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-//	GPIO_InitStruct.Pull = GPIO_NOPULL;
-//	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 	/*Configure GPIO pin : LED_S_Pin */
 	GPIO_InitStruct.Pin = LED_S_Pin;

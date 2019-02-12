@@ -7,6 +7,7 @@
 
 #include "CanFilter.h"
 
+#define FILTER_ID_NULL_BROADCAST		( ( uint ) 0 )
 #define FILTER_ID_CONFIGURE_INPUTS		( ( uint ) 16 )
 #define FILTER_ID_RESET_FLIPFLOP		( ( uint ) 17 )
 #define FILTER_ID_GET_INPUT_CONFIG		( ( uint ) 18 )
@@ -38,27 +39,7 @@ void InitFilter(volatile CAN_HandleTypeDef* hcan, uint32_t filterId, uint filter
 }
 
 void FilterIdNull(volatile CAN_HandleTypeDef* hcan) {
-	InitFilter(&hcan2, 0, 21);
-//	CAN_FilterConfTypeDef sFilterConfig;
-//	sFilterConfig.FilterNumber = 21;
-//	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
-//	sFilterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
-//	sFilterConfig.FilterIdHigh = 0x0000;
-//	sFilterConfig.FilterIdLow = 0x0000 << 5;
-//	sFilterConfig.FilterMaskIdHigh = 0xFFFF;
-//	sFilterConfig.FilterMaskIdLow = 0x07FF << 5;
-//	sFilterConfig.FilterFIFOAssignment = CAN_FIFO0;
-//	sFilterConfig.FilterActivation = ENABLE;
-//
-//	// info mb: der filter muss auf can 1 gesetzt werden, auch wenn nur can 2 genutzt wird (warum auch immer)
-//	hcan2.Instance = CAN1;
-//	//      	HAL_CAN_Receive_IT(&hcan2, CAN_FIFO0);
-//	if (HAL_CAN_ConfigFilter(&hcan2, &sFilterConfig) != HAL_OK) {
-//		/* Filter configuration Error */
-//		//Error_Handler();
-//	}
-//
-//	hcan2.Instance = CAN2;
+	InitFilter(&hcan2, FILTER_ID_NULL_BROADCAST, 21);
 }
 
 void FilterCanIdResetFlipFlop(volatile CAN_HandleTypeDef* hcan) {

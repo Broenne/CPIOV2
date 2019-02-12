@@ -46,10 +46,10 @@
         #region Properties
 
         /// <summary>
-        /// Gets or sets the bugfix.
+        /// Gets or sets the bug fix.
         /// </summary>
         /// <value>
-        /// The bugfix.
+        /// The bug fix.
         /// </value>
         public string Bugfix
         {
