@@ -5,14 +5,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
-        <Label>Alive handling</Label>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width = "140"></ColumnDefinition>
-                <ColumnDefinition Width = "40"></ColumnDefinition>
-                <ColumnDefinition Width = "*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="MinWidth" Value="25"/>
+        </Style>
+    </UserControl.Resources>
+    <Border BorderThickness="1" BorderBrush="Black">
+        <StackPanel>
+            <Label>Alive handling</Label>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width = "180"></ColumnDefinition>
+                    <ColumnDefinition Width = "40"></ColumnDefinition>
+                    <ColumnDefinition Width = "*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
                 <TextBox Grid.Column="0" Text="{Binding LastUpdateTime}" Margin="2"></TextBox>
                 <Ellipse Grid.Column="1" Fill="{Binding Color}" Margin="2" Height="25" Width="25"></Ellipse>
                 <StackPanel Grid.Column="2" Orientation="Horizontal">
@@ -20,7 +28,8 @@
                     <TextBox Text="{Binding Major}"></TextBox>
                     <TextBox Text="{Binding Minor}"></TextBox>
                     <TextBox Text="{Binding Bugfix}"></TextBox>
-            </StackPanel>
-        </Grid>
-    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </Border>
 </UserControl>

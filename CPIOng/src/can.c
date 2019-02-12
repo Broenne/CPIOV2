@@ -26,13 +26,13 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 	canMessage.IDE = CAN_ID_STD;
 	canMessage.DLC = len;
 
-	memcpy(canMessage.Data, data, sizeof(data));
+	memcpy(canMessage.Data, data, sizeof(uint8_t) * len);
 
 	int i = 0;
 	while (hcan2.State != HAL_CAN_STATE_READY) {
 		++i;
 		if (i > 10) {
-			SetCanSendError();
+			SetCanSendError(); // if not ready after 50 ms, throw error
 			break;
 		}
 
@@ -54,14 +54,13 @@ void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* hcan) {
 	/* We have not woken a task at the start of the ISR. */
 	xHigherPriorityTaskWoken = pdFALSE;
 
-	printf("id:%d  d1:%d  d2:%d   d3:%d \r\n", hcan->pRxMsg->StdId, hcan->pRxMsg->Data[0], hcan->pRxMsg->Data[1], hcan->pRxMsg->Data[2]);
 	if (xQueueSendFromISR(CanRxQueueHandle, hcan, xHigherPriorityTaskWoken) != pdTRUE) {
 		SetPossiblePulseSendQueueFullError();
 	}
-
-	if (xHigherPriorityTaskWoken) {
-		printf("was nun?");
-	}
+//
+//	if (xHigherPriorityTaskWoken) {
+//		printf("was nun?");
+//	}
 
 	__HAL_CAN_ENABLE_IT(&hcan2, CAN_IT_EWG | CAN_IT_EPV | CAN_IT_BOF | CAN_IT_LEC | CAN_IT_ERR | CAN_IT_TME);
 	__HAL_CAN_ENABLE_IT(&hcan2, CAN_IT_FOV0 | CAN_IT_FMP0);

@@ -28,9 +28,8 @@ void SetFlipFlop(uint8_t channel) {
 
 /*
  *  Created on: 24.01.2019
- *      Author: MB
- *
- *      Es wird der Kanal, oder die Kanäle zurück gese tzt
+ *      Author: MB *
+ *      Es wird der Kanal, oder die Kanäle zurück gesetzt
  */
 void ResetFlipFlop(uint8_t* resetChannelsBitmask) {
 
@@ -38,7 +37,7 @@ void ResetFlipFlop(uint8_t* resetChannelsBitmask) {
 	resetMask |= (resetChannelsBitmask[0]);
 	resetMask |= (resetChannelsBitmask[1] << 8);
 
-	for(int i = 0; i < 16; ++i){
+	for(int i = 0; i < CHANNEL_COUNT; ++i){
 		if((resetMask >> i) & 0x01){
 			// wenn das entsprechende bit in der maske gesetz ist, dann zurück setzen
 			uint16_t singleMaskForThisChannel = 1 << i;
@@ -46,10 +45,6 @@ void ResetFlipFlop(uint8_t* resetChannelsBitmask) {
 			StorageFlipFlopState = StorageFlipFlopState & singleMaskForThisChannel;
 		}
 	}
-
-	// Bit 0-1
-	// Bitmaske, welcher KAnäle resetet werden
-	//StorageFlipFlopState = 0x00;
 
 	// zur Bestätigung wieder wegsenden
 	uint16_t data = StorageFlipFlopState;

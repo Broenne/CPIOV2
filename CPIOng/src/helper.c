@@ -33,7 +33,7 @@ void myPrintf(char* resString){
 	HAL_UART_Transmit(&huart1, (uint8_t*) resString, size, 100);
 }
 
-volatile static int printMode = 1; // todo mb: während der entwicklung an
+volatile static int printMode = 0;
 /*
  * 30.11.2017
  * MB

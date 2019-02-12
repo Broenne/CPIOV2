@@ -28,6 +28,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="70"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <ContentPresenter Content="{Binding SelectAdapterView}"></ContentPresenter>
@@ -63,6 +64,7 @@
                 <ContentPresenter Content="{Binding ErrorHardwareView}"></ContentPresenter>
             </TabItem>
         </TabControl>
+        <TextBox Grid.Row="2" Background="LightSlateGray">Created: 2019 by MB - AvB - MR</TextBox>
     </Grid>
 </controls:MetroWindow>
 
