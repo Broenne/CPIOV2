@@ -201,6 +201,11 @@ void SetGlobalCanNodeId(uint8_t canId) {
 	Reset();
 }
 
+/*
+ * Created on: 12.02.19
+ * Author: MB
+ * Service for send the time difference betwenn pulses on can bus.
+ * */
 void SendCanTimeDif(uint8_t channel, uint32_t res) {
 	uint8_t p[] = { 0, 0, 0, 0 };
 
@@ -214,6 +219,12 @@ void SendCanTimeDif(uint8_t channel, uint32_t res) {
 	SendCan(canId, p, 4);
 }
 
+/*
+ * Created on: 12.02.19
+ * Author: MB
+ * Service for send the actual flip flop state via can.
+ * Always send the complete process state of flip flops.
+ * */
 void SendFlipFlopStateViaCan(uint16_t flipFlopState) {
 	uint8_t p[] = { 0, 0 };
 
