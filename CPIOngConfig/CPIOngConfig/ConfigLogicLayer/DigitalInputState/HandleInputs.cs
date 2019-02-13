@@ -11,6 +11,7 @@
     using CPIOngConfig.ActiveSensor;
     using CPIOngConfig.Contracts.Adapter;
     using CPIOngConfig.Contracts.Alive;
+    using CPIOngConfig.Contracts.CanText;
     using CPIOngConfig.Contracts.ConfigInputs;
     using CPIOngConfig.Contracts.FlipFlop;
     using CPIOngConfig.Contracts.InputBinary;
@@ -82,6 +83,8 @@
 
         private IReadCanMessage ReadCanMessage { get; }
 
+        private ICanTextEventHandler CanTextEventHandler { get; }
+
         #endregion
 
         #region Public Methods
@@ -105,6 +108,9 @@
             }
         }
 
+        /// <summary>
+        /// Stops this instance.
+        /// </summary>
         public void Stop()
         {
             try
@@ -224,6 +230,8 @@
                 {
                     var version = new Version(data[0], data[1], data[2]);
                     this.AliveEventHandler.OnReached(new AliveEventArgs(version, data[3], data[4], data[5], data[6]));
+                    
+                    this.CanTextEventHandler.OnReached(data[7]);
                 }
             }
             catch (Exception ex)

@@ -42,12 +42,7 @@
         /// <param name="pulseStorageView">The pulse storage view.</param>
         /// <param name="factorPulseViewArg">The time factor pulse view argument.</param>
         /// <param name="factorPulseEventHandler">The time factor pulse event handler.</param>
-        public PulseViewModel(
-            ILogger logger, 
-            IPulseEventHandler pulseEventHandler, 
-            IPulseStorageView pulseStorageView, 
-            IFactorPulseView factorPulseViewArg, 
-            IFactorPulseEventHandler factorPulseEventHandler)
+        public PulseViewModel(ILogger logger, IPulseEventHandler pulseEventHandler, IPulseStorageView pulseStorageView, IFactorPulseView factorPulseViewArg, IFactorPulseEventHandler factorPulseEventHandler)
         {
             this.Logger = logger;
             this.PulseDataForViewList = new List<PulseDataForView>();
@@ -61,6 +56,12 @@
                 var pulseDataForView = new PulseDataForView($"{i}", 100, true);
                 pulseDataForView.AddTime(0, 0, 0);
                 this.PulseDataForViewList.Add(pulseDataForView);
+            }
+
+            this.CheckSumStorage = new List<CheckSumData>();
+            for (var i = 0; i < 16; i++)
+            {
+                this.CheckSumStorage.Add(new CheckSumData());
             }
 
             pulseEventHandler.EventIsReached += this.PulseEventHandler_EventIsReached;
@@ -106,6 +107,8 @@
             set => this.SetProperty(ref this.pulseStorageView, value);
         }
 
+        private List<CheckSumData> CheckSumStorage { get; } // = new List<CheckSumData>(new CheckSumData[16]);
+
         private ILogger Logger { get; }
 
         #endregion
@@ -134,7 +137,6 @@
                 var time = this.timefactor * e.Stamp;
                 var valueToList = this.volumePerTimeSlot / time;
 
-
                 var check = this.CheckIfNextIsNext(e.Channel, e.CheckSum);
 
                 this.dispatcher.Invoke(() => { this.PulseDataForViewList[e.Channel].AddTime(e.Stamp, valueToList, check); });
@@ -147,24 +149,24 @@
         }
 
 
-
-        private List<CheckSumData> CheckSumStorage {get;}  = new List<CheckSumData>(new CheckSumData[16]);
-
+        // todo mb: das muss mal irgendwie getetst werden
         private byte CheckIfNextIsNext(int channel, byte checkSum)
         {
             // todo mb: was passietr beim ersten mal? wie initailisieren????
-            if (!(this.CheckSumStorage[channel]).check(checkSum))
+            if (!this.CheckSumStorage[channel].Check(checkSum))
             {
-                MessageBox.Show("Reihenfolge passt nicht");
+                MessageBox.Show($"Reihenfolge passt nicht {channel}");
             }
 
             this.CheckSumStorage[channel] = new CheckSumData(checkSum);
             return checkSum;
         }
 
+        #endregion
 
         private class CheckSumData
         {
+            #region Constructor
 
             public CheckSumData()
             {
@@ -177,13 +179,20 @@
                 this.CheckSum = checkSum;
             }
 
-            public bool IsInitialized { get; }
+            #endregion
 
-            public byte CheckSum { get; }
+            #region Properties
 
-            public bool check(byte ch)
+            private byte CheckSum { get; }
+
+            private bool IsInitialized { get; }
+
+            #endregion
+
+            #region Public Methods
+
+            public bool Check(byte ch)
             {
-
                 if (!this.IsInitialized)
                 {
                     return true; // kein sinnvoller vergleich wenn kein startwert
@@ -193,12 +202,11 @@
                 {
                     return true;
                 }
-               
+
                 return false;
             }
+
+            #endregion
         }
-
-
-        #endregion
     }
 }

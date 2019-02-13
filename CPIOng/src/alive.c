@@ -41,9 +41,6 @@ void SanCanAlive(void) {
 }
 
 static void Init_TimerInternal() {
-//	TIM_ClockConfigTypeDef sClockSourceConfig;
-//	TIM_SlaveConfigTypeDef sSlaveConfig;
-//	TIM_MasterConfigTypeDef sMasterConfig;
 
 	__HAL_RCC_TIM2_CLK_ENABLE()	;
 	s_TimerInstance.Instance = TIM2;

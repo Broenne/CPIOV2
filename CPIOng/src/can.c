@@ -31,12 +31,12 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 	int i = 0;
 	while (hcan2.State != HAL_CAN_STATE_READY) {
 		++i;
-		if (i > 10) {
+		if (i > 50) {
 			SetCanSendError(); // if not ready after 50 ms, throw error
 			break;
 		}
 
-		vTaskDelay(5);
+		vTaskDelay(1);
 	}
 
 	hcan2.pTxMsg = &canMessage;

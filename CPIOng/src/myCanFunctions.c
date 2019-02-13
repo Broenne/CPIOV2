@@ -16,6 +16,18 @@ osThreadId canInputTaskHandle;
 xQueueHandle CanRxQueueHandle = NULL;
 xQueueHandle CanQueueSenderHandle = NULL;
 
+
+
+void SendTextPerCan(){
+
+}
+
+
+
+
+
+
+
 /*
  * Created on: 04.02.19
  * Author: MB

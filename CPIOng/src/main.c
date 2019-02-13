@@ -107,6 +107,10 @@ int main(void) {
 	InitAlive();
 	InitAnalog();
 
+
+	myPrintf("Test 1");
+	myPrintf("Test 2");
+
 	osStatus osStatus = osKernelStart();
 
 	while (1) {

@@ -7,8 +7,10 @@
     using CPIOngConfig.ActiveSensor;
     using CPIOngConfig.Adapter;
     using CPIOngConfig.Alive;
+    using CPIOngConfig.CanText;
     using CPIOngConfig.Contracts.Adapter;
     using CPIOngConfig.Contracts.Alive;
+    using CPIOngConfig.Contracts.CanText;
     using CPIOngConfig.Contracts.FactorPulse;
     using CPIOngConfig.Contracts.FlipFlop;
     using CPIOngConfig.Contracts.InputBinary;
@@ -46,6 +48,7 @@
             builder.RegisterType<FlipFlopEventHandler>().As<IFlipFlopEventHandler>().SingleInstance();
             builder.RegisterType<FactorPulseEventHandler>().As<IFactorPulseEventHandler>().SingleInstance();
             builder.RegisterType<ActiveSensorEventHandler>().As<IActiveSensorEventHandler>().SingleInstance();
+            builder.RegisterType<CanTextEventHandler>().As<ICanTextEventHandler>().SingleInstance();
         }
 
         #endregion

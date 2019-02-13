@@ -9,6 +9,29 @@
 
 extern UART_HandleTypeDef huart1;
 
+
+#define MAX_STRING_SIZE (( unsigned short ) 200 )
+
+#define CAN_TEXT_TABELL_ROWS (( unsigned short ) 8 )
+static int pointerToTextTabelleForCan;
+static char TextStorageForCan[CAN_TEXT_TABELL_ROWS][MAX_STRING_SIZE]; // 8*200
+
+
+
+
+
+void StoreForCan(char* resString, uint size){
+	memcpy(TextStorageForCan[pointerToTextTabelleForCan], resString, size);
+	++pointerToTextTabelleForCan;
+
+	if(pointerToTextTabelleForCan > (CAN_TEXT_TABELL_ROWS - 1)){
+		pointerToTextTabelleForCan = 0;
+	}
+
+	// Info geben, neue info vorhanden
+}
+
+
 /*
  *  Created on: 29.11.2018
  *      Author: MB
@@ -20,7 +43,7 @@ void myPrintf(char* resString){
 	// länger ermitteln, maximal 200 zeichen. string endet mit /n
 	char* remberCharAddress = resString;
 	int size=0;
-	for(size=0;size<200;++size){
+	for(size=0; size < MAX_STRING_SIZE; ++size){
 		if((*resString) == '\n'){
 			break;
 		}
@@ -30,6 +53,7 @@ void myPrintf(char* resString){
 
 	resString = remberCharAddress;
 
+	StoreForCan(resString, size);
 	HAL_UART_Transmit(&huart1, (uint8_t*) resString, size, 100);
 }
 
