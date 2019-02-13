@@ -155,7 +155,7 @@
             // todo mb: was passietr beim ersten mal? wie initailisieren????
             if (!this.CheckSumStorage[channel].Check(checkSum))
             {
-                MessageBox.Show($"Reihenfolge passt nicht {channel}");
+                MessageBox.Show($"Puls-Reihenfolge passt nicht {channel}");
             }
 
             this.CheckSumStorage[channel] = new CheckSumData(checkSum);

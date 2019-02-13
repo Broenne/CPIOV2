@@ -94,6 +94,12 @@ void SendPulsePerCanTask(void * pvParameters) {
 
 				if(i == currentMessage.channel && channelModi == GetActiveChannelModiType()){
 					SendCanTimeDif(currentMessage.channel, currentMessage.res, currentMessage.checkSum);
+
+					// todo mb: debug hilfe
+					char s[50]; // fucking c
+					sprintf(s, "Send channel %d  cs:%d \n", (int)currentMessage.res, (int)currentMessage.checkSum);
+					myPrintf(s);
+
 					break; // schleife kan dann beendet werden
 				}
 			}

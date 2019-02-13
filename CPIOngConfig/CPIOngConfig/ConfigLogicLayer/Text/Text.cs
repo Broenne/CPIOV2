@@ -56,7 +56,9 @@ namespace ConfigLogicLayer.Text
                 for (int i = 3; i < 8; i++)
                 {
                     char content = Convert.ToChar(e[i]);
-                    if(e[i] == 0)
+                    //if(/*e[i] == 10 ||*/ e[i] == 0)
+                    if (e[i] == 10)
+                    //if(e[i] == 0x2F) // das backslash
                     {
                         endIsReached = true;
                         break;
@@ -79,7 +81,7 @@ namespace ConfigLogicLayer.Text
 
                 if (!endIsReached)
                 {
-                    byte nextpositionInRow = (byte)(positionInRow + 6);
+                    byte nextpositionInRow = (byte)(positionInRow + 5);
 
                     if (nextpositionInRow > 200)
                     {
@@ -121,6 +123,11 @@ namespace ConfigLogicLayer.Text
 
             public void AddText(byte posInRow, string txt)
             {
+                if (this.Data.ContainsKey(posInRow))
+                {
+                    return;
+                }
+
                 this.Data.Add(posInRow, txt);
             }
 

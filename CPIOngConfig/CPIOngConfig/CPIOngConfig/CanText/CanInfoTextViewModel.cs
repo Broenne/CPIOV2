@@ -16,6 +16,8 @@
 
     public class CanInfoTextViewModel : BindableBase, ICanInfoTextViewModel
     {
+        private readonly Dispatcher dispatcher = RootDispatcherFetcher.RootDispatcher;
+
         private ObservableCollection<string> text;
 
         #region Constructor
@@ -30,28 +32,7 @@
             this.Text = new ObservableCollection<string>(new List<string>());
 
             this.CanTextEventHandler.EventIsReached += this.CanTextEventHandler_EventIsReached;
-            this.TextForDisplayEventHandler.EventIsReached += TextForDisplayEventHandler_EventIsReached;
-        }
-
-
-
-        private readonly Dispatcher dispatcher = RootDispatcherFetcher.RootDispatcher;
-
-        private void TextForDisplayEventHandler_EventIsReached(object sender, string e)
-        {
-            try
-            {
-                dispatcher.Invoke(()=>
-                    {
-                        this.Text.Add(e);
-                    });
-                //this.Text += e + Environment.NewLine;
-            }
-            catch (Exception ex)
-            {
-                this.Logger.LogError(ex);
-                MessageBox.Show(ex.Message);
-            }
+            this.TextForDisplayEventHandler.EventIsReached += this.TextForDisplayEventHandler_EventIsReached;
         }
 
         #endregion
@@ -68,13 +49,36 @@
 
         private ILogger Logger { get; }
 
-        private IText TextService { get; }
-
         private ITextForDisplayEventHandler TextForDisplayEventHandler { get; }
+
+        private IText TextService { get; }
 
         #endregion
 
         #region Private Methods
+
+        private void TextForDisplayEventHandler_EventIsReached(object sender, string e)
+        {
+            try
+            {
+                this.dispatcher.Invoke(
+                    () =>
+                        {
+                            const int Feldlaenge = 20;
+                            if (this.Text.Count > Feldlaenge)
+                            {
+                                this.Text.RemoveAt(0);
+                            }
+
+                            this.Text.Add(e);
+                        });
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                MessageBox.Show(ex.Message);
+            }
+        }
 
         private void CanTextEventHandler_EventIsReached(object sender, byte e)
         {
@@ -85,15 +89,11 @@
                     // welche bist sind gesetzt? im byte
                     for (byte i = 0; i < 8; ++i)
                     {
-                        if ((e & 1 << (int)i) != 0)
+                        if ((e & (1 << i)) != 0)
                         {
                             this.TextService.Request(i);
-                            //this.Text += $"Bit {i} is set \r\n";
                         }
                     }
-                    
-                    // info in dto speichern, und abholung starten
-                    // this.Text += e.ToString();
                 }
             }
             catch (Exception ex)
@@ -102,9 +102,6 @@
                 MessageBox.Show(ex.Message);
             }
         }
-
-
-
 
         #endregion
     }

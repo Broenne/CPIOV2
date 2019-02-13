@@ -36,12 +36,12 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 			break;
 		}
 
-		vTaskDelay(1);
+		vTaskDelay(5);
 	}
 
 	hcan2.pTxMsg = &canMessage;
 
-	if (HAL_CAN_Transmit(&hcan2, 10) != HAL_OK) {
+	if (HAL_CAN_Transmit(&hcan2, 20) != HAL_OK) {
 		SetCanSendError();
 	}
 }

@@ -40,6 +40,7 @@ void GetTextDataForRow(uint8_t pos, uint8_t posInRow, uint8_t* data){
 
 void StoreForCan(char* resString, uint size){
 	memcpy(TextStorageForCan[pointerToTextTabelleForCan], resString, size);
+	TextStorageForCan[pointerToTextTabelleForCan][size] = '\n';
 	++pointerToTextTabelleForCan;
 
 	if(pointerToTextTabelleForCan > (CAN_TEXT_TABELL_ROWS - 1)){
