@@ -49,6 +49,7 @@
             builder.RegisterType<FactorPulseEventHandler>().As<IFactorPulseEventHandler>().SingleInstance();
             builder.RegisterType<ActiveSensorEventHandler>().As<IActiveSensorEventHandler>().SingleInstance();
             builder.RegisterType<CanTextEventHandler>().As<ICanTextEventHandler>().SingleInstance();
+            builder.RegisterType<TextForDisplayEventHandler>().As<ITextForDisplayEventHandler>().SingleInstance();
         }
 
         #endregion

@@ -18,6 +18,11 @@ void SwitchMainLed(void) {
 
 
 void SanCanAlive(void) {
+
+
+	myPrintf("Testvndf kjsdkjfks sass\n");
+
+
 	uint8_t p[] = { Major, Minor, Bugfix, 0, 0, 0, 0, 0 };
 
 

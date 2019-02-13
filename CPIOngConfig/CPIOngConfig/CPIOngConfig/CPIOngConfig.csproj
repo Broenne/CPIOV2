@@ -121,6 +121,7 @@
       <DependentUpon>CanInfoTextView.xaml</DependentUpon>
     </Compile>
     <Compile Include="CanText\CanInfoTextViewModel.cs" />
+    <Compile Include="CanText\TextForDisplayEventHandler .cs" />
     <Compile Include="CanText\CanTextEventHandler.cs" />
     <Compile Include="ConfigID\ConfigCanIdViewModel.cs" />
     <Compile Include="ConfigInputs\ConfigInputsAllView.xaml.cs">

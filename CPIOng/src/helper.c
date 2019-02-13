@@ -34,6 +34,10 @@ void GetIfNewTextAvailable(uint8_t* data){
 }
 
 
+void GetTextDataForRow(uint8_t pos, uint8_t posInRow, uint8_t* data){
+	memcpy(data, &TextStorageForCan[pos][posInRow],  5);
+}
+
 void StoreForCan(char* resString, uint size){
 	memcpy(TextStorageForCan[pointerToTextTabelleForCan], resString, size);
 	++pointerToTextTabelleForCan;
@@ -41,8 +45,6 @@ void StoreForCan(char* resString, uint size){
 	if(pointerToTextTabelleForCan > (CAN_TEXT_TABELL_ROWS - 1)){
 		pointerToTextTabelleForCan = 0;
 	}
-
-	// Info geben, neue info vorhanden
 }
 
 

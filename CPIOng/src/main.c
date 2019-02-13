@@ -108,8 +108,8 @@ int main(void) {
 	InitAnalog();
 
 
-	myPrintf("Test 1");
-	myPrintf("Test 2");
+	myPrintf("Test 1\n");
+	myPrintf("Test 2\n");
 
 	osStatus osStatus = osKernelStart();
 

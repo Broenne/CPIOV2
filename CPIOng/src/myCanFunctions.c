@@ -179,9 +179,15 @@ void CanWorkerTask(void * pvParameters) {
 					uint positionInZeile = pData[1];
 					// 0xFF in byte 3 zeigt an, das es eine antwort ist
 
-					uint8_t data[] = { positionInTabelle, positionInZeile, 0xFF, 0x45, 0x46, 0x47, 0, 0 };
+					//uint8_t data[] = { 0, 0, 0, 0, 0, };
 
-					SendCan(GetGlobalCanNodeId(), data, 8);
+					uint8_t data[] = { positionInTabelle, positionInZeile, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00 };
+					GetTextDataForRow(positionInTabelle, positionInZeile, &data[3]);
+
+
+					//uint8_t data[] = { positionInTabelle, positionInZeile, 0xFF, data[0], data[0], data[0], '\n', 0 };
+
+					SendCan(GetGlobalCanNodeId() + REQUEST_TEXT, data, 8);
 				}
 			}
 		}
