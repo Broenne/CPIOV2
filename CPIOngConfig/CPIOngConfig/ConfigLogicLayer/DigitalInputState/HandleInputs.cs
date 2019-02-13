@@ -1,8 +1,10 @@
 ﻿namespace ConfigLogicLayer.DigitalInputState
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
 
+    using ConfigLogicLayer.Configurations;
     using ConfigLogicLayer.Contracts;
     using ConfigLogicLayer.Contracts.ActualId;
     using ConfigLogicLayer.Contracts.Configurations;
@@ -42,7 +44,7 @@
         /// <param name="canIsConnectedEventHandler">The can is connected event handler.</param>
         /// <param name="flipFlopEventHandler">The flip flop event handler.</param>
         /// <param name="activeSensorEventHandler">The active sensor event handler.</param>
-        public HandleInputs(ILogger logger, IPulseEventHandler pulseEventHandler, IReadCanMessage readCanMessage, IInputBinaryEventHandler inputBinaryEventHandler, IAliveEventHandler aliveEventHandler, IGetActualNodeId getActualNodeId, IChannelConfigurationResponseEventHandler channelConfigurationResponseEventHandler, ICanIsConnectedEventHandler canIsConnectedEventHandler, IFlipFlopEventHandler flipFlopEventHandler, IActiveSensorEventHandler activeSensorEventHandler)
+        public HandleInputs(ILogger logger, IPulseEventHandler pulseEventHandler, IReadCanMessage readCanMessage, IInputBinaryEventHandler inputBinaryEventHandler, IAliveEventHandler aliveEventHandler, IGetActualNodeId getActualNodeId, IChannelConfigurationResponseEventHandler channelConfigurationResponseEventHandler, ICanIsConnectedEventHandler canIsConnectedEventHandler, IFlipFlopEventHandler flipFlopEventHandler, IActiveSensorEventHandler activeSensorEventHandler, ICanTextEventHandler canTextEventHandler, ITextResponseEventHandler textResponseEventHandler)
         {
             this.Logger = logger;
 
@@ -55,6 +57,8 @@
             this.CanIsConnectedEventHandler = canIsConnectedEventHandler;
             this.FlipFlopEventHandler = flipFlopEventHandler;
             this.ActiveSensorEventHandler = activeSensorEventHandler;
+            this.CanTextEventHandler = canTextEventHandler;
+            this.TextResponseEventHandler = textResponseEventHandler;
         }
 
         #endregion
@@ -84,6 +88,8 @@
         private IReadCanMessage ReadCanMessage { get; }
 
         private ICanTextEventHandler CanTextEventHandler { get; }
+
+        private ITextResponseEventHandler TextResponseEventHandler { get; }
 
         #endregion
 
@@ -145,11 +151,34 @@
                 this.HandleChannelConfigResponse(id, data);
                 this.HandleFlipFlopEvent(id, data);
                 this.ActiveSensorResponse(id, data);
+                this.TextResponse(id, data);
             }
             catch (Exception ex)
             {
                 this.Logger.LogError(ex);
                 throw;
+            }
+        }
+
+        private void TextResponse(uint id, byte[] data)
+        {
+            try
+            {
+                this.Logger.LogBegin(this.GetType());
+
+                if (id == CanCommandConsts.Text + this.GetActualNodeId.Get() && data[2].Equals(0xFF))
+                {
+                    this.TextResponseEventHandler.OnReached(new List<byte>(data).AsReadOnly());
+                }
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                throw;
+            }
+            finally
+            {
+                this.Logger.LogEnd(this.GetType());
             }
         }
 

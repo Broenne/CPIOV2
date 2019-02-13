@@ -13,6 +13,7 @@
 #define FILTER_ID_GET_INPUT_CONFIG		( ( uint ) 18 )
 #define FILTER_ID_MY_ID					( ( uint ) 19 )
 #define FILTER_ID_ACTIVE_SENSOR			( ( uint ) 20 )
+#define FILTER_ID_REQUEST_TEXT			( ( uint ) 21 )
 
 extern volatile CAN_HandleTypeDef hcan2;
 
@@ -52,7 +53,10 @@ void FilterCanIdGetInputConfig(volatile CAN_HandleTypeDef* hcan) {
 
 void FilterCanIdActiveSensor(volatile CAN_HandleTypeDef* hcan) {
 	InitFilter(&hcan2, GetGlobalCanNodeId() + SET_ACTIVE_SENSOR, FILTER_ID_ACTIVE_SENSOR);
+}
 
+void FilterCanIdRequestText(volatile CAN_HandleTypeDef* hcan) {
+	InitFilter(&hcan2, GetGlobalCanNodeId() + REQUEST_TEXT, FILTER_ID_REQUEST_TEXT);
 }
 
 void FilterCanIdConfigureInputs(volatile CAN_HandleTypeDef* hcan) {
@@ -70,4 +74,5 @@ void InitCanFilter(void) {
 	FilterCanIdResetFlipFlop(&hcan2);
 	FilterCanIdGetInputConfig(&hcan2);
 	FilterCanIdConfigureInputs(&hcan2);
+	FilterCanIdRequestText(&hcan2);
 }

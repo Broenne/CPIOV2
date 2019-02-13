@@ -17,7 +17,21 @@ static int pointerToTextTabelleForCan;
 static char TextStorageForCan[CAN_TEXT_TABELL_ROWS][MAX_STRING_SIZE]; // 8*200
 
 
+void GetIfNewTextAvailable(uint8_t* data){
+	static uint8_t oldValue;
 
+	static uint8_t pos = 0;
+	for(int i = oldValue; i < pointerToTextTabelleForCan; ++i){
+		pos = 1 << i;
+		*data ^= pos;
+	}
+
+	oldValue = pointerToTextTabelleForCan;
+
+	// welche Position hat der Pointer?
+	// unterschied zu vorher?
+	// dann die bits setzen und info geben
+}
 
 
 void StoreForCan(char* resString, uint size){

@@ -8,6 +8,7 @@
     using ConfigLogicLayer.Contracts;
 
     using CPIOngConfig.Contracts.Alive;
+    using CPIOngConfig.Contracts.CanText;
     using CPIOngConfig.Contracts.Error;
 
     using Helper.Contracts.Logger;
@@ -35,10 +36,11 @@
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="aliveEventHandler">The alive event handler.</param>
-        public ErrorHardwareViewModel(ILogger logger, IAliveEventHandler aliveEventHandler)
+        public ErrorHardwareViewModel(ILogger logger, IAliveEventHandler aliveEventHandler, ICanInfoTextView canInfoTextView)
         {
             this.Logger = logger;
             this.AliveEventHandler = aliveEventHandler;
+            this.CanInfoTextView = canInfoTextView;
 
             this.Color = new ObservableCollection<SolidColorBrush>();
 
@@ -78,6 +80,15 @@
             get => this.rawErrorFildData;
             set => this.SetProperty(ref this.rawErrorFildData, value);
         }
+
+
+        /// <summary>
+        /// Gets the can information text view.
+        /// </summary>
+        /// <value>
+        /// The can information text view.
+        /// </value>
+        public ICanInfoTextView CanInfoTextView { get; }
 
         private IAliveEventHandler AliveEventHandler { get; }
 

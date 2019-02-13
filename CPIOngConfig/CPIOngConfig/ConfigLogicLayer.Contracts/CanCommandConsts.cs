@@ -1,5 +1,8 @@
 ﻿namespace ConfigLogicLayer.Contracts
 {
+    /// <summary>
+    /// The can commands.
+    /// </summary>
     public static class CanCommandConsts
     {
         #region Constants
@@ -11,6 +14,8 @@
         public const uint AliveOffset = 0x200;
 
         public const uint CountOfErrorBytes = 0x04;
+
+        public const uint Text = 0x177;
 
         #endregion
 

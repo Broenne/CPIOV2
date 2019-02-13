@@ -13,5 +13,6 @@
 void ActivateDebug(uint activate);
 void Reset(void);
 void myPrintf(char* resString);
+void GetIfNewTextAvailable(uint8_t* data);
 
 #endif /* HELPER_H_ */

@@ -24,6 +24,8 @@ void SanCanAlive(void) {
 	// add error frames
 	GetApplicationStatus(&p[3]);
 
+	// Get info about text
+	GetIfNewTextAvailable(&p[7]);
 
 	static CAN_HandleTypeDef hcan;
 	hcan.Instance=CAN2;

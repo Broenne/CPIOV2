@@ -172,6 +172,17 @@ void CanWorkerTask(void * pvParameters) {
 				if ((globalCanId + FLIPFLOP_OPENCAN_OFFSET_RESET) == stdid) {
 					ResetFlipFlop(pData);
 				}
+
+				if ((globalCanId + REQUEST_TEXT) == stdid) {
+
+					uint positionInTabelle = pData[0];
+					uint positionInZeile = pData[1];
+					// 0xFF in byte 3 zeigt an, das es eine antwort ist
+
+					uint8_t data[] = { positionInTabelle, positionInZeile, 0xFF, 0x45, 0x46, 0x47, 0, 0 };
+
+					SendCan(GetGlobalCanNodeId(), data, 8);
+				}
 			}
 		}
 
