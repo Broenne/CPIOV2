@@ -281,8 +281,10 @@
                     shiftData[2] = data[1];
                     shiftData[3] = data[0];
 
+                    var checkSum = data[7];
+
                     var pulseData = BitConverter.ToUInt32(shiftData, 0);
-                    this.PulseEventHandler.OnReached(new PulseEventArgs(channel, pulseData));
+                    this.PulseEventHandler.OnReached(new PulseEventArgs(channel, pulseData, checkSum));
                 }
             }
             catch (Exception ex)

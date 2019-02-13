@@ -21,6 +21,8 @@
 
         private bool activated;
 
+        private byte checkSum;
+
         private SolidColorBrush color;
 
         private TimePulse selectedTimeItem;
@@ -70,6 +72,19 @@
         }
 
         /// <summary>
+        ///     Gets or sets the check sum.
+        /// </summary>
+        /// <value>
+        ///     The check sum.
+        /// </value>
+        public byte CheckSum
+        {
+            get => this.checkSum;
+
+            set => this.SetProperty(ref this.checkSum, value);
+        }
+
+        /// <summary>
         ///     Gets or sets the color.
         /// </summary>
         /// <value>
@@ -115,12 +130,14 @@
         #region Public Methods
 
         /// <summary>
-        ///     Adds the time.
+        /// Adds the time.
         /// </summary>
         /// <param name="dif">The difference.</param>
         /// <param name="volume">The volume.</param>
-        public void AddTime(double dif, double volume)
+        /// <param name="checkSumArg">The check sum.</param>
+        public void AddTime(double dif, double volume, byte checkSumArg)
         {
+            this.CheckSum = checkSumArg;
             var difAsString = dif.ToString(CultureInfo.InvariantCulture);
             var timePulseToAdd = new TimePulse(difAsString, volume.ToString(CultureInfo.InvariantCulture));
 

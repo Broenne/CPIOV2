@@ -7,12 +7,13 @@
 
 #include "pulse.h"
 
-#define QUEUE_SIZE_FOR_PULSE_INFO		( ( unsigned short ) 80 ) // 16 * 5
+#define QUEUE_SIZE_FOR_PULSE_INFO		( ( unsigned short ) 96 ) // 16 * 6
 
 
 typedef struct {
 	uint8_t channel;
 	uint32_t res;
+	uint8_t checkSum;
 } MessageForSend;
 
 
@@ -92,7 +93,7 @@ void SendPulsePerCanTask(void * pvParameters) {
 				channelModi = GetChannelModiByChannel(i);
 
 				if(i == currentMessage.channel && channelModi == GetActiveChannelModiType()){
-					SendCanTimeDif(currentMessage.channel, currentMessage.res);
+					SendCanTimeDif(currentMessage.channel, currentMessage.res, currentMessage.checkSum);
 					break; // schleife kan dann beendet werden
 				}
 			}
@@ -124,6 +125,9 @@ void InitPulseSender(void) {
 	// todo mb: wann und wie den task deleten?
 }
 
+
+volatile static uint8_t CheckCounter[CHANNEL_COUNT];
+
 /*
  * Created on: 30.11.18
  * Author: MB
@@ -143,6 +147,7 @@ void SendTimeInfo(uint8_t channel) {
 	static MessageForSend messageForSend;
 	messageForSend.channel = channel;
 	messageForSend.res = res;
+	messageForSend.checkSum = ++CheckCounter[channel];
 
 	if (xQueueSendFromISR(PulsQueue, &messageForSend, 0) != pdTRUE) {
 		SetPossiblePulseSendQueueFullError();
@@ -150,6 +155,9 @@ void SendTimeInfo(uint8_t channel) {
 
 	lastTimeValue[channel] = actualTimeValue;
 }
+
+
+
 
 /*
  * Created on: 12.02.19

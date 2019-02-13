@@ -11,14 +11,16 @@
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PulseEventArgs"/> class.
+        /// Initializes a new instance of the <see cref="PulseEventArgs" /> class.
         /// </summary>
         /// <param name="channel">The channel.</param>
         /// <param name="stamp">The stamp.</param>
-        public PulseEventArgs(uint channel, uint stamp)
+        /// <param name="checkSum">The check sum.</param>
+        public PulseEventArgs(uint channel, uint stamp, byte checkSum)
         {
             this.Channel = (int)channel;
             this.Stamp = stamp;
+            this.CheckSum = checkSum;
         }
 
         #endregion
@@ -40,6 +42,14 @@
         /// The stamp.
         /// </value>
         public uint Stamp { get; }
+
+        /// <summary>
+        /// Gets the check sum.
+        /// </summary>
+        /// <value>
+        /// The check sum.
+        /// </value>
+        public byte CheckSum { get; }
 
         #endregion
     }

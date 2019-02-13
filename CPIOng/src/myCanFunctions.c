@@ -207,8 +207,8 @@ void SetGlobalCanNodeId(uint8_t canId) {
  * Author: MB
  * Service for send the time difference betwenn pulses on can bus.
  * */
-void SendCanTimeDif(uint8_t channel, uint32_t res) {
-	uint8_t p[] = { 0, 0, 0, 0 };
+void SendCanTimeDif(uint8_t channel, uint32_t res, uint8_t checkSum) {
+	uint8_t p[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
 
 // cast timestamp to can info
 	p[0] = (res >> 24) & 0xFF;
@@ -216,8 +216,10 @@ void SendCanTimeDif(uint8_t channel, uint32_t res) {
 	p[2] = (res >> 8) & 0xFF;
 	p[3] = res & 0xFF;
 
+	p[7] = checkSum;
+
 	uint32_t canId = PULSE_OPENCAN_OFFSET + GetGlobalCanNodeId() + channel;
-	SendCan(canId, p, 4);
+	SendCan(canId, p, 8);
 }
 
 /*

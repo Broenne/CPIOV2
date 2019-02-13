@@ -107,7 +107,7 @@ int main(void) {
 	InitAlive();
 	InitAnalog();
 
-	osKernelStart();
+	osStatus osStatus = osKernelStart();
 
 	while (1) {
 	}

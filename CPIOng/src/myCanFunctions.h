@@ -19,7 +19,7 @@ uint8_t GetGlobalCanNodeId();
  * MB
 * Funktion zum senden der Puls-Zeitinformation per CAN.
   * */
-void SendCanTimeDif(uint8_t channel, uint32_t res);
+void SendCanTimeDif(uint8_t channel, uint32_t res, uint8_t checkSum);
 
 /*
  * 24.01.19

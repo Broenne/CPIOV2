@@ -30,7 +30,10 @@
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding Name, Mode=OneWay}" IsReadOnly="True" />
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Text="{Binding Name, Mode=OneWay}" IsReadOnly="True" />
+                                    <TextBox Text="{Binding CheckSum, Mode=OneWay}" IsReadOnly="True" />
+                                </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

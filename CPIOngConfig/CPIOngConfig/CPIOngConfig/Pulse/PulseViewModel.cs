@@ -59,7 +59,7 @@
             for (var i = 0; i < 16; i++)
             {
                 var pulseDataForView = new PulseDataForView($"{i}", 100, true);
-                pulseDataForView.AddTime(0, 0);
+                pulseDataForView.AddTime(0, 0, 0);
                 this.PulseDataForViewList.Add(pulseDataForView);
             }
 
@@ -134,7 +134,10 @@
                 var time = this.timefactor * e.Stamp;
                 var valueToList = this.volumePerTimeSlot / time;
 
-                this.dispatcher.Invoke(() => { this.PulseDataForViewList[e.Channel].AddTime(e.Stamp, valueToList); });
+
+                var check = this.CheckIfNextIsNext(e.Channel, e.CheckSum);
+
+                this.dispatcher.Invoke(() => { this.PulseDataForViewList[e.Channel].AddTime(e.Stamp, valueToList, check); });
             }
             catch (Exception ex)
             {
@@ -142,6 +145,59 @@
                 throw;
             }
         }
+
+
+
+        private List<CheckSumData> CheckSumStorage {get;}  = new List<CheckSumData>(new CheckSumData[16]);
+
+        private byte CheckIfNextIsNext(int channel, byte checkSum)
+        {
+            // todo mb: was passietr beim ersten mal? wie initailisieren????
+            if (!(this.CheckSumStorage[channel]).check(checkSum))
+            {
+                MessageBox.Show("Reihenfolge passt nicht");
+            }
+
+            this.CheckSumStorage[channel] = new CheckSumData(checkSum);
+            return checkSum;
+        }
+
+
+        private class CheckSumData
+        {
+
+            public CheckSumData()
+            {
+                this.IsInitialized = false;
+            }
+
+            public CheckSumData(byte checkSum)
+            {
+                this.IsInitialized = true;
+                this.CheckSum = checkSum;
+            }
+
+            public bool IsInitialized { get; }
+
+            public byte CheckSum { get; }
+
+            public bool check(byte ch)
+            {
+
+                if (!this.IsInitialized)
+                {
+                    return true; // kein sinnvoller vergleich wenn kein startwert
+                }
+
+                if ((this.CheckSum + 1).Equals(ch))
+                {
+                    return true;
+                }
+               
+                return false;
+            }
+        }
+
 
         #endregion
     }
