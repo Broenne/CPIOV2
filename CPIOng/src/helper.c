@@ -60,8 +60,6 @@ void myPrintf_ToArg2(char* resString, int arg1, int arg2) {
  *      Printf überschreiben führt zu Problemne, daher diese Funktion nutzen
  */
 void myPrintf(char* resString) {
-
-	// länger ermitteln, maximal 200 zeichen. string endet mit /n
 	char* remberCharAddress = resString;
 	int size = 0;
 	for (size = 0; size < MAX_STRING_SIZE; ++size) {
@@ -74,7 +72,11 @@ void myPrintf(char* resString) {
 
 	resString = remberCharAddress;
 
-	StoreForCan(resString, size);
+	// tod mb: erstmal nur can sperren
+	if(printMode){
+		StoreForCan(resString, size);
+	}
+
 	HAL_UART_Transmit(&huart1, (uint8_t*) resString, size, 100);
 }
 

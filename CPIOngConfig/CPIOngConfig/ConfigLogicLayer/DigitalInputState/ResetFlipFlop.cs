@@ -10,10 +10,20 @@
 
     using Helper.Contracts.Logger;
 
+    /// <summary>
+    /// The reset flip flop service.
+    /// </summary>
+    /// <seealso cref="ConfigLogicLayer.Contracts.DigitalInputState.IResetFlipFlop" />
     public class ResetFlipFlop : IResetFlipFlop
     {
         #region Constructor
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ResetFlipFlop"/> class.
+        /// </summary>
+        /// <param name="logger">The logger.</param>
+        /// <param name="writeBasicCan">The write basic can.</param>
+        /// <param name="actualNodeId">The actual node identifier.</param>
         public ResetFlipFlop(ILogger logger, IWriteBasicCan writeBasicCan, IGetActualNodeId actualNodeId)
         {
             this.Logger = logger;
@@ -35,6 +45,9 @@
 
         #region Public Methods
 
+        /// <summary>
+        /// Resets all.
+        /// </summary>
         public void ResetAll()
         {
             try

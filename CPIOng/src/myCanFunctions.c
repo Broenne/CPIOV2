@@ -16,17 +16,16 @@ osThreadId canInputTaskHandle;
 xQueueHandle CanRxQueueHandle = NULL;
 xQueueHandle CanQueueSenderHandle = NULL;
 
+void SendTextPerCan(uint8_t* dataArg) {
+	uint positionInTabelle = dataArg[0];
+	uint positionInZeile = dataArg[1];
+	// 0xFF in byte 3 zeigt an, das es eine antwort ist
 
+	uint8_t data[] = { positionInTabelle, positionInZeile, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00 };
+	GetTextDataForRow(positionInTabelle, positionInZeile, &data[3]);
 
-void SendTextPerCan(){
-
+	SendCan(GetGlobalCanNodeId() + REQUEST_TEXT, data, 8);
 }
-
-
-
-
-
-
 
 /*
  * Created on: 04.02.19
@@ -112,15 +111,14 @@ void StatusOfActualConfiguredInputs(uint8_t* data) {
 		CreateResponseForRequestChannelModi(data);
 		break;
 	case 0x02:
-		// einstellung, welcher Sensor grade am Knoten aktiv ist
-		CreateResponseActiveSensor(data);
+		CreateResponseActiveSensor(data); // einstellung, welcher Sensor grade am Knoten aktiv ist
 	default:
 		break;
 	}
 }
 
-void SetActiveChannel(uint8_t* data){
-	ChannelModiType channelModiType = (ChannelModiType)data[0];
+void SetActiveChannel(uint8_t* data) {
+	ChannelModiType channelModiType = (ChannelModiType) data[0];
 	SetActiveChannelModiType(channelModiType);
 }
 
@@ -174,20 +172,7 @@ void CanWorkerTask(void * pvParameters) {
 				}
 
 				if ((globalCanId + REQUEST_TEXT) == stdid) {
-
-					uint positionInTabelle = pData[0];
-					uint positionInZeile = pData[1];
-					// 0xFF in byte 3 zeigt an, das es eine antwort ist
-
-					//uint8_t data[] = { 0, 0, 0, 0, 0, };
-
-					uint8_t data[] = { positionInTabelle, positionInZeile, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00 };
-					GetTextDataForRow(positionInTabelle, positionInZeile, &data[3]);
-
-
-					//uint8_t data[] = { positionInTabelle, positionInZeile, 0xFF, data[0], data[0], data[0], '\n', 0 };
-
-					SendCan(GetGlobalCanNodeId() + REQUEST_TEXT, data, 8);
+					SendTextPerCan(pData);
 				}
 			}
 		}
