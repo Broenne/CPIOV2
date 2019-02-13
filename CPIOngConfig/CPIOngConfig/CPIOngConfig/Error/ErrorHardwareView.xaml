@@ -97,7 +97,10 @@
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
-                <ContentPresenter Grid.Column="1" Content="{Binding CanInfoTextView}"></ContentPresenter>
+                <StackPanel Grid.Column="1" >
+                    <CheckBox IsEnabled="{Binding IsEnabled}" Margin="5" Command="{Binding ActivateCommand}" CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}}">Activate Can-Debug</CheckBox>
+                    <ContentPresenter Content="{Binding CanInfoTextView}"></ContentPresenter>
+                </StackPanel>
             </Grid>
         </StackPanel>
     

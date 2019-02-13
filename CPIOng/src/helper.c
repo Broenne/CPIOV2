@@ -53,6 +53,22 @@ void myPrintf_ToArg2(char* resString, int arg1, int arg2) {
 
 }
 
+volatile static int printMode = 0;
+/*
+ * 30.11.2018
+ * MB
+ * 0 = deactivate debug
+ * 1 = debug on uart
+ *
+ */
+void ActivateDebug(uint activate) {
+	printMode = activate;
+}
+
+int GetDebugStatusInfo() {
+	return printMode;
+}
+
 /*
  *  Created on: 29.11.2018
  *      Author: MB
@@ -73,28 +89,13 @@ void myPrintf(char* resString) {
 	resString = remberCharAddress;
 
 	// tod mb: erstmal nur can sperren
-	if(printMode){
+	if(GetDebugStatusInfo() == 1){
 		StoreForCan(resString, size);
 	}
 
 	HAL_UART_Transmit(&huart1, (uint8_t*) resString, size, 100);
 }
 
-volatile static int printMode = 0;
-/*
- * 30.11.2017
- * MB
- * 0 = deactivate debug
- * 1 = debug on uart
- *
- */
-void ActivateDebug(uint activate) {
-	printMode = activate;
-}
-
-int GetDebugStatusInfo() {
-	return printMode;
-}
 
 int _write(int file, char *ptr, int len) {
 	if (GetDebugStatusInfo()) {

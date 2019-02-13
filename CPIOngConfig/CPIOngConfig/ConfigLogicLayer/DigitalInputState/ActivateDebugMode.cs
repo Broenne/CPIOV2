@@ -10,7 +10,7 @@
     using Helper.Contracts.Logger;
 
     /// <summary>
-    /// The service for activate debug.
+    ///     The service for activate debug.
     /// </summary>
     /// <seealso cref="ConfigLogicLayer.Contracts.DigitalInputState.IActivateDebugMode" />
     public class ActivateDebugMode : IActivateDebugMode
@@ -24,13 +24,14 @@
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ActivateDebugMode"/> class.
+        ///     Initializes a new instance of the <see cref="ActivateDebugMode" /> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="writeBasicCan">The write basic can.</param>
         public ActivateDebugMode(ILogger logger, IWriteBasicCan writeBasicCan)
         {
             this.Logger = logger;
+
             this.WriteBasicCan = writeBasicCan;
         }
 
@@ -75,7 +76,7 @@
         }
 
         /// <summary>
-        /// Deactivates this instance.
+        ///     Deactivates this instance.
         /// </summary>
         public void Deactivate()
         {

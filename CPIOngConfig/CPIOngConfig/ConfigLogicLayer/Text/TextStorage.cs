@@ -33,7 +33,11 @@
                 this.Data.Add(posInRow, txt);
             }
 
-            public string CreateFinishedText()
+        /// <summary>
+        /// Creates the finished text.
+        /// </summary>
+        /// <returns></returns>
+        public string CreateFinishedText()
             {
                 var tt = this.Data.OrderBy(x => x.Key);
 

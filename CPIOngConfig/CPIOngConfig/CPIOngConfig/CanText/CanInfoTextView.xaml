@@ -6,17 +6,27 @@
              xmlns:local="clr-namespace:CPIOngConfig.CanText"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Border BorderThickness="1" BorderBrush="Black">
+    
     <Grid>
-        <ListBox Margin="20" ItemsSource="{Binding Text}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            <StackPanel>
+                <TextBlock IsEnabled="False">
+                    Info: Es werden nicht garantiert alle Status übertragen,
+                    <LineBreak />
+                    da Speicher und Prio begrenzt sind.
+                </TextBlock>
+                <Border BorderThickness="1" BorderBrush="Black">
+                <ListBox Margin="2" ItemsSource="{Binding Text}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+        </StackPanel>
+        
     </Grid>
-    </Border>
+   
 </UserControl>
