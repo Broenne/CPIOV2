@@ -41,7 +41,7 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 
 	hcan2.pTxMsg = &canMessage;
 
-	if (HAL_CAN_Transmit(&hcan2, 20) != HAL_OK) {
+	if (HAL_CAN_Transmit(&hcan2, 5) != HAL_OK) {
 		SetCanSendError();
 	}
 }

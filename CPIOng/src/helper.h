@@ -13,6 +13,7 @@
 void ActivateDebug(uint activate);
 void Reset(void);
 void myPrintf(char* resString);
+void myPrintf_ToArg2(char* resString, int arg1, int arg2);
 
 
 void GetIfNewTextAvailable(uint8_t* data);

@@ -9,14 +9,11 @@
 
 #define QUEUE_SIZE_FOR_PULSE_INFO		( ( unsigned short ) 96 ) // 16 * 6
 
-
 typedef struct {
 	uint8_t channel;
 	uint32_t res;
 	uint8_t checkSum;
 } MessageForSend;
-
-
 
 static TIM_HandleTypeDef pulseTimerInstance;
 
@@ -37,7 +34,8 @@ void Init_TimerForPulsTime(void) {
 
 	// calculate:
 	// f / fclock / Period*(Pre+1))
-	__HAL_RCC_TIM3_CLK_ENABLE()	;
+	__HAL_RCC_TIM3_CLK_ENABLE()
+	;
 	pulseTimerInstance.Instance = TIM3;
 	pulseTimerInstance.Init.CounterMode = TIM_COUNTERMODE_UP;
 
@@ -88,25 +86,22 @@ void SendPulsePerCanTask(void * pvParameters) {
 
 		if (xQueueReceive(PulsQueue, &currentMessage, 100) == pdTRUE) {
 
-			for(int i=0; i < CHANNEL_COUNT; ++i){
+			for (int i = 0; i < CHANNEL_COUNT; ++i) {
 				static ChannelModiType channelModi; // voraussetzung, channels muss dem eingang entsprechen!!
 				channelModi = GetChannelModiByChannel(i);
 
-				if(i == currentMessage.channel && channelModi == GetActiveChannelModiType()){
+				if (i == currentMessage.channel && channelModi == GetActiveChannelModiType()) {
 					SendCanTimeDif(currentMessage.channel, currentMessage.res, currentMessage.checkSum);
 
-					// todo mb: debug hilfe
-					char s[50]; // fucking c
-					sprintf(s, "Send channel %d  cs:%d \n", (int)currentMessage.res, (int)currentMessage.checkSum);
-					myPrintf(s);
+					myPrintf_ToArg2("Send channel %d  cs:%d \n", (int) currentMessage.res, (int) currentMessage.checkSum);
 
 					break; // schleife kan dann beendet werden
 				}
 			}
 
 			// Besonderheit FlipFlop (Zweite Schleife, da die obere ggf gebreakt wird)
-			for(int i=0; i < CHANNEL_COUNT; ++i){
-				if(i == currentMessage.channel && GetChannelModiByChannel(i) == FlipFlop){
+			for (int i = 0; i < CHANNEL_COUNT; ++i) {
+				if (i == currentMessage.channel && GetChannelModiByChannel(i) == FlipFlop) {
 					SetFlipFlop(i);
 				}
 			}
@@ -130,7 +125,6 @@ void InitPulseSender(void) {
 	myTask03Handle = osThreadCreate(osThread(PulseTask), NULL);
 	// todo mb: wann und wie den task deleten?
 }
-
 
 volatile static uint8_t CheckCounter[CHANNEL_COUNT];
 
@@ -161,9 +155,6 @@ void SendTimeInfo(uint8_t channel) {
 
 	lastTimeValue[channel] = actualTimeValue;
 }
-
-
-
 
 /*
  * Created on: 12.02.19
