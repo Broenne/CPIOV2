@@ -88,7 +88,7 @@
         #endregion
 
         #region Private Methods
-
+        
         private void TextResponseEventHandler_EventIsReached(object sender, IReadOnlyList<byte> e)
         {
             try
@@ -100,8 +100,9 @@
                 for (var i = 3; i < 8; i++)
                 {
                     var content = Convert.ToChar(e[i]);
-                    if (e[i] == 10) // ascii \n
+                    if (e[i] == 10) 
                     {
+                        // ascii \n
                         endIsReached = true;
                         break;
                     }
@@ -123,7 +124,7 @@
 
                 if (!endIsReached)
                 {
-                    var nextpositionInRow = (byte)(positionInRow + 5);
+                    var nextpositionInRow = (byte)(positionInRow + 5); // weitersetzen der Position im string der cpio
 
                     if (nextpositionInRow > 200)
                     {
