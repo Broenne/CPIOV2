@@ -3,11 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.Windows;
+    using System.Windows.Input;
     using System.Windows.Threading;
 
     using CPIOngConfig.Contracts.FactorPulse;
     using CPIOngConfig.Contracts.Pulse;
 
+    using Helper;
     using Helper.Contracts.Logger;
 
     using Prism.Mvvm;
@@ -50,6 +52,8 @@
             this.PulseFactorView = factorPulseViewArg;
             factorPulseEventHandler.EventIsReached += this.FactorPulseEventHandler_EventIsReached;
 
+            this.ActivateCheckSumcCommand = new RelayCommand(this.ActivateCheckSumcCommandAction);
+
             // todo mb: parallel for
             for (var i = 0; i < 16; i++)
             {
@@ -70,6 +74,8 @@
         #endregion
 
         #region Properties
+
+        public ICommand ActivateCheckSumcCommand { get; }
 
         /// <summary>
         ///     Gets or sets the pulse data for view list.
@@ -107,6 +113,8 @@
             set => this.SetProperty(ref this.pulseStorageView, value);
         }
 
+        private bool CheckSumIsActivated { get; set; }
+
         private List<CheckSumData> CheckSumStorage { get; } // = new List<CheckSumData>(new CheckSumData[16]);
 
         private ILogger Logger { get; }
@@ -114,6 +122,19 @@
         #endregion
 
         #region Private Methods
+
+        private void ActivateCheckSumcCommandAction(object obj)
+        {
+            try
+            {
+                this.CheckSumIsActivated = (bool)obj;
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                MessageBox.Show(ex.Message);
+            }
+        }
 
         private void FactorPulseEventHandler_EventIsReached(object sender, FactorPulseEventArgs e)
         {
@@ -137,7 +158,11 @@
                 var time = this.timefactor * e.Stamp;
                 var valueToList = this.volumePerTimeSlot / time;
 
-                var check = this.CheckIfNextIsNext(e.Channel, e.CheckSum);
+                var check = e.CheckSum;
+                if (this.CheckSumIsActivated)
+                {
+                    this.CheckIfNextIsNext(e.Channel, e.CheckSum);
+                }
 
                 this.dispatcher.Invoke(() => { this.PulseDataForViewList[e.Channel].AddTime(e.Stamp, valueToList, check); });
             }
@@ -147,7 +172,6 @@
                 throw;
             }
         }
-
 
         // todo mb: das muss mal irgendwie getetst werden
         private byte CheckIfNextIsNext(int channel, byte checkSum)
@@ -163,50 +187,5 @@
         }
 
         #endregion
-
-        private class CheckSumData
-        {
-            #region Constructor
-
-            public CheckSumData()
-            {
-                this.IsInitialized = false;
-            }
-
-            public CheckSumData(byte checkSum)
-            {
-                this.IsInitialized = true;
-                this.CheckSum = checkSum;
-            }
-
-            #endregion
-
-            #region Properties
-
-            private byte CheckSum { get; }
-
-            private bool IsInitialized { get; }
-
-            #endregion
-
-            #region Public Methods
-
-            public bool Check(byte ch)
-            {
-                if (!this.IsInitialized)
-                {
-                    return true; // kein sinnvoller vergleich wenn kein startwert
-                }
-
-                if ((this.CheckSum + 1).Equals(ch))
-                {
-                    return true;
-                }
-
-                return false;
-            }
-
-            #endregion
-        }
     }
 }

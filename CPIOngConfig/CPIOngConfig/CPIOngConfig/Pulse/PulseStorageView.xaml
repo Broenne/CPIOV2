@@ -6,18 +6,19 @@
              xmlns:local="clr-namespace:CPIOngConfig.Pulse"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <StackPanel Orientation="Horizontal" Margin="5">
-            <Button Margin="5" Command="{Binding StartCommand}">Start write file</Button>
-            <Button Margin="5" Command="{Binding StopCommand}">Stop write file</Button>
-            <Button Margin="5" Command="{Binding SelectFileCommand}">Select File</Button>
-            <TextBox Text="{Binding SelectedFile}"></TextBox>
-            <Label>
-                <TextBlock>Achtung, doppeltes öffnen usw ist nicht abgefangen<LineBreak/> 
-                    Datei wird bei close geschlossen und gespeichert<LineBreak/>
-                    Es wird der Zeitwert und nicht der umgerechnete Durchfluss gespeichert
-                </TextBlock>
-            </Label>
-        </StackPanel>
-    </Grid>
+    <Border BorderThickness="1" BorderBrush="Black">
+        <Grid>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Button Margin="5" Command="{Binding StartCommand}">Start write file</Button>
+                <Button Margin="5" Command="{Binding StopCommand}">Stop write file</Button>
+                <Button Margin="5" Command="{Binding SelectFileCommand}">Select File</Button>
+                <TextBox Text="{Binding SelectedFile}"></TextBox>
+                <Label>
+                    <TextBlock>Achtung, doppeltes öffnen usw ist nicht abgefangen. Datei wird bei close <LineBreak/>
+                        geschlossen und gespeichert. Es wird der Zeitwert und nicht der umgerechnete Durchfluss gespeichert
+                    </TextBlock>
+                </Label>
+            </StackPanel>
+        </Grid>
+    </Border>
 </UserControl>

@@ -10,6 +10,10 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <cpiOngConfig:BoolConverter x:Key="MyConverter"></cpiOngConfig:BoolConverter>
+        <Style TargetType="{x:Type controls:NumericUpDown}">
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="100"/>
+        </Style>
     </UserControl.Resources>
     <Border BorderThickness="1" BorderBrush="Black">
         <Grid>
@@ -20,11 +24,11 @@
                     <Label Margin="0,5,5,5">Activate checkbox for use.</Label>
                     <controls:NumericUpDown 
                         IsEnabled="{Binding ElementName=Checkbox, Path=IsChecked, Converter={StaticResource MyConverter}}"
-                        Minimum = "1" Maximum = "100" Interval = "1" Height="40" Width="100" Margin="5,5,0,5" Value="{Binding PulsPerRevolution}"></controls:NumericUpDown>
+                        Minimum = "1" Maximum = "100" Interval = "1" Margin="5,5,0,5" Value="{Binding PulsPerRevolution}"></controls:NumericUpDown>
                     <Label Margin="0,5,5,5">Pulse/Umdrehung</Label>
                     <controls:NumericUpDown 
                         IsEnabled="{Binding ElementName=Checkbox, Path=IsChecked, Converter={StaticResource MyConverter}}" 
-                        Minimum = "0" Maximum = "100" Interval = "0.01" Height="40" Width="100" Margin="5,5,0,5" Value="{Binding VolumePerRevolution}"></controls:NumericUpDown>
+                        Minimum = "0" Maximum = "100" Interval = "0.01" Margin="5,5,0,5" Value="{Binding VolumePerRevolution}"></controls:NumericUpDown>
                     <Label Margin="0,5,5,5">Volume/Umdrehung</Label>
                     <controls:SplitButton
                         IsEnabled="{Binding ElementName=Checkbox, Path=IsChecked, Converter={StaticResource MyConverter}}" 

@@ -17,12 +17,13 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="160"></RowDefinition>
+            <RowDefinition Height="180"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical">
             <ContentPresenter Content="{Binding PulseStorageView}"></ContentPresenter>
             <ContentPresenter Content="{Binding PulseFactorView}"></ContentPresenter>
+            <CheckBox Command="{Binding ActivateCheckSumcCommand}" CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}}" Margin="5">Activate Pilse check</CheckBox>
         </StackPanel>
         <ListView Grid.Row="1" ItemsSource="{Binding PulseDataForViewList}">
             <ListView.View>
@@ -42,7 +43,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <ListBox Margin="1" ItemsSource="{Binding Times}" 
-                                         Width="700" 
+                                         Width="800" 
                                          SelectedItem="{Binding SelectedTimeItem}" 
                                          ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}"
                                          Background="{Binding Color}">

@@ -6535,3 +6535,122 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 !ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2019-02-12 06:03:33.198
 !MESSAGE Error in initializing ST-Link device.
 Reason: (2) ST-Link DLL error.
+
+!ENTRY TrueSTUDIO 4 0 2019-02-14 06:05:52.404
+!MESSAGE ST-LINK GDB server failed to start (exit code = 3)
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2019-02-14 06:05:52.569
+!MESSAGE Error in initializing ST-Link device.
+Reason: (3) USB communication error. Please reconnect the ST-Link USB cable and try again.
+
+!ENTRY com.atollic.truestudio.swv.core 4 0 2019-02-14 06:13:10.929
+!MESSAGE SWV Client received I/O Exception: Connection reset... trying to reconnect
+
+!ENTRY com.atollic.truestudio.swv.core 4 0 2019-02-14 06:13:12.027
+!MESSAGE SWVClient - Failed to connect to Host: localhost Port: 61235
+
+!ENTRY com.atollic.truestudio.swv.core 4 0 2019-02-14 06:13:12.028
+!MESSAGE Failed to reconnect and read data
+!STACK 0
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:79)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:211)
+	at com.atollic.truestudio.swv.core.SWVClient.connect(SWVClient.java:173)
+	at com.atollic.truestudio.swv.core.SWVClient.getNextByte(SWVClient.java:287)
+	at com.atollic.truestudio.swv.core.SWVClient.run(SWVClient.java:327)
+!SESSION 2019-02-14 06:52:25.155 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_181
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY com.atollic.truestudio.productmanager 1 0 2019-02-14 06:52:29.051
+!MESSAGE Loading product manager
+
+!ENTRY com.atollic.truestudio.productmanager 1 0 2019-02-14 06:52:29.059
+!MESSAGE OS info: Windows 7, 6.1, x86
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-02-14 06:52:29.224
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY TrueSTUDIO 1 0 2019-02-14 06:52:30.325
+!MESSAGE Target: STM32, Version: 9.1.0, Build date: 20181011-1241, Installation dir: /C:/Program Files (x86)/Atollic/TrueSTUDIO for STM32 9.1.0/ide/
+
+!ENTRY TrueSTUDIO 1 0 2019-02-14 06:52:30.325
+!MESSAGE Workspace: C:\apps\CPIOV2
+
+!ENTRY org.eclipse.cdt.managedbuilder.core 4 0 2019-02-14 06:52:31.063
+!MESSAGE Orphaned CDT build configuration [com.atollic.truestudio.exe.release.1518366166]: parent extension cfg [com.atollic.truestudio.exe.release.1518366166] not found
+!STACK 0
+java.lang.Exception
+	at org.eclipse.cdt.managedbuilder.core.ManagedBuilderCorePlugin.error(ManagedBuilderCorePlugin.java:226)
+	at org.eclipse.cdt.managedbuilder.internal.core.Configuration.loadFromProject(Configuration.java:844)
+	at org.eclipse.cdt.managedbuilder.internal.core.Configuration.<init>(Configuration.java:402)
+	at org.eclipse.cdt.managedbuilder.internal.dataprovider.ConfigurationDataProvider.load(ConfigurationDataProvider.java:391)
+	at org.eclipse.cdt.managedbuilder.internal.dataprovider.ConfigurationDataProvider.loadConfiguration(ConfigurationDataProvider.java:557)
+	at org.eclipse.cdt.internal.core.settings.model.CConfigurationDescriptionCache.loadData(CConfigurationDescriptionCache.java:136)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescription.loadDatas(CProjectDescription.java:196)
+	at org.eclipse.cdt.internal.core.settings.model.xml.XmlProjectDescriptionStorage.loadProjectDescription(XmlProjectDescriptionStorage.java:500)
+	at org.eclipse.cdt.internal.core.settings.model.xml.XmlProjectDescriptionStorage.getProjectDescription(XmlProjectDescriptionStorage.java:237)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.getProjectDescriptionInternal(CProjectDescriptionManager.java:437)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.getProjectDescription(CProjectDescriptionManager.java:419)
+	at org.eclipse.cdt.managedbuilder.core.ManagedBuildManager.findBuildInfo(ManagedBuildManager.java:2730)
+	at org.eclipse.cdt.managedbuilder.core.ManagedBuildManager.getBuildInfo(ManagedBuildManager.java:2991)
+	at org.eclipse.cdt.managedbuilder.core.ManagedBuildManager.getBuildInfo(ManagedBuildManager.java:2946)
+	at org.eclipse.cdt.build.core.scannerconfig.ScannerConfigBuilder.build(ScannerConfigBuilder.java:92)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:736)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:207)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:247)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:302)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:305)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:361)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:384)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.jface 2 0 2019-02-14 06:52:31.714
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2019-02-14 06:52:31.714
+!MESSAGE A conflict occurred for ALT+CTRL+T:
+Binding(ALT+CTRL+T,
+	ParameterizedCommand(Command(org.eclipse.team.svn.ui.command.EditPropertiesCommand,Show Properties,
+		,
+		Category(org.eclipse.team.svn.ui.command.category,SVN,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@95f584,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+CTRL+T,
+	ParameterizedCommand(Command(org.eclipse.tm.terminal.connector.local.command.launch,Open Local Terminal on Selection,
+		,
+		Category(org.eclipse.tm.terminal.view.ui.commands.category,Terminal Commands,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@997f67,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY com.atollic.truestudio.integration.processorexpert 0 0 2019-02-14 06:52:36.849
+!MESSAGE Atollic TrueSTUDIO Processor Expert integration is up.
+
+!ENTRY edu.hawaii.ics.csdl.jupiter 1 0 2019-02-14 06:52:36.915
+!MESSAGE Code Review is up.
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-02-14 06:52:37.028
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\tbe241.OSMA-AUFZUEGE'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
