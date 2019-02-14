@@ -184,7 +184,7 @@
             var lisTim = this.Times.Select(x => x.Tim).ToList();
             this.MeanValueTim = lisTim.Average();
 
-            var lisFlow = this.Times.Select(x => x.Tim).ToList();
+            var lisFlow = this.Times.Select(x => x.Volume).ToList();
             this.MeanValueFlow = lisFlow.Average();
         }
 
