@@ -46,10 +46,15 @@ void StoreForCan(char* resString, uint size) {
 }
 
 void myPrintf_ToArg2(char* resString, int arg1, int arg2) {
-	// todo mb: debug hilfe, wann will man das eingeschaltet haben?
-	char s[MAX_STRING_SIZE];
-	sprintf(s, resString, arg1, arg2);
-	myPrintf(s);
+
+	// scheiﬂe, nur in diesem gesperrt
+	if(GetDebugStatusInfo() == 1){
+
+		// todo mb: debug hilfe, wann will man das eingeschaltet haben?
+		char s[MAX_STRING_SIZE];
+		sprintf(s, resString, arg1, arg2);
+		myPrintf(s);
+	}
 
 }
 
@@ -89,9 +94,9 @@ void myPrintf(char* resString) {
 	resString = remberCharAddress;
 
 	// tod mb: erstmal nur can sperren
-	if(GetDebugStatusInfo() == 1){
+
 		StoreForCan(resString, size);
-	}
+
 
 	HAL_UART_Transmit(&huart1, (uint8_t*) resString, size, 100);
 }

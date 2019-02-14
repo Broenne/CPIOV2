@@ -63,6 +63,14 @@
             }
 
             pulseEventHandler.EventIsReached += this.PulseEventHandler_EventIsReached;
+
+
+            // todoo mb: in eigen service
+            this.StorageForMeanValue  = new Dictionary<byte, List<double>>();
+            for (byte i = 0; i < 16; i++)
+            {
+                this.StorageForMeanValue.Add(i, new List<double>());
+            }
         }
 
         #endregion
@@ -153,12 +161,26 @@
             }
         }
 
+
+        private Dictionary<byte, List<double>> StorageForMeanValue { get; }
+
+
+        private void AddToMeanValueStorage(byte channel, double value)
+        {
+            // mittelwert, mittelwert tiefe nachher beschränken
+            this.StorageForMeanValue[channel].Add(value);
+        }
+
+
         private void PulseEventHandler_EventIsReached(object sender, PulseEventArgs e)
         {
             try
             {
                 // Q = V / t
-                var time = this.timefactor * e.Stamp;
+                double time = this.timefactor * e.Stamp;
+
+                this.AddToMeanValueStorage((byte)e.Channel, time);
+
                 var valueToList = this.volumePerTimeSlot / time;
 
                 var check = e.CheckSum;
