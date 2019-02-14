@@ -8,9 +8,9 @@
     /// <seealso cref="Prism.Mvvm.BindableBase" />
     public class TimePulse : BindableBase
     {
-        private string tim;
+        private double tim;
 
-        private string volume;
+        private double volume;
 
         #region Constructor
 
@@ -19,7 +19,7 @@
         /// </summary>
         /// <param name="tim">The time info.</param>
         /// <param name="volume">The volume.</param>
-        public TimePulse(string tim, string volume)
+        public TimePulse(double tim, double volume)
         {
             this.Tim = tim;
             this.Volume = volume;
@@ -35,7 +35,7 @@
         /// <value>
         /// The time info.
         /// </value>
-        public string Tim
+        public double Tim
         {
             get => this.tim;
             set => this.SetProperty(ref this.tim, value);
@@ -47,7 +47,7 @@
         /// <value>
         /// The time info.
         /// </value>
-        public string Volume
+        public double Volume
         {
             get => this.volume;
             set => this.SetProperty(ref this.volume, value);

@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Globalization;
+    using System.Linq;
     using System.Windows.Media;
 
     using Prism.Mvvm;
@@ -25,6 +25,10 @@
 
         private SolidColorBrush color;
 
+        private double meanValueFlow;
+
+        private double meanValueTim;
+
         private TimePulse selectedTimeItem;
 
         #region Constructor
@@ -44,11 +48,15 @@
 
             for (var i = 0; i < listCntArg; i++)
             {
-                helper.Add(new TimePulse("0", "0"));
+                helper.Add(new TimePulse(0, 0));
             }
 
             this.Activated = activatedArg;
             this.Times = new ObservableCollection<TimePulse>(helper);
+
+            this.MeanValueTim = 42;
+
+            this.MeanValueFlow = 56;
         }
 
         #endregion
@@ -98,6 +106,32 @@
         }
 
         /// <summary>
+        ///     Gets or sets the check sum.
+        /// </summary>
+        /// <value>
+        ///     The check sum.
+        /// </value>
+        public double MeanValueFlow
+        {
+            get => this.meanValueFlow;
+
+            set => this.SetProperty(ref this.meanValueFlow, value);
+        }
+
+        /// <summary>
+        ///     Gets or sets the check sum.
+        /// </summary>
+        /// <value>
+        ///     The check sum.
+        /// </value>
+        public double MeanValueTim
+        {
+            get => this.meanValueTim;
+
+            set => this.SetProperty(ref this.meanValueTim, value);
+        }
+
+        /// <summary>
         ///     Gets the name.
         /// </summary>
         /// <value>
@@ -130,16 +164,15 @@
         #region Public Methods
 
         /// <summary>
-        /// Adds the time.
+        ///     Adds the time.
         /// </summary>
         /// <param name="dif">The difference.</param>
         /// <param name="volume">The volume.</param>
         /// <param name="checkSumArg">The check sum.</param>
-        public void AddTime(double dif, double volume, byte checkSumArg)
+        public void AddTime(uint dif, double volume, byte checkSumArg)
         {
             this.CheckSum = checkSumArg;
-            var difAsString = dif.ToString(CultureInfo.InvariantCulture);
-            var timePulseToAdd = new TimePulse(difAsString, volume.ToString(CultureInfo.InvariantCulture));
+            var timePulseToAdd = new TimePulse(dif, volume);
 
             this.Times.Add(timePulseToAdd); // das wird gesetz, um den sdcroll balken nach hinten zu setzen
             this.SelectedTimeItem = timePulseToAdd;
@@ -147,6 +180,12 @@
             {
                 this.Times.RemoveAt(0);
             }
+
+            var lisTim = this.Times.Select(x => x.Tim).ToList();
+            this.MeanValueTim = lisTim.Average();
+
+            var lisFlow = this.Times.Select(x => x.Tim).ToList();
+            this.MeanValueFlow = lisFlow.Average();
         }
 
         #endregion

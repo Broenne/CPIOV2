@@ -15,6 +15,22 @@ extern UART_HandleTypeDef huart1;
 static int pointerToTextTabelleForCan;
 static char TextStorageForCan[CAN_TEXT_TABELL_ROWS][MAX_STRING_SIZE]; // 8*200
 
+volatile static int printMode = 0;
+/*
+ * 30.11.2018
+ * MB
+ * 0 = deactivate debug
+ * 1 = debug on uart
+ *
+ */
+void ActivateDebug(uint activate) {
+	printMode = activate;
+}
+
+int GetDebugStatusInfo() {
+	return printMode;
+}
+
 void GetIfNewTextAvailable(uint8_t* data) {
 	static uint8_t oldValue;
 
@@ -47,31 +63,13 @@ void StoreForCan(char* resString, uint size) {
 
 void myPrintf_ToArg2(char* resString, int arg1, int arg2) {
 
-	// scheiße, nur in diesem gesperrt
-	if(GetDebugStatusInfo() == 1){
+
 
 		// todo mb: debug hilfe, wann will man das eingeschaltet haben?
 		char s[MAX_STRING_SIZE];
 		sprintf(s, resString, arg1, arg2);
 		myPrintf(s);
-	}
 
-}
-
-volatile static int printMode = 0;
-/*
- * 30.11.2018
- * MB
- * 0 = deactivate debug
- * 1 = debug on uart
- *
- */
-void ActivateDebug(uint activate) {
-	printMode = activate;
-}
-
-int GetDebugStatusInfo() {
-	return printMode;
 }
 
 /*
@@ -81,26 +79,28 @@ int GetDebugStatusInfo() {
  *      Printf überschreiben führt zu Problemne, daher diese Funktion nutzen
  */
 void myPrintf(char* resString) {
-	char* remberCharAddress = resString;
-	int size = 0;
-	for (size = 0; size < MAX_STRING_SIZE; ++size) {
-		if ((*resString) == '\n') {
-			break;
+
+	// scheiße, nur in diesem gesperrt
+		if (GetDebugStatusInfo() == 1) {
+			char* remberCharAddress = resString;
+			int size = 0;
+			for (size = 0; size < MAX_STRING_SIZE; ++size) {
+				if ((*resString) == '\n') {
+					break;
+				}
+
+				++(resString);
+			}
+
+			resString = remberCharAddress;
+
+			// tod mb: erstmal nur can sperren
+
+			StoreForCan(resString, size);
+
+			HAL_UART_Transmit(&huart1, (uint8_t*) resString, size, 100);
 		}
-
-		++(resString);
-	}
-
-	resString = remberCharAddress;
-
-	// tod mb: erstmal nur can sperren
-
-		StoreForCan(resString, size);
-
-
-	HAL_UART_Transmit(&huart1, (uint8_t*) resString, size, 100);
 }
-
 
 int _write(int file, char *ptr, int len) {
 	if (GetDebugStatusInfo()) {

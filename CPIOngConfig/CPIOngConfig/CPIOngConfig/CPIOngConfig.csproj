@@ -150,6 +150,7 @@
     <Compile Include="InputBinary\InputBinaryEventHandler.cs" />
     <Compile Include="Pulse\CheckSumData.cs" />
     <Compile Include="Pulse\ListBoxItemBehavior.cs" />
+    <Compile Include="Pulse\MeanValueHelper.cs" />
     <Compile Include="Pulse\PulseEventHandler.cs" />
     <Compile Include="Pulse\PulseStorageView.xaml.cs">
       <DependentUpon>PulseStorageView.xaml</DependentUpon>

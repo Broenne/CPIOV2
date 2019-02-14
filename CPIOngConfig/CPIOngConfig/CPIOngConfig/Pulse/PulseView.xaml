@@ -32,8 +32,14 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBox Text="{Binding Name, Mode=OneWay}" IsReadOnly="True" />
-                                    <TextBox Text="{Binding CheckSum, Mode=OneWay}" IsReadOnly="True" MinWidth="30"/>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBox Text="{Binding Name, Mode=OneWay}" IsReadOnly="True" />
+                                        <TextBox Text="{Binding CheckSum, Mode=OneWay}" IsReadOnly="True" MinWidth="30"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBox VerticalContentAlignment="Center" Text="{Binding MeanValueTim, Mode=OneWay}" IsReadOnly="True" MinWidth="30"/>
+                                        <TextBox VerticalContentAlignment="Center" Text="{Binding MeanValueFlow, Mode=OneWay}" IsReadOnly="True" MinWidth="30"/>
+                                    </StackPanel>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

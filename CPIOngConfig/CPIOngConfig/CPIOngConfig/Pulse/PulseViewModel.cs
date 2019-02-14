@@ -65,12 +65,7 @@
             pulseEventHandler.EventIsReached += this.PulseEventHandler_EventIsReached;
 
 
-            // todoo mb: in eigen service
-            this.StorageForMeanValue  = new Dictionary<byte, List<double>>();
-            for (byte i = 0; i < 16; i++)
-            {
-                this.StorageForMeanValue.Add(i, new List<double>());
-            }
+          
         }
 
         #endregion
@@ -162,15 +157,9 @@
         }
 
 
-        private Dictionary<byte, List<double>> StorageForMeanValue { get; }
 
-
-        private void AddToMeanValueStorage(byte channel, double value)
-        {
-            // mittelwert, mittelwert tiefe nachher beschränken
-            this.StorageForMeanValue[channel].Add(value);
-        }
-
+        //private MeanValueHelper MeanValueHelper { get; } = new MeanValueHelper();
+       
 
         private void PulseEventHandler_EventIsReached(object sender, PulseEventArgs e)
         {
@@ -178,10 +167,10 @@
             {
                 // Q = V / t
                 double time = this.timefactor * e.Stamp;
+                
+                //var timeave = this.MeanValueHelper.AddToMeanValueStorage((byte)e.Channel, time);
 
-                this.AddToMeanValueStorage((byte)e.Channel, time);
-
-                var valueToList = this.volumePerTimeSlot / time;
+                var flowCalculation = this.volumePerTimeSlot / time;
 
                 var check = e.CheckSum;
                 if (this.CheckSumIsActivated)
@@ -189,7 +178,7 @@
                     this.CheckIfNextIsNext(e.Channel, e.CheckSum);
                 }
 
-                this.dispatcher.Invoke(() => { this.PulseDataForViewList[e.Channel].AddTime(e.Stamp, valueToList, check); });
+                this.dispatcher.Invoke(() => { this.PulseDataForViewList[e.Channel].AddTime(e.Stamp, flowCalculation, check); });
             }
             catch (Exception ex)
             {
