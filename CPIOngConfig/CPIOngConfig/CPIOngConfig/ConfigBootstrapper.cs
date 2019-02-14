@@ -13,18 +13,10 @@
 
     using Hal.PeakCan;
 
+    using Helper.Contracts.Logger;
+
     using Prism.Autofac;
     using Prism.Logging;
-
-    //using CircuitDiagram;
-    //using CircuitDiagram.UserInterface;
-
-    //using FrequencyAnalyze;
-
-    //using MqttBroker;
-    //using MqttBroker.Contracts;
-
-    //using MqttClient;
 
     /// <summary>
     ///     The OSCI BOOTSTRAPPER.
@@ -32,17 +24,9 @@
     /// <seealso cref="AutofacBootstrapper" />
     public class ConfigBootstrapper : AutofacBootstrapper, IDisposable
     {
-        //private ILocalhostBroker localhostBroker;
-
         #region Properties
 
-        /// <summary>
-        ///     Gets or sets the <see cref="T:Microsoft.Practices.Prism.Logging.ILoggerFacade" /> for the application.
-        /// </summary>
-        /// <value>
-        ///     A <see cref="T:Microsoft.Practices.Prism.Logging.ILoggerFacade" /> instance.
-        /// </value>
-        //internal new ILogger Logger { get; set; }
+        private new ILogger Logger { get; set; }
 
         #endregion
 
@@ -66,21 +50,21 @@
         {
             switch (category)
             {
-                //case Category.Debug:
-                //    this.Logger.LogDebug(message);
-                //    break;
-                //case Category.Warn:
-                //    this.Logger.LogDebug(message);
-                //    break;
-                //case Category.Exception:
-                //    this.Logger.LogDebug(message);
-                //    break;
-                //case Category.Info:
-                //    this.Logger.LogDebug(message);
-                //    break;
-                //default:
-                //    this.Logger.LogDebug(message);
-                //    break;
+                case Category.Debug:
+                    this.Logger.LogDebug(message);
+                    break;
+                case Category.Warn:
+                    this.Logger.LogDebug(message);
+                    break;
+                case Category.Exception:
+                    this.Logger.LogDebug(message);
+                    break;
+                case Category.Info:
+                    this.Logger.LogDebug(message);
+                    break;
+                default:
+                    this.Logger.LogDebug(message);
+                    break;
             }
         }
 
@@ -97,7 +81,7 @@
             try
             {
                 base.ConfigureContainerBuilder(builder);
-                
+
                 builder.RegisterModule<CPIOngConfigContainerModule>();
                 builder.RegisterModule<HelperContainerModule>();
                 builder.RegisterModule<ConfigLogicLayerContainerModule>();
@@ -109,7 +93,7 @@
                 Console.WriteLine(ex);
             }
         }
-        
+
         /// <summary>
         ///     Creates the shell or main window of the application.
         /// </summary>
@@ -129,16 +113,14 @@
         protected override DependencyObject CreateShell()
         {
             var ooo = this.Container.Resolve<IMainWindow>();
+            this.Logger = this.Container.Resolve<ILogger>();
             return (MainWindow)ooo;
         }
 
         /// <summary>
         ///     Initializes the shell.
         /// </summary>
-        [SuppressMessage(
-            "StyleCop.CSharp.NamingRules",
-            "SA1305:FieldNamesMustNotUseHungarianNotation",
-            Justification = "Reviewed. Suppression is OK here.")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation", Justification = "Reviewed. Suppression is OK here.")]
         protected override void InitializeShell()
         {
             try
@@ -156,12 +138,6 @@
                     Application.Current.MainWindow.MinHeight = 0;
                     Application.Current.MainWindow.Show();
                 }
-
-               
-                
-
-                // this.localhostBroker = this.Container.Resolve<ILocalhostBroker>();
-                // this.localhostBroker.Start();
             }
             catch (Exception e)
             {
@@ -170,7 +146,7 @@
             }
             finally
             {
-                //this.Logger.LogEnd(this.GetType());
+                this.Logger.LogEnd(this.GetType());
             }
         }
 

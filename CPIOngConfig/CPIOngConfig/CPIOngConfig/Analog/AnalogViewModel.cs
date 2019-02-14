@@ -15,18 +15,20 @@
     using Prism.Mvvm;
 
     /// <summary>
-    /// The service for analog view model.
+    ///     The service for analog view model.
     /// </summary>
     /// <seealso cref="Prism.Mvvm.BindableBase" />
     /// <seealso cref="CPIOngConfig.Analog.IAnalogViewModel" />
     public class AnalogViewModel : BindableBase, IAnalogViewModel
     {
+        private static readonly object LockSerialWrite = new object();
+
         private bool analogValuePolling;
 
         private List<string> comPorts;
 
         private string console;
-        
+
         #region Constructor
 
         /// <summary>
@@ -36,7 +38,6 @@
         public AnalogViewModel(ILogger logegr)
         {
             // todo mb: das ganze ding umbennen
-
             this.Logger = logegr;
             this.RefreshCommand = new RelayCommand(this.RefreshCommandAction);
             this.OpenValueCommand = new RelayCommand(this.OpenValueCommandAction);
@@ -82,10 +83,10 @@
         }
 
         /// <summary>
-        /// Gets or sets the console.
+        ///     Gets or sets the console.
         /// </summary>
         /// <value>
-        /// The console.
+        ///     The console.
         /// </value>
         public string Console
         {
@@ -116,7 +117,7 @@
         ///     The refresh command.
         /// </value>
         public ICommand RefreshCommand { get; }
-        
+
         private ILogger Logger { get; }
 
         private SerialPort SerialPort { get; set; }
@@ -157,9 +158,6 @@
             }
         }
 
-
-        static object LockSerialWrite = new object();
-
         private void StartPollingTask()
         {
             Task.Run(
@@ -182,9 +180,7 @@
                                     this.SerialPort.WriteLine($"AnaCh{i}");
                                 }
                             }
-                           
 
-                            var res = string.Empty;
                             Thread.Sleep(50);
 
                             ++i;
@@ -197,7 +193,6 @@
                     });
         }
 
-
         private void ListenTask()
         {
             Task.Run(
@@ -205,7 +200,7 @@
                     {
                         while (true)
                         {
-                            string res = string.Empty;
+                            var res = string.Empty;
                             Thread.Sleep(50);
 
                             lock (LockSerialWrite)
@@ -213,11 +208,11 @@
                                 try
                                 {
                                     // todo mb: im read line muss mitgegebnen werden, was es ist
-                                    res = this.SerialPort.ReadExisting();//.ReadLine();
+                                    res = this.SerialPort.ReadExisting(); // .ReadLine();
                                 }
-                                catch (TimeoutException ex)
+                                catch (TimeoutException)
                                 {
-                                    ; // ignore
+                                    // ignore
                                 }
 
                                 this.Console += res;
@@ -227,7 +222,6 @@
                         }
                     });
         }
-
 
         private void OpenValueCommandAction(object obj)
         {

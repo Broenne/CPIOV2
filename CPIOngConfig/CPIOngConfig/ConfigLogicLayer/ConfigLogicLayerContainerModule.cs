@@ -8,6 +8,7 @@
     using ConfigLogicLayer.Configurations;
     using ConfigLogicLayer.Contracts.ActualId;
     using ConfigLogicLayer.Contracts.Configurations;
+    using ConfigLogicLayer.Text;
 
     using Module = Autofac.Module;
 

@@ -1,4 +1,3 @@
-C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\TelegramTest\obj\Debug\TelegramTest.csprojAssemblyReference.cache
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\TelegramTest\obj\Debug\TelegramTest.csproj.CoreCompileInputs.cache
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\TelegramTest\bin\Debug\TelegramTest.exe.config
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\TelegramTest\bin\Debug\TelegramTest.exe

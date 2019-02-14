@@ -8,7 +8,6 @@
     using Hal.PeakCan.Contracts.Init;
     using Hal.PeakCan.PCANDll;
 
-    using HardwareAbstaction.PCAN.Init;
     using HardwareAbstaction.PCAN.PCANDll;
 
     using HardwareAbstraction.Contracts.PCanDll;
@@ -18,37 +17,22 @@
     /// <summary>
     ///     The write basic CAN class.
     /// </summary>
-    /// <seealso cref="HardwareAbstraction.Contracts.Basics.IWriteBasicCan" />
     public class WriteBasicCan : IWriteBasicCan
     {
         private static readonly object LockWrite = new object();
-
-        private static int cnt;
-
-        private static Dictionary<uint, object> locksWrite;
 
         #region Constructor
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="WriteBasicCan" /> class.
         /// </summary>
-        /// <param name="logger">The logger.</param>
         /// <param name="preparePeakCan">The prepare peak can.</param>
+        /// <param name="logger">The logger.</param>
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation", Justification = "Reviewed. Suppression is OK here.")]
         public WriteBasicCan(IPreparePeakCan preparePeakCan, ILogger logger)
         {
             this.PreparePeakCan = preparePeakCan;
             this.Logger = logger;
-
-            try
-            {
-                // this.MPcanHandle = preparePeakCan.Do();
-            }
-            catch (Exception ex)
-            {
-                this.Logger.LogError(ex);
-                throw;
-            }
         }
 
         #endregion
@@ -194,19 +178,9 @@
             }
             catch (Exception ex)
             {
+                this.Logger.LogError(ex);
                 throw;
             }
-        }
-
-        private string ByteArrayToHexString(byte[] data)
-        {
-            var msg = string.Empty;
-            foreach (var item in data)
-            {
-                msg += item.ToString("x2");
-            }
-
-            return msg;
         }
 
         #endregion

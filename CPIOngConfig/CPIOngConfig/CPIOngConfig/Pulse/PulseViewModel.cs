@@ -63,15 +63,18 @@
             }
 
             pulseEventHandler.EventIsReached += this.PulseEventHandler_EventIsReached;
-
-
-          
         }
 
         #endregion
 
         #region Properties
 
+        /// <summary>
+        /// Gets the activate check sum command.
+        /// </summary>
+        /// <value>
+        /// The activate check sum command.
+        /// </value>
         public ICommand ActivateCheckSumcCommand { get; }
 
         /// <summary>
@@ -87,10 +90,10 @@
         }
 
         /// <summary>
-        ///     Gets or sets the pulse timefactor view.
+        ///     Gets or sets the pulse time factor view.
         /// </summary>
         /// <value>
-        ///     The pulse timefactor view.
+        ///     The pulse time factor view.
         /// </value>
         public IFactorPulseView PulseFactorView
         {
@@ -155,20 +158,13 @@
                 MessageBox.Show(ex.Message);
             }
         }
-
-
-
-        //private MeanValueHelper MeanValueHelper { get; } = new MeanValueHelper();
-       
-
+        
         private void PulseEventHandler_EventIsReached(object sender, PulseEventArgs e)
         {
             try
             {
                 // Q = V / t
                 double time = this.timefactor * e.Stamp;
-                
-                //var timeave = this.MeanValueHelper.AddToMeanValueStorage((byte)e.Channel, time);
 
                 var flowCalculation = this.volumePerTimeSlot / time;
 
@@ -187,7 +183,6 @@
             }
         }
 
-        // todo mb: das muss mal irgendwie getetst werden
         private void CheckIfNextIsNext(int channel, byte checkSum)
         {
             // todo mb: was passietr beim ersten mal? wie initailisieren????

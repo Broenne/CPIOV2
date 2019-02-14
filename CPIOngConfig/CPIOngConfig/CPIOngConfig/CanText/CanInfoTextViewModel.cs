@@ -14,6 +14,11 @@
 
     using Prism.Mvvm;
 
+    /// <summary>
+    /// The view model for CAN info text.
+    /// </summary>
+    /// <seealso cref="Prism.Mvvm.BindableBase" />
+    /// <seealso cref="CPIOngConfig.Contracts.CanText.ICanInfoTextViewModel" />
     public class CanInfoTextViewModel : BindableBase, ICanInfoTextViewModel
     {
         private readonly Dispatcher dispatcher = RootDispatcherFetcher.RootDispatcher;
@@ -22,6 +27,13 @@
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CanInfoTextViewModel"/> class.
+        /// </summary>
+        /// <param name="logger">The logger.</param>
+        /// <param name="canTextEventHandler">The can text event handler.</param>
+        /// <param name="textService">The text service.</param>
+        /// <param name="textForDisplayEventHandler">The text for display event handler.</param>
         public CanInfoTextViewModel(ILogger logger, ICanTextEventHandler canTextEventHandler, IText textService, ITextForDisplayEventHandler textForDisplayEventHandler)
         {
             this.Logger = logger;
@@ -39,6 +51,12 @@
 
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the text.
+        /// </summary>
+        /// <value>
+        /// The text info.
+        /// </value>
         public ObservableCollection<string> Text
         {
             get => this.text;

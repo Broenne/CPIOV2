@@ -21,8 +21,6 @@
     {
         private int waitForResponse;
 
-        private int waitForResponseRequest;
-
         #region Constructor
 
         /// <summary>
@@ -86,7 +84,6 @@
                     var i = 0;
                     while (this.waitForResponse != item.Channel)
                     {
-                        // todo mb: timeoput
                         Thread.Sleep(50);
                         ++i;
                         if (i > 50)
@@ -123,8 +120,6 @@
 
                 for (var i = 0; i < 16; i++)
                 {
-                    // todo mb: wait for response
-                    const byte WriteConfigByte = 0x03;
                     var data = new List<byte>();
                     data.Add(0x01);
                     data.Add(Convert.ToByte(i));
@@ -133,9 +128,8 @@
 
                     while (this.waitForResponse != i)
                     {
-                        // todo mb: timeoput
                         Thread.Sleep(10);
-                        Console.WriteLine($"Kanal zur Anfrages  {i}");
+                        Console.WriteLine($"Kanal zur Anfrage  {i}");
                     }
                 }
             }

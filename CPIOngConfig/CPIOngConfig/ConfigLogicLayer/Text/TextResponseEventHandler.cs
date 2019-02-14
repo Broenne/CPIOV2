@@ -1,9 +1,9 @@
-﻿namespace ConfigLogicLayer.Configurations
+﻿namespace ConfigLogicLayer.Text
 {
     using System;
     using System.Collections.Generic;
 
-    using ConfigLogicLayer.Contracts.Configurations;
+    using ConfigLogicLayer.Configurations;
 
     using CPIOngConfig.Contracts.Alive;
 

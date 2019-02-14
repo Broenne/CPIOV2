@@ -138,8 +138,6 @@
                 if (endIsReached)
                 {
                     var newFinishedText = this.TextFromCpio[postion].CreateFinishedText();
-
-                    // Console.WriteLine($"newFinishedText {newFinishedText}");
                     this.TextForDisplayEventHandler.OnReached(newFinishedText);
                 }
             }

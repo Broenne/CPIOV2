@@ -32,7 +32,7 @@
         #region Constructor
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="HandleInputs" /> class.
+        /// Initializes a new instance of the <see cref="HandleInputs" /> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="pulseEventHandler">The pulse event handler.</param>
@@ -44,6 +44,8 @@
         /// <param name="canIsConnectedEventHandler">The can is connected event handler.</param>
         /// <param name="flipFlopEventHandler">The flip flop event handler.</param>
         /// <param name="activeSensorEventHandler">The active sensor event handler.</param>
+        /// <param name="canTextEventHandler">The can text event handler.</param>
+        /// <param name="textResponseEventHandler">The text response event handler.</param>
         public HandleInputs(ILogger logger, IPulseEventHandler pulseEventHandler, IReadCanMessage readCanMessage, IInputBinaryEventHandler inputBinaryEventHandler, IAliveEventHandler aliveEventHandler, IGetActualNodeId getActualNodeId, IChannelConfigurationResponseEventHandler channelConfigurationResponseEventHandler, ICanIsConnectedEventHandler canIsConnectedEventHandler, IFlipFlopEventHandler flipFlopEventHandler, IActiveSensorEventHandler activeSensorEventHandler, ICanTextEventHandler canTextEventHandler, ITextResponseEventHandler textResponseEventHandler)
         {
             this.Logger = logger;
@@ -102,10 +104,9 @@
         {
             try
             {
-                // todo mb: mehrfach start verhindern?
                 this.CanEventHandler = this.ReadCanMessage.Start();
                 this.CanEventHandler.EventIsReached += this.CanEventHandler_EventIsReached;
-                this.CanIsConnectedEventHandler.OnReached(true); // todo mb: was ist wenn es schief geht
+                this.CanIsConnectedEventHandler.OnReached(true); 
             }
             catch (Exception ex)
             {
@@ -121,10 +122,9 @@
         {
             try
             {
-                // todo mb: mehrfach start verhindern?
                 this.ReadCanMessage.Stop();
                 this.CanEventHandler.EventIsReached -= this.CanEventHandler_EventIsReached;
-                this.CanIsConnectedEventHandler.OnReached(false); // todo mb: was ist wenn es schief geht
+                this.CanIsConnectedEventHandler.OnReached(false); 
             }
             catch (Exception ex)
             {

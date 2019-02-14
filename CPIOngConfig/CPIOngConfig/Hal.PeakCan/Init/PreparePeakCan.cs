@@ -1,4 +1,4 @@
-﻿namespace HardwareAbstaction.PCAN.Init
+﻿namespace Hal.PeakCan.Init
 {
     using System;
     using System.Text;
@@ -13,7 +13,6 @@
     /// <summary>
     ///     The CAN prepare service.
     /// </summary>
-    /// <seealso cref="HardwareAbstraction.Contracts.Init.IPreparePeakCan" />
     public class PreparePeakCan : IPreparePeakCan
     {
         // : IPreparePeakCan
@@ -27,7 +26,6 @@
         ///     Initializes a new instance of the <see cref="PreparePeakCan" /> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
-        /// <param name="peakCanConfiguration">The peak can configuration.</param>
         public PreparePeakCan(ILogger logger)
         {
             this.Logger = logger;
@@ -64,7 +62,7 @@
             }
             catch (Exception e)
             {
-                // this.Logger.LogError(e);
+                this.Logger.LogError(e);
                 throw;
             }
         }
@@ -109,6 +107,9 @@
             }
         }
 
+        /// <summary>
+        /// Resets this instance.
+        /// </summary>
         public void Reset()
         {
             try
@@ -119,7 +120,7 @@
             }
             catch (Exception e)
             {
-                // this.Logger.LogError(e);
+                this.Logger.LogError(e);
                 throw;
             }
         }

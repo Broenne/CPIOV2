@@ -55,7 +55,6 @@
             this.Times = new ObservableCollection<TimePulse>(helper);
 
             this.MeanValueTim = 42;
-
             this.MeanValueFlow = 56;
         }
 
