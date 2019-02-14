@@ -62,12 +62,6 @@
                 this.PulseDataForViewList.Add(pulseDataForView);
             }
 
-            this.CheckSumStorage = new List<CheckSumData>();
-            for (var i = 0; i < 16; i++)
-            {
-                this.CheckSumStorage.Add(new CheckSumData());
-            }
-
             pulseEventHandler.EventIsReached += this.PulseEventHandler_EventIsReached;
         }
 
@@ -115,7 +109,7 @@
 
         private bool CheckSumIsActivated { get; set; }
 
-        private List<CheckSumData> CheckSumStorage { get; } // = new List<CheckSumData>(new CheckSumData[16]);
+        private List<CheckSumData> CheckSumStorage { get; set; } // = new List<CheckSumData>(new CheckSumData[16]);
 
         private ILogger Logger { get; }
 
@@ -128,6 +122,15 @@
             try
             {
                 this.CheckSumIsActivated = (bool)obj;
+
+                if (this.CheckSumIsActivated)
+                {
+                    this.CheckSumStorage = new List<CheckSumData>();
+                    for (var i = 0; i < 16; i++)
+                    {
+                        this.CheckSumStorage.Add(new CheckSumData());
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -174,16 +177,15 @@
         }
 
         // todo mb: das muss mal irgendwie getetst werden
-        private byte CheckIfNextIsNext(int channel, byte checkSum)
+        private void CheckIfNextIsNext(int channel, byte checkSum)
         {
             // todo mb: was passietr beim ersten mal? wie initailisieren????
             if (!this.CheckSumStorage[channel].Check(checkSum))
             {
-                MessageBox.Show($"Puls-Reihenfolge passt nicht {channel}");
+                MessageBox.Show($"Puls-Reihenfolge passt nicht Kanal:{channel} checkSum:{checkSum}.");
             }
 
             this.CheckSumStorage[channel] = new CheckSumData(checkSum);
-            return checkSum;
         }
 
         #endregion

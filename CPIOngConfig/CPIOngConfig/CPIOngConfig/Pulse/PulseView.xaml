@@ -23,7 +23,7 @@
         <StackPanel Orientation="Vertical">
             <ContentPresenter Content="{Binding PulseStorageView}"></ContentPresenter>
             <ContentPresenter Content="{Binding PulseFactorView}"></ContentPresenter>
-            <CheckBox Command="{Binding ActivateCheckSumcCommand}" CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}}" Margin="5">Activate Pilse check</CheckBox>
+            <CheckBox Command="{Binding ActivateCheckSumcCommand}" CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}}" Margin="5">Activate Puls check</CheckBox>
         </StackPanel>
         <ListView Grid.Row="1" ItemsSource="{Binding PulseDataForViewList}">
             <ListView.View>
@@ -33,7 +33,7 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBox Text="{Binding Name, Mode=OneWay}" IsReadOnly="True" />
-                                    <TextBox Text="{Binding CheckSum, Mode=OneWay}" IsReadOnly="True" />
+                                    <TextBox Text="{Binding CheckSum, Mode=OneWay}" IsReadOnly="True" MinWidth="30"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

@@ -20,7 +20,7 @@
             <StackPanel Orientation="Vertical">
                 <Label>Achtung, übernahme der Werte passiert immer erst nach dem erneuten aktiviern der checkbox</Label>
                 <StackPanel Orientation="Horizontal">
-                    <CheckBox Name="Checkbox"  Margin="10" Width="20" Height="40" Command="{Binding CheckBoxChangeCommand}" CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}">Use factor</CheckBox>
+                    <CheckBox Name="Checkbox"  Margin="5" Width="20" Height="25" Command="{Binding CheckBoxChangeCommand}" CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}">Use factor</CheckBox>
                     <Label Margin="0,5,5,5">Activate checkbox for use.</Label>
                     <controls:NumericUpDown 
                         IsEnabled="{Binding ElementName=Checkbox, Path=IsChecked, Converter={StaticResource MyConverter}}"
@@ -33,7 +33,7 @@
                     <controls:SplitButton
                         IsEnabled="{Binding ElementName=Checkbox, Path=IsChecked, Converter={StaticResource MyConverter}}" 
                         Name="UnitSelect"
-                        Margin="20"
+                        Margin="5"
                         VerticalContentAlignment="Center"
                         Width="120"
                         SelectedValue="{Binding SelectedTimeBase}"
