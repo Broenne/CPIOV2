@@ -65,7 +65,7 @@ void Init_TimerForPulsTime(void) {
 void InitQueueForPulse(void) {
 
 
-	int ddd = 8;//8;//sizeof(struct MessageType *);
+	int ddd = sizeof(struct MessageType *);
 
 	//PulsQueue = xQueueCreate(QUEUE_SIZE_FOR_PULSE_INFO, sizeof(MessageForSend));
 	PulsQueue = xQueueCreate(QUEUE_SIZE_FOR_PULSE_INFO, ddd);
@@ -94,37 +94,21 @@ void InitPulse(void) {
 void SendPulsePerCanTask(void * pvParameters) {
 	while (1) {
 		/*static*/MessageForSend currentMessage;
-//		currentMessage.channel = 255;
-//		currentMessage.res = 1;
-//		currentMessage.checkSum = 0;
 
-
-		//MessageForSend* pCurrentMessage = &currentMessage;
-
-
-		//struct MessageType *pCurrentMessage;// = &currentMessage;
-		//if (xQueueReceive(PulsQueue, &(currentMessage), 100) == pdTRUE) {
-		//if (xQueueReceive(PulsQueue, (void*)&pCurrentMessage, 100) == pdTRUE) {
 		if (xQueueReceive(PulsQueue, (void*)&currentMessage, 100) == pdTRUE) {
-
-
-//			currentMessage.channel = pCurrentMessage->channel;
-//					currentMessage.checkSum = pCurrentMessage->checkSum;
-//					currentMessage.res = pCurrentMessage->res;
-			//int xx = pCurrentMessage->MessageForSend.channel;
-			//&currentMessage = pCurrentMessage;
 			for (int i = 0; i < CHANNEL_COUNT; ++i) {
 				static ChannelModiType channelModi; // voraussetzung, channels muss dem eingang entsprechen!!
 				channelModi = GetChannelModiByChannel(i);
 
 				if (i == currentMessage.channel && channelModi == GetActiveChannelModiType()) {
 
-					if (i < 8) {
-						printf("sss");
-					}
+//					if (i < 8) {
+//						printf("sss");
+//					}
 
 					SendCanTimeDif(currentMessage.channel, currentMessage.res, currentMessage.checkSum);
 
+					// todo mb: das macht es kapoutt
 					//myPrintf_ToArg2("Send channel %d  cs:%d \n", (int) currentMessage.res, (int) currentMessage.checkSum);
 
 					break; // schleife kan dann beendet werden
@@ -158,7 +142,7 @@ void InitPulseSender(void) {
 	// todo mb: wann und wie den task deleten?
 }
 
-volatile static uint8_t CheckCounter[CHANNEL_COUNT];
+
 
 /*
  * Created on: 30.11.18
@@ -178,18 +162,19 @@ void SendTimeInfo(uint8_t channel) {
 
 
 
-
+	static uint16_t CheckCounter[CHANNEL_COUNT];
 	MessageForSend messageForSend;
 	messageForSend.channel = channel;
 	messageForSend.res = res;
-	messageForSend.checkSum = ++CheckCounter[channel];
-	if (0xFF == CheckCounter[channel]) {
+	messageForSend.checkSum = CheckCounter[channel];
+	++CheckCounter[channel];
+	if ((0xFF+1) == CheckCounter[channel]) {
 		CheckCounter[channel] = 0x00;
 	}
 
-	if (channel < 8) {
-		printf("sss");
-	}
+//	if (channel < 8) {
+//		printf("sss");
+//	}
 
 	struct MessageType *pMessageForSend;
 	pMessageForSend = &messageForSend;

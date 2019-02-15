@@ -54,8 +54,9 @@
                                 <ListBox Margin="1" ItemsSource="{Binding Times}" 
                                          Width="800" 
                                          SelectedItem="{Binding SelectedTimeItem}" 
-                                         ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}"
-                                         Background="{Binding Color}">
+                                         ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}">
+                                         <!--Background="{Binding Color}"-->
+                                         
                                    <ListBox.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <WrapPanel IsItemsHost="True" />
@@ -64,8 +65,10 @@
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Vertical" >
-                                                <TextBox Width="60" Text="{Binding Tim}" Background="{Binding Color}"/>
-                                                <TextBox Width="60" Text="{Binding Volume}" Background="{Binding Color}"/>
+                                                <!--<TextBox Width="60" Text="{Binding Tim}" Background="{Binding Color}"/>
+                                                <TextBox Width="60" Text="{Binding Volume}" Background="{Binding Color}"/>-->
+                                                <TextBox Width="60" Text="{Binding Tim}"/>
+                                                <TextBox Width="60" Text="{Binding Volume}"/>
                                             </StackPanel>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>

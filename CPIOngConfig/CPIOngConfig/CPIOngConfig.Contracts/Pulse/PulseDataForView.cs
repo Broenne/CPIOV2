@@ -73,7 +73,7 @@
             get => this.activated;
             set
             {
-                this.Color = value ? this.white : this.gray;
+                //this.Color = value ? this.white : this.gray;
                 this.SetProperty(ref this.activated, value);
             }
         }
@@ -91,18 +91,18 @@
             set => this.SetProperty(ref this.checkSum, value);
         }
 
-        /// <summary>
-        ///     Gets or sets the color.
-        /// </summary>
-        /// <value>
-        ///     The color.
-        /// </value>
-        public SolidColorBrush Color
-        {
-            get => this.color;
+        ///// <summary>
+        /////     Gets or sets the color.
+        ///// </summary>
+        ///// <value>
+        /////     The color.
+        ///// </value>
+        //public SolidColorBrush Color
+        //{
+        //    get => this.color;
 
-            set => this.SetProperty(ref this.color, value);
-        }
+        //    set => this.SetProperty(ref this.color, value);
+        //}
 
         /// <summary>
         ///     Gets or sets the check sum.
@@ -180,11 +180,11 @@
                 this.Times.RemoveAt(0);
             }
 
-            //var lisTim = this.Times.Select(x => x.Tim).ToList();
-            //this.MeanValueTim = lisTim.Average();
+            var lisTim = this.Times.Select(x => x.Tim).ToList();
+            this.MeanValueTim = lisTim.Average();
 
-            //var lisFlow = this.Times.Select(x => x.Volume).ToList();
-            //this.MeanValueFlow = lisFlow.Average();
+            var lisFlow = this.Times.Select(x => x.Volume).ToList();
+            this.MeanValueFlow = lisFlow.Average();
         }
 
         #endregion

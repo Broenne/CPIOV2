@@ -9470,3 +9470,351 @@ Cannot access memory at address 0x2b00a0
 java.lang.Exception: Cannot access memory at address 0x2b00a0
 	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
 	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:53.315
+!MESSAGE Request for monitor: '119^error,msg="Cannot access memory at address 0x424b0a8c"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:53.315
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x424b0a48)->uxBasePriority
+Error message from debugger back end:
+Cannot access memory at address 0x424b0a8c
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x424b0a8c
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:53.319
+!MESSAGE Request for monitor: '120^error,msg="Cannot access memory at address 0x424b0a74"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:53.319
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x424b0a48)->uxPriority
+Error message from debugger back end:
+Cannot access memory at address 0x424b0a74
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x424b0a74
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:53.323
+!MESSAGE Request for monitor: '121^error,msg="Cannot access memory at address 0x424b0a48"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:53.323
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x424b0a48)->pxTopOfStack
+Error message from debugger back end:
+Cannot access memory at address 0x424b0a48
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x424b0a48
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:53.472
+!MESSAGE Request for monitor: '133^error,msg="Cannot access memory at address 0x424b0a8c"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:53.472
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x424b0a48)->uxBasePriority
+Error message from debugger back end:
+Cannot access memory at address 0x424b0a8c
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x424b0a8c
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:53.476
+!MESSAGE Request for monitor: '134^error,msg="Cannot access memory at address 0x424b0a74"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:53.476
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x424b0a48)->uxPriority
+Error message from debugger back end:
+Cannot access memory at address 0x424b0a74
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x424b0a74
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:53.480
+!MESSAGE Request for monitor: '135^error,msg="Cannot access memory at address 0x424b0a48"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:53.480
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x424b0a48)->pxTopOfStack
+Error message from debugger back end:
+Cannot access memory at address 0x424b0a48
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x424b0a48
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:53.605
+!MESSAGE Request for monitor: '146^error,msg="Cannot access memory at address 0x424b0a8c"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:53.605
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x424b0a48)->uxBasePriority
+Error message from debugger back end:
+Cannot access memory at address 0x424b0a8c
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x424b0a8c
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:53.610
+!MESSAGE Request for monitor: '147^error,msg="Cannot access memory at address 0x424b0a74"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:53.610
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x424b0a48)->uxPriority
+Error message from debugger back end:
+Cannot access memory at address 0x424b0a74
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x424b0a74
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:53.614
+!MESSAGE Request for monitor: '148^error,msg="Cannot access memory at address 0x424b0a48"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:53.614
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x424b0a48)->pxTopOfStack
+Error message from debugger back end:
+Cannot access memory at address 0x424b0a48
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x424b0a48
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:53.797
+!MESSAGE Request for monitor: '163^error,msg="Cannot access memory at address 0xffff024c"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:53.797
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0xffff0208)->uxBasePriority
+Error message from debugger back end:
+Cannot access memory at address 0xffff024c
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0xffff024c
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:53.802
+!MESSAGE Request for monitor: '164^error,msg="Cannot access memory at address 0xffff0234"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:53.802
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0xffff0208)->uxPriority
+Error message from debugger back end:
+Cannot access memory at address 0xffff0234
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0xffff0234
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:53.806
+!MESSAGE Request for monitor: '165^error,msg="Cannot access memory at address 0xffff0208"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:53.806
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0xffff0208)->pxTopOfStack
+Error message from debugger back end:
+Cannot access memory at address 0xffff0208
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0xffff0208
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:53.906
+!MESSAGE Request for monitor: '173^error,msg="Cannot access memory at address 0x424b0a8c"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:53.906
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x424b0a48)->uxBasePriority
+Error message from debugger back end:
+Cannot access memory at address 0x424b0a8c
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x424b0a8c
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:53.910
+!MESSAGE Request for monitor: '174^error,msg="Cannot access memory at address 0x424b0a74"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:53.911
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x424b0a48)->uxPriority
+Error message from debugger back end:
+Cannot access memory at address 0x424b0a74
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x424b0a74
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:53.915
+!MESSAGE Request for monitor: '175^error,msg="Cannot access memory at address 0x424b0a48"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:53.915
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x424b0a48)->pxTopOfStack
+Error message from debugger back end:
+Cannot access memory at address 0x424b0a48
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x424b0a48
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:54.040
+!MESSAGE Request for monitor: '183^error,msg="Cannot access memory at address 0x53f000ad"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:54.040
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x53f00069)->uxBasePriority
+Error message from debugger back end:
+Cannot access memory at address 0x53f000ad
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x53f000ad
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:54.044
+!MESSAGE Request for monitor: '184^error,msg="Cannot access memory at address 0x53f00095"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:54.044
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x53f00069)->uxPriority
+Error message from debugger back end:
+Cannot access memory at address 0x53f00095
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x53f00095
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:54.048
+!MESSAGE Request for monitor: '185^error,msg="Cannot access memory at address 0x53f00069"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:54.048
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x53f00069)->pxTopOfStack
+Error message from debugger back end:
+Cannot access memory at address 0x53f00069
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x53f00069
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:54.339
+!MESSAGE Request for monitor: '206^error,msg="Cannot access memory at address 0x424b0a8c"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:54.339
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x424b0a48)->uxBasePriority
+Error message from debugger back end:
+Cannot access memory at address 0x424b0a8c
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x424b0a8c
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:54.343
+!MESSAGE Request for monitor: '207^error,msg="Cannot access memory at address 0x424b0a74"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:54.343
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x424b0a48)->uxPriority
+Error message from debugger back end:
+Cannot access memory at address 0x424b0a74
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x424b0a74
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:54.347
+!MESSAGE Request for monitor: '208^error,msg="Cannot access memory at address 0x424b0a48"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:54.347
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x424b0a48)->pxTopOfStack
+Error message from debugger back end:
+Cannot access memory at address 0x424b0a48
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x424b0a48
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:54.352
+!MESSAGE Request for monitor: '209^error,msg="Cannot access memory at address 0x424b0a70"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:54.352
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x424b0a48)->xEventListItem.pvContainer
+Error message from debugger back end:
+Cannot access memory at address 0x424b0a70
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x424b0a70
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:54.468
+!MESSAGE Request for monitor: '217^error,msg="Cannot access memory at address 0x3546988a"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:54.468
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x35469846)->uxBasePriority
+Error message from debugger back end:
+Cannot access memory at address 0x3546988a
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x3546988a
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:54.473
+!MESSAGE Request for monitor: '218^error,msg="Cannot access memory at address 0x35469872"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:54.473
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x35469846)->uxPriority
+Error message from debugger back end:
+Cannot access memory at address 0x35469872
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x35469872
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:54.477
+!MESSAGE Request for monitor: '219^error,msg="Cannot access memory at address 0x35469846"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:54.477
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x35469846)->pxTopOfStack
+Error message from debugger back end:
+Cannot access memory at address 0x35469846
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x35469846
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:54.598
+!MESSAGE Request for monitor: '227^error,msg="Cannot access memory at address 0x2b00bc"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:54.598
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x2b0078)->uxBasePriority
+Error message from debugger back end:
+Cannot access memory at address 0x2b00bc
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x2b00bc
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:54.602
+!MESSAGE Request for monitor: '228^error,msg="Cannot access memory at address 0x2b00a4"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:54.602
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x2b0078)->uxPriority
+Error message from debugger back end:
+Cannot access memory at address 0x2b00a4
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x2b00a4
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:54.607
+!MESSAGE Request for monitor: '229^error,msg="Cannot access memory at address 0x2b0078"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:54.608
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x2b0078)->pxTopOfStack
+Error message from debugger back end:
+Cannot access memory at address 0x2b0078
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x2b0078
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-02-15 11:41:54.620
+!MESSAGE Request for monitor: '230^error,msg="Cannot access memory at address 0x2b00a0"' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-02-15 11:41:54.620
+!MESSAGE Failed to execute MI command:
+-data-evaluate-expression ((tskTCB*)0x2b0078)->xEventListItem.pvContainer
+Error message from debugger back end:
+Cannot access memory at address 0x2b00a0
+!STACK 0
+java.lang.Exception: Cannot access memory at address 0x2b00a0
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
+	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
