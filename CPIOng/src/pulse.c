@@ -55,7 +55,6 @@ void Init_TimerForPulsTime(void) {
 	HAL_NVIC_EnableIRQ(TIM3_IRQn);
 }
 
-
 //struct MessageType *pMessageForSend;
 /*
  * Created on: 12.02.19
@@ -64,16 +63,13 @@ void Init_TimerForPulsTime(void) {
  * */
 void InitQueueForPulse(void) {
 
+	int size = sizeof(struct MessageType);
 
-	int ddd = sizeof(struct MessageType *);
+	PulsQueue = xQueueCreate(QUEUE_SIZE_FOR_PULSE_INFO, size);
 
-	//PulsQueue = xQueueCreate(QUEUE_SIZE_FOR_PULSE_INFO, sizeof(MessageForSend));
-	PulsQueue = xQueueCreate(QUEUE_SIZE_FOR_PULSE_INFO, ddd);
-
-	if( PulsQueue == 0 )
-		{
-			myPrintf("error create pulse queue");// Failed to create the queue.
-		}
+	if (PulsQueue == 0) {
+		myPrintf("error create pulse queue"); // Failed to create the queue.
+	}
 
 }
 
@@ -111,7 +107,7 @@ void SendPulsePerCanTask(void * pvParameters) {
 					// todo mb: das macht es kapoutt
 					//myPrintf_ToArg2("Send channel %d  cs:%d \n", (int) currentMessage.res, (int) currentMessage.checkSum);
 
-					break; // schleife kan dann beendet werden
+					break;// schleife kan dann beendet werden
 				}
 			}
 
@@ -142,8 +138,6 @@ void InitPulseSender(void) {
 	// todo mb: wann und wie den task deleten?
 }
 
-
-
 /*
  * Created on: 30.11.18
  * Author: MB
@@ -160,15 +154,13 @@ void SendTimeInfo(uint8_t channel) {
 		res = lastTimeValue[channel] - actualTimeValue;
 	}
 
-
-
 	static uint16_t CheckCounter[CHANNEL_COUNT];
 	MessageForSend messageForSend;
 	messageForSend.channel = channel;
 	messageForSend.res = res;
 	messageForSend.checkSum = CheckCounter[channel];
 	++CheckCounter[channel];
-	if ((0xFF+1) == CheckCounter[channel]) {
+	if ((0xFF + 1) == CheckCounter[channel]) {
 		CheckCounter[channel] = 0x00;
 	}
 
@@ -179,7 +171,7 @@ void SendTimeInfo(uint8_t channel) {
 	struct MessageType *pMessageForSend;
 	pMessageForSend = &messageForSend;
 	if (xQueueSendFromISR(PulsQueue, ( void * ) pMessageForSend, 0) != pdTRUE) {
-	//if (xQueueSendFromISR(PulsQueue, &messageForSend, 0) != pdTRUE) {
+		//if (xQueueSendFromISR(PulsQueue, &messageForSend, 0) != pdTRUE) {
 		SetPossiblePulseSendQueueFullError();
 	}
 

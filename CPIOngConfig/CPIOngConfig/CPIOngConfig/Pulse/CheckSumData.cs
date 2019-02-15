@@ -15,23 +15,31 @@
             this.IsInitialized = false;
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CheckSumData"/> class.
-        /// </summary>
-        /// <param name="checkSum">The check sum.</param>
-        public CheckSumData(byte checkSum)
+        ///// <summary>
+        ///// Initializes a new instance of the <see cref="CheckSumData"/> class.
+        ///// </summary>
+        ///// <param name="checkSum">The check sum.</param>
+        //public CheckSumData(byte checkSum)
+        //{
+        //    this.IsInitialized = true;
+        //    this.CheckSum = checkSum;
+        //}
+
+
+        public void ChangeCheckSum(byte checkSum)
         {
             this.IsInitialized = true;
             this.CheckSum = checkSum;
         }
 
+
         #endregion
 
         #region Properties
 
-        private byte CheckSum { get; }
+        private byte CheckSum { get; set; }
 
-        private bool IsInitialized { get; }
+        private bool IsInitialized { get; set; }
 
         #endregion
 

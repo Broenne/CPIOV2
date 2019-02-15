@@ -209,7 +209,8 @@
                 MessageBox.Show($"Puls-Reihenfolge passt nicht Kanal:{channel} checkSum:{checkSum}.");
             }
 
-            this.CheckSumStorage[channel] = new CheckSumData(checkSum);
+            //this.CheckSumStorage[channel] = new CheckSumData(checkSum);
+            this.CheckSumStorage[channel].ChangeCheckSum(checkSum);
         }
 
         #endregion

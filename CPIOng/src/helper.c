@@ -68,7 +68,7 @@ void myPrintf_ToArg2(char* resString, int arg1, int arg2) {
 		// todo mb: debug hilfe, wann will man das eingeschaltet haben?
 		char s[MAX_STRING_SIZE];
 		sprintf(s, resString, arg1, arg2);
-		myPrintf(s);
+		//myPrintf(s);
 
 }
 
