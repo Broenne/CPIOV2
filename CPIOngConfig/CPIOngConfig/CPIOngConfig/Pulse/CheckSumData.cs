@@ -77,7 +77,8 @@
                 info = $"Gleiche {channel} checkSum:{ch}.";
 
                 // todo mb: ignore
-                return CheckReturn.SameMessage;
+                //return CheckReturn.SameMessage;
+                return CheckReturn.Error;
             }
             else
             {

@@ -19,7 +19,7 @@ extern xQueueHandle CanRxQueueHandle;
 void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 
 	//CanTxMsgTypeDef
-	static CanTxMsgTypeDef canMessage;
+	CanTxMsgTypeDef canMessage;
 	canMessage.StdId = id;
 	canMessage.ExtId = 0;
 	canMessage.RTR = CAN_RTR_DATA;
@@ -46,6 +46,7 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 	if (HAL_CAN_Transmit(&hcan2, 5) != HAL_OK) {
 		SetCanSendError();
 	}
+
 }
 
 void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* hcan) {

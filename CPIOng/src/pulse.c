@@ -90,7 +90,6 @@ void InitPulse(void) {
 void SendPulsePerCanTask(void * pvParameters) {
 	while (1) {
 		/*static*/MessageForSend currentMessage;
-
 		if (xQueueReceive(PulsQueue, (void*)&currentMessage, 100) == pdTRUE) {
 			for (int i = 0; i < CHANNEL_COUNT; ++i) {
 				static ChannelModiType channelModi; // voraussetzung, channels muss dem eingang entsprechen!!
