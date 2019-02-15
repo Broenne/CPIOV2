@@ -29,10 +29,12 @@
     /// <seealso cref="ConfigLogicLayer.Contracts.DigitalInputState.IHandleInputs" />
     public class HandleInputs : IHandleInputs
     {
+        private static readonly object LockObj = new object();
+
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HandleInputs" /> class.
+        ///     Initializes a new instance of the <see cref="HandleInputs" /> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="pulseEventHandler">The pulse event handler.</param>
@@ -75,6 +77,8 @@
 
         private ICanIsConnectedEventHandler CanIsConnectedEventHandler { get; }
 
+        private ICanTextEventHandler CanTextEventHandler { get; }
+
         private IChannelConfigurationResponseEventHandler ChannelConfigurationResponseEventHandler { get; }
 
         private IFlipFlopEventHandler FlipFlopEventHandler { get; }
@@ -88,8 +92,6 @@
         private IPulseEventHandler PulseEventHandler { get; }
 
         private IReadCanMessage ReadCanMessage { get; }
-
-        private ICanTextEventHandler CanTextEventHandler { get; }
 
         private ITextResponseEventHandler TextResponseEventHandler { get; }
 
@@ -106,7 +108,7 @@
             {
                 this.CanEventHandler = this.ReadCanMessage.Start();
                 this.CanEventHandler.EventIsReached += this.CanEventHandler_EventIsReached;
-                this.CanIsConnectedEventHandler.OnReached(true); 
+                this.CanIsConnectedEventHandler.OnReached(true);
             }
             catch (Exception ex)
             {
@@ -116,7 +118,7 @@
         }
 
         /// <summary>
-        /// Stops this instance.
+        ///     Stops this instance.
         /// </summary>
         public void Stop()
         {
@@ -124,7 +126,7 @@
             {
                 this.ReadCanMessage.Stop();
                 this.CanEventHandler.EventIsReached -= this.CanEventHandler_EventIsReached;
-                this.CanIsConnectedEventHandler.OnReached(false); 
+                this.CanIsConnectedEventHandler.OnReached(false);
             }
             catch (Exception ex)
             {
@@ -141,17 +143,20 @@
         {
             try
             {
-                var id = e.Id;
-                var data = e.Data.ToArray();
+                lock (LockObj)
+                {
+                    var id = e.Id;
+                    var data = e.Data.ToArray();
 
-                // die könnte man auslagern und dynamisch reinladen anhand eineer interface deklaration
-                this.HandlePulseEvent(id, data);
-                this.HandleBinaryInputState(id, data);
-                this.HandleAlive(id, data);
-                this.HandleChannelConfigResponse(id, data);
-                this.HandleFlipFlopEvent(id, data);
-                this.ActiveSensorResponse(id, data);
-                this.TextResponse(id, data);
+                    // die könnte man auslagern und dynamisch reinladen anhand eineer interface deklaration
+                    this.HandlePulseEvent(id, data);
+                    this.HandleBinaryInputState(id, data);
+                    this.HandleAlive(id, data);
+                    this.HandleChannelConfigResponse(id, data);
+                    this.HandleFlipFlopEvent(id, data);
+                    this.ActiveSensorResponse(id, data);
+                    this.TextResponse(id, data);
+                }
             }
             catch (Exception ex)
             {
@@ -259,7 +264,7 @@
                 {
                     var version = new Version(data[0], data[1], data[2]);
                     this.AliveEventHandler.OnReached(new AliveEventArgs(version, data[3], data[4], data[5], data[6]));
-                    
+
                     this.CanTextEventHandler.OnReached(data[7]);
                 }
             }

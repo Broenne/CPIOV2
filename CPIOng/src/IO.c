@@ -62,7 +62,7 @@ void ReadInputs(uint8_t* data) {
 }
 
 void GetInputs(uint8_t* data) {
-	uint8_t val[2];
+	uint8_t val[2] = { 0, 0};
 	ReadInputs(&val[0]);
 	memcpy(data, &val, sizeof(val));
 }

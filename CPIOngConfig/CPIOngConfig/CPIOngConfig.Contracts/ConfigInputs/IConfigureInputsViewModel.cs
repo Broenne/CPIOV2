@@ -22,5 +22,11 @@
         /// </summary>
         /// <returns>Return the modus.</returns>
         Modi GetSelectedModi();
+
+        /// <summary>
+        /// Changes the channel modi.
+        /// </summary>
+        /// <param name="modi">The modi to use.</param>
+        void ChangeChannelModi(Modi modi);
     }
 }

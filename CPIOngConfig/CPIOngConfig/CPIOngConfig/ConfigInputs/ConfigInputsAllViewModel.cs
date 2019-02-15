@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Windows;
     using System.Windows.Input;
 
@@ -55,6 +56,7 @@
             this.WindowLoadCommand = new RelayCommand(this.WindowLoadCommandAction);
             this.SaveCommand = new RelayCommand(this.SaveCommandAction);
             this.LoadFromDeviceCommand = new RelayCommand(this.LoadFromDeviceCommandAction);
+            this.SetAllToFirstOneCommand = new RelayCommand(this.SetAllToFirstOneCommandAction);
         }
 
         #endregion
@@ -111,6 +113,8 @@
         /// </value>
         public ICommand WindowLoadCommand { get; }
 
+        public ICommand SetAllToFirstOneCommand { get; }
+
         private IChannelConfiguration ChannelConfiguration { get; }
 
         private ILogger Logger { get; }
@@ -126,6 +130,34 @@
                 this.Logger.LogBegin(this.GetType());
 
                 this.IsEnabled = e;
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                this.Logger.LogEnd(this.GetType());
+            }
+        }
+
+        private void SetAllToFirstOneCommandAction(object obj)
+        {
+            try
+            {
+                IConfigureInputsView first = this.ConfigureInputsViewList.FirstOrDefault();
+
+                if (first == null)
+                {
+                    return;
+                }
+
+                foreach (var item in this.ConfigureInputsViewList)
+                {
+                    var vm = item.GetDataContext();
+                    vm.ChangeChannelModi(first.GetDataContext().GetSelectedModi());
+                }
             }
             catch (Exception ex)
             {

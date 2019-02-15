@@ -11,7 +11,7 @@
 #include "include.h"
 
 volatile static uint32_t tickMs;
-volatile static uint32_t lastTimeValue[8];
+volatile static uint32_t lastTimeValue[CHANNEL_COUNT];
 
 void SetTimerPulseCorrecturFactor(uint16_t value);
 void InitPulse(void);

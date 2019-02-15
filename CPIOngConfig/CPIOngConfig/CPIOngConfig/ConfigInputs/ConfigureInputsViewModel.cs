@@ -100,6 +100,15 @@
             this.Channel = channelArg;
         }
 
+        /// <summary>
+        /// Changes the channel modi.
+        /// </summary>
+        /// <param name="modi">The modi to use.</param>
+        public void ChangeChannelModi(Modi modi)
+        {
+            this.SelectedModi = modi;
+        }
+
         #endregion
 
         #region Private Methods
