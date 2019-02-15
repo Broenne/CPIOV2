@@ -97,16 +97,7 @@ void SendPulsePerCanTask(void * pvParameters) {
 				channelModi = GetChannelModiByChannel(i);
 
 				if (i == currentMessage.channel && channelModi == GetActiveChannelModiType()) {
-
-//					if (i < 8) {
-//						printf("sss");
-//					}
-
 					SendCanTimeDif(currentMessage.channel, currentMessage.res, currentMessage.checkSum);
-
-					// todo mb: das macht es kapoutt
-					//myPrintf_ToArg2("Send channel %d  cs:%d \n", (int) currentMessage.res, (int) currentMessage.checkSum);
-
 					break;// schleife kan dann beendet werden
 				}
 			}
@@ -164,14 +155,9 @@ void SendTimeInfo(uint8_t channel) {
 		CheckCounter[channel] = 0x00;
 	}
 
-//	if (channel < 8) {
-//		printf("sss");
-//	}
-
 	struct MessageType *pMessageForSend;
 	pMessageForSend = &messageForSend;
 	if (xQueueSendFromISR(PulsQueue, ( void * ) pMessageForSend, 0) != pdTRUE) {
-		//if (xQueueSendFromISR(PulsQueue, &messageForSend, 0) != pdTRUE) {
 		SetPossiblePulseSendQueueFullError();
 	}
 

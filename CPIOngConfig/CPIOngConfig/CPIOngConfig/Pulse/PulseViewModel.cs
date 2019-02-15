@@ -204,9 +204,10 @@
         private void CheckIfNextIsNext(int channel, byte checkSum)
         {
             // todo mb: was passietr beim ersten mal? wie initailisieren????
-            if (!this.CheckSumStorage[channel].Check(checkSum))
+            string info = string.Empty;
+            if (!this.CheckSumStorage[channel].Check(channel, checkSum, ref info))
             {
-                MessageBox.Show($"Puls-Reihenfolge passt nicht Kanal:{channel} checkSum:{checkSum}.");
+                MessageBox.Show(info);
             }
 
             //this.CheckSumStorage[channel] = new CheckSumData(checkSum);

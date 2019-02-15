@@ -326,7 +326,7 @@ static void MX_ADC1_Init(void) {
 
 /* CAN2 init function */
 static void MX_CAN2_Init(void) {
-	// info m: die static zuweisung des Speicherbereichs für Tx und Rx wurden nicht durch cubemx zugewiesen, daher hier die Ergänzung
+	// info mb: die static zuweisung des Speicherbereichs für Tx und Rx wurden nicht durch cubemx zugewiesen, daher hier die Ergänzung
 	static CanTxMsgTypeDef TxMessage;
 	static CanRxMsgTypeDef RxMessage;
 
@@ -341,9 +341,9 @@ static void MX_CAN2_Init(void) {
 	hcan2.Init.BS1 = CAN_BS1_11TQ;
 	hcan2.Init.BS2 = CAN_BS2_4TQ;
 	hcan2.Init.TTCM = DISABLE;
-	hcan2.Init.ABOM = ENABLE;
+	hcan2.Init.ABOM = DISABLE; //ENABLE;
 	hcan2.Init.AWUM = DISABLE;
-	hcan2.Init.NART = DISABLE;
+	hcan2.Init.NART = ENABLE;//DISABLE;
 	hcan2.Init.RFLM = DISABLE;
 	hcan2.Init.TXFP = DISABLE;
 

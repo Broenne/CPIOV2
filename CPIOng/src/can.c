@@ -26,6 +26,8 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 	canMessage.IDE = CAN_ID_STD;
 	canMessage.DLC = len;
 
+
+
 	memcpy(canMessage.Data, data, sizeof(uint8_t) * len);
 
 	int i = 0;

@@ -48,9 +48,13 @@
         /// <summary>
         /// Checks the specified count.
         /// </summary>
+        /// <param name="channel">The channel.</param>
         /// <param name="ch">The check sum..</param>
-        /// <returns>Return if check is valid.</returns>
-        public bool Check(byte ch)
+        /// <param name="info">The information.</param>
+        /// <returns>
+        /// Return if check is valid.
+        /// </returns>
+        public bool Check(int channel, byte ch, ref string info)
         {
             if (!this.IsInitialized)
             {
@@ -66,6 +70,15 @@
             if ((this.CheckSum + 1).Equals(ch))
             {
                 return true;
+            }
+
+            if (this.CheckSum == ch)
+            {
+                info = $"Gleiche {channel} checkSum:{ch}.";
+            }
+            else
+            {
+                info = $"Puls-Reihenfolge passt nicht Kanal:{channel} checkSum:{ch}.";
             }
 
             return false;
