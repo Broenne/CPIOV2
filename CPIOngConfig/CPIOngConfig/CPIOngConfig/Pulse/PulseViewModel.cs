@@ -189,7 +189,10 @@
                 var check = e.CheckSum;
                 if (this.CheckSumIsActivated)
                 {
-                    this.CheckIfNextIsNext(e.Channel, e.CheckSum);
+                    if (!this.CheckIfNextIsNext(e.Channel, e.CheckSum))
+                    {
+                        return;
+                    }
                 }
 
                 this.dispatcher.Invoke(() => { this.PulseDataForViewList[e.Channel].AddTime(e.Stamp, flowCalculation, check); });
@@ -201,17 +204,33 @@
             }
         }
 
-        private void CheckIfNextIsNext(int channel, byte checkSum)
+        private bool CheckIfNextIsNext(int channel, byte checkSum)
         {
             // todo mb: was passietr beim ersten mal? wie initailisieren????
             string info = string.Empty;
-            if (!this.CheckSumStorage[channel].Check(channel, checkSum, ref info))
+            //if (!this.CheckSumStorage[channel].Check(channel, checkSum, ref info))
+            var res = this.CheckSumStorage[channel].Check(channel, checkSum, ref info);
+            if (CheckReturn.Error == res)
             {
                 MessageBox.Show(info);
+                return false;
+            }
+
+
+
+            // todo mb:
+            // das  ist noch ne basoluteer workaround, da teilweise NAchrichten doppeklt kommen!!?=? 
+
+            // das muss im Knoten nochh geändert werden
+
+            if (CheckReturn.SameMessage == res)
+            {
+                return false;
             }
 
             //this.CheckSumStorage[channel] = new CheckSumData(checkSum);
             this.CheckSumStorage[channel].ChangeCheckSum(checkSum);
+            return true;
         }
 
         #endregion

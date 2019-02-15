@@ -11,3 +11,4 @@ C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\TelegramTest\bin\Debug\Telegram.Bot.xml
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\TelegramTest\obj\Debug\TelegramTest.csproj.CopyComplete
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\TelegramTest\obj\Debug\TelegramTest.exe
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\TelegramTest\obj\Debug\TelegramTest.pdb
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\TelegramTest\obj\Debug\TelegramTest.csprojAssemblyReference.cache

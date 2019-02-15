@@ -54,22 +54,22 @@
         /// <returns>
         /// Return if check is valid.
         /// </returns>
-        public bool Check(int channel, byte ch, ref string info)
+        public CheckReturn Check(int channel, byte ch, ref string info)
         {
             if (!this.IsInitialized)
             {
-                return true; // kein sinnvoller vergleich wenn kein startwert
+                return CheckReturn.Ok; // kein sinnvoller vergleich wenn kein startwert
             }
 
             // überlauf return true
             if (this.CheckSum.Equals(255) && ch.Equals(0))
             {
-                return true;
+                return CheckReturn.Ok;
             }
 
             if ((this.CheckSum + 1).Equals(ch))
             {
-                return true;
+                return CheckReturn.Ok;
             }
 
             if (this.CheckSum == ch)
@@ -77,16 +77,27 @@
                 info = $"Gleiche {channel} checkSum:{ch}.";
 
                 // todo mb: ignore
-                return true;
+                return CheckReturn.SameMessage;
             }
             else
             {
                 info = $"Puls-Reihenfolge passt nicht Kanal:{channel} checkSum:{ch}.";
             }
 
-            return false;
+            return CheckReturn.Error;
         }
 
         #endregion
     }
+
+    public enum CheckReturn
+    {
+        Ok = 0, 
+
+        SameMessage = 1,
+
+        Error = 2
+    }
+
+
 }
