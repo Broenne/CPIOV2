@@ -75,6 +75,9 @@
             if (this.CheckSum == ch)
             {
                 info = $"Gleiche {channel} checkSum:{ch}.";
+
+                // todo mb: ignore
+                return true;
             }
             else
             {
