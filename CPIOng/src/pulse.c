@@ -7,12 +7,12 @@
 
 #include "pulse.h"
 
-#define QUEUE_SIZE_FOR_PULSE_INFO		( ( unsigned short ) 96 ) // 16 * 6
+#define QUEUE_SIZE_FOR_PULSE_INFO		( ( unsigned short ) 32 ) // 16*5
 
-typedef struct {
-	uint8_t channel;
+typedef struct MessageType {
+	uint16_t channel;
+	uint16_t checkSum;
 	uint32_t res;
-	uint8_t checkSum;
 } MessageForSend;
 
 static TIM_HandleTypeDef pulseTimerInstance;
@@ -55,13 +55,26 @@ void Init_TimerForPulsTime(void) {
 	HAL_NVIC_EnableIRQ(TIM3_IRQn);
 }
 
+
+//struct MessageType *pMessageForSend;
 /*
  * Created on: 12.02.19
  * Author: MB
  * Initialisierung die freertos quee für die pulse information.
  * */
 void InitQueueForPulse(void) {
-	PulsQueue = xQueueCreate(QUEUE_SIZE_FOR_PULSE_INFO, sizeof(MessageForSend));
+
+
+	int ddd = 8;//8;//sizeof(struct MessageType *);
+
+	//PulsQueue = xQueueCreate(QUEUE_SIZE_FOR_PULSE_INFO, sizeof(MessageForSend));
+	PulsQueue = xQueueCreate(QUEUE_SIZE_FOR_PULSE_INFO, ddd);
+
+	if( PulsQueue == 0 )
+		{
+			myPrintf("error create pulse queue");// Failed to create the queue.
+		}
+
 }
 
 void InitPulse(void) {
@@ -80,20 +93,39 @@ void InitPulse(void) {
  * */
 void SendPulsePerCanTask(void * pvParameters) {
 	while (1) {
-		static MessageForSend currentMessage;
-		currentMessage.channel = 0;
-		currentMessage.res = 1;
+		/*static*/MessageForSend currentMessage;
+//		currentMessage.channel = 255;
+//		currentMessage.res = 1;
+//		currentMessage.checkSum = 0;
 
-		if (xQueueReceive(PulsQueue, &currentMessage, 100) == pdTRUE) {
 
+		//MessageForSend* pCurrentMessage = &currentMessage;
+
+
+		//struct MessageType *pCurrentMessage;// = &currentMessage;
+		//if (xQueueReceive(PulsQueue, &(currentMessage), 100) == pdTRUE) {
+		//if (xQueueReceive(PulsQueue, (void*)&pCurrentMessage, 100) == pdTRUE) {
+		if (xQueueReceive(PulsQueue, (void*)&currentMessage, 100) == pdTRUE) {
+
+
+//			currentMessage.channel = pCurrentMessage->channel;
+//					currentMessage.checkSum = pCurrentMessage->checkSum;
+//					currentMessage.res = pCurrentMessage->res;
+			//int xx = pCurrentMessage->MessageForSend.channel;
+			//&currentMessage = pCurrentMessage;
 			for (int i = 0; i < CHANNEL_COUNT; ++i) {
 				static ChannelModiType channelModi; // voraussetzung, channels muss dem eingang entsprechen!!
 				channelModi = GetChannelModiByChannel(i);
 
 				if (i == currentMessage.channel && channelModi == GetActiveChannelModiType()) {
+
+					if (i < 8) {
+						printf("sss");
+					}
+
 					SendCanTimeDif(currentMessage.channel, currentMessage.res, currentMessage.checkSum);
 
-					myPrintf_ToArg2("Send channel %d  cs:%d \n", (int) currentMessage.res, (int) currentMessage.checkSum);
+					//myPrintf_ToArg2("Send channel %d  cs:%d \n", (int) currentMessage.res, (int) currentMessage.checkSum);
 
 					break; // schleife kan dann beendet werden
 				}
@@ -144,12 +176,25 @@ void SendTimeInfo(uint8_t channel) {
 		res = lastTimeValue[channel] - actualTimeValue;
 	}
 
-	static MessageForSend messageForSend;
+
+
+
+	MessageForSend messageForSend;
 	messageForSend.channel = channel;
 	messageForSend.res = res;
 	messageForSend.checkSum = ++CheckCounter[channel];
+	if (0xFF == CheckCounter[channel]) {
+		CheckCounter[channel] = 0x00;
+	}
 
-	if (xQueueSendFromISR(PulsQueue, &messageForSend, 0) != pdTRUE) {
+	if (channel < 8) {
+		printf("sss");
+	}
+
+	struct MessageType *pMessageForSend;
+	pMessageForSend = &messageForSend;
+	if (xQueueSendFromISR(PulsQueue, ( void * ) pMessageForSend, 0) != pdTRUE) {
+	//if (xQueueSendFromISR(PulsQueue, &messageForSend, 0) != pdTRUE) {
 		SetPossiblePulseSendQueueFullError();
 	}
 
@@ -174,6 +219,11 @@ void CheckPulseInputs(void) {
 		uint16_t dif = value ^ oldValue;
 		for (int i = 0; i < 16; ++i) {
 			if ((dif >> i) & 0x01 && (value >> i & 0x01)) {
+
+				if (i < 8) {
+					printf("sss");
+				}
+
 				SendTimeInfo(i);
 			}
 		}

@@ -23,7 +23,10 @@
         <StackPanel Orientation="Vertical">
             <ContentPresenter Content="{Binding PulseStorageView}"></ContentPresenter>
             <ContentPresenter Content="{Binding PulseFactorView}"></ContentPresenter>
-            <CheckBox Command="{Binding ActivateCheckSumcCommand}" CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}}" Margin="5">Activate Puls check</CheckBox>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="True" Command="{Binding ActivateCheckSumcCommand}" CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}}" Margin="5">Activate Puls check</CheckBox>
+                <Button  Margin="5" Command="{Binding ClearAllDataCommand}">Clear results (tbd!!!)</Button>
+            </StackPanel>
         </StackPanel>
         <ListView Grid.Row="1" ItemsSource="{Binding PulseDataForViewList}">
             <ListView.View>

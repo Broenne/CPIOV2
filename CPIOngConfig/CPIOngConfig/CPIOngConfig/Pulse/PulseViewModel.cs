@@ -50,9 +50,9 @@
             this.PulseDataForViewList = new List<PulseDataForView>();
             this.PulseStorageView = pulseStorageView;
             this.PulseFactorView = factorPulseViewArg;
-            factorPulseEventHandler.EventIsReached += this.FactorPulseEventHandler_EventIsReached;
 
             this.ActivateCheckSumcCommand = new RelayCommand(this.ActivateCheckSumcCommandAction);
+            this.ClearAllDataCommand = new RelayCommand(this.ClearAllDataCommandAction);
 
             // todo mb: parallel for
             for (var i = 0; i < 16; i++)
@@ -62,6 +62,9 @@
                 this.PulseDataForViewList.Add(pulseDataForView);
             }
 
+            this.ActivateCheckSumcCommandAction(true); // cativiert und füllt das feld
+
+            factorPulseEventHandler.EventIsReached += this.FactorPulseEventHandler_EventIsReached;
             pulseEventHandler.EventIsReached += this.PulseEventHandler_EventIsReached;
         }
 
@@ -76,6 +79,21 @@
         /// The activate check sum command.
         /// </value>
         public ICommand ActivateCheckSumcCommand { get; }
+
+        public ICommand ClearAllDataCommand { get; }
+
+        private void ClearAllDataCommandAction(object obj)
+        {
+            try
+            {
+                ;
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                MessageBox.Show(ex.Message);
+            }
+        }
 
         /// <summary>
         ///     Gets or sets the pulse data for view list.

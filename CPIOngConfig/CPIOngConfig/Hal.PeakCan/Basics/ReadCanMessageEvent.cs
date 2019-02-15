@@ -6,8 +6,16 @@ using Helper.Contracts.Logger;
 
 namespace Hal.PeakCan.Basics
 {
+    /// <summary>
+    /// The read can message event.
+    /// </summary>
+    /// <seealso cref="Hal.PeakCan.Contracts.Basics.IReadCanMessageEvent" />
     public class ReadCanMessageEvent : IReadCanMessageEvent
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ReadCanMessageEvent"/> class.
+        /// </summary>
+        /// <param name="logger">The logger.</param>
         public ReadCanMessageEvent(ILogger logger)
         {
             this.Logger = logger;
@@ -35,8 +43,8 @@ namespace Hal.PeakCan.Basics
                 this.Logger.LogBegin(this.GetType());
                 if (this.EventIsReached == null)
                 {
-                    return;
-                    //throw new Exception("Event for read can is null");
+                    //return;
+                    throw new Exception("Event for read can is null");
                 }
 
                 this.EventIsReached.Invoke(this, e);

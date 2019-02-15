@@ -180,11 +180,11 @@
                 this.Times.RemoveAt(0);
             }
 
-            var lisTim = this.Times.Select(x => x.Tim).ToList();
-            this.MeanValueTim = lisTim.Average();
+            //var lisTim = this.Times.Select(x => x.Tim).ToList();
+            //this.MeanValueTim = lisTim.Average();
 
-            var lisFlow = this.Times.Select(x => x.Volume).ToList();
-            this.MeanValueFlow = lisFlow.Average();
+            //var lisFlow = this.Times.Select(x => x.Volume).ToList();
+            //this.MeanValueFlow = lisFlow.Average();
         }
 
         #endregion
