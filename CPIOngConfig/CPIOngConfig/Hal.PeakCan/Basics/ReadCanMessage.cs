@@ -89,14 +89,14 @@
             }
         }
 
+        /// <summary>
+        /// Stops this instance.
+        /// </summary>
         public void Stop()
         {
             try
             {
-               
                 this.src.Cancel();
-                //Task.Run(() => { this.ReadRaw(); });
-               
             }
             catch (Exception ex)
             {

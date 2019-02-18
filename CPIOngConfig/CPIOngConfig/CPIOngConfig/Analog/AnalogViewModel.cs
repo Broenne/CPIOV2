@@ -4,10 +4,13 @@
     using System.Collections.Generic;
     using System.IO.Ports;
     using System.Linq;
+    using System.Runtime.CompilerServices;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Input;
+
+    using ConfigLogicLayer.Contracts.Analog;
 
     using Helper;
     using Helper.Contracts.Logger;
@@ -35,13 +38,15 @@
         ///     Initializes a new instance of the <see cref="AnalogViewModel" /> class.
         /// </summary>
         /// <param name="logegr">The logger.</param>
-        public AnalogViewModel(ILogger logegr)
+        public AnalogViewModel(ILogger logegr, IAnalogCan analogCan)
         {
             // todo mb: das ganze ding umbennen
             this.Logger = logegr;
+            this.AnalogCan = analogCan;
             this.RefreshCommand = new RelayCommand(this.RefreshCommandAction);
             this.OpenValueCommand = new RelayCommand(this.OpenValueCommandAction);
             this.DisconnectCommand = new RelayCommand(this.DisconnectCommandAction);
+            AnalogPollingByCanCommand = new RelayCommand(AnalogPollingByCanCommandAction);
 
             this.LoadComports();
         }
@@ -93,6 +98,29 @@
             get => this.console;
             set => this.SetProperty(ref this.console, value);
         }
+
+        public ICommand AnalogPollingByCanCommand { get; }
+
+        private IAnalogCan AnalogCan { get; }
+
+
+        private void AnalogPollingByCanCommandAction(object obj)
+        {
+            try
+            {
+                if (Convert.ToBoolean(obj))
+                {
+                    this.AnalogCan.Trigger(0);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+        }
+
+
 
         /// <summary>
         ///     Gets the disconnect command.

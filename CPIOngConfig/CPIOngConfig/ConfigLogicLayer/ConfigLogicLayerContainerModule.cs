@@ -32,6 +32,7 @@
             builder.RegisterType<ChannelConfigurationResponseEventHandler>().As<IChannelConfigurationResponseEventHandler>().SingleInstance();
             builder.RegisterType<ChangeActualIdToConnectedEventHandler>().As<IChangeActualIdToConnectedEventHandler>().SingleInstance();
             builder.RegisterType<TextResponseEventHandler>().As<ITextResponseEventHandler>().SingleInstance();
+            builder.RegisterType<AnalogEventHandler>().As<IAnalogEventHandler>().SingleInstance();
         }
 
         #endregion

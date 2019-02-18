@@ -1,24 +1,27 @@
-﻿namespace Hal.PeakCan.Basics
+﻿namespace ConfigLogicLayer.Text
 {
     using System;
+    using System.Collections.Generic;
 
-    using Hal.PeakCan.Contracts.Basics;
+    using ConfigLogicLayer.Configurations;
+
+    using CPIOngConfig.Contracts.Alive;
 
     using Helper.Contracts.Logger;
 
     /// <summary>
-    ///     The read can message event.
+    ///     The channel configuration response event handler.
     /// </summary>
-    /// <seealso cref="Hal.PeakCan.Contracts.Basics.IReadCanMessageEvent" />
-    public class ReadCanMessageEvent : IReadCanMessageEvent
+    /// <seealso cref="ITextResponseEventHandler" />
+    public class AnalogEventHandler : IAnalogEventHandler
     {
         #region Constructor
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ReadCanMessageEvent" /> class.
+        ///     Initializes a new instance of the <see cref="AnalogEventHandler" /> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
-        public ReadCanMessageEvent(ILogger logger)
+        public AnalogEventHandler(ILogger logger)
         {
             this.Logger = logger;
         }
@@ -30,7 +33,7 @@
         /// <summary>
         ///     Occurs when [node is reached].
         /// </summary>
-        public event EventHandler<ReadCanMessageEventArgs> EventIsReached;
+        public event EventHandler<AnalogEventArgs> EventIsReached;
 
         #endregion
 
@@ -45,8 +48,8 @@
         /// <summary>
         ///     Raises the <see cref="E:NodeReached" /> event.
         /// </summary>
-        /// <param name="e">The <see cref="ReadCanMessageEventArgs" /> instance containing the event data.</param>
-        public virtual void OnReached(ReadCanMessageEventArgs e)
+        /// <param name="e">The <see cref="AnalogEventArgs" /> instance containing the event data.</param>
+        public virtual void OnReached(AnalogEventArgs e)
         {
             try
             {
@@ -54,8 +57,6 @@
                 if (this.EventIsReached == null)
                 {
                     return;
-
-                    // throw new Exception("Event for read can is null");
                 }
 
                 this.EventIsReached.Invoke(this, e);

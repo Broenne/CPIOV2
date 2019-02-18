@@ -30,6 +30,7 @@
                 <Button Command="{Binding DisconnectCommand}">Disconnect</Button>
                 <ComboBox Margin="5" MinWidth="140" Name="ComboBox" ItemsSource="{Binding ComPorts}" ></ComboBox>
                 <CheckBox IsChecked="{Binding AnalogValuePolling}">Activate analog polling</CheckBox>
+                <CheckBox Command="{Binding AnalogPollingByCanCommand}" CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}}">Polling by CAN</CheckBox>
             </StackPanel>
             <StackPanel>
                 <TextBox Height="450" Text="{Binding Console}" VerticalScrollBarVisibility="Auto" ></TextBox>

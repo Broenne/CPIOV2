@@ -124,9 +124,9 @@
         {
             try
             {
-                this.ReadCanMessage.Stop();
-                this.CanEventHandler.EventIsReached -= this.CanEventHandler_EventIsReached;
                 this.CanIsConnectedEventHandler.OnReached(false);
+                this.CanEventHandler.EventIsReached -= this.CanEventHandler_EventIsReached;
+                this.ReadCanMessage.Stop();
             }
             catch (Exception ex)
             {
