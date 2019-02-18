@@ -46,11 +46,6 @@
 
             var helper = new List<TimePulse>();
 
-            for (var i = 0; i < listCntArg; i++)
-            {
-                helper.Add(new TimePulse(0, 0));
-            }
-
             this.Activated = activatedArg;
             this.Times = new ObservableCollection<TimePulse>(helper);
 

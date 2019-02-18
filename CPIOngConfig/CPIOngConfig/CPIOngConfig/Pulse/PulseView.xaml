@@ -52,7 +52,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <ListBox Margin="1" ItemsSource="{Binding Times}" 
-                                         Width="800" 
+                                         MinWidth="800" 
                                          SelectedItem="{Binding SelectedTimeItem}" 
                                          ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}">
                                          <!--Background="{Binding Color}"-->

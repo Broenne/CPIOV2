@@ -15,17 +15,10 @@
             this.IsInitialized = false;
         }
 
-        ///// <summary>
-        ///// Initializes a new instance of the <see cref="CheckSumData"/> class.
-        ///// </summary>
-        ///// <param name="checkSum">The check sum.</param>
-        //public CheckSumData(byte checkSum)
-        //{
-        //    this.IsInitialized = true;
-        //    this.CheckSum = checkSum;
-        //}
-
-
+        /// <summary>
+        /// Changes the check sum.
+        /// </summary>
+        /// <param name="checkSum">The check sum.</param>
         public void ChangeCheckSum(byte checkSum)
         {
             this.IsInitialized = true;

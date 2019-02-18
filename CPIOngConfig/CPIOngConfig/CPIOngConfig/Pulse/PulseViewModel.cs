@@ -58,7 +58,6 @@
             for (var i = 0; i < 16; i++)
             {
                 var pulseDataForView = new PulseDataForView($"{i}", 100, true);
-                pulseDataForView.AddTime(0, 0, 0);
                 this.PulseDataForViewList.Add(pulseDataForView);
             }
 
