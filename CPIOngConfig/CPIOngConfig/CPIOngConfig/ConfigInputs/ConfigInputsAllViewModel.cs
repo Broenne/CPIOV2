@@ -113,6 +113,12 @@
         /// </value>
         public ICommand WindowLoadCommand { get; }
 
+        /// <summary>
+        /// Gets the set all to first one command.
+        /// </summary>
+        /// <value>
+        /// The set all to first one command.
+        /// </value>
         public ICommand SetAllToFirstOneCommand { get; }
 
         private IChannelConfiguration ChannelConfiguration { get; }
@@ -174,6 +180,8 @@
         {
             try
             {
+
+                Mouse.OverrideCursor = Cursors.Wait;
                 this.ChannelConfiguration.TriggerToGetState();
             }
             catch (Exception ex)
@@ -183,6 +191,7 @@
             }
             finally
             {
+                Mouse.OverrideCursor = null;
                 this.Logger.LogEnd(this.GetType());
             }
         }
@@ -196,6 +205,8 @@
             try
             {
                 this.Logger.LogBegin(this.GetType());
+
+                Mouse.OverrideCursor = Cursors.Wait;
 
                 var listOfChannelConfigurationDto = new List<ChannelConfigurationDto>();
                 foreach (var item in this.ConfigureInputsViewList)
@@ -215,6 +226,7 @@
             }
             finally
             {
+                Mouse.OverrideCursor = null;
                 this.Logger.LogEnd(this.GetType());
             }
         }
