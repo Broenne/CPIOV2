@@ -308,7 +308,7 @@
             try
             {
                 // todo mb das nicht jedes mal im handler machen
-                uint canPulseOffsset = 0x180;
+                uint canPulseOffsset = CanCommandConsts.PulseId;
                 var node = this.GetActualNodeId.Get();
                 var copIdPulseMinimum = node + canPulseOffsset;
                 var copIdPulseMaximum = node + canPulseOffsset + 16;
@@ -318,7 +318,7 @@
                     var channel = id - copIdPulseMinimum;
 
                     var shiftData = new byte[4];
-                    shiftData[0] = data[3]; // todo mb: beser unter schon ander rein?
+                    shiftData[0] = data[3];
                     shiftData[1] = data[2];
                     shiftData[2] = data[1];
                     shiftData[3] = data[0];

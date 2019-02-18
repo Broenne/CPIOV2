@@ -3,7 +3,6 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Windows.Media;
 
     using Prism.Mvvm;
 
@@ -13,17 +12,11 @@
     /// <seealso cref="Prism.Mvvm.BindableBase" />
     public class PulseDataForView : BindableBase
     {
-        private readonly SolidColorBrush gray = new SolidColorBrush(Colors.Gray);
-
         private readonly uint listCnt;
-
-        private readonly SolidColorBrush white = new SolidColorBrush(Colors.White);
 
         private bool activated;
 
         private byte checkSum;
-
-        private SolidColorBrush color;
 
         private double meanValueFlow;
 
@@ -68,7 +61,6 @@
             get => this.activated;
             set
             {
-                //this.Color = value ? this.white : this.gray;
                 this.SetProperty(ref this.activated, value);
             }
         }
@@ -85,19 +77,6 @@
 
             set => this.SetProperty(ref this.checkSum, value);
         }
-
-        ///// <summary>
-        /////     Gets or sets the color.
-        ///// </summary>
-        ///// <value>
-        /////     The color.
-        ///// </value>
-        //public SolidColorBrush Color
-        //{
-        //    get => this.color;
-
-        //    set => this.SetProperty(ref this.color, value);
-        //}
 
         /// <summary>
         ///     Gets or sets the check sum.

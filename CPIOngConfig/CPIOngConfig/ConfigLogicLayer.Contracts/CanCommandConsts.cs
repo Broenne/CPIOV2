@@ -17,6 +17,8 @@
 
         public const uint Text = 0x177;
 
+        public const uint PulseId = 0x180;
+
         #endregion
 
         public static readonly uint TriggerGetInputConfigurationOffset = 0x0178;
