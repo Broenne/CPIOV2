@@ -180,7 +180,6 @@
         {
             try
             {
-
                 Mouse.OverrideCursor = Cursors.Wait;
                 this.ChannelConfiguration.TriggerToGetState();
             }

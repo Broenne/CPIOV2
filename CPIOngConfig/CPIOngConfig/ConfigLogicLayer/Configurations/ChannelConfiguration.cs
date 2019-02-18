@@ -19,7 +19,7 @@
     /// <seealso cref="ConfigLogicLayer.Contracts.Configurations.IChannelConfiguration" />
     public class ChannelConfiguration : IChannelConfiguration
     {
-        private int waitForResponse;
+        private int waitForResponse = -1;
 
         #region Constructor
 
@@ -118,6 +118,7 @@
             {
                 this.Logger.LogBegin(this.GetType());
 
+                this.waitForResponse = -1;
                 for (var i = 0; i < 16; i++)
                 {
                     var data = new List<byte>();
@@ -126,10 +127,16 @@
 
                     this.WriteBasicCan.WriteCan(this.GetActualNodeId.Get() + CanCommandConsts.TriggerGetInputConfigurationOffset, data);
 
+                    int maxCounter = 0;
                     while (this.waitForResponse != i)
                     {
                         Thread.Sleep(10);
-                        Console.WriteLine($"Kanal zur Anfrage  {i}");
+                        if (maxCounter > 20)
+                        {
+                            throw new Exception($"No response on get configuration. Channel-Nr.: {i}");
+                        }
+
+                        ++maxCounter;
                     }
                 }
             }
