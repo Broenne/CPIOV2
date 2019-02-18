@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v2.0/",
-    "signature": "d89cc0340210e88faf0b7160560aa24fd04328d7"
+    "signature": "8ef930a5797e6700b34b4778fa3528083f2eb079"
   },
   "compilationOptions": {},
   "targets": {
@@ -12,6 +12,7 @@
           "Autofac": "3.5.2",
           "Helper.Contracts": "1.0.0",
           "NETStandard.Library": "2.0.3",
+          "NLog": "4.3.11",
           "PresentationFramework": "4.0.0.0",
           "WindowsBase": "4.0.0.0"
         },
@@ -31,6 +32,14 @@
       "NETStandard.Library/2.0.3": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0"
+        }
+      },
+      "NLog/4.3.11": {
+        "runtime": {
+          "lib/net45/NLog.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.3.3566.0"
+          }
         }
       },
       "Helper.Contracts/1.0.0": {
@@ -186,6 +195,13 @@
       "sha512": "sha512-st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
       "path": "netstandard.library/2.0.3",
       "hashPath": "netstandard.library.2.0.3.nupkg.sha512"
+    },
+    "NLog/4.3.11": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rsNK0gerahC82eVoHG1g9psuMvDOaM369+fbBtoZ4aE7wFLKZjkyXXCRQ+Q78304ZsJBVsAj8NmtLMNeDDehWg==",
+      "path": "nlog/4.3.11",
+      "hashPath": "nlog.4.3.11.nupkg.sha512"
     },
     "Helper.Contracts/1.0.0": {
       "type": "project",

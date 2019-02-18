@@ -1,30 +1,19 @@
 ﻿namespace CPIOngConfig.Pulse
 {
     /// <summary>
-    /// Service for check sum data.
+    ///     Service for check sum data.
     /// </summary>
     public class CheckSumData
     {
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CheckSumData"/> class.
+        ///     Initializes a new instance of the <see cref="CheckSumData" /> class.
         /// </summary>
         public CheckSumData()
         {
             this.IsInitialized = false;
         }
-
-        /// <summary>
-        /// Changes the check sum.
-        /// </summary>
-        /// <param name="checkSum">The check sum.</param>
-        public void ChangeCheckSum(byte checkSum)
-        {
-            this.IsInitialized = true;
-            this.CheckSum = checkSum;
-        }
-
 
         #endregion
 
@@ -39,13 +28,23 @@
         #region Public Methods
 
         /// <summary>
-        /// Checks the specified count.
+        ///     Changes the check sum.
+        /// </summary>
+        /// <param name="checkSum">The check sum.</param>
+        public void ChangeCheckSum(byte checkSum)
+        {
+            this.IsInitialized = true;
+            this.CheckSum = checkSum;
+        }
+
+        /// <summary>
+        ///     Checks the specified count.
         /// </summary>
         /// <param name="channel">The channel.</param>
         /// <param name="ch">The check sum..</param>
         /// <param name="info">The information.</param>
         /// <returns>
-        /// Return if check is valid.
+        ///     Return if check is valid.
         /// </returns>
         public CheckReturn Check(int channel, byte ch, ref string info)
         {
@@ -70,28 +69,15 @@
                 info = $"Gleiche {channel} checkSum:{ch}.";
 
                 // todo mb: ignore
-                //return CheckReturn.SameMessage;
-                return CheckReturn.Error;
+                // return CheckReturn.SameMessage;
+                return CheckReturn.SameMessage;
             }
-            else
-            {
-                info = $"Puls-Reihenfolge passt nicht Kanal:{channel} checkSum:{ch}.";
-            }
+
+            info = $"Puls-Reihenfolge passt nicht Kanal:{channel} checkSum:{ch}.";
 
             return CheckReturn.Error;
         }
 
         #endregion
     }
-
-    public enum CheckReturn
-    {
-        Ok = 0, 
-
-        SameMessage = 1,
-
-        Error = 2
-    }
-
-
 }

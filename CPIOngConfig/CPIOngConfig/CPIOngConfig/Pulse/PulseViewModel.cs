@@ -47,19 +47,13 @@
         public PulseViewModel(ILogger logger, IPulseEventHandler pulseEventHandler, IPulseStorageView pulseStorageView, IFactorPulseView factorPulseViewArg, IFactorPulseEventHandler factorPulseEventHandler)
         {
             this.Logger = logger;
-            this.PulseDataForViewList = new List<PulseDataForView>();
             this.PulseStorageView = pulseStorageView;
             this.PulseFactorView = factorPulseViewArg;
 
             this.ActivateCheckSumcCommand = new RelayCommand(this.ActivateCheckSumcCommandAction);
             this.ClearAllDataCommand = new RelayCommand(this.ClearAllDataCommandAction);
 
-            // todo mb: parallel for
-            for (var i = 0; i < 16; i++)
-            {
-                var pulseDataForView = new PulseDataForView($"{i}", 100, true);
-                this.PulseDataForViewList.Add(pulseDataForView);
-            }
+            this.PulseDataNew();
 
             this.ActivateCheckSumcCommandAction(true); // cativiert und füllt das feld
 
@@ -72,27 +66,14 @@
         #region Properties
 
         /// <summary>
-        /// Gets the activate check sum command.
+        ///     Gets the activate check sum command.
         /// </summary>
         /// <value>
-        /// The activate check sum command.
+        ///     The activate check sum command.
         /// </value>
         public ICommand ActivateCheckSumcCommand { get; }
 
         public ICommand ClearAllDataCommand { get; }
-
-        private void ClearAllDataCommandAction(object obj)
-        {
-            try
-            {
-                ;
-            }
-            catch (Exception ex)
-            {
-                this.Logger.LogError(ex);
-                MessageBox.Show(ex.Message);
-            }
-        }
 
         /// <summary>
         ///     Gets or sets the pulse data for view list.
@@ -140,6 +121,39 @@
 
         #region Private Methods
 
+        private void PulseDataNew()
+        {
+            try
+            {
+                this.PulseDataForViewList = new List<PulseDataForView>();
+
+                // todo mb: parallel for
+                for (var i = 0; i < 16; i++)
+                {
+                    var pulseDataForView = new PulseDataForView($"{i}", 100, true);
+                    this.PulseDataForViewList.Add(pulseDataForView);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                throw;
+            }
+        }
+
+        private void ClearAllDataCommandAction(object obj)
+        {
+            try
+            {
+                this.PulseDataNew();
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void ActivateCheckSumcCommandAction(object obj)
         {
             try
@@ -175,13 +189,13 @@
                 MessageBox.Show(ex.Message);
             }
         }
-        
+
         private void PulseEventHandler_EventIsReached(object sender, PulseEventArgs e)
         {
             try
             {
                 // Q = V / t
-                double time = this.timefactor * e.Stamp;
+                var time = this.timefactor * e.Stamp;
 
                 var flowCalculation = this.volumePerTimeSlot / time;
 
@@ -206,8 +220,9 @@
         private bool CheckIfNextIsNext(int channel, byte checkSum)
         {
             // todo mb: was passietr beim ersten mal? wie initailisieren????
-            string info = string.Empty;
-            //if (!this.CheckSumStorage[channel].Check(channel, checkSum, ref info))
+            var info = string.Empty;
+
+            // if (!this.CheckSumStorage[channel].Check(channel, checkSum, ref info))
             var res = this.CheckSumStorage[channel].Check(channel, checkSum, ref info);
             if (CheckReturn.Error == res)
             {
@@ -215,19 +230,16 @@
                 return false;
             }
 
-
-
             // todo mb:
             // das  ist noch ne basoluteer workaround, da teilweise NAchrichten doppeklt kommen!!?=? 
 
             // das muss im Knoten nochh geändert werden
-
             if (CheckReturn.SameMessage == res)
             {
                 return false;
             }
 
-            //this.CheckSumStorage[channel] = new CheckSumData(checkSum);
+            // this.CheckSumStorage[channel] = new CheckSumData(checkSum);
             this.CheckSumStorage[channel].ChangeCheckSum(checkSum);
             return true;
         }
