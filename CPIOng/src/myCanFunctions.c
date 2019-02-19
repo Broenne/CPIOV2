@@ -163,7 +163,6 @@ void SendAnalogValueByCan(uint8_t* pData){
 			{25 ,    3922},
 			{26 ,    4004},
 			{27 ,    4087},
-
 	};
 
 
@@ -179,9 +178,11 @@ void SendAnalogValueByCan(uint8_t* pData){
 			int y2 = AnalogTabelle[i+1][0];
 			int x1 = AnalogTabelle[i][1];
 			int x2 = AnalogTabelle[i+1][1];
-			double b = y1; // --> in diesem fall der offset
 			double m = (double)(y2-y1) / (double)(x2-x1);
-			milliVoltage = (m * digits - b) * 1000;
+
+			double b = y1 - m * x1;
+
+			milliVoltage = (m * digits + b) * 1000;
 			milliVoltageAsInt = (int)milliVoltage;
 			break;
 		}
