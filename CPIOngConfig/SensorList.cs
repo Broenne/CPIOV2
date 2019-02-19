@@ -74,6 +74,8 @@ namespace R_Flow_Hardware
         {
             var allSensors = new List<Sensor>
             {
+				
+				// byte ModulId, int CanIdentifier, int CanIndex, string sensorName, uint workPlace, uint workLine, string workPosition
             new Sensor(11,93,0,"Cnt",0,1,"")
             , new Sensor(11,93,0,"Cnt",0,1,"1")
             , new Sensor(11,94,0,"Cnt",0,1,"2")
