@@ -10898,3 +10898,17 @@ Cannot access memory at address 0x2b00a0
 java.lang.Exception: Cannot access memory at address 0x2b00a0
 	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1022)
 	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:851)
+
+!ENTRY TrueSTUDIO 4 0 2019-02-18 11:43:30.030
+!MESSAGE ST-LINK GDB server failed to start (exit code = 2)
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2019-02-18 11:43:30.144
+!MESSAGE Error in initializing ST-Link device.
+Reason: (2) ST-Link DLL error.
+
+!ENTRY TrueSTUDIO 4 0 2019-02-19 06:04:31.498
+!MESSAGE ST-LINK GDB server failed to start (exit code = 2)
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2019-02-19 06:04:31.549
+!MESSAGE Error in initializing ST-Link device.
+Reason: (2) ST-Link DLL error.

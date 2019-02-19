@@ -5,8 +5,10 @@
     using Autofac;
 
     using ConfigLogicLayer.ActualId;
+    using ConfigLogicLayer.Analog;
     using ConfigLogicLayer.Configurations;
     using ConfigLogicLayer.Contracts.ActualId;
+    using ConfigLogicLayer.Contracts.Analog;
     using ConfigLogicLayer.Contracts.Configurations;
     using ConfigLogicLayer.Text;
 

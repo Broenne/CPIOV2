@@ -54,7 +54,7 @@ void CreateResponseForRequestChannelModi(uint8_t* data) {
 /*
  * Created on: 17.12.18
  * Author: MB
- * Set the difffernt modi for the cahnnel from outside by can. *
+ * Set the diffferent modi for the cahnnel from outside by can. *
  * */
 void SetChannelModiFromExternal(uint8_t* data) {
 	uint8_t channel = data[1];
@@ -123,6 +123,81 @@ void SetActiveChannel(uint8_t* data) {
 }
 
 /*
+ * Created on: 18.02.19
+ * Author: MB
+ * function for send analog value per can
+ * */
+void SendAnalogValueByCan(uint8_t* pData){
+	// aufgrund der Diode und elektrischen Beschaltung verhält sich die Spannungsmessung nicht linear.
+	// todo mb: achtung, gilt für die "alte" Hardware
+
+	uint8_t channel = pData[0];
+	uint32_t digits = ReadChannelAnalog(channel);
+
+	static int AnalogTabelle[28][2] = {
+			{0  ,    0},
+			{1 ,     433},
+			{2  ,    866},
+			{3  ,    1298},
+			{4  ,    1727},
+			{5  ,    2096},
+			{6  ,    2260},
+			{7   ,   2373},
+			{8   ,   2472},
+			{9   ,   2568},
+			{10  ,   2659},
+			{11 ,    2749},
+			{12  ,   2836},
+			{13 ,    2924},
+			{14  ,   3009},
+			{15  ,   3091},
+			{16 ,    3180},
+			{17  ,   3262},
+			{18 ,    3345},
+			{19 ,    3428},
+			{20 ,    3514},
+			{21 ,    3595},
+			{22 ,    3676},
+			{23 ,    3761},
+			{24  ,   3840},
+			{25 ,    3922},
+			{26 ,    4004},
+			{27 ,    4087},
+
+	};
+
+
+
+	double milliVoltage = 0;
+	int32_t milliVoltageAsInt = 0;
+	for(int i=0; i < 28; ++i){
+
+		if(digits >= AnalogTabelle[i][1] && digits < AnalogTabelle[i+1][1]    && channel == 5 ){
+			// y = m*x+b  --> (y2-y1) = m*(x2-x1) + b
+			//m=(y2-y1)/(x2-x1)
+			int y1 = AnalogTabelle[i][0];
+			int y2 = AnalogTabelle[i+1][0];
+			int x1 = AnalogTabelle[i][1];
+			int x2 = AnalogTabelle[i+1][1];
+			double b = y1; // --> in diesem fall der offset
+			double m = (double)(y2-y1) / (double)(x2-x1);
+			milliVoltage = (m * digits - b) * 1000;
+			milliVoltageAsInt = (int)milliVoltage;
+			break;
+		}
+	}
+
+
+
+	uint8_t data[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+	data[0] = channel;
+	memcpy(&data[1], &digits, 2);
+	memcpy(&data[3], &milliVoltageAsInt, 4); // info mb: für die Millivolt reichen drei byte!!!
+
+	SendCan(GetGlobalCanNodeId() + ANALOG_REQUEST, data, 8);
+}
+
+/*
  * Created on: 30.11.18
  * Author: MB
  * Diese Funktion arbeitet die queue ab.
@@ -174,6 +249,12 @@ void CanWorkerTask(void * pvParameters) {
 				if ((globalCanId + REQUEST_TEXT) == stdid) {
 					SendTextPerCan(pData);
 				}
+
+				// Funktion zum Abfragen des aktuellen analogen Messwerts
+				if((globalCanId + ANALOG_REQUEST) == stdid){
+					SendAnalogValueByCan(pData);
+				}
+
 			}
 		}
 
@@ -185,6 +266,9 @@ void CanWorkerTask(void * pvParameters) {
 
 	SetCanWorkerTaskError();
 }
+
+
+
 
 /*
  * Created on: 30.11.18

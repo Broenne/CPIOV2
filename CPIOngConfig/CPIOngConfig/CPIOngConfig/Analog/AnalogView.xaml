@@ -32,8 +32,35 @@
                 <CheckBox IsChecked="{Binding AnalogValuePolling}">Activate analog polling</CheckBox>
                 <CheckBox Command="{Binding AnalogPollingByCanCommand}" CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}}">Polling by CAN</CheckBox>
             </StackPanel>
-            <StackPanel>
+            <StackPanel Orientation="Horizontal">
                 <TextBox Height="450" Text="{Binding Console}" VerticalScrollBarVisibility="Auto" ></TextBox>
+                <ListBox Margin="2" ItemsSource="{Binding AnaValue}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock>Digits: </TextBlock>
+                                <TextBlock Text="{Binding Digits}" />
+                                <TextBlock>          Millivolt: </TextBlock>
+                                <TextBlock Text="{Binding MilliVolt}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <!--<ListView  ItemsSource="{Binding AnaValue}">
+                    <ListView.View>
+                        <GridView>
+                           
+                            <GridViewColumn>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                       <TextBox Text="{Binding}"></TextBox>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>-->
             </StackPanel>
         </StackPanel>
     </Grid>

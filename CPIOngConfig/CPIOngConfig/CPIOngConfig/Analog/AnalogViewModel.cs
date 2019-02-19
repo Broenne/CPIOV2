@@ -2,20 +2,37 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.IO.Ports;
     using System.Linq;
-    using System.Runtime.CompilerServices;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Input;
+    using System.Windows.Threading;
 
     using ConfigLogicLayer.Contracts.Analog;
+    using ConfigLogicLayer.Text;
 
     using Helper;
     using Helper.Contracts.Logger;
 
     using Prism.Mvvm;
+
+
+    public class Analog : BindableBase
+    {
+        public Analog(uint digits, uint milliVolt)
+        {
+            this.Digits = digits;
+            this.MilliVolt = milliVolt;
+        }
+
+        public uint Digits { get; }
+
+        public uint MilliVolt { get; }
+    }
+
 
     /// <summary>
     ///     The service for analog view model.
@@ -32,28 +49,50 @@
 
         private string console;
 
+        private Task tsk;
+
         #region Constructor
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="AnalogViewModel" /> class.
         /// </summary>
         /// <param name="logegr">The logger.</param>
-        public AnalogViewModel(ILogger logegr, IAnalogCan analogCan)
+        public AnalogViewModel(ILogger logegr, IAnalogCan analogCan, IAnalogEventHandler analogEventHandler)
         {
             // todo mb: das ganze ding umbennen
             this.Logger = logegr;
             this.AnalogCan = analogCan;
+            this.AnalogEventHandler = analogEventHandler;
+
             this.RefreshCommand = new RelayCommand(this.RefreshCommandAction);
             this.OpenValueCommand = new RelayCommand(this.OpenValueCommandAction);
             this.DisconnectCommand = new RelayCommand(this.DisconnectCommandAction);
-            AnalogPollingByCanCommand = new RelayCommand(AnalogPollingByCanCommandAction);
+            this.AnalogPollingByCanCommand = new RelayCommand(this.AnalogPollingByCanCommandAction);
 
             this.LoadComports();
+
+            this.AnaValue = new ObservableCollection<Analog>();
+
+            for (int i = 0; i < 16; i++)
+            {
+                this.AnaValue.Add(new Analog(0, 0));
+            }
         }
 
         #endregion
 
         #region Properties
+
+
+        private readonly Dispatcher dispatcher = RootDispatcherFetcher.RootDispatcher;
+
+        /// <summary>
+        ///     Gets the analog polling by can command.
+        /// </summary>
+        /// <value>
+        ///     The analog polling by can command.
+        /// </value>
+        public ICommand AnalogPollingByCanCommand { get; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether [analog value polling].
@@ -99,29 +138,6 @@
             set => this.SetProperty(ref this.console, value);
         }
 
-        public ICommand AnalogPollingByCanCommand { get; }
-
-        private IAnalogCan AnalogCan { get; }
-
-
-        private void AnalogPollingByCanCommandAction(object obj)
-        {
-            try
-            {
-                if (Convert.ToBoolean(obj))
-                {
-                    this.AnalogCan.Trigger(0);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                throw;
-            }
-        }
-
-
-
         /// <summary>
         ///     Gets the disconnect command.
         /// </summary>
@@ -146,6 +162,10 @@
         /// </value>
         public ICommand RefreshCommand { get; }
 
+        private IAnalogCan AnalogCan { get; }
+
+        private IAnalogEventHandler AnalogEventHandler { get; }
+
         private ILogger Logger { get; }
 
         private SerialPort SerialPort { get; set; }
@@ -153,6 +173,48 @@
         #endregion
 
         #region Private Methods
+
+        private void AnalogPollingByCanCommandAction(object obj)
+        {
+            try
+            {
+                if (Convert.ToBoolean(obj))
+                {
+                    this.AnalogEventHandler.EventIsReached += this.AnalogEventHandler_EventIsReached;
+
+                    this.tsk = this.AnalogCan.TriggerRunAll();
+                }
+                else
+                {
+                    this.AnalogCan.Stop();
+
+                    this.AnalogEventHandler.EventIsReached -= this.AnalogEventHandler_EventIsReached;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+        }
+
+
+        public ObservableCollection<Analog> AnaValue { get; set; }
+
+        private void AnalogEventHandler_EventIsReached(object sender, AnalogEventArgs e)
+        {
+            try
+            {
+                dispatcher.Invoke(() => { this.AnaValue[(int)e.Channel] = new Analog(e.Digits, e.Millivoltage); });
+
+                //this.Console += $"ch:{e.Channel} + mV: {e.Millivoltage} {Environment.NewLine}";
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                MessageBox.Show(ex.Message);
+            }
+        }
 
         private void LoadComports()
         {

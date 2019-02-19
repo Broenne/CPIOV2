@@ -7,8 +7,10 @@
     using ConfigLogicLayer.Configurations;
     using ConfigLogicLayer.Contracts;
     using ConfigLogicLayer.Contracts.ActualId;
+    using ConfigLogicLayer.Contracts.Analog;
     using ConfigLogicLayer.Contracts.Configurations;
     using ConfigLogicLayer.Contracts.DigitalInputState;
+    using ConfigLogicLayer.Text;
 
     using CPIOngConfig.ActiveSensor;
     using CPIOngConfig.Contracts.Adapter;
@@ -34,7 +36,7 @@
         #region Constructor
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="HandleInputs" /> class.
+        /// Initializes a new instance of the <see cref="HandleInputs" /> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="pulseEventHandler">The pulse event handler.</param>
@@ -48,7 +50,8 @@
         /// <param name="activeSensorEventHandler">The active sensor event handler.</param>
         /// <param name="canTextEventHandler">The can text event handler.</param>
         /// <param name="textResponseEventHandler">The text response event handler.</param>
-        public HandleInputs(ILogger logger, IPulseEventHandler pulseEventHandler, IReadCanMessage readCanMessage, IInputBinaryEventHandler inputBinaryEventHandler, IAliveEventHandler aliveEventHandler, IGetActualNodeId getActualNodeId, IChannelConfigurationResponseEventHandler channelConfigurationResponseEventHandler, ICanIsConnectedEventHandler canIsConnectedEventHandler, IFlipFlopEventHandler flipFlopEventHandler, IActiveSensorEventHandler activeSensorEventHandler, ICanTextEventHandler canTextEventHandler, ITextResponseEventHandler textResponseEventHandler)
+        /// <param name="analogEventHandler">The analog event handler.</param>
+        public HandleInputs(ILogger logger, IPulseEventHandler pulseEventHandler, IReadCanMessage readCanMessage, IInputBinaryEventHandler inputBinaryEventHandler, IAliveEventHandler aliveEventHandler, IGetActualNodeId getActualNodeId, IChannelConfigurationResponseEventHandler channelConfigurationResponseEventHandler, ICanIsConnectedEventHandler canIsConnectedEventHandler, IFlipFlopEventHandler flipFlopEventHandler, IActiveSensorEventHandler activeSensorEventHandler, ICanTextEventHandler canTextEventHandler, ITextResponseEventHandler textResponseEventHandler, IAnalogEventHandler analogEventHandler)
         {
             this.Logger = logger;
 
@@ -63,6 +66,7 @@
             this.ActiveSensorEventHandler = activeSensorEventHandler;
             this.CanTextEventHandler = canTextEventHandler;
             this.TextResponseEventHandler = textResponseEventHandler;
+            this.AnalogEventHandler = analogEventHandler;
         }
 
         #endregion
@@ -94,6 +98,8 @@
         private IReadCanMessage ReadCanMessage { get; }
 
         private ITextResponseEventHandler TextResponseEventHandler { get; }
+
+        private IAnalogEventHandler AnalogEventHandler { get; }
 
         #endregion
 
@@ -156,11 +162,38 @@
                     this.HandleFlipFlopEvent(id, data);
                     this.ActiveSensorResponse(id, data);
                     this.TextResponse(id, data);
+                    this.AnalogResponse(id, data);
                 }
             }
             catch (Exception ex)
             {
                 this.Logger.LogError(ex);
+                throw;
+            }
+        }
+
+        private void AnalogResponse(uint id, byte[] data)
+        {
+            try
+            {
+                if (id.Equals(this.GetActualNodeId.Get() + CanCommandConsts.RequestAnalogValue))
+                {
+                    var channel = data[0];
+
+                    if (channel == 5)
+                    {
+                        ;
+                    }
+
+                    var digits = BitConverter.ToUInt16(data, 1);
+                    var milliVoltage = BitConverter.ToInt32(data, 3);
+
+                    this.AnalogEventHandler.OnReached(new AnalogEventArgs(channel, digits, Convert.ToUInt32(milliVoltage)));
+                }
+                
+            }
+            catch (Exception ex)
+            {
                 throw;
             }
         }

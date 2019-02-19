@@ -19,6 +19,8 @@
 
         public const uint PulseId = 0x180;
 
+        public const uint RequestAnalogValue = 0x175;
+
         #endregion
 
         public static readonly uint TriggerGetInputConfigurationOffset = 0x0178;

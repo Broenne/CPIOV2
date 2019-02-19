@@ -1,11 +1,10 @@
-﻿namespace ConfigLogicLayer.Text
+﻿namespace ConfigLogicLayer.Analog
 {
     using System;
-    using System.Collections.Generic;
 
     using ConfigLogicLayer.Configurations;
-
-    using CPIOngConfig.Contracts.Alive;
+    using ConfigLogicLayer.Contracts.Analog;
+    using ConfigLogicLayer.Text;
 
     using Helper.Contracts.Logger;
 
