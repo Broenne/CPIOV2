@@ -7,9 +7,7 @@
 
 #include "myCanFunctions.h"
 
-static uint8_t globalCanId = 2;
-
-#define QUEUE_SIZE_FOR_CAN		( ( unsigned short ) 32 )
+static uint8_t globalCanId = 0;
 
 osThreadId canInputTaskHandle;
 
@@ -279,9 +277,9 @@ void CanWorkerTask(void * pvParameters) {
  * */
 void InitCanInputTask(void) {
 
-	CanRxQueueHandle = xQueueCreate(QUEUE_SIZE_FOR_CAN, sizeof(CAN_HandleTypeDef));
+	CanRxQueueHandle = xQueueCreate(QUEUE_SIZE_FOR_CAN_RECEIVE, sizeof(CAN_HandleTypeDef));
 
-	CanQueueSenderHandle = xQueueCreate(6, sizeof(CAN_HandleTypeDef));
+	CanQueueSenderHandle = xQueueCreate(QUEUE_SIZE_FOR_CAN_SEND, sizeof(CAN_HandleTypeDef));
 
 	osThreadDef(canInputTask, CanWorkerTask, osPriorityNormal, 0, 256);
 	canInputTaskHandle = osThreadCreate(osThread(canInputTask), NULL);

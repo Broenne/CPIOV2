@@ -182,10 +182,6 @@ void CheckPulseInputs(void) {
 		for (int i = 0; i < 16; ++i) {
 			if ((dif >> i) & 0x01 && (value >> i & 0x01)) {
 
-				if (i < 8) {
-					printf("sss");
-				}
-
 				SendTimeInfo(i);
 			}
 		}

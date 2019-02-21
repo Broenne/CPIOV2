@@ -9,6 +9,7 @@
 #define INCLUDE_H_
 
 
+
 #define CHANNEL_COUNT 					(( unsigned short ) 16 )
 
 #define Major ((uint8_t)0x00)
@@ -24,6 +25,8 @@
 #define SEND_INPUT_CONFIG				(( unsigned short ) 0x179 )
 #define PULSE_OPENCAN_OFFSET 			(( unsigned short ) 0x180 )
 #define AliveOffset 					(( unsigned short )	0x200 )
+#define QUEUE_SIZE_FOR_CAN_RECEIVE		( ( unsigned short ) 32 )
+#define QUEUE_SIZE_FOR_CAN_SEND 		( ( unsigned short ) 32 )
 
 
 #include "main.h"
