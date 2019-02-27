@@ -343,24 +343,39 @@
                 // todo mb das nicht jedes mal im handler machen
                 uint canPulseOffsset = CanCommandConsts.PulseId;
                 var node = this.GetActualNodeId.Get();
-                var copIdPulseMinimum = node + canPulseOffsset;
-                var copIdPulseMaximum = node + canPulseOffsset + 16;
 
-                if (id >= copIdPulseMinimum && id < copIdPulseMaximum)
-                {
-                    var channel = id - copIdPulseMinimum;
 
-                    var shiftData = new byte[4];
-                    shiftData[0] = data[3];
-                    shiftData[1] = data[2];
-                    shiftData[2] = data[1];
-                    shiftData[3] = data[0];
+                var shiftData = new byte[4];
+                shiftData[0] = data[3];
+                shiftData[1] = data[2];
+                shiftData[2] = data[1];
+                shiftData[3] = data[0];
 
-                    var checkSum = data[7];
+                var channel = data[6];
+                var checkSum = data[7];
 
-                    var pulseData = BitConverter.ToUInt32(shiftData, 0);
-                    this.PulseEventHandler.OnReached(new PulseEventArgs(channel, pulseData, checkSum));
-                }
+                var pulseData = BitConverter.ToUInt32(shiftData, 0);
+                this.PulseEventHandler.OnReached(new PulseEventArgs(channel, pulseData, checkSum));
+
+
+                //var copIdPulseMinimum = node + canPulseOffsset;
+                //var copIdPulseMaximum = node + canPulseOffsset + 16;
+
+                //if (id >= copIdPulseMinimum && id < copIdPulseMaximum)
+                //{
+                //    var channel = id - copIdPulseMinimum;
+
+                //    var shiftData = new byte[4];
+                //    shiftData[0] = data[3];
+                //    shiftData[1] = data[2];
+                //    shiftData[2] = data[1];
+                //    shiftData[3] = data[0];
+
+                //    var checkSum = data[7];
+
+                //    var pulseData = BitConverter.ToUInt32(shiftData, 0);
+                //    this.PulseEventHandler.OnReached(new PulseEventArgs(channel, pulseData, checkSum));
+                //}
             }
             catch (Exception ex)
             {
