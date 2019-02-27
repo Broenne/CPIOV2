@@ -313,9 +313,10 @@ void SendCanTimeDif(uint8_t channel, uint32_t res, uint8_t checkSum) {
 	p[2] = (res >> 8) & 0xFF;
 	p[3] = res & 0xFF;
 
+	p[6] = channel;
 	p[7] = checkSum;
 
-	uint32_t canId = PULSE_OPENCAN_OFFSET + GetGlobalCanNodeId() + channel;
+	uint32_t canId = PULSE_OPENCAN_OFFSET + GetGlobalCanNodeId();// + channel;
 	SendCan(canId, p, 8);
 }
 
