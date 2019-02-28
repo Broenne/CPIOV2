@@ -47,7 +47,7 @@ uint GetPositionOfThisChannelModiAndChannel(uint8_t channel){
 
 	int pos = -1;
 
-	for(int i = 0; i < channel; ++i){
+	for(int i = 0; i <= channel; ++i){
 
 		// entsprechend aktivem hochzählen
 		if(ChannelModiStorage[i].channelModiType == channelModi){
@@ -59,6 +59,8 @@ uint GetPositionOfThisChannelModiAndChannel(uint8_t channel){
 	if(-1 == pos){
 		SetCouldNotFindSpecificSensorPosition();
 	}
+
+	return pos;
 }
 
 
