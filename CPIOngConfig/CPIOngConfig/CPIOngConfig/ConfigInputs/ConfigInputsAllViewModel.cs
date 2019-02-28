@@ -183,13 +183,13 @@
         {
             try
             {
-                this.ConfigureInputsViewList[0].GetDataContext().ChangeChannelModi(Modi.FlipFlop);
-                this.ConfigureInputsViewList[1].GetDataContext().ChangeChannelModi(Modi.FlipFlop);
-                this.ConfigureInputsViewList[2].GetDataContext().ChangeChannelModi(Modi.FlipFlop);
+                this.ConfigureInputsViewList[0].GetDataContext().ChangeChannelModi(Modi.Qmin);
+                this.ConfigureInputsViewList[1].GetDataContext().ChangeChannelModi(Modi.Qmin);
+                this.ConfigureInputsViewList[2].GetDataContext().ChangeChannelModi(Modi.Qmin);
 
-                this.ConfigureInputsViewList[3].GetDataContext().ChangeChannelModi(Modi.None);
-                this.ConfigureInputsViewList[4].GetDataContext().ChangeChannelModi(Modi.None);
-                this.ConfigureInputsViewList[5].GetDataContext().ChangeChannelModi(Modi.None);
+                this.ConfigureInputsViewList[3].GetDataContext().ChangeChannelModi(Modi.Qmax);
+                this.ConfigureInputsViewList[4].GetDataContext().ChangeChannelModi(Modi.Qmax);
+                this.ConfigureInputsViewList[5].GetDataContext().ChangeChannelModi(Modi.Qmax);
 
                 this.ConfigureInputsViewList[6].GetDataContext().ChangeChannelModi(Modi.None);
 

@@ -80,6 +80,27 @@ void InitPulse(void) {
 	InitChannelModi();
 }
 
+void HandleFlipFlops(uint16_t channel) {
+	// Besonderheit FlipFlop (Zweite Schleife, da die obere ggf gebreakt wird)
+	for (int i = 0; i < CHANNEL_COUNT; ++i) {
+		ChannelModiType channelModi = GetChannelModiByChannel(i);
+		if (i == channel) {
+			switch (channelModi) {
+			case Qmin:
+				SetFlipFlopQmin(i);
+				break;
+			case Qmax:
+				SetFlipFlopQmax(i);
+				break;
+			default:
+				break;
+
+			}
+
+		}
+	}
+}
+
 /*
  * Created on: 30.11.18
  * Author: MB
@@ -97,17 +118,11 @@ void SendPulsePerCanTask(void * pvParameters) {
 
 				if (i == currentMessage.channel && channelModi == GetActiveChannelModiType()) {
 					SendCanTimeDif(currentMessage.channel, currentMessage.res, currentMessage.checkSum);
-					break;// schleife kan dann beendet werden
+					break; // schleife kann dann beendet werden
 				}
 			}
 
-			// Besonderheit FlipFlop (Zweite Schleife, da die obere ggf gebreakt wird)
-			for (int i = 0; i < CHANNEL_COUNT; ++i) {
-				if (i == currentMessage.channel && GetChannelModiByChannel(i) == FlipFlop) {
-					SetFlipFlop(i);
-				}
-			}
-
+			HandleFlipFlops(currentMessage.channel);
 		}
 	}
 

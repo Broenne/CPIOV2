@@ -15,7 +15,16 @@ static volatile uint16_t StorageFlipFlopState = 0;
  *      Die Funktion setzt den FlipFlop Zustand des Kanals, wenn es eine Änderung gab.
  *      Es wird eine Nachricht auf den CAN-BUS mit der Info gelegt.
  */
-void SetFlipFlop(uint8_t channel) {
+void SetFlipFlopQmin(uint8_t channel) {
+	int mask = 0;
+	mask = 1 << channel;
+	StorageFlipFlopState |= mask;
+
+	uint16_t data = StorageFlipFlopState;
+	SendFlipFlopStateViaCan(data);
+}
+
+void SetFlipFlopQmax(uint8_t channel) {
 	int mask = 0;
 	mask = 1 << channel;
 	StorageFlipFlopState |= mask;

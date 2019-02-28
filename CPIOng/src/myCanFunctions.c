@@ -100,7 +100,8 @@ void WorkerCanId0(uint8_t* data) {
 void ReadAndSendDigitalInputStates() {
 	uint8_t data[8];
 	GetInputs(data);
-	SendCan(GetGlobalCanNodeId(), data, 8); // ab in ide ander queu un einfach weg
+	uint32_t canId = GetGlobalCanNodeId();
+	SendCanExtended(canId + INPUT_STATE, data, 8); // ab in ide ander queu un einfach weg
 }
 
 void StatusOfActualConfiguredInputs(uint8_t* data) {
@@ -126,68 +127,37 @@ void SetActiveChannel(uint8_t* data) {
  * Author: MB
  * function for send analog value per can
  * */
-void SendAnalogValueByCan(uint8_t* pData){
+void SendAnalogValueByCan(uint8_t* pData) {
 	// aufgrund der Diode und elektrischen Beschaltung verhält sich die Spannungsmessung nicht linear.
 	// todo mb: achtung, gilt für die "alte" Hardware
 
 	uint8_t channel = pData[0];
 	uint32_t digits = ReadChannelAnalog(channel);
 
-	static int AnalogTabelle[28][2] = {
-			{0  ,    0},
-			{1 ,     433},
-			{2  ,    866},
-			{3  ,    1298},
-			{4  ,    1727},
-			{5  ,    2096},
-			{6  ,    2260},
-			{7   ,   2373},
-			{8   ,   2472},
-			{9   ,   2568},
-			{10  ,   2659},
-			{11 ,    2749},
-			{12  ,   2836},
-			{13 ,    2924},
-			{14  ,   3009},
-			{15  ,   3091},
-			{16 ,    3180},
-			{17  ,   3262},
-			{18 ,    3345},
-			{19 ,    3428},
-			{20 ,    3514},
-			{21 ,    3595},
-			{22 ,    3676},
-			{23 ,    3761},
-			{24  ,   3840},
-			{25 ,    3922},
-			{26 ,    4004},
-			{27 ,    4087},
-	};
-
-
+	static int AnalogTabelle[28][2] = { { 0, 0 }, { 1, 433 }, { 2, 866 }, { 3, 1298 }, { 4, 1727 }, { 5, 2096 }, { 6, 2260 }, { 7, 2373 }, { 8, 2472 }, { 9, 2568 }, { 10, 2659 }, {
+			11, 2749 }, { 12, 2836 }, { 13, 2924 }, { 14, 3009 }, { 15, 3091 }, { 16, 3180 }, { 17, 3262 }, { 18, 3345 }, { 19, 3428 }, { 20, 3514 }, { 21, 3595 }, { 22, 3676 }, {
+			23, 3761 }, { 24, 3840 }, { 25, 3922 }, { 26, 4004 }, { 27, 4087 }, };
 
 	double milliVoltage = 0;
 	int32_t milliVoltageAsInt = 0;
-	for(int i=0; i < 28; ++i){
+	for (int i = 0; i < 28; ++i) {
 
-		if(digits >= AnalogTabelle[i][1] && digits < AnalogTabelle[i+1][1]    && channel == 5 ){
+		if (digits >= AnalogTabelle[i][1] && digits < AnalogTabelle[i + 1][1] && channel == 5) {
 			// y = m*x+b  --> (y2-y1) = m*(x2-x1) + b
 			//m=(y2-y1)/(x2-x1)
 			int y1 = AnalogTabelle[i][0];
-			int y2 = AnalogTabelle[i+1][0];
+			int y2 = AnalogTabelle[i + 1][0];
 			int x1 = AnalogTabelle[i][1];
-			int x2 = AnalogTabelle[i+1][1];
-			double m = (double)(y2-y1) / (double)(x2-x1);
+			int x2 = AnalogTabelle[i + 1][1];
+			double m = (double) (y2 - y1) / (double) (x2 - x1);
 
 			double b = y1 - m * x1;
 
 			milliVoltage = (m * digits + b) * 1000;
-			milliVoltageAsInt = (int)milliVoltage;
+			milliVoltageAsInt = (int) milliVoltage;
 			break;
 		}
 	}
-
-
 
 	uint8_t data[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 	data[0] = channel;
@@ -247,12 +217,10 @@ void CanWorkerTask(void * pvParameters) {
 					ResetFlipFlop(pData);
 				}
 
-
 				// Funktion zum Abfragen des aktuellen analogen Messwerts
-				if((globalCanId + ANALOG_REQUEST) == stdid){
+				if ((globalCanId + ANALOG_REQUEST) == stdid) {
 					SendAnalogValueByCan(pData);
 				}
-
 
 				// Extendend Bereich!=
 				if ((globalCanId + REQUEST_TEXT) == extId) {
@@ -264,15 +232,23 @@ void CanWorkerTask(void * pvParameters) {
 
 		// zum senden
 		if (xQueueReceive(CanQueueSenderHandle, hcan, 100) == pdTRUE) {
-			SendCan(hcan->pTxMsg->StdId, hcan->pTxMsg->Data, 8);
+			// todo mb: oder besser anders oder an anderere Stelle unterscheiden,  besser anders definiertes Objekt für die Que nutzen
+			uint8_t data[CAN_DATA_LENGTH_MAX];
+			memcpy(data, hcan->pTxMsg->Data , CAN_DATA_LENGTH_MAX);
+			if(hcan->pTxMsg->ExtId != 0){
+				SendCanExtended(hcan->pTxMsg->ExtId, data, CAN_DATA_LENGTH_MAX);
+			}
+			else{
+				// dann annahme das es normal-mode ist
+				SendCan(hcan->pTxMsg->StdId, data, CAN_DATA_LENGTH_MAX);
+			}
+
+
 		}
 	}
 
 	SetCanWorkerTaskError();
 }
-
-
-
 
 /*
  * Created on: 30.11.18
@@ -323,7 +299,7 @@ void SendCanTimeDif(uint8_t channel, uint32_t res, uint8_t checkSum) {
 
 	uint cobId = GetPositionOfThisChannelModiAndChannel(channel);
 
-	uint32_t canId = /*PULSE_OPENCAN_OFFSET +*/cobId + GetGlobalCanNodeId();
+	uint32_t canId = PULSE_OPENCAN_OFFSET + cobId + GetGlobalCanNodeId();
 	SendCan(canId, p, 8);
 }
 

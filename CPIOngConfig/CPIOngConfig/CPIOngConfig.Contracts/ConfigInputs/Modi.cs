@@ -6,12 +6,12 @@
     public enum Modi
     {
         /// <summary>
-        /// The none.
+        /// The none status.
         /// </summary>
         None = 0,
 
         /// <summary>
-        /// The read.
+        /// The read info.
         /// </summary>
         Read = 1,
 
@@ -26,8 +26,18 @@
         Licht = 3,
 
         /// <summary>
-        /// The flip flop.
+        /// The QMIN info.
         /// </summary>
-        FlipFlop = 4
+        Qmin = 4,
+
+        /// <summary>
+        /// The QMAX info.
+        /// </summary>
+        Qmax = 5,
+
+        /// <summary>
+        /// The analog.
+        /// </summary>
+        Analog = 6
     }
 }

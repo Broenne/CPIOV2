@@ -10,10 +10,7 @@
 extern CAN_HandleTypeDef hcan2;
 extern xQueueHandle CanRxQueueHandle;
 
-
-
 void SendPrivateCan(CanTxMsgTypeDef canMessage){
-
 
 		int i = 0;
 		while (hcan2.State != HAL_CAN_STATE_READY) {
@@ -23,7 +20,7 @@ void SendPrivateCan(CanTxMsgTypeDef canMessage){
 				break;
 			}
 
-			vTaskDelay(5);
+			vTaskDelay(1);
 		}
 
 		hcan2.pTxMsg = &canMessage;
@@ -32,9 +29,6 @@ void SendPrivateCan(CanTxMsgTypeDef canMessage){
 			SetCanSendError();
 		}
 }
-
-
-
 
 void SendCanExtended(uint32_t id, uint8_t data[], uint8_t len){
 
@@ -50,9 +44,6 @@ void SendCanExtended(uint32_t id, uint8_t data[], uint8_t len){
 		SendPrivateCan(canMessage);
 }
 
-
-
-
 /*
  * Created on: 30.11.18
  * Author: MB
@@ -63,10 +54,13 @@ void SendCan(uint32_t id, uint8_t data[], uint8_t len) {
 
 	//CanTxMsgTypeDef
 	CanTxMsgTypeDef canMessage;
+
 	canMessage.StdId = id;
-	canMessage.ExtId = 0;
-	canMessage.RTR = CAN_RTR_DATA;
 	canMessage.IDE = CAN_ID_STD;
+
+	canMessage.ExtId = 0;
+
+	canMessage.RTR = CAN_RTR_DATA;
 	canMessage.DLC = len;
 
 	memcpy(canMessage.Data, data, sizeof(uint8_t) * len);

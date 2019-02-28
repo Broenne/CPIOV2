@@ -19,12 +19,7 @@ void SwitchMainLed(void) {
 
 void SanCanAlive(void) {
 
-
-	// myPrintf("Testvndf kjsdkjfks sass\n");
-
-
 	uint8_t p[] = { Major, Minor, Bugfix, 0, 0, 0, 0, 0 };
-
 
 	// add error frames
 	GetApplicationStatus(&p[3]);
@@ -32,13 +27,14 @@ void SanCanAlive(void) {
 	// Get info about text
 	GetIfNewTextAvailable(&p[7]);
 
-	static CAN_HandleTypeDef hcan;
+	/*static*/ CAN_HandleTypeDef hcan;
 	hcan.Instance=CAN2;
 	static CanTxMsgTypeDef TxMessage;
 	static CanRxMsgTypeDef RxMessage;
 	hcan.pTxMsg = &TxMessage;
 	hcan.pRxMsg = &RxMessage;
-	hcan.pTxMsg->StdId = AliveCanId;
+	//hcan.pTxMsg->StdId = AliveCanId;
+	hcan.pTxMsg->ExtId = AliveCanId;
 	memcpy(hcan.pTxMsg->Data, p, sizeof(p));
 
 	// es muss sicher gestellt sein, das der worker tak schon läuft
@@ -72,7 +68,7 @@ void Init_Timer(void) {
 }
 
 void InitAlive(void) {
-	AliveCanId = (uint32_t)GetGlobalCanNodeId() + AliveOffset;
+	AliveCanId = (uint32_t)GetGlobalCanNodeId() + ALIVE_OFFSET;
 	Init_Timer();
 }
 

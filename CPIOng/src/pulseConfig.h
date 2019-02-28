@@ -11,7 +11,7 @@
 
 #include "include.h"
 
-typedef enum  { None, Read, Namur, Licht, FlipFlop } ChannelModiType;
+typedef enum  { None, Read, Namur, Licht, Qmin, Qmax, Analog } ChannelModiType;
 
 typedef struct {
 	ChannelModiType channelModiType;

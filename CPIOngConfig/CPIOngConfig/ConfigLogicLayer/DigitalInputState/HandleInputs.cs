@@ -10,7 +10,6 @@
     using ConfigLogicLayer.Contracts.Analog;
     using ConfigLogicLayer.Contracts.Configurations;
     using ConfigLogicLayer.Contracts.DigitalInputState;
-    using ConfigLogicLayer.Text;
 
     using CPIOngConfig.ActiveSensor;
     using CPIOngConfig.Contracts.Adapter;
@@ -180,11 +179,6 @@
                 {
                     var channel = data[0];
 
-                    if (channel == 5)
-                    {
-                        ;
-                    }
-
                     var digits = BitConverter.ToUInt16(data, 1);
                     var milliVoltage = BitConverter.ToInt32(data, 3);
 
@@ -194,6 +188,7 @@
             }
             catch (Exception ex)
             {
+                this.Logger.LogError(ex);
                 throw;
             }
         }
@@ -249,7 +244,7 @@
             {
                 this.Logger.LogBegin(this.GetType());
 
-                if (id == 0x170 + this.GetActualNodeId.Get())
+                if (id == CanCommandConsts.FlipFlop + this.GetActualNodeId.Get())
                 {
                     this.FlipFlopEventHandler.OnReached(new FlipFlopEventArgs(data));
                 }
@@ -316,7 +311,7 @@
         {
             try
             {
-                if (this.GetActualNodeId.Get() == id)
+                if ((this.GetActualNodeId.Get() + CanCommandConsts.InputState) == id)
                 {
                     var inputBinbaryArgs = new InputBinaryEventArgs();
 
@@ -345,7 +340,7 @@
                 var node = (int)this.GetActualNodeId.Get();
 
                 // es kann max 3 geben
-                if (id >= node && id <= (node + 3))
+                if (id >= (node + canPulseOffsset) && id <= (node + 3 + canPulseOffsset))
                 {
                     var shiftData = new byte[4];
                     shiftData[0] = data[3];
@@ -359,27 +354,6 @@
                     var pulseData = BitConverter.ToUInt32(shiftData, 0);
                     this.PulseEventHandler.OnReached(new PulseEventArgs(channel, pulseData, checkSum));
                 }
-
-
-
-                //var copIdPulseMinimum = node + canPulseOffsset;
-                //var copIdPulseMaximum = node + canPulseOffsset + 16;
-
-                //if (id >= copIdPulseMinimum && id < copIdPulseMaximum)
-                //{
-                //    var channel = id - copIdPulseMinimum;
-
-                //    var shiftData = new byte[4];
-                //    shiftData[0] = data[3];
-                //    shiftData[1] = data[2];
-                //    shiftData[2] = data[1];
-                //    shiftData[3] = data[0];
-
-                //    var checkSum = data[7];
-
-                //    var pulseData = BitConverter.ToUInt32(shiftData, 0);
-                //    this.PulseEventHandler.OnReached(new PulseEventArgs(channel, pulseData, checkSum));
-                //}
             }
             catch (Exception ex)
             {
