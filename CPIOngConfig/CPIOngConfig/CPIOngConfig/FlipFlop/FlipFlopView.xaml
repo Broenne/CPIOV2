@@ -32,17 +32,49 @@
                 </ComboBox>
                 <Button Margin="5" Height="50" Width="80" Command="{Binding ResetSingleCommand}" CommandParameter="{Binding Path=Text, ElementName=ComboBox}">Reset Selected</Button>
             </StackPanel>
-            <ListBox ItemsSource="{Binding FlipFlopState}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <CheckBox IsChecked="{Binding Mode=OneWay}" IsEnabled="False"/>
-                        <!--<TextBox Text="{Binding TrueString}" IsEnabled="False"/>-->
+            <!--<ListBox ItemsSource="{Binding FlipFlopState}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding Mode=OneWay}" IsEnabled="False"/>
+                                --><!--<TextBox Text="{Binding TrueString}" IsEnabled="False"/>--><!--
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>-->
+
+            <StackPanel Orientation="Horizontal">
+
+                <StackPanel>
+                    <Label>Qmin</Label>
+                    <ListBox ItemsSource="{Binding StateQmin}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding Mode=OneWay}" IsEnabled="False"/>
+                                <!--<TextBox Text="{Binding TrueString}" IsEnabled="False"/>-->
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                </StackPanel>
+
+                    <StackPanel>
+                        <Label>Qmax</Label>
+                        <ListBox ItemsSource="{Binding StateQmax}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox IsChecked="{Binding Mode=OneWay}" IsEnabled="False"/>
+                                        <!--<TextBox Text="{Binding TrueString}" IsEnabled="False"/>-->
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                     </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        </StackPanel>
+                </StackPanel>
+
+            </StackPanel>
     </Grid>
     </Border>
 </UserControl>

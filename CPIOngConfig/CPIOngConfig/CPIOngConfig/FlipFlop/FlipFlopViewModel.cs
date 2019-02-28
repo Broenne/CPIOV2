@@ -27,6 +27,10 @@
 
         private ObservableCollection<bool> flipFlopState;
 
+        private ObservableCollection<bool> stateQmin;
+
+        private ObservableCollection<bool> stateQmax;
+
         #region Constructor
 
         /// <summary>
@@ -41,13 +45,31 @@
             this.Logger = logger;
             this.ResetFlipFlop = resetFlipFlop;
 
+            //var defaultList = new List<bool>();
+            //for (var i = 0; i < 16; i++)
+            //{
+            //    defaultList.Add(false);
+            //}
+
+            //this.FlipFlopState = new ObservableCollection<bool>(defaultList);
+
+
             var defaultList = new List<bool>();
-            for (var i = 0; i < 16; i++)
+            for (var i = 0; i < 3; i++)
             {
                 defaultList.Add(false);
             }
 
-            this.FlipFlopState = new ObservableCollection<bool>(defaultList);
+            this.StateQmax = new ObservableCollection<bool>(defaultList);
+
+            defaultList = new List<bool>();
+            for (var i = 0; i < 3; i++)
+            {
+                defaultList.Add(false);
+            }
+
+            this.StateQmin = new ObservableCollection<bool>(defaultList);
+
 
             this.FlipFlopEventHandler.EventIsReached += this.FlipFlopEventHandler_EventIsReached;
 
@@ -58,6 +80,34 @@
         #endregion
 
         #region Properties
+
+
+        /// <summary>
+        /// Gets or sets the state of the flip flop.
+        /// </summary>
+        /// <value>
+        /// The state of the flip flop.
+        /// </value>
+        public ObservableCollection<bool> StateQmin
+        {
+            get => this.stateQmin;
+            set => this.SetProperty(ref this.stateQmin, value);
+        }
+
+
+        /// <summary>
+        /// Gets or sets the state of the flip flop.
+        /// </summary>
+        /// <value>
+        /// The state of the flip flop.
+        /// </value>
+        public ObservableCollection<bool> StateQmax
+        {
+            get => this.stateQmax;
+            set => this.SetProperty(ref this.stateQmax, value);
+        }
+
+
 
         /// <summary>
         /// Gets or sets the state of the flip flop.
