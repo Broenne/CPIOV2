@@ -342,9 +342,10 @@
             {
                 // todo mb das nicht jedes mal im handler machen
                 uint canPulseOffsset = CanCommandConsts.PulseId;
-                var node = this.GetActualNodeId.Get();
+                var node = (int)this.GetActualNodeId.Get();
 
-                if (id.Equals(node + canPulseOffsset))
+                // es kann max 3 geben
+                if (id >= node && id <= (node + 3))
                 {
                     var shiftData = new byte[4];
                     shiftData[0] = data[3];
@@ -357,7 +358,6 @@
 
                     var pulseData = BitConverter.ToUInt32(shiftData, 0);
                     this.PulseEventHandler.OnReached(new PulseEventArgs(channel, pulseData, checkSum));
-
                 }
 
 

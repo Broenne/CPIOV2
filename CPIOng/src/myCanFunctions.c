@@ -218,6 +218,7 @@ void CanWorkerTask(void * pvParameters) {
 
 			if (hcan->Instance == CAN2) {
 				uint32_t stdid = hcan->pRxMsg->StdId;
+				uint32_t extId = hcan->pRxMsg->ExtId;
 				uint8_t* pData = &hcan->pRxMsg->Data[0];
 				// default id 0
 				if (0x00 == stdid) {
@@ -246,13 +247,16 @@ void CanWorkerTask(void * pvParameters) {
 					ResetFlipFlop(pData);
 				}
 
-				if ((globalCanId + REQUEST_TEXT) == stdid) {
-					SendTextPerCan(pData);
-				}
 
 				// Funktion zum Abfragen des aktuellen analogen Messwerts
 				if((globalCanId + ANALOG_REQUEST) == stdid){
 					SendAnalogValueByCan(pData);
+				}
+
+
+				// Extendend Bereich!=
+				if ((globalCanId + REQUEST_TEXT) == extId) {
+					SendTextPerCan(pData);
 				}
 
 			}
