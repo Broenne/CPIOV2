@@ -32,7 +32,7 @@
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConfigInputsAllViewModel" /> class.
+        ///     Initializes a new instance of the <see cref="ConfigInputsAllViewModel" /> class.
         /// </summary>
         /// <param name="scope">The scope.</param>
         /// <param name="logger">The logger.</param>
@@ -57,6 +57,7 @@
             this.SaveCommand = new RelayCommand(this.SaveCommandAction);
             this.LoadFromDeviceCommand = new RelayCommand(this.LoadFromDeviceCommandAction);
             this.SetAllToFirstOneCommand = new RelayCommand(this.SetAllToFirstOneCommandAction);
+            this.SetAllToSpecialCommand = new RelayCommand(this.SetAllToSpecialCommandAction);
         }
 
         #endregion
@@ -75,12 +76,12 @@
 
             set => this.SetProperty(ref this.configureInputsViewList, value);
         }
-        
+
         /// <summary>
-        /// Gets or sets a value indicating whether this instance is enabled.
+        ///     Gets or sets a value indicating whether this instance is enabled.
         /// </summary>
         /// <value>
-        ///   <c>true</c>If this instance is enabled; otherwise, <c>false</c>.
+        ///     <c>true</c>If this instance is enabled; otherwise, <c>false</c>.
         /// </value>
         public bool IsEnabled
         {
@@ -88,6 +89,14 @@
 
             set => this.SetProperty(ref this.isEnabled, value);
         }
+
+        /// <summary>
+        ///     Gets the load from device command.
+        /// </summary>
+        /// <value>
+        ///     The load from device command.
+        /// </value>
+        public ICommand LoadFromDeviceCommand { get; }
 
         /// <summary>
         ///     Gets the save command.
@@ -98,12 +107,14 @@
         public ICommand SaveCommand { get; }
 
         /// <summary>
-        /// Gets the load from device command.
+        ///     Gets the set all to first one command.
         /// </summary>
         /// <value>
-        /// The load from device command.
+        ///     The set all to first one command.
         /// </value>
-        public ICommand LoadFromDeviceCommand { get; }
+        public ICommand SetAllToFirstOneCommand { get; }
+
+        public ICommand SetAllToSpecialCommand { get; set; }
 
         /// <summary>
         ///     Gets the window load command.
@@ -112,14 +123,6 @@
         ///     The window load command.
         /// </value>
         public ICommand WindowLoadCommand { get; }
-
-        /// <summary>
-        /// Gets the set all to first one command.
-        /// </summary>
-        /// <value>
-        /// The set all to first one command.
-        /// </value>
-        public ICommand SetAllToFirstOneCommand { get; }
 
         private IChannelConfiguration ChannelConfiguration { get; }
 
@@ -152,7 +155,7 @@
         {
             try
             {
-                IConfigureInputsView first = this.ConfigureInputsViewList.FirstOrDefault();
+                var first = this.ConfigureInputsViewList.FirstOrDefault();
 
                 if (first == null)
                 {
@@ -164,6 +167,43 @@
                     var vm = item.GetDataContext();
                     vm.ChangeChannelModi(first.GetDataContext().GetSelectedModi());
                 }
+            }
+            catch (Exception ex)
+            {
+                this.Logger.LogError(ex);
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                this.Logger.LogEnd(this.GetType());
+            }
+        }
+
+        private void SetAllToSpecialCommandAction(object obj)
+        {
+            try
+            {
+                this.ConfigureInputsViewList[0].GetDataContext().ChangeChannelModi(Modi.FlipFlop);
+                this.ConfigureInputsViewList[1].GetDataContext().ChangeChannelModi(Modi.FlipFlop);
+                this.ConfigureInputsViewList[2].GetDataContext().ChangeChannelModi(Modi.FlipFlop);
+
+                this.ConfigureInputsViewList[3].GetDataContext().ChangeChannelModi(Modi.None);
+                this.ConfigureInputsViewList[4].GetDataContext().ChangeChannelModi(Modi.None);
+                this.ConfigureInputsViewList[5].GetDataContext().ChangeChannelModi(Modi.None);
+
+                this.ConfigureInputsViewList[6].GetDataContext().ChangeChannelModi(Modi.None);
+
+                this.ConfigureInputsViewList[7].GetDataContext().ChangeChannelModi(Modi.Licht);
+                this.ConfigureInputsViewList[8].GetDataContext().ChangeChannelModi(Modi.Licht);
+                this.ConfigureInputsViewList[9].GetDataContext().ChangeChannelModi(Modi.Licht);
+
+                this.ConfigureInputsViewList[10].GetDataContext().ChangeChannelModi(Modi.Read);
+                this.ConfigureInputsViewList[11].GetDataContext().ChangeChannelModi(Modi.Read);
+                this.ConfigureInputsViewList[12].GetDataContext().ChangeChannelModi(Modi.Read);
+
+                this.ConfigureInputsViewList[13].GetDataContext().ChangeChannelModi(Modi.Namur);
+                this.ConfigureInputsViewList[14].GetDataContext().ChangeChannelModi(Modi.Namur);
+                this.ConfigureInputsViewList[15].GetDataContext().ChangeChannelModi(Modi.Namur);
             }
             catch (Exception ex)
             {

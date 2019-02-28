@@ -17,6 +17,7 @@ typedef struct {
 	ChannelModiType channelModiType;
 } ChannelModi;
 
+uint GetPositionOfThisChannelModiAndChannel(uint8_t channel);
 void ChangeChannelModi(uint8_t channel, ChannelModiType channelModiType);
 void InitChannelModi(void);
 void SetActiveChannelModiType(ChannelModiType val);

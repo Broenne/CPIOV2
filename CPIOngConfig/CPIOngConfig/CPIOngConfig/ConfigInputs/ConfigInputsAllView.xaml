@@ -33,6 +33,7 @@
                 </Button>
                 <Button Command="{Binding LoadFromDeviceCommand}">Load From Device</Button>
                 <Button Command="{Binding SetAllToFirstOneCommand}">All to first one</Button>
+                <Button Command="{Binding SetAllToSpecialCommand}">All to special</Button>
                 <Label>Das aktuallisieren dauert ca. 2 Sek</Label>
             </StackPanel>
             <ListView Grid.Row="1" ItemsSource="{Binding ConfigureInputsViewList}">

@@ -22,7 +22,8 @@ void SendTextPerCan(uint8_t* dataArg) {
 	uint8_t data[] = { positionInTabelle, positionInZeile, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00 };
 	GetTextDataForRow(positionInTabelle, positionInZeile, &data[3]);
 
-	SendCan(GetGlobalCanNodeId() + REQUEST_TEXT, data, 8);
+	SendCanExtended(GetGlobalCanNodeId() + REQUEST_TEXT, data, 8);
+	//SendCan(GetGlobalCanNodeId() + REQUEST_TEXT, data, 8);
 }
 
 /*
@@ -86,7 +87,7 @@ void WorkerCanId0(uint8_t* data) {
 		ActivateDebug(data[1]);
 		break;
 	case 0x03:
-		SetChannelModiFromExternal(data);
+		SetChannelModiFromExternal(data); // todo mb: intern max 3 vom gleichen type checken
 		break;
 	case 0x04:
 		SaveChannelToEeprom();
@@ -316,7 +317,9 @@ void SendCanTimeDif(uint8_t channel, uint32_t res, uint8_t checkSum) {
 	p[6] = channel;
 	p[7] = checkSum;
 
-	uint32_t canId = PULSE_OPENCAN_OFFSET + GetGlobalCanNodeId();// + channel;
+	uint cobId = GetPositionOfThisChannelModiAndChannel(channel);
+
+	uint32_t canId = /*PULSE_OPENCAN_OFFSET +*/cobId + GetGlobalCanNodeId();
 	SendCan(canId, p, 8);
 }
 

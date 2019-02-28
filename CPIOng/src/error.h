@@ -23,6 +23,8 @@ void SetApplicationEndError(void);
 void SetCouldNotSafeGlobalCanIdError(void);
 void SetCouldNotReadGlobalCanIdError(void);
 
+void SetCouldNotFindSpecificSensorPosition(void);
+
 void SetPossiblePulseSendQueueFullError(void);
 void SetPulseSenderCreateTaskError(void);
 

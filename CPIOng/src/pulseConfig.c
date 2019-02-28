@@ -20,6 +20,49 @@ ChannelModiType GetChannelModiByChannel(int ch) {
 	return ChannelModiStorage[ch].channelModiType;
 }
 
+/*
+ * Created on: 28.02.19
+ * Author: MB
+ * See inner description:
+ * */
+
+uint GetPositionOfThisChannelModiAndChannel(uint8_t channel){
+	ChannelModiType channelModi = GetActiveChannelModiType();
+	// es ist die Frage, der wie vielte Sensor es an hand der Modi ist
+
+	// Bsp:
+	// channel Modi = Licht
+	// Einstellung
+	// 0: Read
+	// 1: Read
+	// 2: Read
+	// 0: Licht
+    // 1: Licht
+	// 2: Licht
+
+	// es kommkt channel "5" (channels beginnen bei 0)
+	// die Schleife läuft bis channel
+	// es werden alle die "Licht" sind vorher hochgezählt
+	// daraud ergibt sich die Spezifische Position
+
+	int pos = -1;
+
+	for(int i = 0; i < channel; ++i){
+
+		// entsprechend aktivem hochzählen
+		if(ChannelModiStorage[i].channelModiType == channelModi){
+			++pos;
+		}
+
+	}
+
+	if(-1 == pos){
+		SetCouldNotFindSpecificSensorPosition();
+	}
+}
+
+
+
 ChannelModiType GetActiveChannelModiType(void) {
 	// todo mb: aus eeprom laden bei initialisierung?
 	return ActivatedChannelModi;

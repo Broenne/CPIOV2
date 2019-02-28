@@ -20,7 +20,7 @@
 #define FLIPFLOP_OPENCAN_OFFSET_RESET 	(( unsigned short ) 0x172 )
 #define ANALOG_REQUEST 					(( unsigned short ) 0x175 )
 #define SET_ACTIVE_SENSOR 				(( unsigned short ) 0x176 )
-#define REQUEST_TEXT 					(( unsigned short ) 0x177 )
+#define REQUEST_TEXT 					(( unsigned short ) 0xFFFFFF )//(( unsigned short ) 0x177 )
 #define REQUEST_INPUT_CONFIG			(( unsigned short ) 0x178 )
 #define SEND_INPUT_CONFIG				(( unsigned short ) 0x179 )
 #define PULSE_OPENCAN_OFFSET 			(( unsigned short ) 0x180 )

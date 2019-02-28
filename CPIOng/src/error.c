@@ -52,6 +52,10 @@ void SetCouldNotSafeGlobalCanIdError(){
 	SetErrorFlag(Could_NOT_SAFE_GLOBAL_CAN_ID_ERROR);
 }
 
+void SetCouldNotFindSpecificSensorPosition(void){
+	myPrintf("Could not find specific sensor position \r\n");
+}
+
 void SetCouldNotReadGlobalCanIdError(void){
 	myPrintf("Variable can id in eeprom not found \n");
 }
@@ -87,3 +91,4 @@ void SetPulseSenderTaskError(void){
 void SetPeriperialInitError(void){
 	myPrintf("Perriperial init error \r\n");
 }
+

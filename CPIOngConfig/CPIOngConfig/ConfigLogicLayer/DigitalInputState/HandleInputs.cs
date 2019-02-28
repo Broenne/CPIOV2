@@ -344,18 +344,22 @@
                 uint canPulseOffsset = CanCommandConsts.PulseId;
                 var node = this.GetActualNodeId.Get();
 
+                if (id.Equals(node + canPulseOffsset))
+                {
+                    var shiftData = new byte[4];
+                    shiftData[0] = data[3];
+                    shiftData[1] = data[2];
+                    shiftData[2] = data[1];
+                    shiftData[3] = data[0];
 
-                var shiftData = new byte[4];
-                shiftData[0] = data[3];
-                shiftData[1] = data[2];
-                shiftData[2] = data[1];
-                shiftData[3] = data[0];
+                    var channel = data[6];
+                    var checkSum = data[7];
 
-                var channel = data[6];
-                var checkSum = data[7];
+                    var pulseData = BitConverter.ToUInt32(shiftData, 0);
+                    this.PulseEventHandler.OnReached(new PulseEventArgs(channel, pulseData, checkSum));
 
-                var pulseData = BitConverter.ToUInt32(shiftData, 0);
-                this.PulseEventHandler.OnReached(new PulseEventArgs(channel, pulseData, checkSum));
+                }
+
 
 
                 //var copIdPulseMinimum = node + canPulseOffsset;

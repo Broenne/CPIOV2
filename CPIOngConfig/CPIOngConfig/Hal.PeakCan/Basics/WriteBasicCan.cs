@@ -111,13 +111,18 @@
         // }
         // }
 
+
+
+
+
+
         /// <summary>
         ///     Writes the can.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="data">The data info.</param>
         /// <exception cref="Exception">TPCANSTATUS not ok.</exception>
-        public void WriteCan(uint id, IReadOnlyList<byte> data)
+        public void WriteCan(uint id, IReadOnlyList<byte> data, TpcanMessageType tpcanMessageType = TpcanMessageType.PCAN_MESSAGE_STANDARD)
         {
             try
             {
@@ -141,7 +146,7 @@
                         canMsg.Data[i] = data[i];
                     }
 
-                    canMsg.Msgtype = TpcanMessageType.PCAN_MESSAGE_STANDARD;
+                    canMsg.Msgtype = tpcanMessageType;//TpcanMessageType.PCAN_MESSAGE_STANDARD;
 
                     var result = PcanBasicDllWrapper.Write(this.MPcanHandle, ref canMsg);
 

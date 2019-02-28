@@ -22,7 +22,7 @@ void InitFilter(volatile CAN_HandleTypeDef* hcan, uint32_t filterId, uint filter
 	CAN_FilterConfTypeDef sFilterConfig;
 	sFilterConfig.FilterNumber = filterNumber;
 	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
-	sFilterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
+	sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;//CAN_FILTERSCALE_16BIT;
 	sFilterConfig.FilterMaskIdHigh = 0xFFFF;
 	sFilterConfig.FilterMaskIdLow = 0x07FF << 5;
 	sFilterConfig.FilterIdHigh = 0x0000;

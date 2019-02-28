@@ -13,6 +13,8 @@
 
     using Hal.PeakCan.Contracts.Basics;
 
+    using HardwareAbstraction.Contracts.PCanDll;
+
     using Helper.Contracts.Logger;
 
     /// <summary>
@@ -76,7 +78,7 @@
                 var data = new List<byte>();
                 data.Add(position);
                 data.Add(positionInRow);
-                this.WriteBasicCan.WriteCan(this.GetActualNodeId.Get() + CanCommandConsts.Text, data);
+                this.WriteBasicCan.WriteCan(this.GetActualNodeId.Get() + CanCommandConsts.Text, data, TpcanMessageType.PCAN_MESSAGE_EXTENDED);
             }
             catch (Exception ex)
             {

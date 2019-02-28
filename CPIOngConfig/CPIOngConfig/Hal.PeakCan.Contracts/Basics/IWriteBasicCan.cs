@@ -2,6 +2,8 @@
 {
     using System.Collections.Generic;
 
+    using HardwareAbstraction.Contracts.PCanDll;
+
     /// <summary>
     /// The interface for write basic can.
     /// </summary>
@@ -18,6 +20,6 @@
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="data">The data info.</param>
-        void WriteCan(uint id, IReadOnlyList<byte> data);
+        void WriteCan(uint id, IReadOnlyList<byte> data, TpcanMessageType tpcanMessageType = TpcanMessageType.PCAN_MESSAGE_STANDARD);
     }
 }

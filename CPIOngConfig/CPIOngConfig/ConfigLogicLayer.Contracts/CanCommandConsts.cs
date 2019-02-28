@@ -15,7 +15,7 @@
 
         public const uint CountOfErrorBytes = 0x04;
 
-        public const uint Text = 0x177;
+        public const uint Text = 0xFFFFFF;//0x177;
 
         public const uint PulseId = 0x180;
 

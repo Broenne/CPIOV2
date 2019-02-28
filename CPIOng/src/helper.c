@@ -15,7 +15,7 @@ extern UART_HandleTypeDef huart1;
 static int pointerToTextTabelleForCan;
 static char TextStorageForCan[CAN_TEXT_TABELL_ROWS][MAX_STRING_SIZE]; // 8*200
 
-volatile static int printMode = 0;
+volatile static int printMode = 1;
 /*
  * 30.11.2018
  * MB
