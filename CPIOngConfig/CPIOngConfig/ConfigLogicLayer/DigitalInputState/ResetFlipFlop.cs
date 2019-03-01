@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
 
+    using ConfigLogicLayer.Contracts;
     using ConfigLogicLayer.Contracts.ActualId;
     using ConfigLogicLayer.Contracts.DigitalInputState;
 
@@ -73,6 +74,10 @@
             }
         }
 
+        /// <summary>
+        /// Resets the channel.
+        /// </summary>
+        /// <param name="channel">The channel.</param>
         public void ResetChannel(uint channel)
         {
             try
@@ -87,7 +92,7 @@
                 data.Add(intBytes[0]);
                 data.Add(intBytes[1]);
 
-                this.WriteBasicCan.WriteCan(this.GetActualNodeId.Get() + (uint)0x172, data);
+                this.WriteBasicCan.WriteCan(this.GetActualNodeId.Get() + CanCommandConsts.ResetFlipFlop, data);
 
                 // todo mb: wait for alive
             }

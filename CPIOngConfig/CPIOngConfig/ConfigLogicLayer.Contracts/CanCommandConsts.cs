@@ -25,6 +25,8 @@
 
         public const uint FlipFlop = 0x00;
 
+        public const uint ResetFlipFlop = 0x4;
+
         #endregion
 
         public const uint TriggerGetInputConfigurationOffset = 0xFFFFFB;

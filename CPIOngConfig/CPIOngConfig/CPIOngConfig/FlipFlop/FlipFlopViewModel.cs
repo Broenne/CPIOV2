@@ -107,8 +107,6 @@
             set => this.SetProperty(ref this.stateQmax, value);
         }
 
-
-
         /// <summary>
         /// Gets or sets the state of the flip flop.
         /// </summary>

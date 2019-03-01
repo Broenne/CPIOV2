@@ -77,7 +77,7 @@ void FilterCanIdResetFlipFlop(volatile CAN_HandleTypeDef* hcan) {
 
 void FilterCanIdGetInputConfig(volatile CAN_HandleTypeDef* hcan) {
 	//InitFilter11bitIdentifier(&hcan2, GetGlobalCanNodeId() + REQUEST_INPUT_CONFIG, FILTER_ID_GET_INPUT_CONFIG);
-	AddExtendedFilter(&hcan2, GetGlobalCanNodeId() + REQUEST_INPUT_CONFIG, FILTER_ID_REQUEST_TEXT);
+	AddExtendedFilter(&hcan2, GetGlobalCanNodeId() + REQUEST_INPUT_CONFIG, FILTER_ID_GET_INPUT_CONFIG);
 }
 
 void FilterCanIdActiveSensor(volatile CAN_HandleTypeDef* hcan) {

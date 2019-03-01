@@ -13,19 +13,21 @@
 #define CHANNEL_COUNT 					(( unsigned short ) 16 )
 #define CAN_DATA_LENGTH_MAX					(( unsigned short ) 8 )
 
+#define QUEUE_SIZE_FOR_CAN_RECEIVE		( ( unsigned short ) 32 )
+#define QUEUE_SIZE_FOR_CAN_SEND 		( ( unsigned short ) 32 )
+
 #define Major ((uint8_t)0x00)
 #define Minor ((uint8_t)0x00)
 #define Bugfix ((uint8_t)0x01)
 
 #define FLIPFLOP_OPENCAN_OFFSET 		(( unsigned short ) 0x00 )
-#define FLIPFLOP_OPENCAN_OFFSET_RESET 	(( unsigned short ) 0x172 )
+#define PULSE_OPENCAN_OFFSET 			(( unsigned short ) 0x1 ) // 1, 2, 3
+#define FLIPFLOP_OPENCAN_OFFSET_RESET 	(( unsigned short ) 0x4 )
 #define ANALOG_REQUEST 					(( unsigned short ) 0x175 )
 #define SET_ACTIVE_SENSOR 				(( unsigned short ) 0x176 )
 //#define REQUEST_INPUT_CONFIG			(( unsigned short ) 0x178 )
 #define SEND_INPUT_CONFIG				(( unsigned short ) 0x179 )
-#define PULSE_OPENCAN_OFFSET 			(( unsigned short ) 0x1 )
-#define QUEUE_SIZE_FOR_CAN_RECEIVE		( ( unsigned short ) 32 )
-#define QUEUE_SIZE_FOR_CAN_SEND 		( ( unsigned short ) 32 )
+
 
 // Extended-offset-ids
 #define REQUEST_TEXT 					(( unsigned int ) 0xFFFFFF )
