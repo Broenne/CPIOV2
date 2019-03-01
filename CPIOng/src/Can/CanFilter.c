@@ -56,19 +56,17 @@ void FilterCanIdActiveSensor(volatile CAN_HandleTypeDef* hcan) {
 	InitFilter11bitIdentifier(&hcan2, GetGlobalCanNodeId() + SET_ACTIVE_SENSOR, FILTER_ID_ACTIVE_SENSOR);
 }
 
-void FilterCanIdRequestText(volatile CAN_HandleTypeDef* hcan) {
+void AddExtendedFilter(uint filterNumber, uint id) {
 
-	uint filterNumber = FILTER_ID_REQUEST_TEXT;
-
-    //https://www.mikrocontroller.net/topic/209802s
-	int id = (GetGlobalCanNodeId() + REQUEST_TEXT) << 3;
+	//https://www.mikrocontroller.net/topic/209802s
+	id = id << 3;
 
 	CAN_FilterConfTypeDef sFilterConfig;
 	sFilterConfig.FilterNumber = filterNumber;
 	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
 	sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
-//		sFilterConfig.FilterMaskIdHigh = 0xFFFF;
-//		sFilterConfig.FilterMaskIdLow = 0x07FF << 5;
+	//		sFilterConfig.FilterMaskIdHigh = 0xFFFF;
+	//		sFilterConfig.FilterMaskIdLow = 0x07FF << 5;
 	sFilterConfig.FilterIdHigh = id >> 16;
 	sFilterConfig.FilterIdLow = (id & 0x0000FFFF) | 0x04; //Maskierung der ersten 16 Bit, um an die unteren 16 Bit zu kommen. Zusätzlich Setzen des IDE-Bits.
 	sFilterConfig.FilterFIFOAssignment = CAN_FIFO0;
@@ -82,8 +80,12 @@ void FilterCanIdRequestText(volatile CAN_HandleTypeDef* hcan) {
 	}
 
 	hcan->Instance = CAN2;
+}
 
-	//InitFilter(&hcan2, GetGlobalCanNodeId() + REQUEST_TEXT, FILTER_ID_REQUEST_TEXT);
+void FilterCanIdRequestText(volatile CAN_HandleTypeDef* hcan) {
+	int id = (GetGlobalCanNodeId() + REQUEST_TEXT);
+	AddExtendedFilter(id, FILTER_ID_REQUEST_TEXT);
+
 }
 
 void FilterCanIdConfigureInputs(volatile CAN_HandleTypeDef* hcan) {
