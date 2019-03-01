@@ -215,11 +215,6 @@ void CanWorkerTask(void * pvParameters) {
 						}
 					}
 
-					// Funktion zum Abfrage der Einstellung der aktuellen Eingänge
-					if ((globalCanId + REQUEST_INPUT_CONFIG) == stdid) {
-						StatusOfActualConfiguredInputs(pData);
-					}
-
 					// funktion zum setzen des aktuellen channel modi
 					if ((globalCanId + SET_ACTIVE_SENSOR) == stdid) {
 						SetActiveChannel(pData);
@@ -241,6 +236,11 @@ void CanWorkerTask(void * pvParameters) {
 					// Extendend Bereich!=
 					if ((globalCanId + REQUEST_TEXT) == extId) {
 						SendTextPerCan(pData);
+					}
+
+					// Funktion zum Abfrage der Einstellung der aktuellen Eingänge
+					if ((globalCanId + REQUEST_INPUT_CONFIG) == extId) {
+						StatusOfActualConfiguredInputs(pData);
 					}
 				}
 

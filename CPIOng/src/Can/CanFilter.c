@@ -40,23 +40,7 @@ void InitFilter11bitIdentifier(volatile CAN_HandleTypeDef* hcan, uint32_t filter
 	hcan->Instance = CAN2;
 }
 
-void FilterIdNull(volatile CAN_HandleTypeDef* hcan) {
-	InitFilter11bitIdentifier(&hcan2, FILTER_ID_NULL_BROADCAST, FILTER_ID_NULL_BROADCAST);
-}
-
-void FilterCanIdResetFlipFlop(volatile CAN_HandleTypeDef* hcan) {
-	InitFilter11bitIdentifier(&hcan2, GetGlobalCanNodeId() + FLIPFLOP_OPENCAN_OFFSET_RESET, FILTER_ID_RESET_FLIPFLOP);
-}
-
-void FilterCanIdGetInputConfig(volatile CAN_HandleTypeDef* hcan) {
-	InitFilter11bitIdentifier(&hcan2, GetGlobalCanNodeId() + REQUEST_INPUT_CONFIG, FILTER_ID_GET_INPUT_CONFIG);
-}
-
-void FilterCanIdActiveSensor(volatile CAN_HandleTypeDef* hcan) {
-	InitFilter11bitIdentifier(&hcan2, GetGlobalCanNodeId() + SET_ACTIVE_SENSOR, FILTER_ID_ACTIVE_SENSOR);
-}
-
-void AddExtendedFilter(uint filterNumber, uint id) {
+void AddExtendedFilter(volatile CAN_HandleTypeDef* hcan, uint id, uint filterNumber) {
 
 	//https://www.mikrocontroller.net/topic/209802s
 	id = id << 3;
@@ -65,8 +49,8 @@ void AddExtendedFilter(uint filterNumber, uint id) {
 	sFilterConfig.FilterNumber = filterNumber;
 	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
 	sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
-	//		sFilterConfig.FilterMaskIdHigh = 0xFFFF;
-	//		sFilterConfig.FilterMaskIdLow = 0x07FF << 5;
+//			sFilterConfig.FilterMaskIdHigh = 0xFFFF;
+//			sFilterConfig.FilterMaskIdLow = 0xFFFF;//0x07FF << 5;
 	sFilterConfig.FilterIdHigh = id >> 16;
 	sFilterConfig.FilterIdLow = (id & 0x0000FFFF) | 0x04; //Maskierung der ersten 16 Bit, um an die unteren 16 Bit zu kommen. Zusätzlich Setzen des IDE-Bits.
 	sFilterConfig.FilterFIFOAssignment = CAN_FIFO0;
@@ -82,9 +66,28 @@ void AddExtendedFilter(uint filterNumber, uint id) {
 	hcan->Instance = CAN2;
 }
 
+
+void FilterIdNull(volatile CAN_HandleTypeDef* hcan) {
+	InitFilter11bitIdentifier(&hcan2, FILTER_ID_NULL_BROADCAST, FILTER_ID_NULL_BROADCAST);
+}
+
+void FilterCanIdResetFlipFlop(volatile CAN_HandleTypeDef* hcan) {
+	InitFilter11bitIdentifier(&hcan2, GetGlobalCanNodeId() + FLIPFLOP_OPENCAN_OFFSET_RESET, FILTER_ID_RESET_FLIPFLOP);
+}
+
+void FilterCanIdGetInputConfig(volatile CAN_HandleTypeDef* hcan) {
+	//InitFilter11bitIdentifier(&hcan2, GetGlobalCanNodeId() + REQUEST_INPUT_CONFIG, FILTER_ID_GET_INPUT_CONFIG);
+	AddExtendedFilter(&hcan2, GetGlobalCanNodeId() + REQUEST_INPUT_CONFIG, FILTER_ID_REQUEST_TEXT);
+}
+
+void FilterCanIdActiveSensor(volatile CAN_HandleTypeDef* hcan) {
+	InitFilter11bitIdentifier(&hcan2, GetGlobalCanNodeId() + SET_ACTIVE_SENSOR, FILTER_ID_ACTIVE_SENSOR);
+}
+
+
 void FilterCanIdRequestText(volatile CAN_HandleTypeDef* hcan) {
 	int id = (GetGlobalCanNodeId() + REQUEST_TEXT);
-	AddExtendedFilter(id, FILTER_ID_REQUEST_TEXT);
+	AddExtendedFilter(&hcan2, id, FILTER_ID_REQUEST_TEXT);
 
 }
 

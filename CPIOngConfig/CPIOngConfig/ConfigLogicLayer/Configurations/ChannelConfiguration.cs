@@ -11,6 +11,8 @@
 
     using Hal.PeakCan.Contracts.Basics;
 
+    using HardwareAbstraction.Contracts.PCanDll;
+
     using Helper.Contracts.Logger;
 
     /// <summary>
@@ -124,7 +126,7 @@
                     data.Add(0x01);
                     data.Add(Convert.ToByte(i));
 
-                    this.WriteBasicCan.WriteCan(this.GetActualNodeId.Get() + CanCommandConsts.TriggerGetInputConfigurationOffset, data);
+                    this.WriteBasicCan.WriteCan(this.GetActualNodeId.Get() + CanCommandConsts.TriggerGetInputConfigurationOffset, data, TpcanMessageType.PCAN_MESSAGE_EXTENDED);
 
                     this.waitForResponse = -1;
 

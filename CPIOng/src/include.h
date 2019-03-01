@@ -21,7 +21,7 @@
 #define FLIPFLOP_OPENCAN_OFFSET_RESET 	(( unsigned short ) 0x172 )
 #define ANALOG_REQUEST 					(( unsigned short ) 0x175 )
 #define SET_ACTIVE_SENSOR 				(( unsigned short ) 0x176 )
-#define REQUEST_INPUT_CONFIG			(( unsigned short ) 0x178 )
+//#define REQUEST_INPUT_CONFIG			(( unsigned short ) 0x178 )
 #define SEND_INPUT_CONFIG				(( unsigned short ) 0x179 )
 #define PULSE_OPENCAN_OFFSET 			(( unsigned short ) 0x1 )
 #define QUEUE_SIZE_FOR_CAN_RECEIVE		( ( unsigned short ) 32 )
@@ -30,7 +30,8 @@
 // Extended-offset-ids
 #define REQUEST_TEXT 					(( unsigned int ) 0xFFFFFF )
 #define ALIVE_OFFSET 					(( unsigned int ) 0xFFFFFE )
-#define INPUT_STATE 					(( unsigned int ) 0xFFFFFd )
+#define INPUT_STATE 					(( unsigned int ) 0xFFFFFD )
+#define REQUEST_INPUT_CONFIG			(( unsigned int ) 0xFFFFFB )
 
 #include "main.h"
 #include "stm32f1xx_hal.h"

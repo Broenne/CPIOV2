@@ -27,6 +27,7 @@
 
         #endregion
 
-        public static readonly uint TriggerGetInputConfigurationOffset = 0x0178;
+        public const uint TriggerGetInputConfigurationOffset = 0xFFFFFB;
+        //public static readonly uint TriggerGetInputConfigurationOffset = 0x0178;
     }
 }
