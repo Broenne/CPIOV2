@@ -11,8 +11,8 @@
 #include "include.h"
 
 void InitVirtualEeprom(void);
-void SafeGlobalCanId(uint8_t id);
-uint8_t GetGloablCanIdFromEeeprom(void);
+void SafeGlobalCanId(uint16_t id);
+uint16_t GetGloablCanIdFromEeeprom(void);
 
 void SafeUsedActiveSensorType(uint8_t channelModiType);
 uint8_t GetUsedActiveSensorType(void);

@@ -9,6 +9,6 @@
         /// Does the specified identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        void Do(byte id);
+        void Do(ushort id);
     }
 }

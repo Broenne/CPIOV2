@@ -30,7 +30,7 @@
         /// <summary>
         ///     Occurs when [node is reached].
         /// </summary>
-        public event EventHandler<byte> EventIsReached;
+        public event EventHandler<ushort> EventIsReached;
 
         #endregion
 
@@ -46,7 +46,7 @@
         ///     Raises the <see cref="E:NodeReached" /> event.
         /// </summary>
         /// <param name="e">The event argument.</param>
-        public virtual void OnReached(byte e)
+        public virtual void OnReached(ushort e)
         {
             try
             {

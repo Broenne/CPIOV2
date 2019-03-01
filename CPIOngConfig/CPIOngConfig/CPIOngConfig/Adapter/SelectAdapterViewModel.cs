@@ -27,7 +27,7 @@
 
         private bool nodeIdChangeIsEnabled;
 
-        private byte nodeIdValue;
+        private ushort nodeIdValue;
 
         #region Constructor
 
@@ -91,7 +91,7 @@
         /// <value>
         ///     The can adapter.
         /// </value>
-        public byte NodeIdValue
+        public ushort NodeIdValue
         {
             get => this.nodeIdValue;
             set

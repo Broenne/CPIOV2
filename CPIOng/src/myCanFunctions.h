@@ -11,8 +11,8 @@
 #include "include.h"
 
 void PrepareCan(void);
-void SetGlobalCanNodeId(uint8_t canId);
-uint8_t GetGlobalCanNodeId();
+void SetGlobalCanNodeId(uint16_t canId);
+uint16_t GetGlobalCanNodeId();
 
 /*
  * 30.11.18

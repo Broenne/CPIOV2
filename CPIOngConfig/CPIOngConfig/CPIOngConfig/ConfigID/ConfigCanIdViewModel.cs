@@ -56,7 +56,7 @@
             {
                 this.Logger.LogBegin(this.GetType());
 
-                var id = Convert.ToByte(obj);
+                var id = Convert.ToUInt16(obj);
                 this.SetCanIdonDevice.Do(id);
             }
             catch (Exception ex)

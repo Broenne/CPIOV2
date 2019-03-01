@@ -43,7 +43,7 @@
         /// Does the specified identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        public void Do(byte id)
+        public void Do(ushort id)
         {
             try
             {
@@ -52,7 +52,11 @@
                 this.Logger.LogDebug($"Set can id to {id}");
                 var data = new List<byte>();
                 data.Add(0x01);
-                data.Add(id);
+
+                var idAsArray = BitConverter.GetBytes(id);
+
+                data.Add(idAsArray[0]);
+                data.Add(idAsArray[1]);
 
                 this.WriteBasicCan.WriteCan(0, data);
 

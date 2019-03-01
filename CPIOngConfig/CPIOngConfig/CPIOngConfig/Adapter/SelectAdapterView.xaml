@@ -30,7 +30,7 @@
                 
                 <StackPanel>
                     <Label>knoten-Id</Label>
-                    <controls:NumericUpDown Minimum = "0" Maximum = "255" Interval = "1" Margin="5" Value="{Binding NodeIdValue}" IsEnabled="{Binding NodeIdChangeIsEnabled}" ></controls:NumericUpDown>
+                    <controls:NumericUpDown Minimum = "0" Maximum = "2048" Interval = "1" Margin="5" Value="{Binding NodeIdValue}" IsEnabled="{Binding NodeIdChangeIsEnabled}" ></controls:NumericUpDown>
                 </StackPanel>
             </StackPanel>
         </Grid>

@@ -30,7 +30,7 @@
 
         #region Properties
 
-        private static byte NodeId { get; set; } = 4;
+        private static ushort NodeId { get; set; } = 724;
 
         private IChangeActualIdToConnectedEventHandler ChangeActualIdToConnectedEventHandler { get; }
 
@@ -44,7 +44,7 @@
         ///     Gets this instance.
         /// </summary>
         /// <returns>Return the can id.</returns>
-        public byte Get()
+        public ushort Get()
         {
             try
             {
@@ -67,7 +67,7 @@
 
         #region Private Methods
 
-        private void ChangeActualIdToConnectedEventHandler_EventIsReached(object sender, byte e)
+        private void ChangeActualIdToConnectedEventHandler_EventIsReached(object sender, ushort e)
         {
             try
             {

@@ -34,8 +34,8 @@ void SetFlipFlopQmin(uint8_t channel) {
 }
 
 void SetFlipFlopQmax(uint8_t channel) {
-	uint pos = GetPositionOfThisChannelByModi(channel, Qmin);
-		SetFlipFlop(pos, 8);
+	uint pos = GetPositionOfThisChannelByModi(channel, Qmax);
+	SetFlipFlop(pos, 8);
 }
 
 /*

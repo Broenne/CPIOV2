@@ -9,6 +9,6 @@
         /// Gets this instance.
         /// </summary>
         /// <returns>Return the ID.</returns>
-        byte Get();
+        ushort Get();
     }
 }

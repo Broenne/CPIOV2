@@ -11,14 +11,14 @@
 #define ADDRESS_ACTIVE_PULSE_SENSOR  ((uint16_t)0x0004)
 #define ADDRESS_CHANNEL_MODI  ((uint16_t)0x0008)
 
-void SafeGlobalCanId(uint8_t id) {
+void SafeGlobalCanId(uint16_t id) {
 	if (!EE_Write(ADDRESS_CAN_ID, id)) {
 		// info m: der fehler schent ignoriert werden zu können
 		//printf("Error in write eeprrom");
 	}
 }
 
-uint8_t GetGloablCanIdFromEeeprom(void) {
+uint16_t GetGloablCanIdFromEeeprom(void) {
 	uint32_t xxx = 0;
 	if (!EE_Read(ADDRESS_CAN_ID, &xxx)) {
 		printf("Error in read eeprrom");

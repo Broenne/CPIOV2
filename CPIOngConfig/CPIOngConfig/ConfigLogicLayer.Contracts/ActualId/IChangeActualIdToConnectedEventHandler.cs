@@ -10,12 +10,12 @@
         /// <summary>
         /// Occurs when [event is reached].
         /// </summary>
-        event EventHandler<byte> EventIsReached;
+        event EventHandler<ushort> EventIsReached;
 
         /// <summary>
         /// Called when [reached].
         /// </summary>
         /// <param name="e">The event argument.</param>
-        void OnReached(byte e);
+        void OnReached(ushort e);
     }
 }

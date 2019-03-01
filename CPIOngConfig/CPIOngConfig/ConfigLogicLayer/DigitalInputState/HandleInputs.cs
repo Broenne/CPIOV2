@@ -288,7 +288,8 @@
             {
                 this.Logger.LogBegin(this.GetType());
 
-                if (id == CanCommandConsts.AliveOffset + this.GetActualNodeId.Get())
+                var passende = CanCommandConsts.AliveOffset + this.GetActualNodeId.Get();
+                if (id == passende)
                 {
                     var version = new Version(data[0], data[1], data[2]);
                     this.AliveEventHandler.OnReached(new AliveEventArgs(version, data[3], data[4], data[5], data[6]));

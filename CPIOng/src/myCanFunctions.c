@@ -7,7 +7,7 @@
 
 #include "myCanFunctions.h"
 
-static uint8_t globalCanId = 0;
+static uint16_t globalCanId = 0;
 
 osThreadId canInputTaskHandle;
 
@@ -78,10 +78,12 @@ void CreateResponseActiveSensor(uint8_t* data) {
 
 void WorkerCanId0(uint8_t* data) {
 	uint8_t dataByte0 = data[0];
+	uint16_t newId;
 	switch (dataByte0) {
 	case 0x01:
-		SetGlobalCanNodeId(data[1]);
-		// printf("Incoming id 0x00 %d", GetGlobalCanNodeId());
+		newId = data[1];
+		newId = (data[2] << 8) | newId;
+		SetGlobalCanNodeId(newId);
 		break;
 	case 0x02:
 		ActivateDebug(data[1]);
@@ -284,11 +286,11 @@ void PrepareCan(void) {
 	InitCanInputTask();
 }
 
-uint8_t GetGlobalCanNodeId() {
+uint16_t GetGlobalCanNodeId() {
 	return globalCanId;
 }
 
-void SetGlobalCanNodeId(uint8_t canId) {
+void SetGlobalCanNodeId(uint16_t canId) {
 	SafeGlobalCanId(canId);
 	Reset();
 }
