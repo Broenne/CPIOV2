@@ -190,18 +190,18 @@
                                 //this.FlipFlopState[i] = false;
                                 var mask = 1 << (i % 8);
                                 var actBit = e.RawData[i / 8] & mask;
-
+                                bool stateofThis = actBit > 0;
                                 switch (i)
                                 {
                                     case 0:
                                     case 1:
                                     case 2:
-                                        this.StateQmin[i] = actBit > 1;
+                                        this.StateQmin[i] = stateofThis;
                                         break;
                                     case 8:
                                     case 9:
                                     case 10:
-                                        this.StateQmax[i] = actBit > 1;
+                                        this.StateQmax[i % 8] = stateofThis;
                                         break;
                                     default:
                                         break;

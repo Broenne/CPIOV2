@@ -118,7 +118,6 @@
             {
                 this.Logger.LogBegin(this.GetType());
 
-                this.waitForResponse = -1;
                 for (var i = 0; i < 16; i++)
                 {
                     var data = new List<byte>();
@@ -127,11 +126,13 @@
 
                     this.WriteBasicCan.WriteCan(this.GetActualNodeId.Get() + CanCommandConsts.TriggerGetInputConfigurationOffset, data);
 
+                    this.waitForResponse = -1;
+
                     int maxCounter = 0;
                     while (this.waitForResponse != i)
                     {
                         Thread.Sleep(10);
-                        if (maxCounter > 20)
+                        if (maxCounter > 50)
                         {
                             throw new Exception($"No response on get configuration. Channel-Nr.: {i}");
                         }

@@ -20,7 +20,7 @@ void SendPrivateCan(CanTxMsgTypeDef canMessage){
 				break;
 			}
 
-			vTaskDelay(1);
+			vTaskDelay(5);
 		}
 
 		hcan2.pTxMsg = &canMessage;

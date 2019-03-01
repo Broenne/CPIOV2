@@ -187,44 +187,59 @@ void CanWorkerTask(void * pvParameters) {
 		if (xQueueReceive(CanRxQueueHandle, hcan, 10) == pdTRUE) {
 
 			if (hcan->Instance == CAN2) {
-				uint32_t stdid = hcan->pRxMsg->StdId;
-				uint32_t extId = hcan->pRxMsg->ExtId;
+
+				/*
+				 /** @defgroup CAN_Identifier_Type CAN Identifier Type
+				 //#define CAN_ID_STD                  0x00000000U  !< Standard Id
+				 //#define CAN_ID_EXT                  0x00000004U  !< Extended Id
+				 * */
+
+				uint mode = hcan->pRxMsg->IDE;
 				uint8_t* pData = &hcan->pRxMsg->Data[0];
-				// default id 0
-				if (0x00 == stdid) {
-					WorkerCanId0(pData);
-				}
 
-				uint8_t globalCanId = GetGlobalCanNodeId();
-				// Funktion zum abfragen der Einganszustände
-				if (globalCanId == stdid) {
-					if (0x02 == hcan->pRxMsg->RTR) {
-						ReadAndSendDigitalInputStates();
+				if (mode == CAN_ID_STD) {
+					uint32_t stdid = hcan->pRxMsg->StdId;
+
+					// default id 0
+					if (0x00 == stdid) {
+						WorkerCanId0(pData);
 					}
+
+					uint8_t globalCanId = GetGlobalCanNodeId();
+					// Funktion zum abfragen der Einganszustände
+					if (globalCanId == stdid) {
+						if (0x02 == hcan->pRxMsg->RTR) {
+							ReadAndSendDigitalInputStates();
+						}
+					}
+
+					// Funktion zum Abfrage der Einstellung der aktuellen Eingänge
+					if ((globalCanId + REQUEST_INPUT_CONFIG) == stdid) {
+						StatusOfActualConfiguredInputs(pData);
+					}
+
+					// funktion zum setzen des aktuellen channel modi
+					if ((globalCanId + SET_ACTIVE_SENSOR) == stdid) {
+						SetActiveChannel(pData);
+					}
+
+					if ((globalCanId + FLIPFLOP_OPENCAN_OFFSET_RESET) == stdid) {
+						ResetFlipFlop(pData);
+					}
+
+					// Funktion zum Abfragen des aktuellen analogen Messwerts
+					if ((globalCanId + ANALOG_REQUEST) == stdid) {
+						SendAnalogValueByCan(pData);
+					}
+
 				}
 
-				// Funktion zum Abfrage der Einstellung der aktuellen Eingänge
-				if ((globalCanId + REQUEST_INPUT_CONFIG) == stdid) {
-					StatusOfActualConfiguredInputs(pData);
-				}
-
-				// funktion zum setzen des aktuellen channel modi
-				if ((globalCanId + SET_ACTIVE_SENSOR) == stdid) {
-					SetActiveChannel(pData);
-				}
-
-				if ((globalCanId + FLIPFLOP_OPENCAN_OFFSET_RESET) == stdid) {
-					ResetFlipFlop(pData);
-				}
-
-				// Funktion zum Abfragen des aktuellen analogen Messwerts
-				if ((globalCanId + ANALOG_REQUEST) == stdid) {
-					SendAnalogValueByCan(pData);
-				}
-
-				// Extendend Bereich!=
-				if ((globalCanId + REQUEST_TEXT) == extId) {
-					SendTextPerCan(pData);
+				if (mode == CAN_ID_EXT) {
+					uint32_t extId = hcan->pRxMsg->ExtId;
+					// Extendend Bereich!=
+					if ((globalCanId + REQUEST_TEXT) == extId) {
+						SendTextPerCan(pData);
+					}
 				}
 
 			}
@@ -234,15 +249,13 @@ void CanWorkerTask(void * pvParameters) {
 		if (xQueueReceive(CanQueueSenderHandle, hcan, 100) == pdTRUE) {
 			// todo mb: oder besser anders oder an anderere Stelle unterscheiden,  besser anders definiertes Objekt für die Que nutzen
 			uint8_t data[CAN_DATA_LENGTH_MAX];
-			memcpy(data, hcan->pTxMsg->Data , CAN_DATA_LENGTH_MAX);
-			if(hcan->pTxMsg->ExtId != 0){
+			memcpy(data, hcan->pTxMsg->Data, CAN_DATA_LENGTH_MAX);
+			if (hcan->pTxMsg->ExtId != 0) {
 				SendCanExtended(hcan->pTxMsg->ExtId, data, CAN_DATA_LENGTH_MAX);
-			}
-			else{
+			} else {
 				// dann annahme das es normal-mode ist
 				SendCan(hcan->pTxMsg->StdId, data, CAN_DATA_LENGTH_MAX);
 			}
-
 
 		}
 	}
