@@ -96,7 +96,6 @@ void HandleFlipFlops(uint16_t channel) {
 				break;
 
 			}
-
 		}
 	}
 }

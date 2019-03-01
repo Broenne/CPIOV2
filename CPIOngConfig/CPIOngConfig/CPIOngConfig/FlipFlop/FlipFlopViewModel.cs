@@ -181,15 +181,38 @@
                 this.dispatcher.Invoke(
                     () =>
                         {
+
+
+
+
                             for (var i = 0; i < 16; ++i)
                             {
-                                this.FlipFlopState[i] = false;
+                                //this.FlipFlopState[i] = false;
                                 var mask = 1 << (i % 8);
                                 var actBit = e.RawData[i / 8] & mask;
-                                if (actBit > 0)
+
+                                switch (i)
                                 {
-                                    this.FlipFlopState[i] = true;
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        this.StateQmin[i] = actBit > 1;
+                                        break;
+                                    case 8:
+                                    case 9:
+                                    case 10:
+                                        this.StateQmax[i] = actBit > 1;
+                                        break;
+                                    default:
+                                        break;
+                                            //throw new Exception("Faslcher Werit im Flip flop Register?! zu vielel!?");
                                 }
+
+                                //if (actBit > 0 && actBit < 8)
+                                //{
+                                //    this.FlipFlopState[i] = true;
+                                //}
+                                //else if(actBit > 0 && actBit < 8)
                             }
                         });
             }

@@ -44,7 +44,7 @@
 #include "eeprom/eepromConfig.h"
 
 #include "helper.h"
-#include "pulseConfig.h"
+#include "channelConfig.h"
 #include "pulse.h"
 #include "storages.h"
 #include "error.h"

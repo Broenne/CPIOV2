@@ -9,6 +9,19 @@
 
 static volatile uint16_t StorageFlipFlopState = 0;
 
+void SetFlipFlop(uint8_t pos, uint8_t bytePositionOffset){
+		uint mask = 0;
+
+		// schieben <n Position in byte 0 (Qmin) oder byte 1 (Qmax)
+		mask = 1 << (pos + bytePositionOffset);
+
+		StorageFlipFlopState |= mask;
+
+		uint16_t data = StorageFlipFlopState;
+		SendFlipFlopStateViaCan(data);
+}
+
+
 /*
  *  Created on: 24.01.2019
  *      Author: MBs
@@ -16,21 +29,13 @@ static volatile uint16_t StorageFlipFlopState = 0;
  *      Es wird eine Nachricht auf den CAN-BUS mit der Info gelegt.
  */
 void SetFlipFlopQmin(uint8_t channel) {
-	int mask = 0;
-	mask = 1 << channel;
-	StorageFlipFlopState |= mask;
-
-	uint16_t data = StorageFlipFlopState;
-	SendFlipFlopStateViaCan(data);
+	uint pos = GetPositionOfThisChannelByModi(channel, Qmin);
+	SetFlipFlop(pos, 0);
 }
 
 void SetFlipFlopQmax(uint8_t channel) {
-	int mask = 0;
-	mask = 1 << channel;
-	StorageFlipFlopState |= mask;
-
-	uint16_t data = StorageFlipFlopState;
-	SendFlipFlopStateViaCan(data);
+	uint pos = GetPositionOfThisChannelByModi(channel, Qmin);
+		SetFlipFlop(pos, 8);
 }
 
 /*

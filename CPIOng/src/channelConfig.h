@@ -5,8 +5,8 @@
  *      Author: MB
  */
 
-#ifndef PULSECONFIG_H_
-#define PULSECONFIG_H_
+#ifndef CHANNELCONFIG_H_
+#define CHANNELCONFIG_H_
 
 
 #include "include.h"
@@ -18,6 +18,7 @@ typedef struct {
 } ChannelModi;
 
 uint GetPositionOfThisChannelModiAndChannel(uint8_t channel);
+uint GetPositionOfThisChannelByModi(uint8_t channel, ChannelModiType channelModi);
 void ChangeChannelModi(uint8_t channel, ChannelModiType channelModiType);
 void InitChannelModi(void);
 void SetActiveChannelModiType(ChannelModiType val);
@@ -25,4 +26,5 @@ ChannelModiType GetActiveChannelModiType(void);
 ChannelModiType GetChannelModiByChannel(int ch);
 void SaveChannelToEeprom(void);
 
-#endif /* PULSECONFIG_H_ */
+
+#endif /* CHANNELCONFIG_H_ */

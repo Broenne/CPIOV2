@@ -5,7 +5,7 @@
  *      Author: MB
  */
 
-#include "pulseConfig.h"
+#include "channelConfig.h"
 
 static ChannelModi ChannelModiStorage[CHANNEL_COUNT];
 
@@ -20,14 +20,8 @@ ChannelModiType GetChannelModiByChannel(int ch) {
 	return ChannelModiStorage[ch].channelModiType;
 }
 
-/*
- * Created on: 28.02.19
- * Author: MB
- * See inner description:
- * */
+uint GetPositionOfThisChannelByModi(uint8_t channel, ChannelModiType channelModi) {
 
-uint GetPositionOfThisChannelModiAndChannel(uint8_t channel){
-	ChannelModiType channelModi = GetActiveChannelModiType();
 	// es ist die Frage, der wie vielte Sensor es an hand der Modi ist
 
 	// Bsp:
@@ -37,7 +31,7 @@ uint GetPositionOfThisChannelModiAndChannel(uint8_t channel){
 	// 1: Read
 	// 2: Read
 	// 0: Licht
-    // 1: Licht
+	// 1: Licht
 	// 2: Licht
 
 	// es kommkt channel "5" (channels beginnen bei 0)
@@ -47,23 +41,33 @@ uint GetPositionOfThisChannelModiAndChannel(uint8_t channel){
 
 	int pos = -1;
 
-	for(int i = 0; i <= channel; ++i){
+	for (int i = 0; i <= channel; ++i) {
 
 		// entsprechend aktivem hochzählen
-		if(ChannelModiStorage[i].channelModiType == channelModi){
+		if (ChannelModiStorage[i].channelModiType == channelModi) {
 			++pos;
 		}
 
 	}
 
-	if(-1 == pos){
+	if (-1 == pos) {
 		SetCouldNotFindSpecificSensorPosition();
 	}
 
 	return pos;
 }
 
+/*
+ * Created on: 28.02.19
+ * Author: MB
+ * See inner description:
+ * */
 
+uint GetPositionOfThisChannelModiAndChannel(uint8_t channel) {
+	ChannelModiType channelModi = GetActiveChannelModiType();
+	uint pos = GetPositionOfThisChannelByModi(channel, channelModi);
+	return pos;
+}
 
 ChannelModiType GetActiveChannelModiType(void) {
 	// todo mb: aus eeprom laden bei initialisierung?
@@ -90,8 +94,7 @@ void InitChannelModi(void) {
 
 	// todo mb: active channel bei start laden
 
-	ActivatedChannelModi =(ChannelModiType)GetUsedActiveSensorType();
-
+	ActivatedChannelModi = (ChannelModiType) GetUsedActiveSensorType();
 
 	for (int i = 0; i < CHANNEL_COUNT; ++i) {
 		ChannelModiStorage[i].channelModiType = GetStoredChannelModi(i);
