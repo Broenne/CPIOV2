@@ -34,7 +34,8 @@ void SendTextPerCan(uint8_t* dataArg) {
 void SendActualChannelModi(uint8_t* data) {
 	data[3] = 0xFF;
 	uint32_t canId = GetGlobalCanNodeId() + SEND_INPUT_CONFIG;
-	SendCan(canId, data, 8);
+	//SendCan(canId, data, 8);
+	SendCanExtended(canId, data, 8);
 }
 
 /*
@@ -215,11 +216,6 @@ void CanWorkerTask(void * pvParameters) {
 						}
 					}
 
-					// funktion zum setzen des aktuellen channel modi
-					if ((globalCanId + SET_ACTIVE_SENSOR) == stdid) {
-						SetActiveChannel(pData);
-					}
-
 					if ((globalCanId + FLIPFLOP_OPENCAN_OFFSET_RESET) == stdid) {
 						ResetFlipFlop(pData);
 					}
@@ -242,6 +238,12 @@ void CanWorkerTask(void * pvParameters) {
 					if ((globalCanId + REQUEST_INPUT_CONFIG) == extId) {
 						StatusOfActualConfiguredInputs(pData);
 					}
+
+					// funktion zum setzen des aktuellen channel modi
+					if ((globalCanId + SET_ACTIVE_SENSOR) == extId) {
+						SetActiveChannel(pData);
+					}
+
 				}
 
 			}
@@ -252,7 +254,9 @@ void CanWorkerTask(void * pvParameters) {
 			// todo mb: oder besser anders oder an anderere Stelle unterscheiden,  besser anders definiertes Objekt für die Que nutzen
 			uint8_t data[CAN_DATA_LENGTH_MAX];
 			memcpy(data, hcan->pTxMsg->Data, CAN_DATA_LENGTH_MAX);
-			if (hcan->pTxMsg->ExtId != 0) {
+			//hcan->pRxMsg->IDE;
+			//(hcan->pTxMsg->ExtId != 0)
+			if (hcan->pRxMsg->IDE == CAN_ID_EXT) {
 				SendCanExtended(hcan->pTxMsg->ExtId, data, CAN_DATA_LENGTH_MAX);
 			} else {
 				// dann annahme das es normal-mode ist

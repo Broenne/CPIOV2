@@ -7,9 +7,9 @@
     {
         #region Constants
 
-        public const uint SensorModiResponse = 0x179;
+        public const uint SensorModiResponse = 0xFFFFFC;//0x179;
 
-        public const uint SetActiveSensor = 0x176;
+        public const uint SetActiveSensor = 0xFFFFFA;//0x176;
 
         public const uint AliveOffset = 0xFFFFFE; // 0x200;
 

@@ -66,7 +66,6 @@ void AddExtendedFilter(volatile CAN_HandleTypeDef* hcan, uint id, uint filterNum
 	hcan->Instance = CAN2;
 }
 
-
 void FilterIdNull(volatile CAN_HandleTypeDef* hcan) {
 	InitFilter11bitIdentifier(&hcan2, FILTER_ID_NULL_BROADCAST, FILTER_ID_NULL_BROADCAST);
 }
@@ -76,14 +75,13 @@ void FilterCanIdResetFlipFlop(volatile CAN_HandleTypeDef* hcan) {
 }
 
 void FilterCanIdGetInputConfig(volatile CAN_HandleTypeDef* hcan) {
-	//InitFilter11bitIdentifier(&hcan2, GetGlobalCanNodeId() + REQUEST_INPUT_CONFIG, FILTER_ID_GET_INPUT_CONFIG);
 	AddExtendedFilter(&hcan2, GetGlobalCanNodeId() + REQUEST_INPUT_CONFIG, FILTER_ID_GET_INPUT_CONFIG);
 }
 
 void FilterCanIdActiveSensor(volatile CAN_HandleTypeDef* hcan) {
-	InitFilter11bitIdentifier(&hcan2, GetGlobalCanNodeId() + SET_ACTIVE_SENSOR, FILTER_ID_ACTIVE_SENSOR);
+	int id = (GetGlobalCanNodeId() + SET_ACTIVE_SENSOR);
+	AddExtendedFilter(&hcan2, id, FILTER_ID_ACTIVE_SENSOR);
 }
-
 
 void FilterCanIdRequestText(volatile CAN_HandleTypeDef* hcan) {
 	int id = (GetGlobalCanNodeId() + REQUEST_TEXT);
@@ -92,7 +90,9 @@ void FilterCanIdRequestText(volatile CAN_HandleTypeDef* hcan) {
 }
 
 void FilterCanIdConfigureInputs(volatile CAN_HandleTypeDef* hcan) {
-	InitFilter11bitIdentifier(&hcan2, GetGlobalCanNodeId() + SEND_INPUT_CONFIG, FILTER_ID_CONFIGURE_INPUTS);
+	//InitFilter11bitIdentifier(&hcan2, GetGlobalCanNodeId() + SEND_INPUT_CONFIG, FILTER_ID_CONFIGURE_INPUTS);
+	int id = (GetGlobalCanNodeId() + SEND_INPUT_CONFIG);
+		AddExtendedFilter(&hcan2, id, FILTER_ID_CONFIGURE_INPUTS);
 }
 
 void FilterCanIdAnalogRequest(volatile CAN_HandleTypeDef* hcan) {

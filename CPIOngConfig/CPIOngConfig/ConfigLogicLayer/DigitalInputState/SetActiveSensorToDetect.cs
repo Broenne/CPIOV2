@@ -11,6 +11,8 @@
 
     using Hal.PeakCan.Contracts.Basics;
 
+    using HardwareAbstraction.Contracts.PCanDll;
+
     using Helper.Contracts.Logger;
 
     /// <summary>
@@ -68,7 +70,7 @@
                 //data.Add(0);
 
                 var cobid = SelectPulseInput + id;
-                this.WriteBasicCan.WriteCan(cobid, data);
+                this.WriteBasicCan.WriteCan(cobid, data, TpcanMessageType.PCAN_MESSAGE_EXTENDED);
             }
             catch (Exception ex)
             {
@@ -95,7 +97,7 @@
                 var data = new List<byte>();
                 data.Add(0x02);
 
-                this.WriteBasicCan.WriteCan(cobid, data);
+                this.WriteBasicCan.WriteCan(cobid, data, TpcanMessageType.PCAN_MESSAGE_EXTENDED);
             }
             catch (Exception ex)
             {
