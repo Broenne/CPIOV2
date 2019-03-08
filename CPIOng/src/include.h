@@ -18,10 +18,10 @@
 #define Minor ((uint8_t)0x00)
 #define Bugfix ((uint8_t)0x01)
 
-#define FLIPFLOP_OPENCAN_OFFSET 		(( unsigned short ) 0x00 )
-#define PULSE_OPENCAN_OFFSET 			(( unsigned short ) 0x1 ) // 1, 2, 3
-#define FLIPFLOP_OPENCAN_OFFSET_RESET 	(( unsigned short ) 0x4 )
-#define ANALOG_REQUEST 					(( unsigned short ) 0x175 )
+#define FLIPFLOP_OPENCAN_OFFSET 		(( unsigned int ) 0x00 )
+#define PULSE_OPENCAN_OFFSET 			(( unsigned int ) 0x1 ) // 1, 2, 3
+#define FLIPFLOP_OPENCAN_OFFSET_RESET 	(( unsigned int ) 0x4 )
+#define ANALOG_REQUEST 					(( unsigned int ) 0x05 )
 //#define SEND_INPUT_CONFIG				(( unsigned short ) 0x179 )
 
 // Extended-offset-ids

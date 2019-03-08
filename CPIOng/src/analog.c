@@ -63,6 +63,8 @@ void ReadUartTask(void) {
 
 			++pos;
 		}
+
+		vTaskDelay(100);
 	}
 }
 

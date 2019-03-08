@@ -175,7 +175,7 @@
         {
             try
             {
-                if (id.Equals(this.GetActualNodeId.Get() + CanCommandConsts.RequestAnalogValue))
+                if (id.Equals(this.GetActualNodeId.Get() + CanCommandConsts.RequestAnalogValue + 1))
                 {
                     var channel = data[0];
 
@@ -184,7 +184,6 @@
 
                     this.AnalogEventHandler.OnReached(new AnalogEventArgs(channel, digits, Convert.ToUInt32(milliVoltage)));
                 }
-                
             }
             catch (Exception ex)
             {

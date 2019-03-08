@@ -10,7 +10,7 @@
 extern ADC_HandleTypeDef hadc1;
 static uint16_t adcbuffer[CHANNEL_COUNT];
 
-#define DIGIT_LIMIT_FOR_HIGH_SIGNAL ( ( unsigned short ) 2000 )
+#define DIGIT_LIMIT_FOR_HIGH_SIGNAL ( ( unsigned short ) 3000 )
 
 /*
  * Created on: 30.11.18

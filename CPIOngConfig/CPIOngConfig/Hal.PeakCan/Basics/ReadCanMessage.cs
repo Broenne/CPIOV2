@@ -18,6 +18,8 @@
     /// <seealso cref="IReadCanMessage" />
     public class ReadCanMessage : IReadCanMessage
     {
+        private readonly CancellationTokenSource src = new CancellationTokenSource();
+
         #region Constructor
 
         /// <summary>
@@ -53,9 +55,9 @@
         #endregion
 
         #region Properties
-        
+
         private ILogger Logger { get; }
-        
+
         private ushort MPcanHandle { get; set; }
 
         private IPreparePeakCan PreparePeakCan { get; }
@@ -65,8 +67,6 @@
         #endregion
 
         #region Public Methods
-
-        CancellationTokenSource src = new CancellationTokenSource();
 
         /// <summary>
         ///     Starts this instance.
@@ -79,7 +79,7 @@
             try
             {
                 this.OpenCanDongle();
-                Task.Run(() => { this.ReadRaw(); }, src.Token);
+                Task.Run(() => { this.ReadRaw(); }, this.src.Token);
                 return this.ReadCanMessageEvent;
             }
             catch (Exception ex)
@@ -90,7 +90,7 @@
         }
 
         /// <summary>
-        /// Stops this instance.
+        ///     Stops this instance.
         /// </summary>
         public void Stop()
         {
@@ -120,6 +120,7 @@
             }
             catch (Exception ex)
             {
+                this.Logger.LogError(ex);
                 throw;
             }
         }

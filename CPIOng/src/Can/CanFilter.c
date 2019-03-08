@@ -67,7 +67,7 @@ void AddExtendedFilter(volatile CAN_HandleTypeDef* hcan, uint id, uint filterNum
 }
 
 void FilterIdNull(volatile CAN_HandleTypeDef* hcan) {
-	InitFilter11bitIdentifier(&hcan2, FILTER_ID_NULL_BROADCAST, FILTER_ID_NULL_BROADCAST);
+	InitFilter11bitIdentifier(&hcan2, 0x00, FILTER_ID_NULL_BROADCAST);
 }
 
 void FilterCanIdResetFlipFlop(volatile CAN_HandleTypeDef* hcan) {

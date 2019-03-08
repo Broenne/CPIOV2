@@ -98,6 +98,7 @@ void myPrintf(char* resString) {
 
 			StoreForCan(resString, size);
 
+			// todo mb: fehlt jetzt das new line??!!
 			HAL_UART_Transmit(&huart1, (uint8_t*) resString, size, 100);
 		}
 }

@@ -34,6 +34,7 @@ void SanCanAlive(void) {
 	hcan.pTxMsg = &TxMessage;
 	hcan.pRxMsg = &RxMessage;
 	//hcan.pTxMsg->StdId = AliveCanId;
+	hcan.pTxMsg->IDE = CAN_ID_EXT;
 	hcan.pTxMsg->ExtId = AliveCanId;
 	memcpy(hcan.pTxMsg->Data, p, sizeof(p));
 

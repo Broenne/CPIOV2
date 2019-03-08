@@ -61,13 +61,6 @@
                 var id = this.GetActualNodeId.Get();
                 var data = new List<byte>();
                 data.Add((byte)modi);
-                //data.Add(0);
-                //data.Add(0);
-                //data.Add(0);
-                //data.Add(0);
-                //data.Add(0);
-                //data.Add(0);
-                //data.Add(0);
 
                 var cobid = SelectPulseInput + id;
                 this.WriteBasicCan.WriteCan(cobid, data, TpcanMessageType.PCAN_MESSAGE_EXTENDED);

@@ -16,7 +16,7 @@ void SendPrivateCan(CanTxMsgTypeDef canMessage){
 		while (hcan2.State != HAL_CAN_STATE_READY) {
 			++i;
 			if (i > 50) {
-				SetCanSendError(); // if not ready after 50 ms, throw error
+				//SetCanSendError(); // if not ready after 50 ms, throw error
 				break;
 			}
 
@@ -25,8 +25,9 @@ void SendPrivateCan(CanTxMsgTypeDef canMessage){
 
 		hcan2.pTxMsg = &canMessage;
 
-		if (HAL_CAN_Transmit(&hcan2, 5) != HAL_OK) {
-			SetCanSendError();
+		HAL_StatusTypeDef bbb = HAL_CAN_Transmit(&hcan2, 2);
+		if (bbb != HAL_OK) {
+			//SetCanSendError();
 		}
 }
 

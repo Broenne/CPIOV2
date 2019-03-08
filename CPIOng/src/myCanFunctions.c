@@ -137,15 +137,26 @@ void SendAnalogValueByCan(uint8_t* pData) {
 	uint8_t channel = pData[0];
 	uint32_t digits = ReadChannelAnalog(channel);
 
-	static int AnalogTabelle[28][2] = { { 0, 0 }, { 1, 433 }, { 2, 866 }, { 3, 1298 }, { 4, 1727 }, { 5, 2096 }, { 6, 2260 }, { 7, 2373 }, { 8, 2472 }, { 9, 2568 }, { 10, 2659 }, {
-			11, 2749 }, { 12, 2836 }, { 13, 2924 }, { 14, 3009 }, { 15, 3091 }, { 16, 3180 }, { 17, 3262 }, { 18, 3345 }, { 19, 3428 }, { 20, 3514 }, { 21, 3595 }, { 22, 3676 }, {
+	static int AnalogTabelle[28][2] = {
+			{ 0, 0 },
+			{ 1, 433 },
+			{ 2, 866 },
+			{ 3, 1298 },
+			{ 4, 1727 },
+			{ 5, 2096 },
+			{ 6, 2260 },
+			{ 7, 2373 },
+			{ 8, 2472 },
+			{ 9, 2568 },
+			{ 10, 2659 },
+			{ 11, 2749 }, { 12, 2836 }, { 13, 2924 }, { 14, 3009 }, { 15, 3091 }, { 16, 3180 }, { 17, 3262 }, { 18, 3345 }, { 19, 3428 }, { 20, 3514 }, { 21, 3595 }, { 22, 3676 }, {
 			23, 3761 }, { 24, 3840 }, { 25, 3922 }, { 26, 4004 }, { 27, 4087 }, };
 
 	double milliVoltage = 0;
 	int32_t milliVoltageAsInt = 0;
 	for (int i = 0; i < 28; ++i) {
 
-		if (digits >= AnalogTabelle[i][1] && digits < AnalogTabelle[i + 1][1] && channel == 5) {
+		if (digits >= AnalogTabelle[i][1] && digits < AnalogTabelle[i + 1][1]) {
 			// y = m*x+b  --> (y2-y1) = m*(x2-x1) + b
 			//m=(y2-y1)/(x2-x1)
 			int y1 = AnalogTabelle[i][0];
@@ -167,7 +178,7 @@ void SendAnalogValueByCan(uint8_t* pData) {
 	memcpy(&data[1], &digits, 2);
 	memcpy(&data[3], &milliVoltageAsInt, 4); // info mb: für die Millivolt reichen drei byte!!!
 
-	SendCan(GetGlobalCanNodeId() + ANALOG_REQUEST, data, 8);
+	SendCan(GetGlobalCanNodeId() + ANALOG_REQUEST + 1, data, 8);
 }
 
 /*
@@ -208,7 +219,7 @@ void CanWorkerTask(void * pvParameters) {
 						WorkerCanId0(pData);
 					}
 
-					uint8_t globalCanId = GetGlobalCanNodeId();
+					uint16_t globalCanId = GetGlobalCanNodeId();
 					// Funktion zum abfragen der Einganszustände
 					if (globalCanId == stdid) {
 						if (0x02 == hcan->pRxMsg->RTR) {
@@ -256,7 +267,7 @@ void CanWorkerTask(void * pvParameters) {
 			memcpy(data, hcan->pTxMsg->Data, CAN_DATA_LENGTH_MAX);
 			//hcan->pRxMsg->IDE;
 			//(hcan->pTxMsg->ExtId != 0)
-			if (hcan->pRxMsg->IDE == CAN_ID_EXT) {
+			if (hcan->pTxMsg->IDE == CAN_ID_EXT) {
 				SendCanExtended(hcan->pTxMsg->ExtId, data, CAN_DATA_LENGTH_MAX);
 			} else {
 				// dann annahme das es normal-mode ist

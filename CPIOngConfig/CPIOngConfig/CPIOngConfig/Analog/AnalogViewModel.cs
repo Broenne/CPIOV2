@@ -258,26 +258,29 @@
                         {
                             lock (LockSerialWrite)
                             {
-                                if (!this.SerialPort.IsOpen)
+                                if (this.SerialPort != null)
                                 {
-                                    break; // ma besten den task abbrechen und dings zurück setzen
+                                    if (!this.SerialPort.IsOpen)
+                                    {
+                                        break; // ma besten den task abbrechen und dings zurück setzen
+                                    }
+
+                                    this.SerialPort.DiscardInBuffer();
+
+                                    if (this.AnalogValuePolling)
+                                    {
+                                        this.SerialPort.WriteLine($"AnaCh{i}");
+                                    }
                                 }
 
-                                this.SerialPort.DiscardInBuffer();
+                                Thread.Sleep(50);
 
-                                if (this.AnalogValuePolling)
+                                ++i;
+
+                                if (i > 15)
                                 {
-                                    this.SerialPort.WriteLine($"AnaCh{i}");
+                                    i = 0;
                                 }
-                            }
-
-                            Thread.Sleep(50);
-
-                            ++i;
-
-                            if (i > 15)
-                            {
-                                i = 0;
                             }
                         }
                     });
