@@ -227,7 +227,8 @@ void CanWorkerTask(void * pvParameters) {
 						}
 					}
 
-					if ((globalCanId + FLIPFLOP_OPENCAN_OFFSET_RESET) == stdid) {
+					if ((globalCanId + FLIPFLOP_OPENCAN_OFFSET_RESET) == stdid && (0x03 == pData[0])) {
+						// todo mb: achtung, eigentlich werden die datenfgled in der alten cpio nicht mit ausgeweret. evtl wenn datnfeld nicht vorhaden auf 0xff setzen?
 						ResetFlipFlop(pData);
 					}
 

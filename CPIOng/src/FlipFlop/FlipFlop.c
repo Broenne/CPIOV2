@@ -46,8 +46,10 @@ void SetFlipFlopQmax(uint8_t channel) {
 void ResetFlipFlop(uint8_t* resetChannelsBitmask) {
 
 	uint16_t resetMask = 0;
-	resetMask |= (resetChannelsBitmask[0]);
-	resetMask |= (resetChannelsBitmask[1] << 8);
+//	resetMask |= (resetChannelsBitmask[0]);
+//	resetMask |= (resetChannelsBitmask[1] << 8);
+	resetMask |= (resetChannelsBitmask[1]);
+	resetMask |= (resetChannelsBitmask[2] << 8);
 
 	for(int i = 0; i < CHANNEL_COUNT; ++i){
 		if((resetMask >> i) & 0x01){

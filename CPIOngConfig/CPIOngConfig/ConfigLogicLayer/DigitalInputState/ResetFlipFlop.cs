@@ -56,10 +56,12 @@
                 this.Logger.LogBegin(this.GetType());
 
                 var data = new List<byte>();
+                data.Add(0x03);
                 data.Add(0xFF);
                 data.Add(0xFf);
 
-                this.WriteBasicCan.WriteCan(this.GetActualNodeId.Get() + (uint)0x172, data);
+                var resetFlipFlopMode = 512;
+                this.WriteBasicCan.WriteCan(this.GetActualNodeId.Get() + (uint)resetFlipFlopMode, data);
 
                 // todo mb: wait for alive
             }
