@@ -5,7 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:CPIOngConfig.ActiveSensor"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             xmlns:configInputs="clr-namespace:CPIOngConfig.Contracts.ConfigInputs;assembly=CPIOngConfig.Contracts"
+         
+
+    xmlns:configInputs="clr-namespace:ConfigLogicLayer.DigitalInputState;assembly=CPIOngConfig.Contracts"
+    
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -16,7 +19,9 @@
             <ObjectDataProvider x:Key="DataFromEnum" MethodName="GetValues"
                                 ObjectType="{x:Type sys:Enum}">
                 <ObjectDataProvider.MethodParameters>
-                    <x:Type TypeName="configInputs:Modi" />
+        <!--xmlns:configInputs="clr-namespace:CPIOngConfig.Contracts.ConfigInputs;assembly=CPIOngConfig.Contracts"-->
+        <!--<x:Type TypeName="configInputs:Modi" />-->
+        <x:Type TypeName="configInputs:ActionHandleStates" />
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
         </ResourceDictionary>

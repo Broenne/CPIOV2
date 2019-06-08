@@ -49,6 +49,8 @@
             this.ActiveSensorEventHandler.EventIsReached += this.ActiveSensorEventHandler_EventIsReached;
             this.SetSensorCommand = new RelayCommand(this.SetSensorCommandAction);
             this.LoadActiveSensorCommand = new RelayCommand(this.LoadActiveSensorCommandAction);
+
+            IsEnabled = true;
         }
 
         #endregion
@@ -126,7 +128,7 @@
             {
                 this.Logger.LogBegin(this.GetType());
 
-                this.IsEnabled = e;
+                this.IsEnabled = true;//e;
             }
             catch (Exception ex)
             {
