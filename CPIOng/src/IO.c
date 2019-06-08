@@ -18,7 +18,7 @@ static uint16_t adcbuffer[CHANNEL_COUNT];
  Initialisierung der Eingänge auf dem borad.
  Siehe Schaltplan*/
 void InitReadIO(void) {
-	HAL_ADC_Start_DMA(&hadc1, &adcbuffer[0], 16);
+	HAL_ADC_Start_DMA(&hadc1, &adcbuffer[0], CHANNEL_COUNT);
 }
 
 unsigned short GetAnalogBarrier(void) {
@@ -45,6 +45,10 @@ int ReadChannelAnalog(uint pos) {
 
 static uint8_t dataHelper[CHANNEL_COUNT / 8] = { 0 }; // static um es nur einmal anzulegen?
 
+#define MEAN_VALUE_DEPTH ( ( unsigned short ) 10 )
+static int MeanValue[CHANNEL_COUNT][MEAN_VALUE_DEPTH]; // array[y][x]
+static int MeanValuePointer[CHANNEL_COUNT];
+
 void ReadInputs(uint8_t* data) {
 	uint16_t inputs[CHANNEL_COUNT];
 	dataHelper[0] = 0;
@@ -54,6 +58,28 @@ void ReadInputs(uint8_t* data) {
 
 	int anaDigits;
 	for (int i = 0; i < CHANNEL_COUNT; ++i) {
+
+		// Mittelwert berechnen, zumm entprellen (todo mb: ausllagern und wie lange dauert das? wir sind im interrupt)
+		//////////////////////////////////////////////////////////////////////////////////
+		// pointer erhöhen um zu wissen welcher wert ersetzt werden muuss
+		MeanValuePointer[i]++;
+		if(MeanValuePointer[i] >= MEAN_VALUE_DEPTH){
+			MeanValuePointer[i] = 0;
+		}
+
+		// wert an passende Stelle schreiben
+		MeanValue[i][MeanValuePointer[i]] = anaDigits;
+
+		// Mittelwert berechne, achtung zahlentyp überlauf?!!!!!!??????? (Werte sin 2 byte)
+		uint32_t mittelwertSumme = 0;
+		for(int j = 0;j < MEAN_VALUE_DEPTH; ++j){
+			mittelwertSumme	+= MeanValue[i][j];
+		}
+
+		int meanValue = mittelwertSumme / 10;
+		//////////////////////////////////////////////////////////////////////////
+
+
 		anaDigits = CalculateAnalogToHighOrLow(inputs[i]);
 		dataHelper[i / 8] = dataHelper[i / 8] | (anaDigits << (i % 8));
 	}
