@@ -49,3 +49,10 @@ target extended-remote localhost:61234
 
 Error message from debugger back end:
 localhost:61234: Das System hat versucht, einem Verzeichnis, das sich auf einem mit JOIN zugeordneten Laufwerk befindet, ein Laufwerk mit SUBST zuzuordnen.
+
+!ENTRY TrueSTUDIO 4 0 2019-06-08 20:28:15.556
+!MESSAGE ST-LINK GDB server failed to start (exit code = 2)
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2019-06-08 20:28:15.627
+!MESSAGE Error in initializing ST-Link device.
+Reason: (2) ST-Link DLL error.

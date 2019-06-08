@@ -76,7 +76,7 @@ void ReadInputs(uint8_t* data) {
 			mittelwertSumme	+= MeanValue[i][j];
 		}
 
-		int meanValue = mittelwertSumme / 10;
+		int meanValue = mittelwertSumme / 10; // evtl besser 8 oder 16 nehmen und dann shiften >>1(:2)   >>2(:4)
 		//////////////////////////////////////////////////////////////////////////
 
 
