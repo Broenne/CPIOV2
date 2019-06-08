@@ -6,3 +6,4 @@ C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper.Contracts\obj\Debug\netstandard2
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper.Contracts\obj\Debug\netstandard2.0\Helper.Contracts.AssemblyInfo.cs
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper.Contracts\obj\Debug\netstandard2.0\Helper.Contracts.dll
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper.Contracts\obj\Debug\netstandard2.0\Helper.Contracts.pdb
+C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Helper.Contracts\obj\Debug\netstandard2.0\Helper.Contracts.csprojAssemblyReference.cache
