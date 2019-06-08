@@ -53,16 +53,25 @@
         ///     Does the specified modi.
         /// </summary>
         /// <param name="modi">The modi info.</param>
-        public void Do(Modi modi)
+        public void Do(/*Modi modi*/ActionHandleStates actionHandleStates)
         {
             try
             {
+                //const uint SelectPulseInput = CanCommandConsts.SetActiveSensor;
+                //var id = this.GetActualNodeId.Get();
+                //var data = new List<byte>();
+                //data.Add((byte)modi);
+
+                //var cobid = SelectPulseInput + id;
+
                 const uint SelectPulseInput = CanCommandConsts.SetActiveSensor;
                 var id = this.GetActualNodeId.Get();
                 var data = new List<byte>();
-                data.Add((byte)modi);
+                data.Add((byte)actionHandleStates);
 
                 var cobid = SelectPulseInput + id;
+
+
                 this.WriteBasicCan.WriteCan(cobid, data, TpcanMessageType.PCAN_MESSAGE_EXTENDED);
             }
             catch (Exception ex)

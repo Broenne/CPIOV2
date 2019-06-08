@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="C:\apps\CPIOV2"/>
+		<item value="C:\apps\CPIOV2\CPIOng"/>
+	</list>
 	<section name="ExternalProjectImportWizard">
 		<item value="false" key="WizardProjectsImportPage.STORE_NESTED_PROJECTS"/>
 		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
 		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="C:\apps\CPIOV2\CPIOng"/>
 			<item value="C:\Users\tbe241.OSMA-AUFZUEGE\Downloads\IAR_STM32F103ZE_FreeRTOS_Simple_Demo\IAR_STM32F103ZE_FreeRTOS_Simple_Demo"/>
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">

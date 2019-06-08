@@ -5,7 +5,7 @@
     using System.Windows.Input;
 
     using ConfigLogicLayer.Contracts.DigitalInputState;
-
+    using ConfigLogicLayer.DigitalInputState;
     using CPIOngConfig.Contracts.ActiveSensor;
     using CPIOngConfig.Contracts.Adapter;
     using CPIOngConfig.Contracts.ConfigInputs;
@@ -24,7 +24,8 @@
     {
         private bool isEnabled;
 
-        private Modi selctedValue;
+        //private Modi selctedValue;
+        private ActionHandleStates selctedValue;
 
         #region Constructor
 
@@ -35,7 +36,10 @@
         /// <param name="setActiveSensorToDetect">The set active sensor to detect.</param>
         /// <param name="activeSensorEventHandler">The active sensor event handler.</param>
         /// <param name="canIsConnectedEventHandler">The can is connected event handler.</param>
-        public ActiveSensorViewModel(ILogger logger, ISetActiveSensorToDetect setActiveSensorToDetect, IActiveSensorEventHandler activeSensorEventHandler, ICanIsConnectedEventHandler canIsConnectedEventHandler)
+        public ActiveSensorViewModel(ILogger logger, 
+            ISetActiveSensorToDetect setActiveSensorToDetect, 
+            IActiveSensorEventHandler activeSensorEventHandler, 
+            ICanIsConnectedEventHandler canIsConnectedEventHandler)
         {
             this.Logger = logger;
             this.SetActiveSensorToDetect = setActiveSensorToDetect;
@@ -72,13 +76,26 @@
         /// </value>
         public ICommand LoadActiveSensorCommand { get; }
 
+        ///// <summary>
+        /////     Gets or sets the selected value.
+        ///// </summary>
+        ///// <value>
+        /////     The selected value.
+        ///// </value>
+        //public Modi SelctedValue
+        //{
+        //    get => this.selctedValue;
+
+        //    set => this.SetProperty(ref this.selctedValue, value);
+        //}
+
         /// <summary>
         ///     Gets or sets the selected value.
         /// </summary>
         /// <value>
         ///     The selected value.
         /// </value>
-        public Modi SelctedValue
+        public ActionHandleStates SelctedValue
         {
             get => this.selctedValue;
 
@@ -122,7 +139,7 @@
             }
         }
 
-        private void ActiveSensorEventHandler_EventIsReached(object sender, Modi e)
+        private void ActiveSensorEventHandler_EventIsReached(object sender, /*Modi e*/ActionHandleStates e)
         {
             try
             {
@@ -161,7 +178,8 @@
             {
                 this.Logger.LogBegin(this.GetType());
 
-                var modi = (Modi)obj;
+                //var modi = (Modi)obj;
+                var modi = (ActionHandleStates)obj;
                 this.SetActiveSensorToDetect.Do(modi);
             }
             catch (Exception ex)

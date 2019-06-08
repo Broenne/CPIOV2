@@ -1,7 +1,7 @@
 ﻿namespace CPIOngConfig.ActiveSensor
 {
     using System;
-
+    using ConfigLogicLayer.DigitalInputState;
     using CPIOngConfig.Contracts.Alive;
     using CPIOngConfig.Contracts.ConfigInputs;
 
@@ -31,7 +31,7 @@
         /// <summary>
         ///     Occurs when [node is reached].
         /// </summary>
-        public event EventHandler<Modi> EventIsReached;
+        public event EventHandler</*Modi*/ActionHandleStates> EventIsReached;
 
         #endregion
 
@@ -47,7 +47,7 @@
         ///     Raises the <see cref="E:NodeReached" /> event.
         /// </summary>
         /// <param name="e">The <see cref="AliveEventArgs" /> instance containing the event data.</param>
-        public virtual void OnReached(Modi e)
+        public virtual void OnReached(/*Modi*/ActionHandleStates e)
         {
             try
             {

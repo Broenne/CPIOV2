@@ -1,12 +1,13 @@
 ﻿using System;
+using ConfigLogicLayer.DigitalInputState;
 using CPIOngConfig.Contracts.ConfigInputs;
 
 namespace CPIOngConfig.ActiveSensor
 {
     public interface IActiveSensorEventHandler
     {
-        event EventHandler<Modi> EventIsReached;
+        event EventHandler</*Modi*/ActionHandleStates> EventIsReached;
 
-        void OnReached(Modi e);
+        void OnReached(/*Modi*/ActionHandleStates e);
     }
 }

@@ -222,7 +222,10 @@
 
                 if (id == CanCommandConsts.SensorModiResponse + this.GetActualNodeId.Get() && data[0] == 0x02)
                 {
-                    var modi = (Modi)data[1];
+                    //var modi = (Modi)data[1];
+                    //this.ActiveSensorEventHandler.OnReached(modi);
+
+                    var modi = (ActionHandleStates)data[1];
                     this.ActiveSensorEventHandler.OnReached(modi);
                 }
             }
