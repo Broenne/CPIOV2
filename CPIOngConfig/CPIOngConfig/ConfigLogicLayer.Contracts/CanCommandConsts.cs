@@ -19,7 +19,7 @@
 
         public const uint InputState = 0xFFFFFD; // 0x177;
 
-        public const uint PulseId = 0x1;
+        public const uint PulseId = 0x5;
 
         public const uint RequestAnalogValue = 0x05;
 
