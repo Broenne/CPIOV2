@@ -272,12 +272,10 @@ void CanWorkerTask(void * pvParameters) {
 								if(1 == simPulseScharf )
 								{
 									dif = GetTicks() - rememberTicksEigenimpulse;
-//									SendCanTimeDif(0, dif, 0);
-//									SendCanTimeDif(1, dif, 0);
-//									SendCanTimeDif(2, dif, 0);
-									SendCanTimeDifHardChannel(0, dif);
-									SendCanTimeDifHardChannel(1, dif);
-									SendCanTimeDifHardChannel(2, dif);
+									SendCanTimeDif(0, dif, 0);
+									SendCanTimeDif(1, dif, 0);
+									SendCanTimeDif(2, dif, 0);
+									simPulseScharf = 0;
 								}
 								else{
 									pDataHelper[1] = 0xFF;
@@ -285,7 +283,6 @@ void CanWorkerTask(void * pvParameters) {
 									ResetFlipFlop(pDataHelper);
 								}
 
-								simPulseScharf = 0;
 
 								break;
 							case 0x03:
@@ -411,26 +408,6 @@ void SendCanTimeDif(uint8_t channel, uint32_t res, uint8_t checkSum) {
 
 	uint32_t canId = PULSE_OPENCAN_OFFSET + cobId + GetGlobalCanNodeId();
 	SendCan(canId, p, 8);
-}
-
-// todo mb: beschreiben für eigenimpulse
-void SendCanTimeDifHardChannel(uint8_t channel, uint32_t res){
-		uint8_t p[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
-
-		// cast timestamp to can info
-		p[0] = (res >> 24) & 0xFF;
-		p[1] = (res >> 16) & 0xFF;
-		p[2] = (res >> 8) & 0xFF;
-		p[3] = res & 0xFF;
-
-//		p[6] = channel;
-//		p[7] = checkSum;
-
-		//uint cobId = GetPositionOfThisChannelModiAndChannel(channel);
-
-		uint32_t canId = PULSE_OPENCAN_OFFSET + channel + GetGlobalCanNodeId();
-		SendCan(canId, p, 8);
-
 }
 
 /*

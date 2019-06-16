@@ -247,12 +247,10 @@ void CanWorkerTask(void * pvParameters) {
 					// reset durch martin
 					uint8_t pDataHelper[3];
 					static int SetInEigenimpulsModus;
-					uint32_t dif  = 0;
-					static uint8_t simPulseScharf = 0;
-
 					if(globalCanId == stdid ){
 						switch (pData[0]){
 							case 0x00:
+
 								// tod mb:: das ist noch scheiße. unbedingt nummer aus enum
 								pDataHelper[0] = (uint8_t)2;
 								SetActiveChannel(pDataHelper);
@@ -267,49 +265,22 @@ void CanWorkerTask(void * pvParameters) {
 								pDataHelper[0] = (uint8_t)3;
 								SetActiveChannel(pDataHelper);
 								break;
-							//case 0x03:
-							case 0x07: // todo mb: Unebdingt dokumentiren, das ist der selbe Befehl wie bei dr reset
-								if(1 == simPulseScharf )
-								{
-									dif = GetTicks() - rememberTicksEigenimpulse;
-//									SendCanTimeDif(0, dif, 0);
-//									SendCanTimeDif(1, dif, 0);
-//									SendCanTimeDif(2, dif, 0);
-									SendCanTimeDifHardChannel(0, dif);
-									SendCanTimeDifHardChannel(1, dif);
-									SendCanTimeDifHardChannel(2, dif);
-								}
-								else{
-									pDataHelper[1] = 0xFF;
-									pDataHelper[2] = 0xFF;
-									ResetFlipFlop(pDataHelper);
-								}
-
-								simPulseScharf = 0;
-
-								break;
 							case 0x03:
-								// sim pulse
-//								if(1 == simPulseScharf){
-//									simPulseScharf = 0;
-//									rememberTicksEigenimpulse = 0;
-//								}
-//								else{
-									// scharf schalten
-									simPulseScharf = 1;
-									rememberTicksEigenimpulse = GetTicks();
-								//}
 
+								rememberTicksEigenimpulse = GetTicks();;
+								break;
+							case 0x04:
+								SendCanTimeDif(0, GetTicks() - rememberTicksEigenimpulse, 0);
 								break;
 							}
 					}
 
-//					if ((globalCanId + FLIPFLOP_OPENCAN_OFFSET_RESET) == stdid && (0x07 == pData[0])) {
-//						// todo mb: achtung, eigentlich werden die datenfgled in der alten cpio nicht mit ausgeweret. evtl wenn datnfeld nicht vorhaden auf 0xff setzen?
-//						pDataHelper[1] = 0xFF;
-//						pDataHelper[2] = 0xFF;
-//						ResetFlipFlop(pDataHelper);
-//					}
+					if ((globalCanId + FLIPFLOP_OPENCAN_OFFSET_RESET) == stdid && (0x07 == pData[0])) {
+						// todo mb: achtung, eigentlich werden die datenfgled in der alten cpio nicht mit ausgeweret. evtl wenn datnfeld nicht vorhaden auf 0xff setzen?
+						pDataHelper[1] = 0xFF;
+						pDataHelper[2] = 0xFF;
+						ResetFlipFlop(pDataHelper);
+					}
 
 //					// Funktion zum Abfragen des aktuellen analogen Messwerts
 //					if ((globalCanId + ANALOG_REQUEST) == stdid) {
@@ -411,26 +382,6 @@ void SendCanTimeDif(uint8_t channel, uint32_t res, uint8_t checkSum) {
 
 	uint32_t canId = PULSE_OPENCAN_OFFSET + cobId + GetGlobalCanNodeId();
 	SendCan(canId, p, 8);
-}
-
-// todo mb: beschreiben für eigenimpulse
-void SendCanTimeDifHardChannel(uint8_t channel, uint32_t res){
-		uint8_t p[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
-
-		// cast timestamp to can info
-		p[0] = (res >> 24) & 0xFF;
-		p[1] = (res >> 16) & 0xFF;
-		p[2] = (res >> 8) & 0xFF;
-		p[3] = res & 0xFF;
-
-//		p[6] = channel;
-//		p[7] = checkSum;
-
-		//uint cobId = GetPositionOfThisChannelModiAndChannel(channel);
-
-		uint32_t canId = PULSE_OPENCAN_OFFSET + channel + GetGlobalCanNodeId();
-		SendCan(canId, p, 8);
-
 }
 
 /*

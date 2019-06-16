@@ -204,11 +204,6 @@ void CheckPulseInputs(void) {
 	oldValue = value;
 }
 
-uint32_t GetTicks(){
-	return tickMs;
-}
-
-
 /*
  * Created on: 30.11.18
  * Author: MB

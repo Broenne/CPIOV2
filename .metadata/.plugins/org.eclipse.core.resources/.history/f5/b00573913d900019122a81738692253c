@@ -16,6 +16,5 @@ volatile static uint32_t lastTimeValue[CHANNEL_COUNT];
 void SetTimerPulseCorrecturFactor(uint16_t value);
 void InitPulse(void);
 void InitPulseSender(void);
-uint32_t GetTicks();
 
 #endif /* PULSE_H_ */

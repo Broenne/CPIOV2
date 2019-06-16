@@ -272,12 +272,9 @@ void CanWorkerTask(void * pvParameters) {
 								if(1 == simPulseScharf )
 								{
 									dif = GetTicks() - rememberTicksEigenimpulse;
-//									SendCanTimeDif(0, dif, 0);
-//									SendCanTimeDif(1, dif, 0);
-//									SendCanTimeDif(2, dif, 0);
-									SendCanTimeDifHardChannel(0, dif);
-									SendCanTimeDifHardChannel(1, dif);
-									SendCanTimeDifHardChannel(2, dif);
+									SendCanTimeDif(0, dif, 0);
+									SendCanTimeDif(1, dif, 0);
+									SendCanTimeDif(2, dif, 0);
 								}
 								else{
 									pDataHelper[1] = 0xFF;
