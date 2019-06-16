@@ -266,35 +266,33 @@ void CanWorkerTask(void * pvParameters) {
 //								pDataHelper[0] = ChannelModiType.Namur;
 //								SetActiveChannel(pDataHelper);
 
-//								if(0 == SetInEigenimpulsModus){
-//									pDataHelper[1] = 0xFF;
-//									pDataHelper[2] = 0xFF;
-//									ResetFlipFlop(pDataHelper);
-//								}
+								if(0 == SetInEigenimpulsModus){
+									pDataHelper[1] = 0xFF;
+									pDataHelper[2] = 0xFF;
+									ResetFlipFlop(pDataHelper);
+								}
 
-								//if(1 == SetInEigenimpulsModus){
-									//tickMs - rememberTicksEigenimpulse;
+								if(1 == SetInEigenimpulsModus){
+									tickMs - rememberTicksEigenimpulse;
 									//SendCan(dataEigenimpuls,dataEigenimpuls, 4);
 									SendCanTimeDif(0, tickMs - rememberTicksEigenimpulse, 0);
 
-								//}
+								}
 
 								break;
 							case 0x04:
 								// Vorbereitung Eigenimpuls
 //								pDataHelper[0] = ChannelModiType.Namur;
 //								SetActiveChannel(pDataHelper);
-								//SetInEigenimpulsModus = 1;
+								SetInEigenimpulsModus = 1;
 								rememberTicksEigenimpulse = tickMs;
 								break;
 							}
 					}
 
-					if ((globalCanId + FLIPFLOP_OPENCAN_OFFSET_RESET) == stdid && (0x07 == pData[0])) {
+					if ((globalCanId + FLIPFLOP_OPENCAN_OFFSET_RESET) == stdid && (0x03 == pData[0])) {
 						// todo mb: achtung, eigentlich werden die datenfgled in der alten cpio nicht mit ausgeweret. evtl wenn datnfeld nicht vorhaden auf 0xff setzen?
-						pDataHelper[1] = 0xFF;
-						pDataHelper[2] = 0xFF;
-						ResetFlipFlop(pDataHelper);
+						ResetFlipFlop(pData);
 					}
 
 //					// Funktion zum Abfragen des aktuellen analogen Messwerts

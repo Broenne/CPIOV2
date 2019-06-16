@@ -95,9 +95,9 @@ void FilterCanIdConfigureInputs(volatile CAN_HandleTypeDef* hcan) {
 		AddExtendedFilter(&hcan2, id, FILTER_ID_CONFIGURE_INPUTS);
 }
 
-//void FilterCanIdAnalogRequest(volatile CAN_HandleTypeDef* hcan) {
-//	InitFilter11bitIdentifier(&hcan2, GetGlobalCanNodeId() + ANALOG_REQUEST, FILTER_ID_ANALOG_REQUEST);
-//}
+void FilterCanIdAnalogRequest(volatile CAN_HandleTypeDef* hcan) {
+	InitFilter11bitIdentifier(&hcan2, GetGlobalCanNodeId() + ANALOG_REQUEST, FILTER_ID_ANALOG_REQUEST);
+}
 
 void FilterOnlyMyId(volatile CAN_HandleTypeDef* hcan) {
 	InitFilter11bitIdentifier(&hcan2, GetGlobalCanNodeId(), FILTER_ID_MY_ID);
@@ -111,5 +111,5 @@ void InitCanFilter(void) {
 	FilterCanIdGetInputConfig(&hcan2);
 	FilterCanIdConfigureInputs(&hcan2);
 	FilterCanIdRequestText(&hcan2);
-	//FilterCanIdAnalogRequest(&hcan2);
+	FilterCanIdAnalogRequest(&hcan2);
 }

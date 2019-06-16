@@ -292,9 +292,7 @@ void CanWorkerTask(void * pvParameters) {
 
 					if ((globalCanId + FLIPFLOP_OPENCAN_OFFSET_RESET) == stdid && (0x07 == pData[0])) {
 						// todo mb: achtung, eigentlich werden die datenfgled in der alten cpio nicht mit ausgeweret. evtl wenn datnfeld nicht vorhaden auf 0xff setzen?
-						pDataHelper[1] = 0xFF;
-						pDataHelper[2] = 0xFF;
-						ResetFlipFlop(pDataHelper);
+						ResetFlipFlop(pData);
 					}
 
 //					// Funktion zum Abfragen des aktuellen analogen Messwerts

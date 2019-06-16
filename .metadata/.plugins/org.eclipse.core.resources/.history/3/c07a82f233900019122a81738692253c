@@ -30,12 +30,12 @@ void SetFlipFlop(uint8_t pos, uint8_t bytePositionOffset){
  */
 void SetFlipFlopQmin(uint8_t channel) {
 	uint pos = GetPositionOfThisChannelByModi(channel, Qmin);
-	SetFlipFlop(pos, 13);//8);
+	SetFlipFlop(pos, 8);
 }
 
 void SetFlipFlopQmax(uint8_t channel) {
 	uint pos = GetPositionOfThisChannelByModi(channel, Qmax);
-	SetFlipFlop(pos, 5);//0);
+	SetFlipFlop(pos, 0);
 }
 
 /*

@@ -20,7 +20,7 @@
 
 #define FLIPFLOP_OPENCAN_OFFSET 		(( unsigned int ) 0x4 )
 #define PULSE_OPENCAN_OFFSET 			(( unsigned int ) 0x5 ) // 1, 2, 3
-#define FLIPFLOP_OPENCAN_OFFSET_RESET 	(( unsigned int ) 0x00 )
+#define FLIPFLOP_OPENCAN_OFFSET_RESET 	(( unsigned int ) 512 )
 //#define ANALOG_REQUEST 					(( unsigned int ) 0x05 )
 //#define SEND_INPUT_CONFIG				(( unsigned short ) 0x179 )
 
