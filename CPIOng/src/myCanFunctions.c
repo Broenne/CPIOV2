@@ -227,6 +227,42 @@ void CanWorkerTask(void * pvParameters) {
 						}
 					}
 
+
+					//
+
+					// reset durch martin
+					uint8_t pDataHelper[0];
+					if(globalCanId == stdid ){
+						switch (pData[0]){
+							case 0x00:
+
+								// tod mb:: das ist noch scheiﬂe. unbedingt nummer aus enum
+								pDataHelper[0] = (uint8_t)2;
+								SetActiveChannel(pDataHelper);
+								break;
+							case 0x01:
+								// Reed
+								pDataHelper[0] = (uint8_t)1;
+								SetActiveChannel(pDataHelper);
+								break;
+							case 0x02:
+								// Licht
+								pDataHelper[0] = (uint8_t)3;
+								SetActiveChannel(pDataHelper);
+								break;
+							case 0x03:
+								// Reset Druckw‰chter
+//								pDataHelper[0] = ChannelModiType.Namur;
+//								SetActiveChannel(pDataHelper);
+								break;
+							case 0x04:
+								// Vorbereitung Eigenimpuls
+//								pDataHelper[0] = ChannelModiType.Namur;
+//								SetActiveChannel(pDataHelper);
+								break;
+							}
+					}
+
 					if ((globalCanId + FLIPFLOP_OPENCAN_OFFSET_RESET) == stdid && (0x03 == pData[0])) {
 						// todo mb: achtung, eigentlich werden die datenfgled in der alten cpio nicht mit ausgeweret. evtl wenn datnfeld nicht vorhaden auf 0xff setzen?
 						ResetFlipFlop(pData);

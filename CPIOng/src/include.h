@@ -14,9 +14,9 @@
 #define QUEUE_SIZE_FOR_CAN_RECEIVE		( ( unsigned short ) 32 )
 #define QUEUE_SIZE_FOR_CAN_SEND 		( ( unsigned short ) 32 )
 
-#define Major ((uint8_t)0x00)
-#define Minor ((uint8_t)0x00)
-#define Bugfix ((uint8_t)0x01)
+#define Major 							((uint8_t)0x00)
+#define Minor 							((uint8_t)0x00)
+#define Bugfix 							((uint8_t)0xC)
 
 #define FLIPFLOP_OPENCAN_OFFSET 		(( unsigned int ) 0x00 )
 #define PULSE_OPENCAN_OFFSET 			(( unsigned int ) 0x1 ) // 1, 2, 3
@@ -31,6 +31,8 @@
 #define INPUT_STATE 					(( unsigned int ) 0xFFFFFD )
 #define ALIVE_OFFSET 					(( unsigned int ) 0xFFFFFE )
 #define REQUEST_TEXT 					(( unsigned int ) 0xFFFFFF )
+
+typedef enum  { None, Read, Namur, Licht, Qmin, Qmax, Analog } ChannelModiType;
 
 #include "main.h"
 #include "stm32f1xx_hal.h"

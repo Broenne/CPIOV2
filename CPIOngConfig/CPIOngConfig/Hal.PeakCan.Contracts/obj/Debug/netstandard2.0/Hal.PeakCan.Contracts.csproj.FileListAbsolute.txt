@@ -6,4 +6,3 @@ C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.PeakCan.Contracts\obj\Debug\netstan
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.PeakCan.Contracts\obj\Debug\netstandard2.0\Hal.PeakCan.Contracts.AssemblyInfo.cs
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.PeakCan.Contracts\obj\Debug\netstandard2.0\Hal.PeakCan.Contracts.dll
 C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.PeakCan.Contracts\obj\Debug\netstandard2.0\Hal.PeakCan.Contracts.pdb
-C:\apps\CPIOV2\CPIOngConfig\CPIOngConfig\Hal.PeakCan.Contracts\obj\Debug\netstandard2.0\Hal.PeakCan.Contracts.csprojAssemblyReference.cache

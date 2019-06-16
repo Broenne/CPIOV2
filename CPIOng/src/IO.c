@@ -10,7 +10,7 @@
 extern ADC_HandleTypeDef hadc1;
 static uint16_t adcbuffer[CHANNEL_COUNT];
 
-#define DIGIT_LIMIT_FOR_HIGH_SIGNAL ( ( unsigned short ) 4000 )
+#define DIGIT_LIMIT_FOR_HIGH_SIGNAL ( ( unsigned short ) 3000 )
 
 /*
  * Created on: 30.11.18
@@ -42,49 +42,50 @@ int ReadChannelAnalog(uint pos) {
 	return adcbuffer[pos];
 }
 
-
 static uint8_t dataHelper[CHANNEL_COUNT / 8] = { 0 }; // static um es nur einmal anzulegen?
 
-#define MEAN_VALUE_DEPTH ( ( unsigned short ) 10 )
+#define MEAN_VALUE_DEPTH ( ( unsigned short ) 15 )
 static int MeanValue[CHANNEL_COUNT][MEAN_VALUE_DEPTH]; // array[y][x]
 static int MeanValuePointer[CHANNEL_COUNT];
 
 void ReadInputs(uint8_t* data) {
-	uint16_t inputs[CHANNEL_COUNT];
-	dataHelper[0] = 0;
-	dataHelper[1] = 0;
+		uint16_t inputs[CHANNEL_COUNT];
+		dataHelper[0] = 0;
+		dataHelper[1] = 0;
 
-	memcpy(&inputs, &adcbuffer[0], CHANNEL_COUNT * sizeof(uint16_t));
+		memcpy(&inputs, &adcbuffer[0], CHANNEL_COUNT * sizeof(uint16_t));
 
-	int anaDigits;
-	for (int i = 0; i < CHANNEL_COUNT; ++i) {
+		int anaDigits;
+		for (int i = 0; i < CHANNEL_COUNT; ++i) {
+			   // Mittelwert berechnen, zumm entprellen (todo mb: ausllagern und wie lange dauert das? wir sind im interrupt)
+			   //////////////////////////////////////////////////////////////////////////////////
 
-		// Mittelwert berechnen, zumm entprellen (todo mb: ausllagern und wie lange dauert das? wir sind im interrupt)
-		//////////////////////////////////////////////////////////////////////////////////
-		// pointer erhöhen um zu wissen welcher wert ersetzt werden muuss
-		MeanValuePointer[i]++;
-		if(MeanValuePointer[i] >= MEAN_VALUE_DEPTH){
-			MeanValuePointer[i] = 0;
+			   // pointer erhöhen um zu wissen welcher wert ersetzt werden muuss
+			   if(MeanValuePointer[i] >= (MEAN_VALUE_DEPTH-1)){
+					MeanValuePointer[i] = -1;
+			   }
+
+			   MeanValuePointer[i]++;
+			   // wert an passende Stelle schreiben
+
+			   MeanValue[i][MeanValuePointer[i]] = inputs[i];
+			   // Mittelwert berechne, achtung zahlentyp überlauf?!!!!!!??????? (Werte sin 2 byte)
+
+			   uint32_t mittelwertSumme = 0;
+			   for(int j = 0;j < MEAN_VALUE_DEPTH; ++j){
+					mittelwertSumme += MeanValue[i][j];
+			   }
+
+			   int meanValue = mittelwertSumme / MEAN_VALUE_DEPTH; // evtl besser 8 oder 16 nehmen und dann shiften >>1(:2)   >>2(:4)
+			   //////////////////////////////////////////////////////////////////////////
+
+			   //anaDigits = CalculateAnalogToHighOrLow(inputs[i]);
+			   anaDigits = CalculateAnalogToHighOrLow(meanValue);
+
+			   dataHelper[i / 8] = dataHelper[i / 8] | (anaDigits << (i % 8));
 		}
 
-		// wert an passende Stelle schreiben
-		MeanValue[i][MeanValuePointer[i]] = anaDigits;
-
-		// Mittelwert berechne, achtung zahlentyp überlauf?!!!!!!??????? (Werte sin 2 byte)
-		uint32_t mittelwertSumme = 0;
-		for(int j = 0;j < MEAN_VALUE_DEPTH; ++j){
-			mittelwertSumme	+= MeanValue[i][j];
-		}
-
-		int meanValue = mittelwertSumme / 10; // evtl besser 8 oder 16 nehmen und dann shiften >>1(:2)   >>2(:4)
-		//////////////////////////////////////////////////////////////////////////
-
-
-		anaDigits = CalculateAnalogToHighOrLow(inputs[i]);
-		dataHelper[i / 8] = dataHelper[i / 8] | (anaDigits << (i % 8));
-	}
-
-	memcpy(data, dataHelper, sizeof(dataHelper));
+		memcpy(data, dataHelper, sizeof(dataHelper));
 }
 
 void GetInputs(uint8_t* data) {

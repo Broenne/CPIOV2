@@ -183,24 +183,22 @@
         {
             try
             {
-                this.ConfigureInputsViewList[0].GetDataContext().ChangeChannelModi(Modi.Licht);
-                this.ConfigureInputsViewList[1].GetDataContext().ChangeChannelModi(Modi.Licht);
+                this.ConfigureInputsViewList[0].GetDataContext().ChangeChannelModi(Modi.Namur);
+                this.ConfigureInputsViewList[1].GetDataContext().ChangeChannelModi(Modi.Read);
                 this.ConfigureInputsViewList[2].GetDataContext().ChangeChannelModi(Modi.Licht);
+                this.ConfigureInputsViewList[3].GetDataContext().ChangeChannelModi(Modi.Qmin);
+                this.ConfigureInputsViewList[4].GetDataContext().ChangeChannelModi(Modi.Qmax);
 
-                this.ConfigureInputsViewList[3].GetDataContext().ChangeChannelModi(Modi.Read);
-                this.ConfigureInputsViewList[4].GetDataContext().ChangeChannelModi(Modi.Read);
-                this.ConfigureInputsViewList[5].GetDataContext().ChangeChannelModi(Modi.Read);
+                this.ConfigureInputsViewList[5].GetDataContext().ChangeChannelModi(Modi.Namur);
+                this.ConfigureInputsViewList[6].GetDataContext().ChangeChannelModi(Modi.Read);
+                this.ConfigureInputsViewList[7].GetDataContext().ChangeChannelModi(Modi.Licht);
+                this.ConfigureInputsViewList[8].GetDataContext().ChangeChannelModi(Modi.Qmin);
+                this.ConfigureInputsViewList[9].GetDataContext().ChangeChannelModi(Modi.Qmax);
 
-                this.ConfigureInputsViewList[6].GetDataContext().ChangeChannelModi(Modi.Namur);
-                this.ConfigureInputsViewList[7].GetDataContext().ChangeChannelModi(Modi.Namur);
-                this.ConfigureInputsViewList[8].GetDataContext().ChangeChannelModi(Modi.Namur);
-
-                this.ConfigureInputsViewList[9].GetDataContext().ChangeChannelModi(Modi.Qmin);
-                this.ConfigureInputsViewList[10].GetDataContext().ChangeChannelModi(Modi.Qmin);
-                this.ConfigureInputsViewList[11].GetDataContext().ChangeChannelModi(Modi.Qmin);
-
-                this.ConfigureInputsViewList[12].GetDataContext().ChangeChannelModi(Modi.Qmax);
-                this.ConfigureInputsViewList[13].GetDataContext().ChangeChannelModi(Modi.Qmax);
+                this.ConfigureInputsViewList[10].GetDataContext().ChangeChannelModi(Modi.Namur);
+                this.ConfigureInputsViewList[11].GetDataContext().ChangeChannelModi(Modi.Read);
+                this.ConfigureInputsViewList[12].GetDataContext().ChangeChannelModi(Modi.Licht);
+                this.ConfigureInputsViewList[13].GetDataContext().ChangeChannelModi(Modi.Qmin);
                 this.ConfigureInputsViewList[14].GetDataContext().ChangeChannelModi(Modi.Qmax);
 
                 this.ConfigureInputsViewList[15].GetDataContext().ChangeChannelModi(Modi.None);

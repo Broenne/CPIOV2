@@ -88,7 +88,7 @@
                     {
                         Thread.Sleep(50);
                         ++i;
-                        if (i > 50)
+                        if (i > 200)
                         {
                             MessageBox.Show($"configuration Einfgänge fehlerhaft {item.Channel}");
                             goto Finish;
