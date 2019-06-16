@@ -182,7 +182,7 @@ void SendAnalogValueByCan(uint8_t* pData) {
 }
 
 
-//extern volatile static uint32_t tickMs;
+extern volatile static uint32_t tickMs;
 
 /*
  * Created on: 30.11.18

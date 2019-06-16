@@ -81,22 +81,22 @@ void WorkerCanId0(uint8_t* data) {
 	uint8_t dataByte0 = data[0];
 	uint16_t newId;
 	switch (dataByte0) {
-		case 0x01:
-			newId = data[1];
-			newId = (data[2] << 8) | newId;
-			SetGlobalCanNodeId(newId);
-			break;
-		case 0x02:
-			ActivateDebug(data[1]);
-			break;
-		case 0x03:
-			SetChannelModiFromExternal(data); // todo mb: intern max 3 vom gleichen type checken
-			break;
-		case 0x04:
-			SaveChannelToEeprom();
-			break;
-		default:
-			break;
+	case 0x01:
+		newId = data[1];
+		newId = (data[2] << 8) | newId;
+		SetGlobalCanNodeId(newId);
+		break;
+	case 0x02:
+		ActivateDebug(data[1]);
+		break;
+	case 0x03:
+		SetChannelModiFromExternal(data); // todo mb: intern max 3 vom gleichen type checken
+		break;
+	case 0x04:
+		SaveChannelToEeprom();
+		break;
+	default:
+		break;
 	}
 }
 
@@ -181,9 +181,6 @@ void SendAnalogValueByCan(uint8_t* pData) {
 	SendCan(GetGlobalCanNodeId() + ANALOG_REQUEST + 1, data, 8);
 }
 
-
-//extern volatile static uint32_t tickMs;
-
 /*
  * Created on: 30.11.18
  * Author: MB
@@ -234,11 +231,7 @@ void CanWorkerTask(void * pvParameters) {
 //					}
 
 
-					static uint32_t rememberTicksEigenimpulse;
-
 					//
-
-					uint8_t dataEigenimpuls[4];
 
 					// reset durch martin
 					uint8_t pDataHelper[3];
@@ -265,27 +258,15 @@ void CanWorkerTask(void * pvParameters) {
 								// Reset Druckwächter
 //								pDataHelper[0] = ChannelModiType.Namur;
 //								SetActiveChannel(pDataHelper);
-
-								if(0 == SetInEigenimpulsModus){
-									pDataHelper[1] = 0xFF;
-									pDataHelper[2] = 0xFF;
-									ResetFlipFlop(pDataHelper);
-								}
-
-								if(1 == SetInEigenimpulsModus){
-									tickMs - rememberTicksEigenimpulse;
-									//SendCan(dataEigenimpuls,dataEigenimpuls, 4);
-									SendCanTimeDif(0, tickMs - rememberTicksEigenimpulse, 0);
-
-								}
-
+								pDataHelper[1] = 0xFF;
+								pDataHelper[2] = 0xFF;
+								ResetFlipFlop(pDataHelper);
 								break;
 							case 0x04:
 								// Vorbereitung Eigenimpuls
 //								pDataHelper[0] = ChannelModiType.Namur;
 //								SetActiveChannel(pDataHelper);
 								SetInEigenimpulsModus = 1;
-								rememberTicksEigenimpulse = tickMs;
 								break;
 							}
 					}

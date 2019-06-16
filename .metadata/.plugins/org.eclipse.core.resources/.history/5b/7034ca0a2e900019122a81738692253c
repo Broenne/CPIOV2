@@ -81,22 +81,22 @@ void WorkerCanId0(uint8_t* data) {
 	uint8_t dataByte0 = data[0];
 	uint16_t newId;
 	switch (dataByte0) {
-		case 0x01:
-			newId = data[1];
-			newId = (data[2] << 8) | newId;
-			SetGlobalCanNodeId(newId);
-			break;
-		case 0x02:
-			ActivateDebug(data[1]);
-			break;
-		case 0x03:
-			SetChannelModiFromExternal(data); // todo mb: intern max 3 vom gleichen type checken
-			break;
-		case 0x04:
-			SaveChannelToEeprom();
-			break;
-		default:
-			break;
+	case 0x01:
+		newId = data[1];
+		newId = (data[2] << 8) | newId;
+		SetGlobalCanNodeId(newId);
+		break;
+	case 0x02:
+		ActivateDebug(data[1]);
+		break;
+	case 0x03:
+		SetChannelModiFromExternal(data); // todo mb: intern max 3 vom gleichen type checken
+		break;
+	case 0x04:
+		SaveChannelToEeprom();
+		break;
+	default:
+		break;
 	}
 }
 
@@ -182,7 +182,7 @@ void SendAnalogValueByCan(uint8_t* pData) {
 }
 
 
-//extern volatile static uint32_t tickMs;
+extern volatile static uint32_t tickMs;
 
 /*
  * Created on: 30.11.18
