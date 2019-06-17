@@ -42,6 +42,7 @@ void Init_TimerForPulsTime(void) {
 	pulseTimerInstance.Init.Prescaler = 8;
 	pulseTimerInstance.Init.Period = 800;
 
+
 	pulseTimerInstance.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
 	pulseTimerInstance.Init.RepetitionCounter = 0;
 	pulseTimerInstance.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;

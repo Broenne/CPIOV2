@@ -28,6 +28,8 @@
 		<item value="false" key="caseSensitive"/>
 		<item value="227191" key="searchFlags"/>
 		<list key="previousPatterns">
+			<item value="tickMs"/>
+			<item value="extern"/>
 			<item value="Alternate"/>
 			<item value="adcBuffer"/>
 			<item value="GPIO_Mode_IPU"/>

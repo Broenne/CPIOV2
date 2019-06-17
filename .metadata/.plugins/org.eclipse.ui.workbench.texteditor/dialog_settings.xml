@@ -8,6 +8,7 @@
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="extern"/>
 			<item value="GetUsedActiveSensorType"/>
 			<item value="USART_IRQHandler"/>
 			<item value="Msp"/>
@@ -15,15 +16,14 @@
 			<item value="myQueue01"/>
 			<item value="DMA_MemoryBaseAddr"/>
 			<item value="ADCBuffer"/>
-			<item value="Callback"/>
 		</list>
 		<list key="replacehistory">
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item value="612" key="DIALOG_WIDTH"/>
-		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
-		<item value="489" key="DIALOG_HEIGHT"/>
+		<item value="385" key="DIALOG_WIDTH"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		<item value="523" key="DIALOG_HEIGHT"/>
 		<item value="1171" key="DIALOG_X_ORIGIN"/>
 		<item value="489" key="DIALOG_Y_ORIGIN"/>
 	</section>
