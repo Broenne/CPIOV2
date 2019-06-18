@@ -16,7 +16,7 @@
 
 #define Major 							((uint8_t)0x00)
 #define Minor 							((uint8_t)0x00)
-#define Bugfix 							((uint8_t)0x18)
+#define Bugfix 							((uint8_t)0x17)
 
 #define FLIPFLOP_OPENCAN_OFFSET 		(( unsigned int ) 0x4 )
 #define PULSE_OPENCAN_OFFSET 			(( unsigned int ) 0x5 ) // 1, 2, 3
