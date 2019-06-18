@@ -1,1 +1,57 @@
-Info: Nothing to build for CPIOng
+21:15:32 **** Incremental Build of configuration Debug for project CPIOng ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m3 -std=gnu11 -D__weak=__attribute__((weak)) -D__packed=__attribute__((__packed__)) -DUSE_HAL_DRIVER -DSTM32F105xC -I../Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -specs=nano.specs -o src\myCanFunctions.o ..\src\myCanFunctions.c 
+..\src\myCanFunctions.c: In function 'CanWorkerTask':
+..\src\myCanFunctions.c:213:6: warning: "/*" within comment [-Wcomment]
+      /** @defgroup CAN_Identifier_Type CAN Identifier Type
+       
+..\src\myCanFunctions.c:278:10: warning: implicit declaration of function 'SendCanTimeDifHardChannel' [-Wimplicit-function-declaration]
+          SendCanTimeDifHardChannel(0, dif);
+          ^~~~~~~~~~~~~~~~~~~~~~~~~
+..\src\myCanFunctions.c:249:17: warning: unused variable 'SetInEigenimpulsModus' [-Wunused-variable]
+      static int SetInEigenimpulsModus;
+                 ^~~~~~~~~~~~~~~~~~~~~
+..\src\myCanFunctions.c:245:14: warning: unused variable 'dataEigenimpuls' [-Wunused-variable]
+      uint8_t dataEigenimpuls[4];
+              ^~~~~~~~~~~~~~~
+In file included from ..\src\include.h:40:0,
+                 from ..\src\myCanFunctions.h:11,
+                 from ..\src\myCanFunctions.c:8:
+..\src\myCanFunctions.c: In function 'InitCanInputTask':
+../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:470:10: warning: initialization from incompatible pointer type [-Wincompatible-pointer-types]
+ { #name, (thread), (priority), (instances), (stacksz)}
+          ^
+..\src\myCanFunctions.c:376:2: note: in expansion of macro 'osThreadDef'
+  osThreadDef(canInputTask, CanWorkerTask, osPriorityNormal, 0, 256);
+  ^~~~~~~~~~~
+../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:470:10: note: (near initialization for 'os_thread_def_canInputTask.pthread')
+ { #name, (thread), (priority), (instances), (stacksz)}
+          ^
+..\src\myCanFunctions.c:376:2: note: in expansion of macro 'osThreadDef'
+  osThreadDef(canInputTask, CanWorkerTask, osPriorityNormal, 0, 256);
+  ^~~~~~~~~~~
+..\src\myCanFunctions.c: At top level:
+..\src\myCanFunctions.c:423:6: warning: conflicting types for 'SendCanTimeDifHardChannel'
+ void SendCanTimeDifHardChannel(uint8_t channel, uint32_t res){
+      ^~~~~~~~~~~~~~~~~~~~~~~~~
+..\src\myCanFunctions.c:278:10: note: previous implicit declaration of 'SendCanTimeDifHardChannel' was here
+          SendCanTimeDifHardChannel(0, dif);
+          ^~~~~~~~~~~~~~~~~~~~~~~~~
+..\src\myCanFunctions.c:249:17: warning: 'SetInEigenimpulsModus' defined but not used [-Wunused-variable]
+      static int SetInEigenimpulsModus;
+                 ^~~~~~~~~~~~~~~~~~~~~
+arm-atollic-eabi-gcc -o CPIOng.elf Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_can.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dma.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim_ex.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.o Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_wwdg.o Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.o Middlewares\Third_Party\FreeRTOS\Source\croutine.o Middlewares\Third_Party\FreeRTOS\Source\event_groups.o Middlewares\Third_Party\FreeRTOS\Source\list.o Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM3\port.o Middlewares\Third_Party\FreeRTOS\Source\portable\MemMang\heap_4.o Middlewares\Third_Party\FreeRTOS\Source\queue.o Middlewares\Third_Party\FreeRTOS\Source\tasks.o Middlewares\Third_Party\FreeRTOS\Source\timers.o src\Can\CanFilter.o src\FlipFlop\FlipFlop.o src\IO.o src\alive.o src\analog.o src\can.o src\channelConfig.o src\eeprom\eeprom.o src\error.o src\freertos.o src\helper.o src\main.o src\myCanFunctions.o src\pulse.o src\stm32f1xx_hal_msp.o src\stm32f1xx_it.o src\storages.o src\syscalls.o src\system_stm32f1xx.o src\usart\usart.o startup\startup_stm32f105xc.o -mthumb -mcpu=cortex-m3 -T../STM32F105RB_FLASH.ld -specs=nosys.specs -static -Wl,-Map=CPIOng.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.1.0\Tools\arm-atollic-reports.jar sizeinfo list CPIOng.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  46280	    136	  23752	  70168	  11218	CPIOng.elf
+Print size information done
+Generate listing file
+Output sent to: CPIOng.list
+Generate listing file done
+Generate build reports done
+arm-atollic-eabi-objcopy.exe -O ihex CPIOng.elf CPIOng.hex 
+
+21:15:34 Build Finished (took 2s.332ms)
+

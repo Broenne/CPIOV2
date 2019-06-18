@@ -5,7 +5,7 @@
     using System.Windows;
     using System.Windows.Input;
     using System.Windows.Threading;
-
+    using ConfigLogicLayer.Configurations;
     using CPIOngConfig.Contracts.FactorPulse;
     using CPIOngConfig.Contracts.Pulse;
 
@@ -44,11 +44,16 @@
         /// <param name="pulseStorageView">The pulse storage view.</param>
         /// <param name="factorPulseViewArg">The time factor pulse view argument.</param>
         /// <param name="factorPulseEventHandler">The time factor pulse event handler.</param>
-        public PulseViewModel(ILogger logger, IPulseEventHandler pulseEventHandler, IPulseStorageView pulseStorageView, IFactorPulseView factorPulseViewArg, IFactorPulseEventHandler factorPulseEventHandler)
+        public PulseViewModel(
+            ILogger logger, 
+            IPulseEventHandler pulseEventHandler, IPulseStorageView pulseStorageView, 
+            IFactorPulseView factorPulseViewArg, IFactorPulseEventHandler factorPulseEventHandler, 
+            ISimPulseActivate simPulseActivate)
         {
             this.Logger = logger;
             this.PulseStorageView = pulseStorageView;
             this.PulseFactorView = factorPulseViewArg;
+            this.SimPulseActivate = simPulseActivate;
 
             this.ActivateCheckSumcCommand = new RelayCommand(this.ActivateCheckSumcCommandAction);
             this.ClearAllDataCommand = new RelayCommand(this.ClearAllDataCommandAction);
@@ -109,6 +114,21 @@
         {
             get => this.pulseStorageView;
             set => this.SetProperty(ref this.pulseStorageView, value);
+        }
+
+        private ISimPulseActivate SimPulseActivate { get; }
+        private bool simPulse;
+        public bool SimPulse
+        {
+            get { return this.simPulse; }
+            set {
+
+                if (value)
+                {
+                    this.SimPulseActivate.Set();
+                }
+
+                SetProperty(ref this.simPulse, value); }
         }
 
         private bool CheckSumIsActivated { get; set; }

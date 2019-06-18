@@ -7,12 +7,12 @@
 
 #include "myCanFunctions.h"
 
-static uint16_t globalCanId = 0;
+static uint16_t globalCanId = 0; // todo mb 18.6.2019: eigentlich kein volatile notwendig.......
 
 osThreadId canInputTaskHandle;
 
-xQueueHandle CanRxQueueHandle = NULL;
-xQueueHandle CanQueueSenderHandle = NULL;
+volatile xQueueHandle CanRxQueueHandle = NULL;
+volatile xQueueHandle CanQueueSenderHandle = NULL;
 
 void SendTextPerCan(uint8_t* dataArg) {
 	uint positionInTabelle = dataArg[0];
@@ -342,7 +342,7 @@ void CanWorkerTask(void * pvParameters) {
 		}
 
 		// zum senden
-		if (xQueueReceive(CanQueueSenderHandle, hcan, 100) == pdTRUE) {
+		if (xQueueReceive(CanQueueSenderHandle, hcan, 5) == pdTRUE) {
 			// todo mb: oder besser anders oder an anderere Stelle unterscheiden,  besser anders definiertes Objekt für die Que nutzen
 			uint8_t data[CAN_DATA_LENGTH_MAX];
 			memcpy(data, hcan->pTxMsg->Data, CAN_DATA_LENGTH_MAX);
@@ -378,7 +378,12 @@ void InitCanInputTask(void) {
 }
 
 void PrepareCan(void) {
-	globalCanId = GetGloablCanIdFromEeeprom(); // set Methode kan wegen reset nicht genutzt weden
+	// eigentlich quatsch, aber vielleicht passt die adresse am anfang nicht richtig????
+	for(int i=0; i<5;++i)
+	{
+		globalCanId = GetGloablCanIdFromEeeprom(); // set Methode kan wegen reset nicht genutzt weden
+	}
+
 	InitCanInputTask();
 }
 

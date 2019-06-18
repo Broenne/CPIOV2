@@ -19,10 +19,12 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="180"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical">
             <ContentPresenter Content="{Binding PulseStorageView}"></ContentPresenter>
             <ContentPresenter Content="{Binding PulseFactorView}"></ContentPresenter>
+            
             <StackPanel Orientation="Horizontal">
                 <CheckBox IsChecked="True" Command="{Binding ActivateCheckSumcCommand}" CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}}" Margin="5">Activate Puls check</CheckBox>
                 <Button  Margin="5" Command="{Binding ClearAllDataCommand}">Clear results (tbd!!!)</Button>
@@ -80,5 +82,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <CheckBox Grid.Row="2" IsChecked="{Binding SimPulse}" Height="50" Width="50"></CheckBox>
     </Grid>
 </UserControl>

@@ -25,7 +25,7 @@
 //#define SEND_INPUT_CONFIG				(( unsigned short ) 0x179 )
 
 // Extended-offset-ids
-#define SET_ACTIVE_SENSOR 				(( unsigned int )0xFFFFFA )
+#define SET_ACTIVE_SENSOR 				(( unsigned int ) 0xFFFFFA )
 #define REQUEST_INPUT_CONFIG			(( unsigned int ) 0xFFFFFB )
 #define SEND_INPUT_CONFIG				(( unsigned int ) 0xFFFFFC )
 #define INPUT_STATE 					(( unsigned int ) 0xFFFFFD )

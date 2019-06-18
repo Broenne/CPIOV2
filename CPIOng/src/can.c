@@ -78,7 +78,10 @@ void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* hcan) {
 	xHigherPriorityTaskWoken = pdFALSE;
 
 	if (xQueueSendFromISR(CanRxQueueHandle, hcan, xHigherPriorityTaskWoken) != pdTRUE) {
-		SetPossiblePulseSendQueueFullError();
+
+		//xQueueReset(CanRxQueueHandle);
+		// todo mb: was jetzt tun???
+		//SetPossiblePulseSendQueueFullError();
 	}
 //
 //	if (xHigherPriorityTaskWoken) {

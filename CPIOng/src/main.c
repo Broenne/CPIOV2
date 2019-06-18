@@ -87,7 +87,7 @@ static void MX_WWDG_Init(void);
 int main(void) {
 
 	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-	HAL_Init();
+       	HAL_Init();
 
 	/* Configure the system clock */
 	SystemClock_Config();
@@ -97,7 +97,9 @@ int main(void) {
 	MX_DMA_Init();
 	MX_ADC1_Init();
 	MX_CAN2_Init();
-	MX_USART1_UART_Init();
+	//MX_USART1_UART_Init();
+
+
 
 	PrepareCan();
 	InitCanFilter();
