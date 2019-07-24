@@ -79,24 +79,26 @@ void CreateResponseActiveSensor(uint8_t* data) {
 
 void WorkerCanId0(uint8_t* data) {
 	uint8_t dataByte0 = data[0];
-	uint16_t newId;
-	switch (dataByte0) {
-		case 0x01:
-			newId = data[1];
-			newId = (data[2] << 8) | newId;
-			SetGlobalCanNodeId(newId);
-			break;
-		case 0x02:
-			ActivateDebug(data[1]);
-			break;
-		case 0x03:
-			SetChannelModiFromExternal(data); // todo mb: intern max 3 vom gleichen type checken
-			break;
-		case 0x04:
-			SaveChannelToEeprom();
-			break;
-		default:
-			break;
+	if(data[3]== 07 && data[4]== 05 && data[5]== 27 && data[6] == 06 && data[7] == 16){
+		uint16_t newId;
+			switch (dataByte0) {
+				case 0x01:
+ 					newId = data[1];
+					newId = (data[2] << 8) | newId;
+					SetGlobalCanNodeId(newId * 8);
+					break;
+				case 0x02:
+					ActivateDebug(data[1]);
+					break;
+				case 0x03:
+					SetChannelModiFromExternal(data); // todo mb: intern max 3 vom gleichen type checken
+					break;
+				case 0x04:
+					SaveChannelToEeprom();
+					break;
+				default:
+					break;
+			}
 	}
 }
 

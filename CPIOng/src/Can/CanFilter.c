@@ -34,7 +34,7 @@ void InitFilter11bitIdentifier(volatile CAN_HandleTypeDef* hcan, uint32_t filter
 	hcan->Instance = CAN1;
 	if (HAL_CAN_ConfigFilter(hcan, &sFilterConfig) != HAL_OK) {
 		/* Filter configuration Error */
-		//Error_Handler();
+		;//Error_Handler();
 	}
 
 	hcan->Instance = CAN2;
@@ -106,10 +106,10 @@ void FilterOnlyMyId(volatile CAN_HandleTypeDef* hcan) {
 void InitCanFilter(void) {
 	FilterIdNull(&hcan2);
 	FilterOnlyMyId(&hcan2);
-	FilterCanIdActiveSensor(&hcan2);
-	FilterCanIdResetFlipFlop(&hcan2);
-	FilterCanIdGetInputConfig(&hcan2);
-	FilterCanIdConfigureInputs(&hcan2);
-	FilterCanIdRequestText(&hcan2);
+//	FilterCanIdActiveSensor(&hcan2);
+//	FilterCanIdResetFlipFlop(&hcan2);
+//	FilterCanIdGetInputConfig(&hcan2);
+//	FilterCanIdConfigureInputs(&hcan2);
+//	FilterCanIdRequestText(&hcan2);
 	//FilterCanIdAnalogRequest(&hcan2);
 }
